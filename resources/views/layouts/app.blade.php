@@ -29,6 +29,7 @@
 <body class="bg-light">
 
     @include('layouts._header')
+    <br><br><br>
 
     @yield('content')
 
