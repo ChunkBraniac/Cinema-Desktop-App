@@ -150,5 +150,39 @@ class MovieController extends Controller
             return abort(404);
         }
     }
+
+    public static function getStreams($name)
+    {
+        $cacheKey = "moreTop10_" . $name;
+
+        $streaming = Streaming::where('originalTitleText', $name)->first();
+
+        $moreTop10 = Cache::get($cacheKey);
+
+        if (!$moreTop10) {
+            $moreTop10 = Streaming::where('originalTitleText', '<>', $name)
+                    ->inRandomOrder()
+                    ->limit(4)
+                    ->get();
+    
+            Cache::put($cacheKey, $moreTop10, 60); // Cache for 1 minute
+        }
+
+        $isSeries2 = $moreTop10->first()->isSeries;
+
+        //dd($movie);
+
+        if ($streaming && $moreTop10) {
+            $isSeries = $streaming->isSeries;
+
+            if ($isSeries == 1 && $isSeries2 == 1) {
+                return view('streaming.series', compact('streaming', 'moreTop10'));
+            } else {
+                return view('streaming.show', compact('streaming', 'moreTop10'));
+            }
+        } else {
+            return abort(404);
+        }
+    }
 }
 

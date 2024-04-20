@@ -32,3 +32,4 @@ Route::get('thriller', [MovieController::class, 'getThriller'])->name('movies.th
 Route::get('scifi', [MovieController::class, 'getScifi'])->name('movies.scifi');
 
 Route::get('top10/{name}', [MovieController::class, 'getMovie']);
+Route::get('streaming/{name}', [MovieController::class, 'getStreams']);

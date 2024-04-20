@@ -28,7 +28,7 @@
             @unless (count($streaming) == 0)
                 @foreach ($streaming as $streamed)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
-                        <a href="{{ url('') }}"><img src="{{ asset($streamed->imageUrl) }}" alt=""
+                        <a href="{{ url('streaming/' . $streamed->originalTitleText) }}"><img src="{{ asset($streamed->imageUrl) }}" alt=""
                                 class="img-fluid" style="height: 400px; object-fit: fill;" loading="lazy"></a>
                         <a href="{{ url('') }}" class="text-decoration-none text-dark">
                             <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">{{ $streamed->originalTitleText }}</h6>
