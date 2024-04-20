@@ -31,4 +31,4 @@ Route::get('horror', [MovieController::class, 'getHorror'])->name('movies.horror
 Route::get('thriller', [MovieController::class, 'getThriller'])->name('movies.thriller');
 Route::get('scifi', [MovieController::class, 'getScifi'])->name('movies.scifi');
 
-Route::get('series/{id}', [MovieController::class, 'getMovie']);
+Route::get('top10/{name}', [MovieController::class, 'getMovie']);

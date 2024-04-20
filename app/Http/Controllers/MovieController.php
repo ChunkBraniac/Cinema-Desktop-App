@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Top10;
 use App\Models\Popular;
 use App\Models\Streaming;
-use App\Models\Top10;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 class MovieController extends Controller
 {
@@ -115,25 +117,38 @@ class MovieController extends Controller
     }
 
 
-    public static function getMovie($id)
+    public static function getMovie($name)
     {
-        $series = Top10::find($id);
+        $cacheKey = "moreTop10_" . $name;
+
+        $top10 = Top10::where('originalTitleText', $name)->first();
+
+        $moreTop10 = Cache::get($cacheKey);
+
+        if (!$moreTop10) {
+            $moreTop10 = Top10::where('originalTitleText', '<>', $name)
+                    ->inRandomOrder()
+                    ->limit(4)
+                    ->get();
+    
+            Cache::put($cacheKey, $moreTop10, 60); // Cache for 1 minute
+        }
+
+        $isSeries2 = $moreTop10->first()->isSeries;
 
         //dd($movie);
 
-        if ($series) {
-            $isSeries = $series->isSeries;
+        if ($top10 && $moreTop10) {
+            $isSeries = $top10->isSeries;
 
-            if ($isSeries == 1) {
-                return view('top10.series', compact('series'));
+            if ($isSeries == 1 && $isSeries2 == 1) {
+                return view('top10.series', compact('top10', 'moreTop10'));
             } else {
-                return view('top10.show', compact('series'));
+                return view('top10.show', compact('top10', 'moreTop10'));
             }
         } else {
             return abort(404);
         }
     }
-
-
 }
 

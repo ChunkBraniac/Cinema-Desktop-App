@@ -26,7 +26,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="bg-light">
+<body class="">
 
     @include('layouts._header')
     <br><br><br>

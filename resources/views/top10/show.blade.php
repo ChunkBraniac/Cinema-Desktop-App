@@ -1,31 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container-xl mt-5">
         <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">{{ $top10->originalTitleText }}</h3>
         <div class="row">
-            <div class="col-xl-2">
+            <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
                 <img src="{{ asset($top10->imageUrl) }}" alt="" class="img-fluid"
                     style="height: 350px; object-fit: fill;" loading="lazy">
             </div>
 
-            <div class="col-xl-4 mt-xl-4" style="font-size: 15px">
-                <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3">{{ $top10->originalTitleText }}</h4>
-                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
-                    {{ $top10->aggregateRating }}</h6>
-                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Release year:
-                    {{ $top10->releaseYear }}</h6>
-                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Running time:
-                    {{ $top10->runtime }}</h6>
-                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Country: </h6>
+            <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
+                <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
+                    <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3">{{ $top10->originalTitleText }}</h4>
+                    <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                        {{ $top10->aggregateRating }}</h6>
+                    <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Release year:
+                        {{ $top10->releaseYear }}</h6>
+                    <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Genre:
+                        {{ $top10->genres }}</h6>
+                    <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Running time:
+                        {{ $top10->runtime }}</h6>
+                    <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Country: </h6>
 
-                <div class="mt-3">
-                    {{ $top10->plotText }}
+                    <div class="mt-3">
+                        {{ $top10->plotText }}
+                    </div>
                 </div>
             </div>
 
-            <div class="col-xl-6">
-                <iframe height="365" src="{{ $top10->trailer }}" title="YouTube video player" frameborder="0"
+            <div class="col-xl-6 mt-3 mt-xl-0">
+                <iframe height="400" src="{{ $top10->trailer }}" title="YouTube video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 100%;"></iframe>
             </div>
@@ -35,23 +39,25 @@
     <hr class="mt-5">
 
     <div class="container-xl">
+        <div class="m-auto text-center">
+            <a href="" class="btn btn-success btn-lg" style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 13px; padding-bottom: 13px">Download Video</a>
+        </div>
         <div class="row">
             <div class="col-xl-9 col-lg-8 mt-3">
                 <h4>You may also like: </h4>
                 <div class="row">
                     @foreach ($moreTop10 as $more)
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
-                            <a href="{{ url('top10/' . $more->originalTitleText) }} "><img
-                                    src="{{ asset($more->imageUrl) }}" alt=""
-                                    class="img-fluid" style="height: 400px; object-fit: fill;" loading="lazy"></a>
-                            <a href="{{ url('top10/' . $more->originalTitleText) }}" class="text-decoration-none text-dark">
-                                <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">{{ $more->originalTitleText }}</h6>
-                            </a>
-                        </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
+                        <a href="{{ url('top10/' . $more->originalTitleText ) }} "><img
+                                src="{{ asset($more->imageUrl) }}" alt=""
+                                class="img-fluid" style="height: 400px; object-fit: fill;" loading="lazy"></a>
+                        <a href="{{ url('top10/' . $more->originalTitleText) }}" class="text-decoration-none text-dark">
+                            <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">{{ $more->originalTitleText }}</h6>
+                        </a>
+                    </div>
                     @endforeach
+                    
                 </div>
-
-                <hr>
 
                 <div class="mt-4">
                     <h4 class="mb-4">Comment</h4>
@@ -95,8 +101,7 @@
                                             required></textarea>
 
                                         <div class="mt-3">
-                                            <button class="btn btn-primary btn-sm"
-                                                style="border-radius: 0px;">Submit</button>
+                                            <button class="btn btn-primary btn-sm" style="border-radius: 0px;">Submit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -111,8 +116,8 @@
                         <input type="text" class="form-control pl-3" name="name" style="border-radius: 0px" required>
 
                         <label for="" class="mt-3">Your comment</label>
-                        <textarea name="" id="" cols="30" rows="5" class="form-control" style="border-radius: 0px;"
-                            required></textarea>
+                        <textarea name="" id="" cols="30" rows="5" class="form-control"
+                            style="border-radius: 0px;" required></textarea>
 
                         <div class="mt-3">
                             <button class="btn btn-primary" style="border-radius: 0px;">Submit</button>
@@ -122,7 +127,6 @@
             </div>
 
             <div class="col-xl-3 col-lg-4 mt-4">
-                <hr class="d-block d-xl-none d-lg-none">
                 <h5>Recommended Shows </h5>
                 <div class="row">
                     <div class="col-6 col-sm-4 col-md-3 col-lg-6 col-xl-6">
@@ -145,4 +149,6 @@
             </div>
         </div>
     </div>
+
+    <hr class="mt-5">
 @endsection
