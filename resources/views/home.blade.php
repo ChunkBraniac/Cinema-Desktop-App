@@ -10,7 +10,7 @@
                     <div class="item">
                         <a href="{{ url('media/' . $item->originalTitleText . '/' . $item->titleType) }}"><img src="{{ asset($item->imageUrl) }}" alt=""
                                 style="height: 400px; object-fit: fill;" loading="lazy"></a>
-                        <a href="{{ url('top10/' . $item->id) }}" class="text-decoration-none text-dark">
+                        <a href="{{ url('media/' . $item->id) }}" class="text-decoration-none text-dark">
                             <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">{{ $item->originalTitleText }}</h6>
                         </a>
                         <h6 style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">{{ $item->genres }}</h6>
@@ -28,7 +28,7 @@
             @unless (count($streaming) == 0)
                 @foreach ($streaming as $streamed)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
-                        <a href="{{ url('streaming/' . $streamed->originalTitleText) }}"><img src="{{ asset($streamed->imageUrl) }}" alt=""
+                        <a href="{{ url('media/' . $streamed->originalTitleText . '/' . $streamed->titleType) }}"><img src="{{ asset($streamed->imageUrl) }}" alt=""
                                 class="img-fluid" style="height: 400px; object-fit: fill;" loading="lazy"></a>
                         <a href="{{ url('') }}" class="text-decoration-none text-dark">
                             <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">{{ $streamed->originalTitleText }}</h6>
@@ -52,7 +52,7 @@
             @unless (count($popular) == 0)
                 @foreach ($popular as $popularMovies)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
-                        <a href="{{ url('') }}"><img loading="lazy" src="{{ asset($popularMovies->imageUrl) }}"
+                        <a href="{{ url('media/' . $popularMovies->originalTitleText .'/' . $popularMovies->titleType) }}"><img loading="lazy" src="{{ asset($popularMovies->imageUrl) }}"
                                 alt="" class="img-fluid" style="height: 400px; object-fit: fill;"></a>
                         <a href="{{ url('') }}" class="text-decoration-none text-dark">
                             <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">{{ $popularMovies->originalTitleText }}</h6>

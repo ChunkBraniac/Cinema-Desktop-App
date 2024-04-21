@@ -36,10 +36,10 @@
                         <a class="nav-link text-light" href="{{ url('#') }}" style="font-size: 15px">About  </a>
                     </li>
                 </ul>
-                <form class="d-flex my-2 my-lg-0">
+                <form class="d-flex my-2 my-lg-0" action="{{ route('movie.search') }}" method="get">
                     <input class="form-control me-sm-2" type="text" placeholder="Search"
-                        style="border-radius: 0px; box-shadow: none" required />
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="border-radius: 0px;">
+                        style="border-radius: 0px; box-shadow: none" name="search" required />
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="border-radius: 0px;" name="search-btn">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </form>

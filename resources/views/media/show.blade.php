@@ -3,43 +3,49 @@
 @section('content')
     <div class="container-xl mt-5">
 
-        @if ($media)
-            <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">{{ $media->originalTitleText }}</h3>
-            <div class="row">
-                <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
-                    <img src="{{ asset($media->imageUrl) }}" alt="" class="img-fluid"
-                        style="height: 350px; object-fit: fill;" loading="lazy">
-                </div>
+        @if ($all->isNotEmpty())
+            <!-- Check if the collection is not empty -->
+            @foreach ($all as $item)
+                <!-- Iterate over each item in the collection -->
+                <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">{{ $item->originalTitleText }}</h3>
+                <div class="row">
+                    <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
+                        <img src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid"
+                            style="height: 350px; object-fit: fill;" loading="lazy">
+                    </div>
 
-                <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
-                    <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
-                        <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3">{{ $media->originalTitleText }}
-                        </h4>
-                        <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
-                            {{ $media->aggregateRating }}</h6>
-                        <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Release year:
-                            {{ $media->releaseYear }}</h6>
-                        <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Genre:
-                            {{ $media->genres }}</h6>
-                        <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Running time:
-                            {{ $media->runtime }}</h6>
-                        <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Country: </h6>
+                    <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
+                        <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
+                            <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3">{{ $item->originalTitleText }}
+                            </h4>
+                            <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                {{ $item->aggregateRating }}</h6>
+                            <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Release
+                                year:
+                                {{ $item->releaseYear }}</h6>
+                            <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Genre:
+                                {{ $item->genres }}</h6>
+                            <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Running
+                                time:
+                                {{ $item->runtime }}</h6>
+                            <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Country:
+                            </h6>
 
-                        <div class="mt-3">
-                            {{ $media->plotText }}
+                            <div class="mt-3">
+                                {{ $item->plotText }}
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-xl-6 mt-3 mt-xl-0">
-                    <iframe height="400" src="{{ $media->trailer }}" title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 100%;"></iframe>
+                    <div class="col-xl-6 mt-3 mt-xl-0">
+                        <iframe height="400" src="https://www.youtube.com/embed/sFcRukVhgCA?si=UL9_VyXvR-SYdm6y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen width="100%"></iframe>
+                    </div>
                 </div>
-            </div>
+            @endforeach
         @else
             <p>No data found for this title.</p>
         @endif
+
 
         <hr class="mt-5">
 
@@ -55,7 +61,7 @@
                         <h4>You may also like: </h4>
                         <div class="row">
 
-                            @foreach ($moreTop10 as $more)
+                            @foreach ($merged as $more)
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
                                     <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
                                             src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
@@ -71,7 +77,7 @@
                     @elseif ($type == 'tvMiniSeries')
                         <div class="row">
 
-                            @foreach ($moreTop10 as $more)
+                            @foreach ($merged as $more)
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
                                     <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
                                             src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
@@ -87,7 +93,7 @@
                     @elseif ($type == 'tvSeries')
                         <div class="row">
 
-                            @foreach ($moreTop10 as $more)
+                            @foreach ($merged as $more)
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
                                     <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
                                             src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"

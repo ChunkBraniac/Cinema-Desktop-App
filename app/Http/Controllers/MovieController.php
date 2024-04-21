@@ -116,94 +116,50 @@ class MovieController extends Controller
         return view('page.scifi', compact('allScifiMovies'));
     }
 
-
-    public static function getMovie($name)
-    {
-        $cacheKey = "moreTop10_" . $name;
-
-        $top10 = Top10::where('originalTitleText', $name)->first();
-
-        $moreTop10 = Cache::get($cacheKey);
-
-        if (!$moreTop10) {
-            $moreTop10 = Top10::where('originalTitleText', '<>', $name)
-                    ->inRandomOrder()
-                    ->limit(4)
-                    ->get();
-    
-            Cache::put($cacheKey, $moreTop10, 60); // Cache for 1 minute
-        }
-
-        $isSeries2 = $moreTop10->first()->isSeries;
-
-        //dd($movie);
-
-        if ($top10 && $moreTop10) {
-            $isSeries = $top10->isSeries;
-
-            if ($isSeries == 1 && $isSeries2 == 1) {
-                return view('top10.series', compact('top10', 'moreTop10'));
-            } else {
-                return view('top10.show', compact('top10', 'moreTop10'));
-            }
-        } else {
-            return abort(404);
-        }
-    }
-
-    public static function getStreams($name)
-    {
-        $cacheKey = "moreTop10_" . $name;
-
-        $streaming = Streaming::where('originalTitleText', $name)->first();
-
-        $moreTop10 = Cache::get($cacheKey);
-
-        if (!$moreTop10) {
-            $moreTop10 = Streaming::where('originalTitleText', '<>', $name)
-                    ->inRandomOrder()
-                    ->limit(4)
-                    ->get();
-    
-            Cache::put($cacheKey, $moreTop10, 60); // Cache for 1 minute
-        }
-
-        $isSeries2 = $moreTop10->first()->isSeries;
-
-        //dd($movie);
-
-        if ($streaming && $moreTop10) {
-            $isSeries = $streaming->isSeries;
-
-            if ($isSeries == 1 && $isSeries2 == 1) {
-                return view('streaming.series', compact('streaming', 'moreTop10'));
-            } else {
-                return view('streaming.show', compact('streaming', 'moreTop10'));
-            }
-        } else {
-            return abort(404);
-        }
-    }
-
     public static function show($name, $type)
     {
         $cacheKey = "moreTop10_" . $name;
 
-        $media = Top10::where('originalTitleText', $name)->where('titleType', $type)->first();
+        $media = Top10::where('originalTitleText', $name)->where('titleType', $type)->get();
+        $media2 = Streaming::where('originalTitleText', $name)->where('titleType', $type)->get();
+        $media3 = Popular::where('originalTitleText', $name)->where('titleType', $type)->get();
 
-        $moreTop10 = Cache::get($cacheKey);
+        $all = $media->merge($media2)->merge($media3);
 
-        if (!$moreTop10) {
-            $moreTop10 = Top10::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(4)->get();
+        $merged = Cache::get($cacheKey);
 
-            Cache::put($cacheKey, $moreTop10, 60);
+        if (!$merged) {
+            $merged = Top10::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(2)->get();
+            $merged2 = Streaming::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(1)->get();
+            $merged3 = Popular::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(1)->get();
+
+            $merged = $merged->merge($merged2)->merge($merged3);
+
+            Cache::put($cacheKey, $merged, 60);
         }
 
         if (!$media) {
             return abort(404);
         }
 
-        return view('media.show', compact('media', 'type', 'moreTop10'));
+        return view('media.show', compact('all', 'type', 'merged'));
+    }
+
+    public static function search(Request $request)
+    {
+        $searchWord = $request->input('search');
+
+        if (!$searchWord) {
+            return redirect()->back()->with('error', 'Please enter a search word');
+        }
+
+        $top10Results = Top10::where('originalTitleText', 'like', "%$searchWord%")->distinct()->orderBy('id', 'Desc')->paginate(15);
+        $streamingResults = Streaming::where('originalTitleText', 'like', "%$searchWord%")->distinct()->orderBy('id', 'Desc')->paginate(12);
+        $popularResults = Popular::where('originalTitleText', 'like', "%$searchWord%")->distinct()->orderBy('id', 'Desc')->paginate(12);
+
+        $allResults = $top10Results->merge($streamingResults)->merge($popularResults);
+
+        return view('search', compact('allResults', 'top10Results', 'streamingResults', 'popularResults'));
     }
 }
 

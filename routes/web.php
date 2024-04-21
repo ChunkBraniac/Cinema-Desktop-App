@@ -35,3 +35,4 @@ Route::get('top10/{name}', [MovieController::class, 'getMovie']);
 Route::get('streaming/{name}', [MovieController::class, 'getStreams']);
 
 Route::get('/media/{name}/{type}', [MovieController::class, 'show'])->name('media.show');
+Route::get('search', [MovieController::class, 'search'])->name('movie.search');
