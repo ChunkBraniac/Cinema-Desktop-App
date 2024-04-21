@@ -5,7 +5,10 @@
 
         @if ($all->isNotEmpty())
             <!-- Check if the collection is not empty -->
-            @foreach ($all as $item)
+            @foreach ($all->unique('movieId') as $item)
+                @section('title')
+                    {{ $item->originalTitleText }}
+                @endsection
                 <!-- Iterate over each item in the collection -->
                 <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">{{ $item->originalTitleText }}</h3>
                 <div class="row">
@@ -19,26 +22,38 @@
                             <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3">{{ $item->originalTitleText }}
                             </h4>
                             <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
-                                {{ $item->aggregateRating }}</h6>
+                                {{ isset($item->rating->aggregateRating) ? $item->rating->aggregateRating : 'N/A' }}</h6>
                             <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Release
                                 year:
                                 {{ $item->releaseYear }}</h6>
                             <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Genre:
                                 {{ $item->genres }}</h6>
-                            <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Running
-                                time:
-                                {{ $item->runtime }}</h6>
-                            <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Country:
+
+                            @if (isset($item->details) && isset($item->details->runtime))
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    Runtime: {{ $item->details->runtime }}
+                                </h6>
+                            @else
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Runtime:
+                                    N/A
+                                </h6>
+                            @endif
+
+                            <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                Country:
                             </h6>
 
                             <div class="mt-3">
-                                {{ $item->plotText }}
+                                {{ $item->plotText ? $item->plotText : 'N/A' }}
                             </div>
                         </div>
                     </div>
 
                     <div class="col-xl-6 mt-3 mt-xl-0">
-                        <iframe height="400" src="https://www.youtube.com/embed/sFcRukVhgCA?si=UL9_VyXvR-SYdm6y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen width="100%"></iframe>
+                        <iframe height="400" src="{{ $item->trailer ? $item->trailer : 'N/A' }}"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen width="100%"></iframe>
                     </div>
                 </div>
             @endforeach
@@ -66,7 +81,7 @@
                                     <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
                                             src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
                                             style="height: 400px; object-fit: fill;" loading="lazy"></a>
-                                    <a href="{{ url('media/' . $more->originalTitleText) }}"
+                                    <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }}"
                                         class="text-decoration-none text-dark">
                                         <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">
                                             {{ $more->originalTitleText }}</h6>
@@ -82,7 +97,7 @@
                                     <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
                                             src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
                                             style="height: 400px; object-fit: fill;" loading="lazy"></a>
-                                    <a href="{{ url('media/' . $more->originalTitleText) }}"
+                                    <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }}"
                                         class="text-decoration-none text-dark">
                                         <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">
                                             {{ $more->originalTitleText }}</h6>
@@ -98,7 +113,7 @@
                                     <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
                                             src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
                                             style="height: 400px; object-fit: fill;" loading="lazy"></a>
-                                    <a href="{{ url('media/' . $more->originalTitleText) }}"
+                                    <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }}"
                                         class="text-decoration-none text-dark">
                                         <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">
                                             {{ $more->originalTitleText }}</h6>
@@ -163,13 +178,16 @@
                     </div>
 
                     <div class="mt-4">
-                        <form action="" method="post">
+                        <form
+                            action="{{ route('comment.movie', ['name' => $item->originalTitleText, 'type' => $item->titleType]) }}"
+                            method="post">
+                            {{ csrf_field() }}
                             <label for="">Name</label>
-                            <input type="text" class="form-control pl-3" name="name" style="border-radius: 0px"
+                            <input type="text" class="form-control pl-3" name="commentor" style="border-radius: 0px"
                                 required>
 
                             <label for="" class="mt-3">Your comment</label>
-                            <textarea name="" id="" cols="30" rows="5" class="form-control"
+                            <textarea name="comment" id="" cols="30" rows="5" class="form-control"
                                 style="border-radius: 0px;" required></textarea>
 
                             <div class="mt-3">
@@ -202,6 +220,4 @@
                 </div>
             </div>
         </div>
-
-        <hr class="mt-5">
-    @endsection
+@endsection

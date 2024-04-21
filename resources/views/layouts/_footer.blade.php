@@ -1,3 +1,1 @@
-<footer>
-    <p>&copy; 2024 Your CinemaHub</p>
-</footer>
+<div class="mt-4"></div>

@@ -120,26 +120,54 @@ class MovieController extends Controller
     {
         $cacheKey = "moreTop10_" . $name;
 
-        $media = Top10::where('originalTitleText', $name)->where('titleType', $type)->get();
-        $media2 = Streaming::where('originalTitleText', $name)->where('titleType', $type)->get();
-        $media3 = Popular::where('originalTitleText', $name)->where('titleType', $type)->get();
+        // $media = Top10::where('originalTitleText', $name)->where('titleType', $type)->get();
+        // $media2 = Streaming::where('originalTitleText', $name)->where('titleType', $type)->get();
+        // $media3 = Popular::where('originalTitleText', $name)->where('titleType', $type)->get();
 
-        $all = $media->merge($media2)->merge($media3);
+        $media = DB::table('top10s')
+                    ->where('originalTitleText', $name)
+                    ->where('titleType', $type)
+                    ->get();
+
+        $media2 = DB::table('streamings')
+                    ->where('originalTitleText', $name)
+                    ->where('titleType', $type)
+                    ->get();
+        
+        $media3 = DB::table('populars')
+                    ->where('originalTitleText', $name)
+                    ->where('titleType', $type)
+                    ->get();
+
+        $all = $media->union($media2)->union($media3);
 
         $merged = Cache::get($cacheKey);
 
         if (!$merged) {
-            $merged = Top10::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(2)->get();
-            $merged2 = Streaming::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(1)->get();
-            $merged3 = Popular::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(1)->get();
+            // $merged = Top10::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(2)->get();
+            // $merged2 = Streaming::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(1)->get();
+            // $merged3 = Popular::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(1)->get();
+            $merged = DB::table('top10s')
+                        ->where('originalTitleText', '<>', $name)
+                        ->inRandomOrder()
+                        ->limit(2)
+                        ->get();
 
-            $merged = $merged->merge($merged2)->merge($merged3);
+            $merged2 = DB::table('streamings')
+                        ->where('originalTitleText', '<>', $name)
+                        ->inRandomOrder()
+                        ->limit(4)
+                        ->get();
+
+            $merged3 = DB::table('populars')
+                        ->where('originalTitleText', '<>', $name)
+                        ->inRandomOrder()
+                        ->limit(1)
+                        ->get();
+
+            $merged = $merged->union($merged2)->union($merged3);
 
             Cache::put($cacheKey, $merged, 60);
-        }
-
-        if (!$media) {
-            return abort(404);
         }
 
         return view('media.show', compact('all', 'type', 'merged'));

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Horror
+@endsection
+
 @section('content')
     <br><br>
     <div class="container">
@@ -17,16 +21,32 @@
         <div class="row">
             @unless (count($allHorrorMovies) == 0)
                 @foreach ($allHorrorMovies as $horror)
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
-                        <a href="{{ url('') }}"><img src="{{ asset($horror->imageUrl) }}"
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
+                        <a href="{{ url('media/' . $horror->originalTitleText . '/' . $horror->titleType) }}"><img src="{{ asset($horror->imageUrl) }}"
                                 alt="" class="img-fluid" style="height: 400px; object-fit: fill;" loading="lazy"></a>
-                        <a href="{{ url('') }}" class="text-decoration-none text-dark">
-                            <h6 class="mt-1 text-truncate">{{ $horror->originalTitleText }}</h6>
+                        <a href="{{ url('media/' . $horror->originalTitleText . '/' . $horror->titleType) }}" class="text-decoration-none text-dark">
+                            <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">{{ $horror->originalTitleText }}</h6>
                         </a>
                         <h6 class="text-truncate" style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">{{ $horror->genres }}</h6>
                     </div>
                 @endforeach
             @endunless
+        </div>
+
+        <div class="mt-4">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 @endsection

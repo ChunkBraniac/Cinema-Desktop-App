@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Animation
+@endsection
+
 @section('content')
     <br><br>
     <div class="container">
@@ -17,11 +21,11 @@
         <div class="row">
             @unless (count($allAnimationMovies) == 0)
                 @foreach ($allAnimationMovies as $animation)
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
-                        <a href="{{ url('') }}"><img src="{{ asset($animation->imageUrl) }}"
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
+                        <a href="{{ url('media/' . $animation->originalTitleText . '/' . $animation->titleType) }}"><img src="{{ asset($animation->imageUrl) }}"
                                 alt="" class="img-fluid" style="height: 400px; object-fit: fill;" loading="lazy"></a>
-                        <a href="{{ url('') }}" class="text-decoration-none text-dark">
-                            <h6 class="mt-1">{{ $animation->originalTitleText }}</h6>
+                        <a href="{{ url('media/' . $animation->originalTitleText . '/' . $animation->titleType) }}" class="text-decoration-none text-dark">
+                            <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">{{ $animation->originalTitleText }}</h6>
                         </a>
                         <h6 class="text-truncate" style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">{{ $animation->genres }}</h6>
                     </div>
