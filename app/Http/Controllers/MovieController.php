@@ -184,5 +184,26 @@ class MovieController extends Controller
             return abort(404);
         }
     }
+
+    public static function show($name, $type)
+    {
+        $cacheKey = "moreTop10_" . $name;
+
+        $media = Top10::where('originalTitleText', $name)->where('titleType', $type)->first();
+
+        $moreTop10 = Cache::get($cacheKey);
+
+        if (!$moreTop10) {
+            $moreTop10 = Top10::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(4)->get();
+
+            Cache::put($cacheKey, $moreTop10, 60);
+        }
+
+        if (!$media) {
+            return abort(404);
+        }
+
+        return view('media.show', compact('media', 'type', 'moreTop10'));
+    }
 }
 

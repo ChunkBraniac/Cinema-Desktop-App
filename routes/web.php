@@ -33,3 +33,5 @@ Route::get('scifi', [MovieController::class, 'getScifi'])->name('movies.scifi');
 
 Route::get('top10/{name}', [MovieController::class, 'getMovie']);
 Route::get('streaming/{name}', [MovieController::class, 'getStreams']);
+
+Route::get('/media/{name}/{type}', [MovieController::class, 'show'])->name('media.show');

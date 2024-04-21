@@ -8,7 +8,7 @@
             @unless (count($top10) == 0)
                 @foreach ($top10 as $item)
                     <div class="item">
-                        <a href="{{ url('top10/' . $item->originalTitleText) }}"><img src="{{ asset($item->imageUrl) }}" alt=""
+                        <a href="{{ url('media/' . $item->originalTitleText . '/' . $item->titleType) }}"><img src="{{ asset($item->imageUrl) }}" alt=""
                                 style="height: 400px; object-fit: fill;" loading="lazy"></a>
                         <a href="{{ url('top10/' . $item->id) }}" class="text-decoration-none text-dark">
                             <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">{{ $item->originalTitleText }}</h6>
