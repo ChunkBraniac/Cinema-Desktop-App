@@ -10,34 +10,31 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    //
-    public function comment(Request $request, $name, $type) // Include $type parameter
-    {
-        // Find the movie by name and type (using corrected logic from previous discussion)
-        $movie = Top10::where('originalTitleText', $name)->where('titleType', $type)->first();
-        if (!$movie) {
-            $movie = Streaming::where('originalTitleText', $name)->where('titleType', $type)->first();
-        }
-        if (!$movie) {
-            $movie = Popular::where('originalTitleText', $name)->where('titleType', $type)->first();
-        }
 
-        // Validate request and create comment
+    public function store(Request $request, $name, $type)
+    {
         $request->validate([
-            'commentor' => 'required',
-            'comment' => 'required'
+            'commentor' => 'required|string',
+            'comment' => 'required|string',
+            'movie_id',
+            'movie_name',
         ]);
 
-        $comment = new Comment([
+        $storeComment = new Comment([
             'commentor' => $request->commentor,
             'comment' => $request->comment,
-            'comment_on' => $movie->movieId // Use movie ID for association
+            'movie_id' => $request->movie_id,
+            'movie_name' => $request->movie_name
         ]);
 
-        $comment->save();
+        $storeComment->save();
 
-        // Redirect back to the movie page with success message
-        return redirect()->route('media.show', ['name' => $name, 'type' => $type])->with('success', 'Comment added successfully');
+        $movieId = $request->movie_id;
+        $comments = Comment::where('movie_id', $movieId)->get();
+
+        // dd($comments);
+
+        return redirect()->route('media.show', ['name' => $name, 'type' => $type])->with('success', 'Comment added successfully')->with('comments', $comments);
     }
 
 }

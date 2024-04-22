@@ -34,7 +34,8 @@
                                     Runtime: {{ $item->details->runtime }}
                                 </h6>
                             @else
-                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Runtime:
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    Runtime:
                                     N/A
                                 </h6>
                             @endif
@@ -65,11 +66,16 @@
         <hr class="mt-5">
 
         <div class="container-xl">
-            <div class="m-auto text-center">
-                <a href="" class="btn btn-success btn-lg"
-                    style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 13px; padding-bottom: 13px">Download
-                    Video</a>
-            </div>
+            @if ($type == 'movie')
+                <div class="m-auto text-center">
+                    <a href="" class="btn btn-success btn-lg"
+                        style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 13px; padding-bottom: 13px">Download
+                        Video</a>
+                </div>
+            @elseif ($type == 'tvSeries')
+
+            @elseif ($type == 'tvMiniSeries')
+            @endif
             <div class="row">
                 <div class="col-xl-9 col-lg-8 mt-3">
                     @if ($type == 'movie')
@@ -125,64 +131,85 @@
 
                     <div class="mt-4">
                         <h4 class="mb-4">Comment</h4>
+                        @if (session('success'))
+                            <h6 class="alert alert-success">{{ session('success') }}</h6>
+                        @endif
+                        
+                        @if (isset($comments) && count($comments) > 0)
+                            <div class="container-xl">
+                                @foreach ($comments as $comment)
+                                    <div class="row mt-3 pt-3 pb-3"
+                                        style="border-radius: 0px; background: #f9f9f9; border: 1px solid #ccc;">
+                                        <div class="col-xl-2">
+                                            <h5 style="font-family: 'Roboto', sans-serif; font-weight: normal">
+                                                {{ 'Username' }}
+                                            </h5>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <p style="font-size: 15px">
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel ullam aliquam
+                                                labore
+                                                asperiores
+                                                dicta quo
+                                                facilis dolore odit aliquid ratione iste ipsa aspernatur, voluptates
+                                                voluptate
+                                                sunt
+                                                harum
+                                                porro
+                                                illo
+                                                praesentium?
+                                            </p>
+                                        </div>
+                                        <div class="col-xl-2">
+                                            <p class="d-inline-flex gap-1">
+                                                <a class="btn btn-primary btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseExample" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
+                                                    Reply <i class="fa fa-reply" aria-hidden="true"></i>
+                                                </a>
+                                            </p>
 
-                        <div class="container-xl">
-                            <div class="row mt-3 pt-3 pb-3"
-                                style="border-radius: 0px; background: #f9f9f9; border: 1px solid #ccc;">
-                                <div class="col-xl-2">
-                                    <h5 style="font-family: 'Roboto', sans-serif; font-weight: normal">{{ 'Username' }}
-                                    </h5>
-                                </div>
-                                <div class="col-xl-6">
-                                    <p style="font-size: 15px">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel ullam aliquam labore
-                                        asperiores
-                                        dicta quo
-                                        facilis dolore odit aliquid ratione iste ipsa aspernatur, voluptates voluptate sunt
-                                        harum
-                                        porro
-                                        illo
-                                        praesentium?
-                                    </p>
-                                </div>
-                                <div class="col-xl-2">
-                                    <p class="d-inline-flex gap-1">
-                                        <a class="btn btn-primary btn-sm" data-bs-toggle="collapse" href="#collapseExample"
-                                            role="button" aria-expanded="false" aria-controls="collapseExample">
-                                            Reply <i class="fa fa-reply" aria-hidden="true"></i>
-                                        </a>
-                                    </p>
+                                        </div>
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body" style="background: #f9f9f9; border-radius: 0px">
+                                                <form action="" method="post">
+                                                    <label for="" style="font-size: 15px">Name: </label>
+                                                    <input type="text" class="form-control" name="reply_name"
+                                                        style="border-radius: 0px" required>
 
-                                </div>
-                                <div class="collapse" id="collapseExample">
-                                    <div class="card card-body" style="background: #f9f9f9; border-radius: 0px">
-                                        <form action="" method="post">
-                                            <label for="" style="font-size: 15px">Name: </label>
-                                            <input type="text" class="form-control" name="reply_name"
-                                                style="border-radius: 0px" required>
+                                                    <label for="" class="mt-3" style="font-size: 15px">Your
+                                                        reply:
+                                                    </label>
+                                                    <textarea name="reply_text" id="" cols="30" rows="5" class="form-control"
+                                                        style="border-radius: 0px" required></textarea>
 
-                                            <label for="" class="mt-3" style="font-size: 15px">Your reply:
-                                            </label>
-                                            <textarea name="reply_text" id="" cols="30" rows="5" class="form-control"
-                                                style="border-radius: 0px" required></textarea>
-
-                                            <div class="mt-3">
-                                                <button class="btn btn-primary btn-sm"
-                                                    style="border-radius: 0px;">Submit</button>
+                                                    <div class="mt-3">
+                                                        <button class="btn btn-primary btn-sm"
+                                                            style="border-radius: 0px;">Submit</button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
+
                             </div>
-                        </div>
+                        @else
+                            <p>No comments yet for this movie.</p>
+                        @endif
                     </div>
 
                     <div class="mt-4">
                         <form
-                            action="{{ route('comment.movie', ['name' => $item->originalTitleText, 'type' => $item->titleType]) }}"
+                            action="{{ route('media.show', ['name' => $item->originalTitleText, 'type' => $item->titleType]) }}"
                             method="post">
                             {{ csrf_field() }}
                             <label for="">Name</label>
+                            <input type="hidden" class="form-control pl-3" name="movie_id" style="border-radius: 0px"
+                                required value="{{ $item->movieId }}">
+                            <input type="hidden" class="form-control pl-3" name="movie_name" style="border-radius: 0px"
+                                required value="{{ $item->originalTitleText }}">
+
                             <input type="text" class="form-control pl-3" name="commentor" style="border-radius: 0px"
                                 required>
 
@@ -220,4 +247,4 @@
                 </div>
             </div>
         </div>
-@endsection
+    @endsection

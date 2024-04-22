@@ -38,4 +38,4 @@ Route::get('streaming/{name}', [MovieController::class, 'getStreams']);
 Route::get('/media/{name}/{type}', [MovieController::class, 'show'])->name('media.show');
 Route::get('search', [MovieController::class, 'search'])->name('movie.search');
 
-Route::post('media/{name}/{type}', [CommentController::class, 'comment'])->name('comment.movie');
+Route::post('media/{name}/{type}', [CommentController::class, 'store'])->name('comment');
