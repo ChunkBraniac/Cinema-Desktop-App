@@ -69,6 +69,10 @@
                                         @if (session('error'))
                                             <h6 class="alert alert-danger text-center">{{ session('error') }}</h6>
                                         @endif
+
+                                        @if (session('stat'))
+                                            <h6 class="alert alert-danger text-center">{{ session('stat') }}</h6>
+                                        @endif
                                         <div class="col-12">
                                             <label for="yourUsername" class="form-label">Email</label>
                                             <div class="input-group has-validation">

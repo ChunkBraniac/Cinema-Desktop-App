@@ -28,6 +28,11 @@ class AdminController extends Controller
         return view('admin.auth.register');
     }
 
+    public static function profile()
+    {
+        return view('admin.profile');
+    }
+
     public function register(Request $request)
     {
         $request->validate([
@@ -68,7 +73,8 @@ class AdminController extends Controller
                 return redirect()->route('admin.dashboard')->with('status', 'Login successful, welcome back');
             }
             else {
-                return redirect()->back()->with('error', 'You are not an admin!!!');
+                Auth::logout();
+                return redirect()->route('admin.home.login')->with('error', 'You are not an admin!!!');
             }
         }
         else {
@@ -80,6 +86,6 @@ class AdminController extends Controller
     {
         Auth::logout();
 
-        return redirect()->route('admin.home.login');
+        return redirect()->route('admin.home.login')->with('stat', 'Logout successful');
     }
 }
