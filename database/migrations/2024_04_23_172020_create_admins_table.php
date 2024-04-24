@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('admin_name');
             $table->string('admin_email');
             $table->string('admin_password');
-            $table->string('email_verified_at');
-            $table->string('remember_token');
+            $table->string('email_verified_at')->nullable();
+            $table->string('remember_token')->nullable();
             $table->string('status');
             $table->timestamps();
         });

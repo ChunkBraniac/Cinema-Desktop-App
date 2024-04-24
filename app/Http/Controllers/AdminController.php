@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RegisterMail;
 use App\Models\Admin;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -27,22 +29,20 @@ class AdminController extends Controller
             'admin_password' => 'required|string|min:6|confirmed'
         ]);
 
-        $request['email_verified_at'] = 'Null';
-        $request['remember_token'] = Str::random(40);
-        $request['status'] = 'Not Verified';
-
         $register_admin = new Admin([
             'admin_name' => $request->admin_name,
             'admin_email' => $request->admin_email,
             'admin_password' => Hash::make($request->admin_password),
             'email_verified_at' => $request['email_verified_at'],
-            'remember_token' => $request['remember_token'],
-            'status' => $request['status']
+            'remember_token' => Str::random(40),
+            'status' => 'Not verified'
         ]);
 
         $register_admin->save();
 
         if ($register_admin->save()) {
+            Mail::to($request->admin_email)->send(new RegisterMail($register_admin));
+            
             return redirect()->route('admin.home.login')->with('success', 'Admin registered successfully');
         }
         else {
