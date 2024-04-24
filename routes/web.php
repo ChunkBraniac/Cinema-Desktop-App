@@ -1,12 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\Top10Controller;
 use App\Http\Controllers\CinemaController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\MovieController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\Top10Controller;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'home']);
 Route::get('top10', [PageController::class, 'series']);
@@ -39,3 +40,8 @@ Route::get('/media/{name}/{type}', [MovieController::class, 'show'])->name('medi
 Route::get('search', [MovieController::class, 'search'])->name('movie.search');
 
 Route::post('media/{name}/{type}', [CommentController::class, 'store'])->name('comment');
+
+// Admin Routes
+Route::get('admin', [AdminController::class, 'adminPage'])->name('admin.home.login');
+Route::get('register', [AdminController::class, 'registerPage'])->name('admin.home.register');
+Route::post('register', [AdminController::class, 'register'])->name('register.admin');
