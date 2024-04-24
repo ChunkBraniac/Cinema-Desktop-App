@@ -59,26 +59,40 @@
                                         <p class="text-center small">Enter your username & password to login</p>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" action="" method="post">
+                                    <form class="row g-3 needs-validation" action="{{ route('admin.login') }}" method="post">
+                                        {{ csrf_field() }}
 
                                         @if (session('success'))
                                             <h6 class="alert alert-success text-center">{{ session('success') }}</h6>
+                                        @endif
+
+                                        @if (session('error'))
+                                            <h6 class="alert alert-danger text-center">{{ session('error') }}</h6>
                                         @endif
                                         <div class="col-12">
                                             <label for="yourUsername" class="form-label">Email</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="email" name="admin_email" class="form-control"
-                                                    id="yourUsername" required>
-                                                <div class="invalid-feedback">Please enter your username.</div>
+                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                                                    id="yourUsername">
                                             </div>
+                                            @error('email')
+                                                    <span class="text-danger">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                         </div>
 
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control"
-                                                id="yourPassword" required>
-                                            <div class="invalid-feedback">Please enter your password!</div>
+                                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                                                id="yourPassword">
+                                            
+                                            @error('password')
+                                                <span class="text-danger">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
 
                                         <div class="col-12">
@@ -93,7 +107,7 @@
                                         </div>
                                         <div class="col-12">
                                             <p class="small mb-0">Don't have account? <a
-                                                    href="{{ url('register') }}">Create an account</a></p>
+                                                    href="{{ url('admin/register') }}">Create an account</a></p>
                                         </div>
                                     </form>
 

@@ -67,7 +67,7 @@
                                         <p class="text-center small">Enter your personal details to create account</p>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" action="" method="post">
+                                    <form class="row g-3 needs-validation" action="{{ route('register.admin') }}" method="post">
                                         {{ csrf_field() }}
                                         <div class="col-12">
                                             <label for="yourName" class="form-label">Admin Name</label>
@@ -84,13 +84,13 @@
 
                                         <div class="col-12">
                                             <label for="yourEmail" class="form-label">Admin Email</label>
-                                            <input type="email" name="admin_email" value="{{ old('admin_email') }}"
-                                                class="form-control @error('admin_email')
+                                            <input type="email" name="email" value="{{ old('email') }}"
+                                                class="form-control @error('email')
                                                     is-invalid
                                                 @enderror"
                                                 id="yourEmail">
 
-                                            @error('admin_email')
+                                            @error('email')
                                                 <span class="text-danger">
                                                     {{ $message }}
                                                 </span>
@@ -100,10 +100,10 @@
 
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Password</label>
-                                            <input type="password" name="admin_password" class="form-control"
+                                            <input type="password" name="password" class="form-control"
                                                 id="yourPassword">
 
-                                            @error('admin_password')
+                                            @error('password')
                                                 <span class="text-danger"> {{ $message }} </span>
                                             @enderror
                                         </div>

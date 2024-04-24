@@ -42,6 +42,10 @@ Route::get('search', [MovieController::class, 'search'])->name('movie.search');
 Route::post('media/{name}/{type}', [CommentController::class, 'store'])->name('comment');
 
 // Admin Routes
-Route::get('admin', [AdminController::class, 'adminPage'])->name('admin.home.login');
-Route::get('register', [AdminController::class, 'registerPage'])->name('admin.home.register');
-Route::post('register', [AdminController::class, 'register'])->name('register.admin');
+Route::get('admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('admin/register', [AdminController::class, 'registerPage'])->name('admin.home.register');
+Route::post('admin/register', [AdminController::class, 'register'])->name('register.admin');
+Route::get('admin/login', [AdminController::class, 'loginPage'])->name('admin.home.login');
+Route::post('admin/login', [AdminController::class, 'login'])->name('admin.login');
+
+Route::get('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');

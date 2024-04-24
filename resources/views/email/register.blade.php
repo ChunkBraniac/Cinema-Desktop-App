@@ -1,3 +1,3 @@
 @component('mail::message')
-    <p>Hello {{ $user->name }}</p>
+    <p>Hello {{ $user->admin_name }}</p>
 @endcomponent
