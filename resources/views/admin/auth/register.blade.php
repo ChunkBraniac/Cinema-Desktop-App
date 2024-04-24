@@ -110,10 +110,10 @@
 
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Confirm Password</label>
-                                            <input type="password" name="admin_password_confirmation"
+                                            <input type="password" name="password_confirmation"
                                                 class="form-control" id="yourPassword">
 
-                                            @error('admin_password_confirmation')
+                                            @error('password_confirmation')
                                                 <span class="text-danger"> {{ $message }} </span>
                                             @enderror
                                         </div>
