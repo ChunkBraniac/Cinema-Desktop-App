@@ -152,10 +152,6 @@ class MovieController extends Controller
     {
         $cacheKey = "moreTop10_" . $name;
 
-        // $media = Top10::where('originalTitleText', $name)->where('titleType', $type)->get();
-        // $media2 = Streaming::where('originalTitleText', $name)->where('titleType', $type)->get();
-        // $media3 = Popular::where('originalTitleText', $name)->where('titleType', $type)->get();
-
         $media = DB::table('top10s')
             ->where('originalTitleText', $name)
             ->where('titleType', $type)
@@ -176,9 +172,6 @@ class MovieController extends Controller
         $merged = Cache::get($cacheKey);
 
         if (!$merged) {
-            // $merged = Top10::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(2)->get();
-            // $merged2 = Streaming::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(1)->get();
-            // $merged3 = Popular::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(1)->get();
             $merged = DB::table('top10s')
                 ->where('originalTitleText', '<>', $name)
                 ->inRandomOrder()
