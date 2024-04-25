@@ -27,16 +27,48 @@ class MovieController extends Controller
 
     public static function getAction()
     {
+        // Determine the current page
+        $page = request()->get('page', 1);
 
-        $actionMoviesTop10 = Top10::where('genres', 'like', '%Action%')->paginate(9);
-        $actionMovies = Streaming::where('genres', 'like', '%Action%')->paginate(9);
-        $actionMoviesPopular = Popular::where('genres', 'like', '%Action%')->paginate(9);
+        // Define the number of items per page
+        $perPage = 24;
 
-        $allActionMovies = $actionMoviesTop10->merge($actionMovies->merge($actionMoviesPopular));
-        $allActionMovies = $allActionMovies->sortByDesc('created_at'); // Or any sorting criteria
+        // Perform your query for each set of movies
+        $actionMoviesTop10 = Top10::where('genres', 'like', '%Action%')->get();
+        $actionMovies = Streaming::where('genres', 'like', '%Action%')->get();
+        $actionMoviesPopular = Popular::where('genres', 'like', '%Action%')->get();
 
-        return view('page.action', compact('allActionMovies'));
+        // Merge the collections
+        $allActionMovies = $actionMoviesTop10->merge($actionMovies)->merge($actionMoviesPopular);
+
+        // Sort the merged collection
+        $allActionMovies = $allActionMovies->sortByDesc('created_at');
+
+        // Calculate the total number of pages
+        $totalPages = ceil($allActionMovies->count() / $perPage);
+
+        // Define the number of pages to display before and after the "..." separator
+        $pagesToShow = 3;
+
+        // Calculate the start and end page numbers to display
+        $startPage = max(1, $page - $pagesToShow);
+        $endPage = min($totalPages, $page + $pagesToShow);
+
+        // Adjust the start and end page numbers if they are too close to the boundaries
+        if ($startPage == 1) {
+            $endPage = min($totalPages, $startPage + ($pagesToShow * 2));
+        } elseif ($endPage == $totalPages) {
+            $startPage = max(1, $endPage - ($pagesToShow * 2));
+        }
+
+        $currentPageItems = $allActionMovies
+        ->slice(($page - 1) * $perPage, $perPage)
+        ->values();
+
+        // Pass the current page items, total pages, start page, end page, and current page to the view
+        return view('page.action', compact('totalPages', 'startPage', 'endPage', 'page', 'currentPageItems'));
     }
+
 
     public static function getAnimation()
     {
@@ -125,19 +157,19 @@ class MovieController extends Controller
         // $media3 = Popular::where('originalTitleText', $name)->where('titleType', $type)->get();
 
         $media = DB::table('top10s')
-                    ->where('originalTitleText', $name)
-                    ->where('titleType', $type)
-                    ->get();
+            ->where('originalTitleText', $name)
+            ->where('titleType', $type)
+            ->get();
 
         $media2 = DB::table('streamings')
-                    ->where('originalTitleText', $name)
-                    ->where('titleType', $type)
-                    ->get();
-        
+            ->where('originalTitleText', $name)
+            ->where('titleType', $type)
+            ->get();
+
         $media3 = DB::table('populars')
-                    ->where('originalTitleText', $name)
-                    ->where('titleType', $type)
-                    ->get();
+            ->where('originalTitleText', $name)
+            ->where('titleType', $type)
+            ->get();
 
         $all = $media->union($media2)->union($media3);
 
@@ -148,22 +180,22 @@ class MovieController extends Controller
             // $merged2 = Streaming::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(1)->get();
             // $merged3 = Popular::where('originalTitleText', '<>', $name)->inRandomOrder()->limit(1)->get();
             $merged = DB::table('top10s')
-                        ->where('originalTitleText', '<>', $name)
-                        ->inRandomOrder()
-                        ->limit(2)
-                        ->get();
+                ->where('originalTitleText', '<>', $name)
+                ->inRandomOrder()
+                ->limit(2)
+                ->get();
 
             $merged2 = DB::table('streamings')
-                        ->where('originalTitleText', '<>', $name)
-                        ->inRandomOrder()
-                        ->limit(4)
-                        ->get();
+                ->where('originalTitleText', '<>', $name)
+                ->inRandomOrder()
+                ->limit(4)
+                ->get();
 
             $merged3 = DB::table('populars')
-                        ->where('originalTitleText', '<>', $name)
-                        ->inRandomOrder()
-                        ->limit(1)
-                        ->get();
+                ->where('originalTitleText', '<>', $name)
+                ->inRandomOrder()
+                ->limit(1)
+                ->get();
 
             $merged = $merged->union($merged2)->union($merged3);
 

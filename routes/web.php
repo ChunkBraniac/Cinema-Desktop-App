@@ -52,4 +52,6 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::get('logout', [AdminController::class, 'logout'])->name('admin.logout');
+    Route::get('admin/movies', [AdminController::class, 'showMovies'])->name('admin.movies');
+    Route::get('admin/movies', [AdminController::class, 'movies'])->name('admin.all');
 });

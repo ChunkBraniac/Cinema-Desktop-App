@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
-use App\Mail\RegisterMail;
 use App\Models\User;
+use App\Models\Admin;
+use App\Models\Top10;
+use App\Models\Popular;
+use App\Models\Streaming;
+use App\Mail\RegisterMail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +34,11 @@ class AdminController extends Controller
     public static function profile()
     {
         return view('admin.profile');
+    }
+
+    public static function showMovies()
+    {
+        return view('admin.movies');
     }
 
     public function register(Request $request)
@@ -87,5 +95,14 @@ class AdminController extends Controller
         Auth::logout();
 
         return redirect()->route('admin.home.login')->with('stat', 'Logout successful');
+    }
+
+    public function movies()
+    {
+        $allmovies = Top10::paginate(10);
+        $streaming = Streaming::paginate(10);
+        $popular = Popular::paginate(10);
+
+        return view('admin.movies', compact('allmovies', 'streaming', 'popular'));
     }
 }
