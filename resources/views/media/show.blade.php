@@ -95,34 +95,18 @@
                                 </div>
                             @endforeach
                         </div>
-                    @elseif ($type == 'tvMiniSeries')
+                    @elseif ($type == 'series')
                         <div class="row">
 
-                            @foreach ($merged as $more)
+                            @foreach ($seasons as $more)
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
-                                    <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
+                                    <a href="{{ url('media/' . $more->season_number . '/' . $more->episode_number) }} "><img
                                             src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
                                             style="height: 400px; object-fit: fill;" loading="lazy"></a>
                                     <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }}"
                                         class="text-decoration-none text-dark">
-                                        <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">
-                                            {{ $more->originalTitleText }}</h6>
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
-                    @elseif ($type == 'tvSeries')
-                        <div class="row">
-
-                            @foreach ($merged as $more)
-                                <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
-                                    <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
-                                            src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
-                                            style="height: 400px; object-fit: fill;" loading="lazy"></a>
-                                    <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }}"
-                                        class="text-decoration-none text-dark">
-                                        <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">
-                                            {{ $more->originalTitleText }}</h6>
+                                        <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">Season {{ $more->season_number }} Episode {{ $more->episode_number }}
+                                            </h6>
                                     </a>
                                 </div>
                             @endforeach
@@ -134,7 +118,7 @@
                         @if (session('success'))
                             <h6 class="alert alert-success">{{ session('success') }}</h6>
                         @endif
-                        
+
                         @if (isset($comments) && count($comments) > 0)
                             <div class="container-xl">
                                 @foreach ($comments as $comment)
@@ -226,24 +210,27 @@
 
                 <div class="col-xl-3 col-lg-4 mt-4">
                     <h5>Recommended Shows </h5>
-                    <div class="row">
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-6 col-xl-6">
-                            <a href="{{ url('') }} "><img
-                                    src="{{ asset('images/NationalGeographic_2572187_square.avif') }}" alt=""
-                                    class="img-fluid"></a>
-                            <a href="{{ url('') }}" class="text-decoration-none text-dark">
-                                <h6 class="mt-2">Movie name</h6>
-                            </a>
-                        </div>
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-6 col-xl-6">
-                            <a href="{{ url('') }} "><img
-                                    src="{{ asset('images/NationalGeographic_2572187_square.avif') }}" alt=""
-                                    class="img-fluid"></a>
-                            <a href="{{ url('') }}" class="text-decoration-none text-dark">
-                                <h6 class="mt-2">Movie name</h6>
-                            </a>
-                        </div>
-                    </div>
+                    @unless (count($recom) == 0)
+                        @foreach ($recom as $recommended)
+                            <div class="accordion accordion-flush border"
+                                style="box-shadow: none; border: none; border-radius: 3px" id="accordionFlushExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#{{ $recommended->id }}" aria-expanded="false"
+                                            aria-controls="flush-collapseOne">
+                                            {{ $recommended->originalTitleText }}
+                                        </button>
+                                    </h2>
+
+                                    <div id="{{ $recommended->id }}" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body" style="font-size: 15px">{{ $recommended->plotText }} <a href="{{ url('media/' . $recommended->originalTitleText . '/' . $recommended->titleType) }} ">More Details</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endunless
                 </div>
             </div>
         </div>

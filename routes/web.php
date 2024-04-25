@@ -55,3 +55,5 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('admin/movies', [AdminController::class, 'showMovies'])->name('admin.movies');
     Route::get('admin/movies', [AdminController::class, 'movies'])->name('admin.all');
 });
+
+Route::get('update', [MovieController::class, 'seriesUpdate']);

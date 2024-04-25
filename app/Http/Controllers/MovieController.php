@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Top10;
 use App\Models\Popular;
+use App\Models\Seasons;
 use App\Models\Streaming;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -62,8 +63,8 @@ class MovieController extends Controller
         }
 
         $currentPageItems = $allActionMovies
-        ->slice(($page - 1) * $perPage, $perPage)
-        ->values();
+            ->slice(($page - 1) * $perPage, $perPage)
+            ->values();
 
         // Pass the current page items, total pages, start page, end page, and current page to the view
         return view('page.action', compact('totalPages', 'startPage', 'endPage', 'page', 'currentPageItems'));
@@ -148,9 +149,65 @@ class MovieController extends Controller
         return view('page.scifi', compact('allScifiMovies'));
     }
 
+
     public static function show($name, $type)
     {
-        $cacheKey = "moreTop10_" . $name;
+
+        /*
+            fetching recommended movies
+
+            This code snippet represents a caching mechanism in Laravel to retrieve and display recommended content. Here's a breakdown of the process:
+
+            **1. Cache Key Generation:**
+
+            - The code starts by creating a cache key using string concatenation. The variable `$name` is likely used to identify a specific user or context for the recommendations. The key is constructed as `"recommend_" . $name` (e.g., "recommend_user123").
+
+            **2. Checking the Cache:**
+
+            - It then attempts to retrieve data from the Laravel cache using the `Cache::get($cache)` method. This method takes the cache key (`$cache`) as an argument and returns the cached data if it exists, or `null` otherwise.
+
+            **3. Processing If No Cache Exists:**
+
+            - If the cache lookup returns `null` (meaning there's no cached data for the given key), the code proceeds to fetch recommendations from the database:
+            - Three separate queries are executed:
+                - One fetches recommendations from the `Top10` model.
+                - Another fetches recommendations from the `Streaming` model.
+                - The last one fetches recommendations from the `Popular` model.
+            - Each query filters for items with an `aggregateRating` greater than 7 and applies `inRandomOrder` to randomize the results.
+            - The `paginate(4)` method is used on each query to retrieve only the first 4 results (this can be customized).
+            - The results from these three queries are then merged together using the `merge` method, creating a single collection of recommendations.
+
+            **4. Caching the Results:**
+
+            - The merged collection of recommendations is stored in the cache using the `Cache::put($cache, $recom, 60)` method:
+            - The first argument (`$cache`) is the same cache key used earlier.
+            - The second argument (`$recom`) is the collection of recommendations to be cached.
+            - The third argument (`60`) specifies the cache duration in minutes (here, 60 minutes). This means the recommendations will be kept in cache for 1 hour before being refreshed.
+
+            **5. Returning the Recommendations:**
+
+            - Presumably, the `$recom` variable (containing the cached or fetched recommendations) would be used in your application to display them to the user.
+
+            **Overall, this code snippet improves performance by efficiently retrieving recommendations. If the recommendations haven't changed within the past hour, they'll be retrieved from the cache, saving database queries. Otherwise, fresh recommendations will be fetched and cached for future use.**
+        */
+        $cache = "recommend_" . $name;
+
+        $recom = Cache::get($cache);
+
+        if (!$recom) {
+            // $recommend = Top10::where('aggregateRating', '>', '7')->inRandomOrder()->limit(1);
+            // $recommend2 = Streaming::where('aggregateRating', '>', '7')->inRandomOrder()->limit(1);
+            // $recommend3 = Popular::where('aggregateRating', '>', '7')->inRandomOrder()->limit(1);
+
+            $recommend= DB::table('top10s')->where('aggregateRating', '>', '7')->where('originalTitleText', '<>', $name)->inRandomOrder()->limit(9)->get();
+            $recommend2 = DB::table('streamings')->where('aggregateRating', '>', '7')->where('originalTitleText', '<>', $name)->inRandomOrder()->limit(9)->get();
+            $recommend3 = DB::table('populars')->where('aggregateRating', '>', '7')->where('originalTitleText', '<>', $name)->inRandomOrder()->limit(9)->get();
+
+            $recom = $recommend->union($recommend2)->union($recommend3);
+
+            Cache::put($cache, $recom, 60);
+
+        }
 
         $media = DB::table('top10s')
             ->where('originalTitleText', $name)
@@ -168,6 +225,12 @@ class MovieController extends Controller
             ->get();
 
         $all = $media->union($media2)->union($media3);
+
+        /* 
+        the below code uses the same structure as above
+        read it and understand it's workings
+        */
+        $cacheKey = "moreTop10_" . $name;
 
         $merged = Cache::get($cacheKey);
 
@@ -195,11 +258,38 @@ class MovieController extends Controller
             Cache::put($cacheKey, $merged, 60);
         }
 
-        return view('media.show', compact('all', 'type', 'merged'));
+        $seasons = Seasons::where('movieName', $name)->get();
+
+        return view('media.show', compact('all', 'type', 'merged', 'recom', 'seasons'));
     }
 
     public static function search(Request $request)
     {
+
+        /*
+            This code handles a search request in Laravel:
+
+            1. **Retrieves Search Term:** It grabs the "search" input from the user's request using `$request->input('search')`.
+
+            2. **Validates Search Term:** If no search term is provided (`!$searchWord`), it redirects the user back with an error message.
+
+            3. **Performs Separate Searches:** It executes three separate database searches:
+            - One for `Top10` models.
+            - Another for `Streaming` models.
+            - The last one for `Popular` models.
+            - Each search uses `like` with wildcards (`%`) to search for titles containing the search word.
+            - They are distinct (`distinct`) to avoid duplicates and ordered by ID in descending order (`Desc`).
+            - Each search is paginated with a specific number of results (e.g., 15 for `Top10`).
+
+            4. **Merges Results:** It combines all results from the three searches into a single `$allResults` collection using `merge`.
+
+            5. **Passes Data to View:** It returns a view named "search" and passes the following data:
+            - `allResults`: The merged collection of all search results.
+            - Individual results for each category (optional for further processing in the view).
+
+            In summary, this code validates a search term, performs separate searches across different models, combines the results, and sends them to a view for display. 
+        */
+
         $searchWord = $request->input('search');
 
         if (!$searchWord) {
@@ -214,5 +304,23 @@ class MovieController extends Controller
 
         return view('search', compact('allResults', 'top10Results', 'streamingResults', 'popularResults'));
     }
+
+    public function seriesUpdate() {
+        // Fetch all entries where titleType is 'tvMiniSeries'
+        $updateSeries = Top10::where('titleType', 'tvSeries')->where('titleType', 'tvMiniSeries')->get();
+        $updateSeries2 = Streaming::where('titleType', 'tvSeries')->where('titleType', 'tvMiniSeries')->get();
+        $updateSeries3 = Popular::where('titleType', 'tvSeries')->where('titleType', 'tvMiniSeries')->get();
+
+        $merge = $updateSeries->merge($updateSeries2)->merge($updateSeries3);
+    
+        // Loop through each entry and update titleType
+        foreach ($merge as $series) {
+            $series->titleType = "series";
+            $series->save();
+        }
+    
+        return view('dummy');
+    }
+    
 }
 
