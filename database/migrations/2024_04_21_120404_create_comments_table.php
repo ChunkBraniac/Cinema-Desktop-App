@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('commentor');
             $table->longText('comment');
-            $table->string('comment_on');
+            $table->string('movie_id');
+            $table->string('movie_name');
             $table->timestamps();
         });
     }
