@@ -195,7 +195,7 @@
 
                             </div>
                         @else
-                            <p class="alert alert-danger">No comments yet for this movie.</p>
+                            <p class="alert alert-danger" style="font-size: 14px">No comments yet for this movie.</p>
                         @endif
                     </div>
 
