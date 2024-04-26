@@ -32,7 +32,7 @@ class MovieController extends Controller
         $page = request()->get('page', 1);
 
         // Define the number of items per page
-        $perPage = 24;
+        $perPage = 30;
 
         // Perform your query for each set of movies
         $actionMoviesTop10 = Top10::where('genres', 'like', '%Action%')->get();
@@ -301,7 +301,7 @@ class MovieController extends Controller
 
         $allResults = $top10Results->merge($streamingResults)->merge($popularResults);
 
-        return view('search', compact('allResults', 'top10Results', 'streamingResults', 'popularResults'));
+        return view('components.search', compact('allResults', 'top10Results', 'streamingResults', 'popularResults'));
     }
 
     public static function seriesUpdate() {
@@ -331,6 +331,14 @@ class MovieController extends Controller
         }
     
         return view('dummy');
+    }
+
+    public static function showMore()
+    {
+        $more_streaming = Streaming::paginate(36);
+        $more_popular = Popular::paginate(36);
+
+        return view('components.show-more', compact('more_streaming', 'more_popular'));
     }
     
 }

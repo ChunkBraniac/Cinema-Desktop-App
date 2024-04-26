@@ -6,7 +6,7 @@ $('.owl-carousel').owlCarousel({
         0: {
             items: 2,
             nav: false,
-            dots: true
+            dots: false
         },
         600: {
             items: 3,

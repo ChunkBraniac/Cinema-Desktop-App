@@ -44,7 +44,7 @@
         </div>
 
         <div class="mt-4 text-center">
-            <a href="{{ url('') }}" class="btn btn-primary" id="show-more">Show More</a>
+            <a href="{{ url('show-more?cartegory=streaming') }}" class="btn btn-primary" id="show-more">Show More</a>
         </div>
     </div>
 
@@ -67,7 +67,7 @@
             @endunless
         </div>
         <div class="mt-4 text-center">
-            <a href="{{ url('') }}" class="btn btn-primary" id="show-more">Show More</a>
+            <a href="{{ url('show-more?cartegory=popular') }}" class="btn btn-primary" id="show-more">Show More</a>
         </div>
     </div>
 @endsection

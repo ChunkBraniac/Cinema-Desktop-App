@@ -101,7 +101,7 @@
 
                             @foreach ($seasons as $more)
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
-                                    <a href="{{ url('download/' . $more->movieName . '/' . $more->season_number . '/' . $more->episode_number) }} "><img
+                                    <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }} "><img
                                             src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
                                             style="height: 400px; object-fit: fill;" loading="lazy"></a>
                                     <a href="{{ url('download/' . $more->season_number . '/' . $more->episode_number) }}"
