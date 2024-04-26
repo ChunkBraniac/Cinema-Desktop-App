@@ -98,6 +98,8 @@
             </div>
 
             {{ $more_popular->appends(request()->query())->onEachSide(1)->links() }}
+        @else
+            {{ abort(404) }}
         @endif
 
     </div>
