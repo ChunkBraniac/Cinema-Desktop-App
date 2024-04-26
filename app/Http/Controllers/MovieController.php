@@ -69,7 +69,8 @@ class MovieController extends Controller
         // Pass the current page items, total pages, start page, end page, and current page to the view
         return view('page.action', compact('totalPages', 'startPage', 'endPage', 'page', 'currentPageItems'));
     }
-    
+
+
     public static function getAnimation()
     {
 
@@ -287,13 +288,16 @@ class MovieController extends Controller
 
             In summary, this code validates a search term, performs separate searches across different models, combines the results, and sends them to a view for display. 
         */
-        if (isset($_GET['search'])) {
-            $searchWord = $_GET['search'];
+
+        $searchWord = $request->input('search');
+
+        if (!$searchWord) {
+            return redirect()->back()->with('error', 'Please enter a search word');
         }
 
-        $top10Results = Top10::where('originalTitleText', 'LIKE', "%$searchWord%")->paginate(15);
-        $streamingResults = Streaming::where('originalTitleText', 'LIKE', "%$searchWord%")->paginate(12);
-        $popularResults = Popular::where('originalTitleText', 'LIKE', "%$searchWord%")->paginate(12);
+        $top10Results = Top10::where('originalTitleText', 'like', "%$searchWord%")->distinct()->orderBy('id', 'Desc')->paginate(15);
+        $streamingResults = Streaming::where('originalTitleText', 'like', "%$searchWord%")->distinct()->orderBy('id', 'Desc')->paginate(12);
+        $popularResults = Popular::where('originalTitleText', 'like', "%$searchWord%")->distinct()->orderBy('id', 'Desc')->paginate(12);
 
         $allResults = $top10Results->merge($streamingResults)->merge($popularResults);
 
@@ -329,11 +333,13 @@ class MovieController extends Controller
         return view('dummy');
     }
 
-    public function download($name, $season, $episode)
+    public static function download($name, $season, $episode)
     {
-        $db1 = Seasons::where('movieName', $name)->where('season_number', $season)->where('episode_number', $episode);
+        // $db1 = Seasons::where('movieName', $name)->where('season_number', $season)->where('episode_number', $episode);
+
+        $db = DB::table('seasons')->where('movieName', $name)->where('season_number', $season)->where('episode_number', $episode);
         
-        return view('download', compact('db1'));
+        return view('download', compact('db'));
     }
     
 }
