@@ -61,6 +61,8 @@
                 {{-- <p>No results found for Streaming</p> --}}
             @endif
 
+            
+
             @if ($popularResults->isNotEmpty())
                 @unless (count($popularResults) == 0)
                     @foreach ($popularResults as $search)

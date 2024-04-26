@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('isRatable');
             $table->string('originalTitleText');
             $table->string('imageUrl')->nullable();
-            $table->string('ratingsSummary')->nullable();
+            $table->string('aggregateRating')->nullable();
             $table->string('releaseYear')->nullable();
             $table->string('titleType');
             $table->string('titleTypeText');

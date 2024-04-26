@@ -31,6 +31,10 @@
     @include('layouts._header')
     <br><br><br>
 
+    @if (session('error'))
+        <h6 class="alert alert-danger">{{ session('error') }}</h6>
+    @endif
+
     @yield('content')
 
     @include('layouts._footer')

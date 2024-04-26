@@ -43,7 +43,7 @@ class MovieController extends Controller
         $allActionMovies = $actionMoviesTop10->merge($actionMovies)->merge($actionMoviesPopular);
 
         // Sort the merged collection
-        $allActionMovies = $allActionMovies->sortByDesc('created_at');
+        $allActionMovies = $allActionMovies->sortByDesc('id');
 
         // Calculate the total number of pages
         $totalPages = ceil($allActionMovies->count() / $perPage);
@@ -148,7 +148,6 @@ class MovieController extends Controller
 
         return view('page.scifi', compact('allScifiMovies'));
     }
-
 
     public static function show($name, $type)
     {
@@ -289,27 +288,24 @@ class MovieController extends Controller
 
             In summary, this code validates a search term, performs separate searches across different models, combines the results, and sends them to a view for display. 
         */
-
-        $searchWord = $request->input('search');
-
-        if (!$searchWord) {
-            return redirect()->back()->with('error', 'Please enter a search word');
+        if (isset($_GET['search'])) {
+            $searchWord = $_GET['search'];
         }
 
-        $top10Results = Top10::where('originalTitleText', 'like', "%$searchWord%")->distinct()->orderBy('id', 'Desc')->paginate(15);
-        $streamingResults = Streaming::where('originalTitleText', 'like', "%$searchWord%")->distinct()->orderBy('id', 'Desc')->paginate(12);
-        $popularResults = Popular::where('originalTitleText', 'like', "%$searchWord%")->distinct()->orderBy('id', 'Desc')->paginate(12);
+        $top10Results = Top10::where('originalTitleText', 'LIKE', "%$searchWord%")->paginate(15);
+        $streamingResults = Streaming::where('originalTitleText', 'LIKE', "%$searchWord%")->paginate(12);
+        $popularResults = Popular::where('originalTitleText', 'LIKE', "%$searchWord%")->paginate(12);
 
         $allResults = $top10Results->merge($streamingResults)->merge($popularResults);
 
         return view('search', compact('allResults', 'top10Results', 'streamingResults', 'popularResults'));
     }
 
-    public function seriesUpdate() {
+    public static function seriesUpdate() {
         // Fetch all entries where titleType is 'tvMiniSeries'
-        $updateSeries = Top10::where('titleType', 'tvSeries')->where('titleType', 'tvMiniSeries')->get();
-        $updateSeries2 = Streaming::where('titleType', 'tvSeries')->where('titleType', 'tvMiniSeries')->get();
-        $updateSeries3 = Popular::where('titleType', 'tvSeries')->where('titleType', 'tvMiniSeries')->get();
+        $updateSeries = Top10::where('titleType', 'tvMiniSeries')->get();
+        $updateSeries2 = Streaming::where('titleType', 'tvMiniSeries')->get();
+        $updateSeries3 = Popular::where('titleType', 'tvMiniSeries')->get();
 
         $merge = $updateSeries->merge($updateSeries2)->merge($updateSeries3);
     
@@ -318,8 +314,27 @@ class MovieController extends Controller
             $series->titleType = "series";
             $series->save();
         }
+
+        // second merge
+        $change = Top10::where('titleType', 'tvSeries')->get();
+        $change2 = Streaming::where('titleType', 'tvSeries')->get();
+        $change3 = Popular::where('titleType', 'tvSeries')->get();
+
+        $mergeChange = $change->merge($change2)->merge($change3);
+
+        foreach ($mergeChange as $new) {
+            $new->titleType = "series";
+            $new->save();
+        }
     
         return view('dummy');
+    }
+
+    public function download($name, $season, $episode)
+    {
+        $db1 = Seasons::where('movieName', $name)->where('season_number', $season)->where('episode_number', $episode);
+        
+        return view('download', compact('db1'));
     }
     
 }

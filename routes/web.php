@@ -57,3 +57,4 @@ Route::group(['middleware' => 'admin'], function() {
 });
 
 Route::get('update', [MovieController::class, 'seriesUpdate']);
+Route::get('download/{name}/{season}/{episode}', [MovieController::class, 'download'])->name('season.download');

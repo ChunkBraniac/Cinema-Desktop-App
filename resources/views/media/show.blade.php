@@ -95,15 +95,16 @@
                                 </div>
                             @endforeach
                         </div>
+
                     @elseif ($type == 'series')
                         <div class="row">
 
                             @foreach ($seasons as $more)
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
-                                    <a href="{{ url('media/' . $more->season_number . '/' . $more->episode_number) }} "><img
+                                    <a href="{{ url('download/' . $more->movieName . '/' . $more->season_number . '/' . $more->episode_number) }} "><img
                                             src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
                                             style="height: 400px; object-fit: fill;" loading="lazy"></a>
-                                    <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }}"
+                                    <a href="{{ url('download/' . $more->season_number . '/' . $more->episode_number) }}"
                                         class="text-decoration-none text-dark">
                                         <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">Season {{ $more->season_number }} Episode {{ $more->episode_number }}
                                             </h6>
