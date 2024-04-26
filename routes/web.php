@@ -8,6 +8,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\Top10Controller;
 use App\Http\Controllers\CinemaController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\SeasonsController;
 
 Route::get('/', [PageController::class, 'home']);
 Route::get('top10', [PageController::class, 'series']);
@@ -57,4 +58,4 @@ Route::group(['middleware' => 'admin'], function() {
 });
 
 Route::get('update', [MovieController::class, 'seriesUpdate']);
-Route::get('download/{name}/{season}/{episode}', [MovieController::class, 'download'])->name('season.download');
+Route::get('download/{name}/{season}/{episode}', [SeasonsController::class, 'download'])->name('download');

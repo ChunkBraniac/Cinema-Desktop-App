@@ -332,15 +332,6 @@ class MovieController extends Controller
     
         return view('dummy');
     }
-
-    public static function download($name, $season, $episode)
-    {
-        // $db1 = Seasons::where('movieName', $name)->where('season_number', $season)->where('episode_number', $episode);
-
-        $db = DB::table('seasons')->where('movieName', $name)->where('season_number', $season)->where('episode_number', $episode);
-        
-        return view('download', compact('db'));
-    }
     
 }
 
