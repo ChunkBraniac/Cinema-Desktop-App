@@ -69,8 +69,7 @@ class MovieController extends Controller
         // Pass the current page items, total pages, start page, end page, and current page to the view
         return view('page.action', compact('totalPages', 'startPage', 'endPage', 'page', 'currentPageItems'));
     }
-
-
+    
     public static function getAnimation()
     {
 
