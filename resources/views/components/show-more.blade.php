@@ -1,13 +1,20 @@
 @extends('layouts.app')
 
-@section('title')
-    Action
-@endsection
+@php
+    $cartegory = $_GET['cartegory'];
+@endphp
+
+@if ($cartegory == 'streaming')
+    @section('title')
+        Streaming
+    @endsection
+@elseif ($cartegory == 'popular')
+    @section('title')
+        Popular
+    @endsection
+@endif
 
 @section('content')
-    @php
-        $cartegory = $_GET['cartegory'];
-    @endphp
 
     <br><br>
     @if ($cartegory == 'streaming')
