@@ -51,10 +51,12 @@
                     </div>
 
                     <div class="col-xl-6 mt-3 mt-xl-0">
-                        <iframe height="400" src="{{ $item->trailer ? $item->trailer : 'N/A' }}"
+                        <iframe height="400"
+                            src="{{ $item->trailer ? 'https://www.youtube.com/embed/' . explode('?v=', $item->trailer)[1] : 'N/A' }}"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen width="100%"></iframe>
+                            allowfullscreen width="100%">
+                        </iframe>
                     </div>
                 </div>
             @endforeach
@@ -95,19 +97,20 @@
                                 </div>
                             @endforeach
                         </div>
-
                     @elseif ($type == 'series')
                         <div class="row">
 
                             @foreach ($seasons as $more)
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
-                                    <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }} "><img
+                                    <a
+                                        href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }} "><img
                                             src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
                                             style="height: 400px; object-fit: fill;" loading="lazy"></a>
                                     <a href="{{ url('download/' . $more->season_number . '/' . $more->episode_number) }}"
                                         class="text-decoration-none text-dark">
-                                        <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">Season {{ $more->season_number }} Episode {{ $more->episode_number }}
-                                            </h6>
+                                        <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">Season
+                                            {{ $more->season_number }} Episode {{ $more->episode_number }}
+                                        </h6>
                                     </a>
                                 </div>
                             @endforeach
@@ -165,8 +168,8 @@
                                                     <label for="" class="mt-3" style="font-size: 15px">Your
                                                         reply:
                                                     </label>
-                                                    <textarea name="reply_text" id="" cols="30" rows="5" class="form-control"
-                                                        style="border-radius: 0px" required></textarea>
+                                                    <textarea name="reply_text" id="" cols="30" rows="5" class="form-control" style="border-radius: 0px"
+                                                        required></textarea>
 
                                                     <div class="mt-3">
                                                         <button class="btn btn-primary btn-sm"
@@ -226,7 +229,9 @@
 
                                     <div id="{{ $recommended->id }}" class="accordion-collapse collapse"
                                         data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body" style="font-size: 15px">{{ $recommended->plotText }} <a href="{{ url('media/' . $recommended->originalTitleText . '/' . $recommended->titleType) }} ">More Details</a></div>
+                                        <div class="accordion-body" style="font-size: 15px">{{ $recommended->plotText }} <a
+                                                href="{{ url('media/' . $recommended->originalTitleText . '/' . $recommended->titleType) }} ">More
+                                                Details</a></div>
                                     </div>
                                 </div>
                             </div>

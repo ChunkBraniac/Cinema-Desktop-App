@@ -19,14 +19,14 @@
                         <a class="nav-link text-light" href="{{ url('#') }}" id="dropdownId"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 15px; margin-right: 10px">Genres <i
                                 class="fa fa-plus" aria-hidden="true" style="font-size: 12px"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownId" style="border-radius: 0px; font-size: 15px; margin-top: 10px">
-                            <a class="dropdown-item" href="{{ url('action') }}">Action</a>
-                            <a class="dropdown-item" href="{{ url('animation') }}">Animation</a>
-                            <a class="dropdown-item" href="{{ url('comedy') }}">Comedy</a>
-                            <a class="dropdown-item" href="{{ url('drama') }}">Drama</a>
-                            <a class="dropdown-item" href="{{ url('horror') }}">Horror</a>
-                            <a class="dropdown-item" href="{{ url('thriller') }}">Thriller</a>
-                            <a class="dropdown-item" href="{{ url('scifi') }}">Sci-Fi</a>
+                        <div class="dropdown-menu bg-dark mt-0 mt-xl-2 m-lg-auto justify-content-center position-absolute text-left text-xl-left" aria-labelledby="dropdownId" style="border-radius: 0px; font-size: 15px; margin-top: 10px">
+                            <a class="dropdown-item text-light"m id="hover" href="{{ url('action') }}">Action</a>
+                            <a class="dropdown-item text-light"m id="hover" href="{{ url('animation') }}">Animation</a>
+                            <a class="dropdown-item text-light"m id="hover" href="{{ url('comedy') }}">Comedy</a>
+                            <a class="dropdown-item text-light"m id="hover" href="{{ url('drama') }}">Drama</a>
+                            <a class="dropdown-item text-light"m id="hover" href="{{ url('horror') }}">Horror</a>
+                            <a class="dropdown-item text-light"m id="hover" href="{{ url('thriller') }}">Thriller</a>
+                            <a class="dropdown-item text-light"m id="hover" href="{{ url('scifi') }}">Sci-Fi</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -36,13 +36,10 @@
                         <a class="nav-link text-light" href="{{ url('#') }}" style="font-size: 15px">About  </a>
                     </li>
                 </ul>
-                <form class="d-flex my-2 my-lg-0" action="{{ route('movie.search') }}" method="get">
-                    <input class="form-control me-sm-2" type="text" placeholder="Search"
-                        style="border-radius: 0px; box-shadow: none" name="search" />
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="border-radius: 0px;">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </button>
-                </form>
+                <form class="d-flex" role="search" action="{{ route('movie.search') }}" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" required style="border-radius: 0px; box-shadow: none">
+                    <button class="btn btn-outline-success" type="submit" style="border-radius: 0px;"><i class="fa fa-search" aria-hidden="true"></i></button>
+                  </form>            
             </div>
         </div>
     </nav>

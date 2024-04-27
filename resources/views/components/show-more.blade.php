@@ -4,36 +4,36 @@
     $cartegory = $_GET['cartegory'];
 @endphp
 
-@if ($cartegory == 'streaming')
+@if ($cartegory == 'series')
     @section('title')
-        Streaming
+        Series
     @endsection
-@elseif ($cartegory == 'popular')
+@elseif ($cartegory == 'movies')
     @section('title')
-        Popular
+        Movies
     @endsection
 @endif
 
 @section('content')
 
     <br><br>
-    @if ($cartegory == 'streaming')
+    @if ($cartegory == 'series')
         <div class="container">
-            <h4 style="float: left">Streaming movies</h4>
+            <h4 style="float: left">Series</h4>
             <h6 class="" style="float: right; font-family: 'Robot', sans-serif; font-weight: normal"><span
                     style="margin-right: 5px; font-size: 14px"><a href="{{ url('/') }} "
                         class="text-decoration-none text-dark text-muted">Home</a></span> <i
                     class="fa fa-arrow-right text-muted" style="font-size: 13px" aria-hidden="true"></i> <span
-                    style="margin-left: 5px; font-size: 14px" class="text-muted">Streaming movies</span></h6>
+                    style="margin-left: 5px; font-size: 14px" class="text-muted">Series</span></h6>
         </div>
-    @elseif ($cartegory == 'popular')
+    @elseif ($cartegory == 'movies')
         <div class="container">
-            <h4 style="float: left">Popular movies</h4>
+            <h4 style="float: left">Movies</h4>
             <h6 class="" style="float: right; font-family: 'Robot', sans-serif; font-weight: normal"><span
                     style="margin-right: 5px; font-size: 14px"><a href="{{ url('/') }} "
                         class="text-decoration-none text-dark text-muted">Home</a></span> <i
                     class="fa fa-arrow-right text-muted" style="font-size: 13px" aria-hidden="true"></i> <span
-                    style="margin-left: 5px; font-size: 14px" class="text-muted">Popular movies</span></h6>
+                    style="margin-left: 5px; font-size: 14px" class="text-muted">Movies</span></h6>
         </div>
     @endif
 
@@ -41,10 +41,10 @@
     <hr>
     <div class="container mt-5">
 
-        @if ($cartegory == 'streaming')
+        @if ($cartegory == 'movies')
             <div class="row mb-4">
-                @unless (count($more_streaming) == 0)
-                    @foreach ($more_streaming as $action)
+                @unless (count($more_Movies) == 0)
+                    @foreach ($more_Movies as $action)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"><img
                                     src="{{ asset($action->imageUrl) }}" alt="" class="img-fluid"
@@ -72,11 +72,11 @@
                 @endunless
             </div>
 
-            {{ $more_streaming->appends(request()->query())->onEachSide(1)->links() }}
-        @elseif ($cartegory == 'popular')
+            {{ $more_Movies->appends(request()->query())->onEachSide(1)->links() }}
+        @elseif ($cartegory == 'series')
             <div class="row mb-4">
-                @unless (count($more_popular) == 0)
-                    @foreach ($more_popular as $action)
+                @unless (count($more_Series) == 0)
+                    @foreach ($more_Series as $action)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"><img
                                     src="{{ asset($action->imageUrl) }}" alt="" class="img-fluid"
@@ -104,7 +104,7 @@
                 @endunless
             </div>
 
-            {{ $more_popular->appends(request()->query())->onEachSide(1)->links() }}
+            {{ $more_Series->appends(request()->query())->onEachSide(1)->links() }}
         @else
             {{ abort(404) }}
         @endif
