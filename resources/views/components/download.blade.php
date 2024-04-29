@@ -19,7 +19,7 @@
                             <h5 class="card-title">{{ $item->movieName }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted ">Season {{ $item->season_number }} Episode {{ $item->episode_number }}</h6>
                             
-                            <button class="btn btn-primary">Download</button>
+                            <button class="btn btn-primary btn-lg" style="font-size: 17px; text-transform: uppercase" id="show-more">Download</button>
                         </div>
                     </div>
                 </div>

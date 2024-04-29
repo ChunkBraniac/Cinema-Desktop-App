@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('country');
             $table->string('runtime');
             $table->string('genres');
+            $table->string('tmdbId');
             $table->string('trailer');
             $table->longText('plotText');
             $table->timestamps();

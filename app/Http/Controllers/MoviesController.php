@@ -268,6 +268,9 @@ class MoviesController extends Controller
         if (!$searchWord) {
             return redirect()->back()->with('error', 'Please enter a search word');
         }
+        elseif (strlen($searchWord) < 3) {
+            return redirect()->back()->with('error', 'Search term must be at least 3 characters');
+        }
 
         $SeriesResults = Series::where('originalTitleText', 'like', "%$searchWord%")->distinct()->orderBy('id', 'Desc')->paginate(15);
         $MoviesResults = Movies::where('originalTitleText', 'like', "%$searchWord%")->distinct()->orderBy('id', 'Desc')->paginate(15);

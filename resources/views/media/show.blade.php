@@ -22,7 +22,7 @@
                             <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3">{{ $item->originalTitleText }}
                             </h4>
                             <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
-                                {{ isset($item->rating->aggregateRating) ? $item->rating->aggregateRating : 'N/A' }}</h6>
+                                {{ isset($item->aggregateRating) ? $item->aggregateRating : 'N/A' }}</h6>
                             <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Release
                                 year:
                                 {{ $item->releaseYear }}</h6>
@@ -106,7 +106,7 @@
                                         href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }} "><img
                                             src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
                                             style="height: 400px; object-fit: fill;" loading="lazy"></a>
-                                    <a href="{{ url('download/' . $more->season_number . '/' . $more->episode_number) }}"
+                                    <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
                                         class="text-decoration-none text-dark">
                                         <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">Season
                                             {{ $more->season_number }} Episode {{ $more->episode_number }}

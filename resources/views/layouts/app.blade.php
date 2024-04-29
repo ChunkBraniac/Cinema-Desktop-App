@@ -32,7 +32,7 @@
     <br><br><br>
 
     @if (session('error'))
-        <h6 class="alert alert-danger">{{ session('error') }}</h6>
+        <h6 class="alert alert-danger text-center" style="font-family: 'Roboto', sans-serif; font-weight: normal;">{{ session('error') }}</h6>
     @endif
 
     @yield('content')
