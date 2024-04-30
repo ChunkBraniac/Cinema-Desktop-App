@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Top10;
+use App\Models\Movies;
+use App\Models\Series;
 use App\Models\Popular;
 use App\Models\Streaming;
 use App\Mail\RegisterMail;
@@ -99,10 +101,9 @@ class AdminController extends Controller
 
     public function movies()
     {
-        $allmovies = Top10::paginate(10);
-        $streaming = Streaming::paginate(10);
-        $popular = Popular::paginate(10);
+        $allseries = Series::paginate(10);
+        $allmovies = Movies::paginate(10);
 
-        return view('admin.movies', compact('allmovies', 'streaming', 'popular'));
+        return view('admin.movies', compact('allmovies', 'allseries'));
     }
 }

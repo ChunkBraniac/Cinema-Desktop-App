@@ -58,9 +58,20 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('logout', [AdminController::class, 'logout'])->name('admin.logout');
     Route::get('admin/movies', [AdminController::class, 'showMovies'])->name('admin.movies');
     Route::get('admin/movies', [AdminController::class, 'movies'])->name('admin.all');
-});
 
-Route::get('update', [MoviesController::class, 'seriesUpdate']);
+    // route to fetch the movies and series and other settings
+    Route::get('admin/series', [ApiController::class, 'fetchSeries'])->name('fetch.series');
+    Route::get('admin/fetch', [ApiController::class, 'fetchMovies'])->name('fetch.movies');
+    Route::get('admin/update', [ApiController::class, 'updateSeriesType'])->name('update.series');
+    Route::get('admin/series/genre', [ApiController::class, 'updateSeriesGenre'])->name('update.series.genre');
+    Route::get('admin/movies/genre', [ApiController::class, 'updateMoviesGenre'])->name('update.movies.genre');
+    Route::get('admin/series/genre2', [ApiController::class, 'updateSeriesGenre2'])->name('update.series.genre');
+    Route::get('admin/movies/genre2', [ApiController::class, 'updateMoviesGenre2'])->name('update.movies.genre');
+    Route::get('admin/series/description', [ApiController::class, 'updateSeriesDescription'])->name('series.description');
+    Route::get('admin/movies/description', [ApiController::class, 'updateMoviesDescription'])->name('movies.description');
+    Route::get('admin/series/trailer', [ApiController::class, 'updateSeriesTrailer'])->name('series.trailer');
+    Route::get('admin/movies/trailer', [ApiController::class, 'updateMoviesTrailer'])->name('movies.trailer');
+});
 
 // Download page
 Route::get('download/{name}/season/{season}/episode/{episode}', [SeasonsController::class, 'download'])->name('download');

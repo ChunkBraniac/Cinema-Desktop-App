@@ -242,30 +242,86 @@
         </li><!-- End movies Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-register.html">
+            <a class="nav-link collapsed" href="series">
                 <i class="bi bi-card-list"></i>
-                <span>Register</span>
+                <span>Fetch Series</span>
             </a>
         </li><!-- End Register Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-login.html">
+            <a class="nav-link collapsed" href="fetch">
                 <i class="bi bi-box-arrow-in-right"></i>
-                <span>Login</span>
+                <span>Fetch Movies</span>
             </a>
         </li><!-- End Login Page Nav -->
 
         <li class="nav-item">
+            <a class="nav-link collapsed" href="update">
+                <i class="bi bi-camera-video"></i>
+                <span>Update Series Type</span>
+            </a>
+        </li><!-- End Login Page Nav -->
+
+        {{-- <li class="nav-item">
             <a class="nav-link collapsed" href="pages-error-404.html">
                 <i class="bi bi-dash-circle"></i>
                 <span>Error 404</span>
             </a>
-        </li><!-- End Error 404 Page Nav -->
+        </li><!-- End Error 404 Page Nav --> --}}
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-blank.html">
-                <i class="bi bi-file-earmark"></i>
-                <span>Blank</span>
+            <a class="nav-link collapsed" href="series/description">
+                <i class="bi bi-check"></i>
+                <span>Update Series Description</span>
+            </a>
+        </li><!-- End Blank Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="movies/description">
+                <i class="bi bi-check"></i>
+                <span>Update Movies Description</span>
+            </a>
+        </li><!-- End Blank Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="movies/genre">
+                <i class="bi bi-check"></i>
+                <span>Update Movies Genre</span>
+            </a>
+        </li><!-- End Blank Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="series/genre">
+                <i class="bi bi-check"></i>
+                <span>Update Series Genre</span>
+            </a>
+        </li><!-- End Blank Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="series/genre2">
+                <i class="bi bi-moisture"></i>
+                <span>Update 2nd Series Genre</span>
+            </a>
+        </li><!-- End Blank Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="movies/genre2">
+                <i class="bi bi-file-arrow-down"></i>
+                <span>Update 2nd Movies Genre</span>
+            </a>
+        </li><!-- End Blank Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="series/trailer">
+                <i class="bi bi-youtube"></i>
+                <span>Fetch Series Trailer</span>
+            </a>
+        </li><!-- End Blank Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="movies/trailer">
+                <i class="bi bi-youtube"></i>
+                <span>Fetch Movies Trailer</span>
             </a>
         </li><!-- End Blank Page Nav -->
 

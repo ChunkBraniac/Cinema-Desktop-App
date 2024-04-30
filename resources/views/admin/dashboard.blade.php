@@ -12,6 +12,10 @@
             @if (session('status'))
                 <h6 class="alert alert-success">{{ session('status') }}</h6>
             @endif
+
+            @if (session('error'))
+                <h6 class="alert alert-danger">{{ session('error') }}</h6>
+            @endif
             <h1>Dashboard</h1>
             <nav>
                 <ol class="breadcrumb">

@@ -280,31 +280,6 @@ class MoviesController extends Controller
         return view('components.search', compact('allResults', 'SeriesResults', 'MoviesResults'));
     }
 
-    public static function seriesUpdate() {
-        // Fetch all entries where titleType is 'tvMiniSeries'
-        $updateSeries = Series::where('titleType', 'tvMiniSeries')->get();
-
-        $merge = $updateSeries;
-    
-        // Loop through each entry and update titleType
-        foreach ($merge as $series) {
-            $series->titleType = "series";
-            $series->save();
-        }
-
-        // second merge
-        $change = Series::where('titleType', 'tvSeries')->get();
-
-        $mergeChange = $change;
-
-        foreach ($mergeChange as $new) {
-            $new->titleType = "series";
-            $new->save();
-        }
-    
-        return view('dummy');
-    }
-
     public static function showMore()
     {
         $more_Movies = Movies::paginate(36);
