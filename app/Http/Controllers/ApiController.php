@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Google\Client;
+use Google\Service\YouTube;
 use App\Models\Top10;
 use App\Models\Cinema;
 use Illuminate\Http\Request;
@@ -72,7 +73,7 @@ class ApiController extends Controller
                             // if it is, break out of the loop
                             $fetch_movies = mysqli_query($connection, "SELECT * FROM series");
 
-                            if (mysqli_num_rows($fetch_movies) >= 20) {
+                            if (mysqli_num_rows($fetch_movies) >= 50) {
                                 exit;
                             }
 
@@ -96,7 +97,7 @@ class ApiController extends Controller
                                 $select_movies = mysqli_query($connection, "SELECT * FROM series");
 
                                 // Insert the movie into the database
-                                if (mysqli_num_rows($select_movies) < 20) {
+                                if (mysqli_num_rows($select_movies) < 50) {
 
                                     // check if the fetched movies is series
                                     if ($titleType == 'tvSeries' || $titleType == 'tvMiniSeries') {
@@ -105,19 +106,23 @@ class ApiController extends Controller
                                         $insert = mysqli_query($connection, "INSERT INTO series (movieId, isAdult, isRatable, originalTitleText, imageUrl, aggregateRating, releaseYear, titleType, titleTypeText, isSeries, country, runtime, genres, tmdbId, trailer, plotText, created_at) VALUES ('$movie_id', '$isAdult', '$isRatable', '$originalTitleText', '$primaryImage', '$ratingsSummary', '$releaseYear', '$titleType', '$titleTypeText', '$isSeries', '0', '0', '0', '', '0', '', '$current_timestamp')");
 
                                         if ($insert) {
-                                            return redirect()->route('admin.dashboard')->with('success', 'Series fetched successfully');
+                                            echo "Movie inserted successfully";
                                         } else {
-                                            return redirect()->route('admin.dashboard')->with('error', 'Failed to add series');
+                                            // return redirect()->route('admin.dashboard')->with('error', 'Failed to add series');
+                                            echo "Failed to add series";
                                         }
                                     } else {
-                                        return redirect()->route('admin.dashboard')->with('error', 'Series not inserted');
+                                        // return redirect()->route('admin.dashboard')->with('error', 'Series not inserted');
+                                        echo "Series not inserted";
                                     }
                                 }
                             } else {
-                                return redirect()->route('admin.dashboard')->with('error', 'Series release year is not within the specified range');
+                                // return redirect()->route('admin.dashboard')->with('error', 'Series release year is not within the specified range');
+                                echo "Series release year is not within the specified range";
                             }
                         } else {
-                            return redirect()->route('admin.dashboard')->with('error', 'Series already exists');
+                            // return redirect()->route('admin.dashboard')->with('error', 'Series already exists');
+                            echo "Series already exists";
                         }
                     }
                 }
@@ -210,7 +215,7 @@ class ApiController extends Controller
                                 $current_timestamp = date('Y-m-d H:i:s');
 
                                 // Accept only 150 movies
-                                $select_movies = mysqli_query($connection, "SELECT * FROM series");
+                                $select_movies = mysqli_query($connection, "SELECT * FROM movies");
 
                                 // Insert the movie into the database
                                 if (mysqli_num_rows($select_movies) < 20) {
@@ -219,27 +224,27 @@ class ApiController extends Controller
                                     if ($titleType == 'movie') {
 
                                         // if it is series, insert it into the series table
-                                        $insert = mysqli_query($connection, "INSERT INTO movies (movieId, isAdult, isRatable, originalTitleText, imageUrl, aggregateRating, releaseYear, titleType, titleTypeText, isSeries, country, runtime, genres, trailer, plotText, created_at) VALUES ('$movie_id', '$isAdult', '$isRatable', '$originalTitleText', '$primaryImage', '$ratingsSummary', '$releaseYear', '$titleType', '$titleTypeText', '$isSeries', '0', '0', '0', '0', '', '$current_timestamp')");
+                                        $insert = mysqli_query($connection, "INSERT INTO movies (movieId, isAdult, isRatable, originalTitleText, imageUrl, aggregateRating, releaseYear, titleType, titleTypeText, isSeries, country, runtime, genres, tmdbId, trailer, plotText, created_at) VALUES ('$movie_id', '$isAdult', '$isRatable', '$originalTitleText', '$primaryImage', '$ratingsSummary', '$releaseYear', '$titleType', '$titleTypeText', '$isSeries', '0', '0', '0', '0', '', '', '$current_timestamp')");
 
                                         if ($insert) {
-                                            return redirect()->route('admin.dashboard')->with('success', 'Movies fetched successfully');
+                                            echo "Movie inserted successfully";
                                         } else {
-                                            return redirect()->route('admin.dashboard')->with('error', 'Failed to add movie');
+                                            echo "Failed to add movie";
                                         }
                                     } else {
-                                        return redirect()->route('admin.dashboard')->with('error', 'Movie not inserted');
+                                        echo "Movie not inserted";
                                     }
                                 }
                             } else {
-                                return redirect()->route('admin.dashboard')->with('error', 'Movie release year is not within the specified range');
+                                echo "Movie release year is not within the specified range";
                             }
                         } else {
-                            return redirect()->route('admin.dashboard')->with('error', 'Movie already exists');
+                            echo "Movie already exist";
                         }
                     }
                 }
             } else {
-                return redirect()->route('admin.dashboard')->with('error', var_dump($data));
+                var_dump($data);
             }
         }
     }
@@ -260,7 +265,7 @@ class ApiController extends Controller
         }
 
         // update the movie type
-        $update_type = mysqli_query($connection, "UPDATE series SET titleType = 'series' WHERE titleType = 'tvSeries'");
+        $update_type = mysqli_query($connection, "UPDATE series SET titleType = 'series'");
 
         if ($update_type) {
             return redirect()->route('admin.dashboard')->with('status', 'Series type updated');
@@ -302,18 +307,17 @@ class ApiController extends Controller
 
                 if ($search_response === false) {
                     // Handle error for failed API request
-                    return redirect()->route('admin.dashboard')->with('error', 'Error fetching data for movie');
+                    echo "Error fetching data for movie";
                 }
 
                 $search_results = json_decode($search_response, true);
 
                 if (empty($search_results["results"])) {
                     // Handle case where no results were found for the movie
-                    echo "No results found for movie: $movie_name in the Popular Movies db" . "<br>";
-                    continue;
+                    echo "No result found";
                 }
 
-                $movie_id = $search_results["results"][0]["id"];
+                $movie_id = isset($search_results["results"][0]["id"]) ? $search_results["results"][0]["id"] : null;
 
                 // Step 3: Get movie details
                 $movie_url = "{$base_url}/movie/{$movie_id}";
@@ -340,8 +344,9 @@ class ApiController extends Controller
                 $update_query = "UPDATE series SET genres = '$genres_string' WHERE id = '$movieId'";
                 mysqli_query($connection, $update_query);
 
+                // return redirect()->route('admin.dashboard')->with('success', 'Series genres updated');
                 if ($update_query) {
-                    return redirect()->route('admin.dashboard')->with('success', 'Series genres updated');
+                    echo "Genre fetched successfully";
                 }
             }
         } else {
@@ -384,18 +389,18 @@ class ApiController extends Controller
 
                 if ($search_response === false) {
                     // Handle error for failed API request
-                    return redirect()->route('admin.dashboard')->with('error', 'Error fetching data for movie');
+                    echo "Error fetching data for movie";
                 }
 
                 $search_results = json_decode($search_response, true);
 
                 if (empty($search_results["results"])) {
                     // Handle case where no results were found for the movie
-                    echo "No results found for movie: $movie_name in the Popular Movies db" . "<br>";
-                    continue;
+                    echo "No result found";
                 }
 
-                $movie_id = $search_results["results"][0]["id"];
+                $movie_id = isset($search_results["results"][0]["id"]) ? $search_results["results"][0]["id"] : null;
+
 
                 // Step 3: Get movie details
                 $movie_url = "{$base_url}/movie/{$movie_id}";
@@ -422,8 +427,9 @@ class ApiController extends Controller
                 $update_query = "UPDATE movies SET genres = '$genres_string' WHERE id = '$movieId'";
                 mysqli_query($connection, $update_query);
 
+                // return redirect()->route('admin.dashboard')->with('success', 'Movies genres updated');
                 if ($update_query) {
-                    return redirect()->route('admin.dashboard')->with('success', 'Movies genres updated');
+                    echo 'Movies genres updated successfully';
                 }
             }
         } else {
@@ -447,7 +453,7 @@ class ApiController extends Controller
         }
 
         // fetch the movies to find description
-        $fetchStreaming = mysqli_query($connection, "SELECT * FROM series WHERE plotText = ''");
+        $fetchStreaming = mysqli_query($connection, "SELECT * FROM series WHERE plotText = '' OR plotText = '0'");
 
         if (mysqli_num_rows($fetchStreaming) > 0) {
             while ($stream = mysqli_fetch_assoc($fetchStreaming)) {
@@ -465,9 +471,9 @@ class ApiController extends Controller
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => [
-                            "X-RapidAPI-Host: imdb146.p.rapidapi.com",
-                            "X-RapidAPI-Key: 85391acd3cmsh02760f9d15463d2p145d38jsn69e076280407"
-                        ],
+                        "X-RapidAPI-Host: imdb146.p.rapidapi.com",
+                        "X-RapidAPI-Key: 85391acd3cmsh02760f9d15463d2p145d38jsn69e076280407"
+                    ],
                 ]);
 
                 $response = curl_exec($curl);
@@ -487,9 +493,11 @@ class ApiController extends Controller
                 $updateDescription = mysqli_query($connection, "UPDATE series SET plotText = '$newDescription' WHERE id = '$streamId'");
 
                 if ($updateDescription) {
-                    return redirect()->route('admin.dashboard')->with('success', 'Series description updated successfully');
+                    // return redirect()->route('admin.dashboard')->with('success', 'Series description updated successfully');
+                    echo "Description updated successfully" . "<br>";
                 } else {
-                    return redirect()->route('admin.dashboard')->with('error', 'Series description not updated');
+                    // return redirect()->route('admin.dashboard')->with('error', 'Series description not updated');
+                    echo "Series description not updated" . "<br>";
                 }
             }
         } else {
@@ -513,7 +521,7 @@ class ApiController extends Controller
         }
 
         // fetch the movies to find description
-        $fetchStreaming = mysqli_query($connection, "SELECT * FROM movies WHERE plotText = ''");
+        $fetchStreaming = mysqli_query($connection, "SELECT * FROM movies WHERE plotText = '' OR plotText = '0'");
 
         if (mysqli_num_rows($fetchStreaming) > 0) {
             while ($stream = mysqli_fetch_assoc($fetchStreaming)) {
@@ -531,9 +539,9 @@ class ApiController extends Controller
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => [
-                            "X-RapidAPI-Host: imdb146.p.rapidapi.com",
-                            "X-RapidAPI-Key: 85391acd3cmsh02760f9d15463d2p145d38jsn69e076280407"
-                        ],
+                        "X-RapidAPI-Host: imdb146.p.rapidapi.com",
+                        "X-RapidAPI-Key: 85391acd3cmsh02760f9d15463d2p145d38jsn69e076280407"
+                    ],
                 ]);
 
                 $response = curl_exec($curl);
@@ -553,9 +561,9 @@ class ApiController extends Controller
                 $updateDescription = mysqli_query($connection, "UPDATE movies SET plotText = '$newDescription' WHERE id = '$streamId'");
 
                 if ($updateDescription) {
-                    return redirect()->route('admin.dashboard')->with('success', 'Movies description updated successfully');
+                    echo "Movies description updated successfully";
                 } else {
-                    return redirect()->route('admin.dashboard')->with('error', 'Movies description not updated');
+                    echo "Movies not description updated";
                 }
             }
         } else {
@@ -578,7 +586,7 @@ class ApiController extends Controller
             mysqli_error($connection);
         }
 
-        $fetch_movieId = mysqli_query($connection, "SELECT * FROM movies WHERE genres = ''");
+        $fetch_movieId = mysqli_query($connection, "SELECT * FROM movies WHERE genres = '0' OR genres = ''");
 
         if (mysqli_num_rows($fetch_movieId) > 0) {
             while ($ids = mysqli_fetch_assoc($fetch_movieId)) {
@@ -596,9 +604,9 @@ class ApiController extends Controller
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => [
-                            "X-RapidAPI-Host: ott-details.p.rapidapi.com",
-                            "X-RapidAPI-Key: 5db32b6427msh63a3feac22d80eep1c836bjsn20a1f588f218"
-                        ],
+                        "X-RapidAPI-Host: ott-details.p.rapidapi.com",
+                        "X-RapidAPI-Key: 5db32b6427msh63a3feac22d80eep1c836bjsn20a1f588f218"
+                    ],
                 ]);
 
                 $response = curl_exec($curl);
@@ -630,7 +638,8 @@ class ApiController extends Controller
                 $update = mysqli_query($connection, "UPDATE streamings SET genres = '$updatedGenreId' WHERE id = '$movieMainId'");
 
                 if ($update) {
-                    return redirect()->route('admin.dashboard')->with('success', 'Movie genre has been update');
+                    // return redirect()->route('admin.dashboard')->with('success', 'Movie genre has been update');
+                    echo "Genres updated successfully";
                 } else {
                     return redirect()->route('admin.dashboard')->with('error', 'Something went wrong');
                 }
@@ -656,7 +665,7 @@ class ApiController extends Controller
             mysqli_error($connection);
         }
 
-        $fetch_movieId = mysqli_query($connection, "SELECT * FROM series WHERE genres = ''");
+        $fetch_movieId = mysqli_query($connection, "SELECT * FROM series WHERE genres = '0' OR genres = ''");
 
         if (mysqli_num_rows($fetch_movieId) > 0) {
             while ($ids = mysqli_fetch_assoc($fetch_movieId)) {
@@ -674,9 +683,9 @@ class ApiController extends Controller
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => [
-                            "X-RapidAPI-Host: ott-details.p.rapidapi.com",
-                            "X-RapidAPI-Key: 5db32b6427msh63a3feac22d80eep1c836bjsn20a1f588f218"
-                        ],
+                        "X-RapidAPI-Host: ott-details.p.rapidapi.com",
+                        "X-RapidAPI-Key: 5db32b6427msh63a3feac22d80eep1c836bjsn20a1f588f218"
+                    ],
                 ]);
 
                 $response = curl_exec($curl);
@@ -708,7 +717,8 @@ class ApiController extends Controller
                 $update = mysqli_query($connection, "UPDATE series SET genres = '$updatedGenreId' WHERE id = '$movieMainId'");
 
                 if ($update) {
-                    return redirect()->route('admin.dashboard')->with('success', 'Series genre has been update');
+                    // return redirect()->route('admin.dashboard')->with('success', 'Series genre has been updated');
+                    echo "Genres updated successfully";
                 } else {
                     return redirect()->route('admin.dashboard')->with('error', 'Something went wrong');
                 }
@@ -737,15 +747,14 @@ class ApiController extends Controller
         $fetch_trailer = mysqli_query($connection, "SELECT * FROM series WHERE trailer = '0'");
 
         if (mysqli_num_rows($fetch_trailer) > 0) {
-            require('vendor/autoload.php');
 
             // Create a Google_Client
-            $client = new Google\Client();
+            $client = new Client();
             $client->setApplicationName('CinemaHub');
             $client->setDeveloperKey('AIzaSyCUoGQhYzTPCkjEpYZvgyoFHqngLwibFiI');
 
             // Create a Google_Service_YouTube instance
-            $youtube = new Google\Service\YouTube($client);
+            $youtube = new YouTube($client);
 
             // Fetch movies that don't have trailers
             $noTrailer = mysqli_query($connection, "SELECT * FROM series WHERE trailer = '0'");
@@ -774,16 +783,18 @@ class ApiController extends Controller
                         // Update the database with the trailer
                         $updateTrailer = mysqli_query($connection, "UPDATE series SET trailer = '$videoTrailer' WHERE originalTitleText = '$movieName'");
                         if ($updateTrailer) {
-                            return redirect()->route('admin.dashboard')->with('success', 'Trailer updated');
+                            // return redirect()->route('admin.dashboard')->with('success', 'Trailer updated');
+                            echo "Trailer updated";
                         } else {
-                            return redirect()->route('admin.dashboard')->with('error', 'Failed to update trailer');
+                            echo "Failed";
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 return redirect()->route('admin.dashboard')->with('error', 'No empty trailer field found');
             }
+        } else {
+            return redirect()->route('admin.dashboard')->with('error', 'No empty trailer field found');
         }
     }
 
@@ -802,21 +813,20 @@ class ApiController extends Controller
             mysqli_error($connection);
         }
 
-        $fetch_trailer = mysqli_query($connection, "SELECT * FROM movies WHERE trailer = '0'");
+        $fetch_trailer = mysqli_query($connection, "SELECT * FROM movies WHERE trailer = ''");
 
         if (mysqli_num_rows($fetch_trailer) > 0) {
-            require('vendor/autoload.php');
 
             // Create a Google_Client
-            $client = new Google\Client();
+            $client = new Client();
             $client->setApplicationName('CinemaHub');
             $client->setDeveloperKey('AIzaSyCUoGQhYzTPCkjEpYZvgyoFHqngLwibFiI');
 
             // Create a Google_Service_YouTube instance
-            $youtube = new Google\Service\YouTube($client);
+            $youtube = new YouTube($client);
 
             // Fetch movies that don't have trailers
-            $noTrailer = mysqli_query($connection, "SELECT * FROM movies WHERE trailer = '0'");
+            $noTrailer = mysqli_query($connection, "SELECT * FROM movies WHERE trailer = ''");
 
             if (mysqli_num_rows($noTrailer) > 0) {
                 while ($nonTrailer = mysqli_fetch_assoc($noTrailer)) {
@@ -842,19 +852,253 @@ class ApiController extends Controller
                         // Update the database with the trailer
                         $updateTrailer = mysqli_query($connection, "UPDATE movies SET trailer = '$videoTrailer' WHERE originalTitleText = '$movieName'");
                         if ($updateTrailer) {
-                            return redirect()->route('admin.dashboard')->with('success', 'Trailer updated');
+                            // return redirect()->route('admin.dashboard')->with('success', 'Trailer updated');
+                            echo "Trailer updated";
                         } else {
-                            return redirect()->route('admin.dashboard')->with('error', 'Failed to update trailer');
+                            echo "Failed";
+                        }
+                    }
+                }
+            } else {
+                return redirect()->route('admin.dashboard')->with('error', 'No empty trailer field found');
+            }
+        } else {
+            return redirect()->route('admin.dashboard')->with('error', 'No empty trailer field found');
+        }
+    }
+
+    public function getTmdbIdSeries()
+    {
+        $dbhost = "127.0.0.1";
+        $dbus = "root";
+        $dbpass = '';
+        $dbname = 'cinema';
+
+        $connection = mysqli_connect($dbhost, $dbus, $dbpass, $dbname);
+
+        if (!$connection) {
+            die('Failed to connect' . mysqli_connect_error());
+        } else {
+            mysqli_error($connection);
+        }
+
+        $imdb_ids = mysqli_query($connection, "SELECT * FROM series WHERE tmdbId = ''");
+
+        if (mysqli_num_rows($imdb_ids) > 0) {
+            while ($imdb = mysqli_fetch_assoc($imdb_ids)) {
+                $id = $imdb['movieId'];
+                $mainId = $imdb['id'];
+
+                $curl = curl_init();
+
+                curl_setopt_array($curl, [
+                    CURLOPT_URL => "https://mdblist.p.rapidapi.com/?i={$id}",
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => "",
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_HTTPHEADER => [
+                        "X-RapidAPI-Host: mdblist.p.rapidapi.com",
+                        "X-RapidAPI-Key: 42f503244cmsh53f60704eda2911p158869jsnd555cbfa525f"
+                    ],
+                ]);
+
+                $response = curl_exec($curl);
+                $err = curl_error($curl);
+
+                if ($err) {
+                    return redirect()->route('admin.dashboard')->with('error', 'Failed to fetch movies: ' . $err);
+                }
+
+                curl_close($curl);
+
+                $data = json_decode($response, true);
+
+                $tmdb_id = isset($data['tmdbid']) ? mysqli_real_escape_string($connection, $data['tmdbid']) : '0';
+
+                // update the tmdb id in the database
+                $update = mysqli_query($connection, "UPDATE series SET tmdbId = '$tmdb_id' WHERE id = '$mainId'");
+
+                if ($update) {
+                    echo "TMDb ID updated successfully";
+                } else {
+                    echo "Error updating TMDb ID";
+                }
+            }
+        }
+    }
+
+    public function getSeasons()
+    {
+        $dbhost = "127.0.0.1";
+        $dbus = "root";
+        $dbpass = '';
+        $dbname = 'cinema';
+
+        $connection = mysqli_connect($dbhost, $dbus, $dbpass, $dbname);
+
+        if (!$connection) {
+            die('Failed to connect' . mysqli_connect_error());
+        } else {
+            mysqli_error($connection);
+        }
+
+        $fetch_tmdbid = mysqli_query($connection, "SELECT * FROM series WHERE tmdbId != '0'");
+
+        if (mysqli_num_rows($fetch_tmdbid) > 0) {
+            while ($tmdbids = mysqli_fetch_assoc($fetch_tmdbid)) {
+                $movie_id = $tmdbids['movieId'];
+                $movie_name = $tmdbids['originalTitleText'];
+                $movie_type = $tmdbids['titleType'];
+                $movie_image = $tmdbids['imageUrl'];
+                $tmdbid = $tmdbids['tmdbId'];
+                $mainId = $tmdbids['id'];
+
+                $curl = curl_init();
+
+                curl_setopt_array($curl, [
+                    CURLOPT_URL => "https://movies-api14.p.rapidapi.com/show/{$tmdbid}",
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => "",
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_HTTPHEADER => [
+                        "X-RapidAPI-Host: movies-api14.p.rapidapi.com",
+                        "X-RapidAPI-Key: e5a7cf5c05msh4389aff7b01c10dp1d3cd3jsn14a1371d10f6"
+                    ],
+                ]);
+
+                $response = curl_exec($curl);
+                $err = curl_error($curl);
+
+                if ($err) {
+                    return redirect()->route('admin.dashboard')->with('error', 'Failed to fetch movies: ' . $err);
+                }
+
+                curl_close($curl);
+
+                $data = json_decode($response, true);
+
+                if (isset($data['seasons']) && is_array($data['seasons'])) {
+                    foreach ($data['seasons'] as $season) {
+
+                        foreach ($season['episodes'] as $episode) {
+                            $season_number = $episode['season_number'];
+                            $episode_number = $episode['episode_number'];
+                            $title = mysqli_real_escape_string($connection, $episode['title']);
+                            $air_date = mysqli_real_escape_string($connection, $episode['first_aired']);
+
+                            // now inser them into the seasons table
+
+                            // check if the episode already exists
+                            $fetch_old = mysqli_query($connection, "SELECT * FROM seasons WHERE movieName = '$movie_name' AND episode_number = '$episode_number' AND season_number = '$season_number'");
+
+                            if (mysqli_num_rows($fetch_old) > 0) {
+                                echo "Episode already in database";
+                            } else {
+                                $insert = mysqli_query($connection, "INSERT INTO seasons (movieId, movieName, movieType, season_number, episode_number, episode_title, air_date, imageUrl) VALUES('$movie_id', '$movie_name', '$movie_type', '$season_number', '$episode_number', '$title', '$air_date', '$movie_image')");
+
+                                if ($insert) {
+                                    echo "Seasons inserted successfully";
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // var_dump($data);
+            }
+        }
+    }
+
+    public function getSeriesSeasons()
+    {
+        $dbhost = "127.0.0.1";
+        $dbus = "root";
+        $dbpass = '';
+        $dbname = 'cinema';
+
+        $connection = mysqli_connect($dbhost, $dbus, $dbpass, $dbname);
+
+        if (!$connection) {
+            die('Failed to connect' . mysqli_connect_error());
+        } else {
+            mysqli_error($connection);
+        }
+        $seasons = [1, 2, 3, 4, 5];
+
+        foreach ($seasons as $season) {
+            $fetch_series = mysqli_query($connection, "SELECT * FROM series");
+
+            if (mysqli_num_rows($fetch_series) > 0) {
+                while ($series = mysqli_fetch_assoc($fetch_series)) {
+                    $movieName = mysqli_real_escape_string($connection, $series['originalTitleText']);
+                    $type = $series['titleType'];
+                    $imageUrl = mysqli_real_escape_string($connection, $series['imageUrl']);
+                    $series_id = $series['movieId'];
+                    $id = $series['id'];
+
+                    $curl = curl_init();
+
+                    curl_setopt_array($curl, [
+                        CURLOPT_URL => "https://movies-tv-shows-database.p.rapidapi.com/?seriesid={$series_id}&season={$season}",
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => "",
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 30,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => "GET",
+                        CURLOPT_HTTPHEADER => [
+                            "Type: get-show-season-episodes",
+                            "X-RapidAPI-Host: movies-tv-shows-database.p.rapidapi.com",
+                            "X-RapidAPI-Key: 85391acd3cmsh02760f9d15463d2p145d38jsn69e076280407"
+                        ],
+                    ]);
+
+                    $response = curl_exec($curl);
+                    $err = curl_error($curl);
+
+                    curl_close($curl);
+
+                    if ($err) {
+                        return redirect()->route('admin.dashboard')->with('error', 'Failed to fetch movies: ' . $err);
+                    } else {
+                        $data = json_decode($response, true);
+
+                        if (isset($data['tv_episodes'])) {
+                            foreach ($data['tv_episodes'] as $tv) {
+                                $episode_number = mysqli_real_escape_string($connection, $tv['episode_number']);
+                                $title = mysqli_real_escape_string($connection, $tv['title']);
+                                $air_date = mysqli_real_escape_string($connection, $tv['air_date']);
+
+                                // check if the episode already exists
+                                $fetch_old = mysqli_query($connection, "SELECT * FROM seasons WHERE movieName = '$movieName' AND episode_number = '$episode_number'");
+
+                                if (mysqli_num_rows($fetch_old) > 0) {
+                                    echo "Episode already in database";
+                                } else {
+                                    $insert = mysqli_query($connection, "INSERT INTO seasons (movieId, movieName, movieType, season_number, episode_number, episode_title, air_date, imageUrl) VALUES('$series_id', '$movieName', '$type', '1', '$episode_number', '$title', '$air_date', '$imageUrl')");
+
+                                    if (!$insert) {
+                                        echo "Error inserting episode: " . mysqli_error($connection);
+                                    } else {
+                                        echo "Season fetched successfully" . '<br>';
+                                    }
+                                }
+                            }
+                        } else {
+                            echo "No episodes found for series ID: " . $series_id;
                         }
                     }
                 }
             }
-            else {
-                return redirect()->route('admin.dashboard')->with('error', 'No empty trailer field found');
-            }
         }
-        else {
-            return redirect()->route('admin.dashboard')->with('error', 'No empty trailer field found');
-        }
+
+        var_dump($data);
+
     }
 }

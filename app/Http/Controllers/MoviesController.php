@@ -14,8 +14,8 @@ class MoviesController extends Controller
     //
     public function getAll()
     {
-        $series_all = Series::paginate(6)->sortByDesc('releaseDate');
-        $movies_all = Movies::paginate(6)->sortByDesc('releaseDate');
+        $series_all = Series::paginate(24)->sortByDesc('releaseDate');
+        $movies_all = Movies::paginate(24)->sortByDesc('releaseDate');
 
         return view('home', compact('series_all', 'movies_all'));
     }
@@ -231,7 +231,7 @@ class MoviesController extends Controller
             Cache::put($cacheKey, $merged, 60);
         }
 
-        $seasons = Seasons::where('movieName', $name)->get();
+        $seasons = Seasons::where('movieName', $name)->paginate(12);
 
         return view('media.show', compact('all', 'type', 'merged', 'recom', 'seasons'));
     }

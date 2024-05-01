@@ -26,7 +26,7 @@
 
     {{-- <hr class="mt-5"> --}}
 
-    <div class="container mt-5">
+    <div class="container-xl mt-5">
         <h4>Series</h4>
         <div class="row">
             @unless (count($series_all) == 0)
@@ -65,7 +65,7 @@
 
     <hr class="mt-5">
 
-    <div class="container mt-5">
+    <div class="container-xl mt-5">
         <h4>Movies</h4>
         <div class="row">
             @unless (count($movies_all) == 0)

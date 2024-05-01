@@ -5,10 +5,10 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MoviesController;
-use App\Http\Controllers\Top10Controller;
 use App\Http\Controllers\CinemaController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SeasonsController;
+use App\Models\Api;
 
 Route::get('/', [PageController::class, 'home']);
 Route::get('top10', [PageController::class, 'series']);
@@ -71,6 +71,9 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('admin/movies/description', [ApiController::class, 'updateMoviesDescription'])->name('movies.description');
     Route::get('admin/series/trailer', [ApiController::class, 'updateSeriesTrailer'])->name('series.trailer');
     Route::get('admin/movies/trailer', [ApiController::class, 'updateMoviesTrailer'])->name('movies.trailer');
+    Route::get('admin/series/tmdb', [ApiController::class, 'getTmdbIdSeries'])->name('series.tmdb');
+    Route::get('admin/series/seasons', [ApiController::class, 'getSeasons'])->name('series.seasons');
+    Route::get('admin/series/seasons2', [ApiController::class, 'getSeriesSeasons'])->name('series.seasons.2');
 });
 
 // Download page

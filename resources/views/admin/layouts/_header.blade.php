@@ -236,21 +236,21 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="movies">
-                <i class="bi bi-camera"></i>
+                <i class="fa fa-video"></i>
                 <span>Movies</span>
             </a>
         </li><!-- End movies Page Nav -->
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="series">
-                <i class="bi bi-card-list"></i>
+                <i class="fa fa-camera-retro" aria-hidden="true"></i>
                 <span>Fetch Series</span>
             </a>
         </li><!-- End Register Page Nav -->
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="fetch">
-                <i class="bi bi-box-arrow-in-right"></i>
+                <i class="fa fa-camera-retro" aria-hidden="true"></i>
                 <span>Fetch Movies</span>
             </a>
         </li><!-- End Login Page Nav -->
@@ -322,6 +322,27 @@
             <a class="nav-link collapsed" href="movies/trailer">
                 <i class="bi bi-youtube"></i>
                 <span>Fetch Movies Trailer</span>
+            </a>
+        </li><!-- End Blank Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="series/tmdb">
+                <i class="bi bi-youtube"></i>
+                <span>Fetch Series TMDB ID</span>
+            </a>
+        </li><!-- End Blank Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="series/seasons">
+                <i class="bi bi-youtube"></i>
+                <span>Get Series Seasons</span>
+            </a>
+        </li><!-- End Blank Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="series/seasons2">
+                <i class="bi bi-youtube"></i>
+                <span>Get Series Seasons 2</span>
             </a>
         </li><!-- End Blank Page Nav -->
 

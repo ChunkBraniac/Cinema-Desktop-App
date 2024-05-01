@@ -66,178 +66,181 @@
 
 
         <hr class="mt-5">
+    </div>
 
-        <div class="container-xl">
-            @if ($type == 'movie')
-                <div class="m-auto text-center">
-                    <a href="" class="btn btn-success btn-lg"
-                        style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 13px; padding-bottom: 13px">Download
-                        Video</a>
-                </div>
-            @elseif ($type == 'tvSeries')
+    <div class="container-xl">
+        @if ($type == 'movie')
+            <div class="m-auto text-center">
+                <a href="" class="btn btn-success btn-lg"
+                    style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 13px; padding-bottom: 13px">Download
+                    Video</a>
+            </div>
+        @elseif ($type == 'tvSeries')
 
-            @elseif ($type == 'tvMiniSeries')
-            @endif
-            <div class="row">
-                <div class="col-xl-9 col-lg-8 mt-3">
-                    @if ($type == 'movie')
-                        <h4>You may also like: </h4>
-                        <div class="row">
+        @elseif ($type == 'tvMiniSeries')
+        @endif
+        <div class="row">
+            <div class="col-xl-9 col-lg-8 mt-3">
+                @if ($type == 'movie')
+                    <h4>You may also like: </h4>
+                    <div class="row">
 
-                            @foreach ($merged as $more)
-                                <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
-                                    <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
-                                            src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
-                                            style="height: 400px; object-fit: fill;" loading="lazy"></a>
-                                    <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }}"
-                                        class="text-decoration-none text-dark">
-                                        <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">
-                                            {{ $more->originalTitleText }}</h6>
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
-                    @elseif ($type == 'series')
-                        <div class="row">
-
-                            @foreach ($seasons as $more)
-                                <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
-                                    <a
-                                        href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }} "><img
-                                            src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
-                                            style="height: 400px; object-fit: fill;" loading="lazy"></a>
-                                    <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
-                                        class="text-decoration-none text-dark">
-                                        <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">Season
-                                            {{ $more->season_number }} Episode {{ $more->episode_number }}
-                                        </h6>
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
-                    @endif
-
-                    <div class="mt-4">
-                        <h4 class="mb-4">Comment</h4>
-                        @if (session('success'))
-                            <h6 class="alert alert-success">{{ session('success') }}</h6>
-                        @endif
-
-                        @if (isset($comments) && count($comments) > 0)
-                            <div class="container-xl">
-                                @foreach ($comments as $comment)
-                                    <div class="row mt-3 pt-3 pb-3"
-                                        style="border-radius: 0px; background: #f9f9f9; border: 1px solid #ccc;">
-                                        <div class="col-xl-2">
-                                            <h5 style="font-family: 'Roboto', sans-serif; font-weight: normal">
-                                                {{ 'Username' }}
-                                            </h5>
-                                        </div>
-                                        <div class="col-xl-6">
-                                            <p style="font-size: 15px">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel ullam aliquam
-                                                labore
-                                                asperiores
-                                                dicta quo
-                                                facilis dolore odit aliquid ratione iste ipsa aspernatur, voluptates
-                                                voluptate
-                                                sunt
-                                                harum
-                                                porro
-                                                illo
-                                                praesentium?
-                                            </p>
-                                        </div>
-                                        <div class="col-xl-2">
-                                            <p class="d-inline-flex gap-1">
-                                                <a class="btn btn-primary btn-sm" data-bs-toggle="collapse"
-                                                    href="#collapseExample" role="button" aria-expanded="false"
-                                                    aria-controls="collapseExample">
-                                                    Reply <i class="fa fa-reply" aria-hidden="true"></i>
-                                                </a>
-                                            </p>
-
-                                        </div>
-                                        <div class="collapse" id="collapseExample">
-                                            <div class="card card-body" style="background: #f9f9f9; border-radius: 0px">
-                                                <form action="" method="post">
-                                                    <label for="" style="font-size: 15px">Name: </label>
-                                                    <input type="text" class="form-control" name="reply_name"
-                                                        style="border-radius: 0px" required>
-
-                                                    <label for="" class="mt-3" style="font-size: 15px">Your
-                                                        reply:
-                                                    </label>
-                                                    <textarea name="reply_text" id="" cols="30" rows="5" class="form-control" style="border-radius: 0px"
-                                                        required></textarea>
-
-                                                    <div class="mt-3">
-                                                        <button class="btn btn-primary btn-sm"
-                                                            style="border-radius: 0px;">Submit</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-
-                            </div>
-                        @else
-                            <p class="alert alert-danger" style="font-size: 14px">No comments yet for this movie.</p>
-                        @endif
-                    </div>
-
-                    <div class="mt-4">
-                        <form
-                            action="{{ route('media.show', ['name' => $item->originalTitleText, 'type' => $item->titleType]) }}"
-                            method="post">
-                            {{ csrf_field() }}
-                            <label for="">Name</label>
-                            <input type="hidden" class="form-control pl-3" name="movie_id" style="border-radius: 0px"
-                                required value="{{ $item->movieId }}">
-                            <input type="hidden" class="form-control pl-3" name="movie_name" style="border-radius: 0px"
-                                required value="{{ $item->originalTitleText }}">
-
-                            <input type="text" class="form-control pl-3" name="commentor" style="border-radius: 0px"
-                                required>
-
-                            <label for="" class="mt-3">Your comment</label>
-                            <textarea name="comment" id="" cols="30" rows="5" class="form-control"
-                                style="border-radius: 0px;" required></textarea>
-
-                            <div class="mt-3">
-                                <button class="btn btn-primary" style="border-radius: 0px;">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 mt-4">
-                    <h5>Recommended Shows </h5>
-                    @unless (count($recom) == 0)
-                        @foreach ($recom as $recommended)
-                            <div class="accordion accordion-flush border"
-                                style="box-shadow: none; border: none; border-radius: 3px" id="accordionFlushExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#{{ $recommended->id }}" aria-expanded="false"
-                                            aria-controls="flush-collapseOne">
-                                            {{ $recommended->originalTitleText }}
-                                        </button>
-                                    </h2>
-
-                                    <div id="{{ $recommended->id }}" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body" style="font-size: 15px">{{ $recommended->plotText }} <a
-                                                href="{{ url('media/' . $recommended->originalTitleText . '/' . $recommended->titleType) }} ">More
-                                                Details</a></div>
-                                    </div>
-                                </div>
+                        @foreach ($merged as $more)
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
+                                <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
+                                        src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
+                                        style="height: 400px; object-fit: fill;" loading="lazy"></a>
+                                <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }}"
+                                    class="text-decoration-none text-dark">
+                                    <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">
+                                        {{ $more->originalTitleText }}</h6>
+                                </a>
                             </div>
                         @endforeach
-                    @endunless
+                    </div>
+                @elseif ($type == 'series')
+                    <div class="row mb-3">
+
+                        @foreach ($seasons as $more)
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
+                                <a
+                                    href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }} "><img
+                                        src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
+                                        style="height: 400px; object-fit: fill;" loading="lazy"></a>
+                                <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
+                                    class="text-decoration-none text-dark">
+                                    <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">Season
+                                        {{ $more->season_number }} Episode {{ $more->episode_number }}
+                                    </h6>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    {{ $seasons->onEachSide(1)->links() }}
+                @endif
+
+                <div class="mt-4">
+                    <h4 class="mb-4">Comment</h4>
+                    @if (session('success'))
+                        <h6 class="alert alert-success">{{ session('success') }}</h6>
+                    @endif
+
+                    @if (isset($comments) && count($comments) > 0)
+                        <div class="container-xl">
+                            @foreach ($comments as $comment)
+                                <div class="row mt-3 pt-3 pb-3"
+                                    style="border-radius: 0px; background: #f9f9f9; border: 1px solid #ccc;">
+                                    <div class="col-xl-2">
+                                        <h5 style="font-family: 'Roboto', sans-serif; font-weight: normal">
+                                            {{ 'Username' }}
+                                        </h5>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <p style="font-size: 15px">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel ullam aliquam
+                                            labore
+                                            asperiores
+                                            dicta quo
+                                            facilis dolore odit aliquid ratione iste ipsa aspernatur, voluptates
+                                            voluptate
+                                            sunt
+                                            harum
+                                            porro
+                                            illo
+                                            praesentium?
+                                        </p>
+                                    </div>
+                                    <div class="col-xl-2">
+                                        <p class="d-inline-flex gap-1">
+                                            <a class="btn btn-primary btn-sm" data-bs-toggle="collapse"
+                                                href="#collapseExample" role="button" aria-expanded="false"
+                                                aria-controls="collapseExample">
+                                                Reply <i class="fa fa-reply" aria-hidden="true"></i>
+                                            </a>
+                                        </p>
+
+                                    </div>
+                                    <div class="collapse" id="collapseExample">
+                                        <div class="card card-body" style="background: #f9f9f9; border-radius: 0px">
+                                            <form action="" method="post">
+                                                <label for="" style="font-size: 15px">Name: </label>
+                                                <input type="text" class="form-control" name="reply_name"
+                                                    style="border-radius: 0px" required>
+
+                                                <label for="" class="mt-3" style="font-size: 15px">Your
+                                                    reply:
+                                                </label>
+                                                <textarea name="reply_text" id="" cols="30" rows="5" class="form-control" style="border-radius: 0px"
+                                                    required></textarea>
+
+                                                <div class="mt-3">
+                                                    <button class="btn btn-primary btn-sm"
+                                                        style="border-radius: 0px;">Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                        </div>
+                    @else
+                        <p class="alert alert-danger" style="font-size: 14px">No comments yet for this movie.</p>
+                    @endif
+                </div>
+
+                <div class="mt-4">
+                    <form
+                        action="{{ route('media.show', ['name' => $item->originalTitleText, 'type' => $item->titleType]) }}"
+                        method="post">
+                        {{ csrf_field() }}
+                        <label for="">Name</label>
+                        <input type="hidden" class="form-control pl-3" name="movie_id" style="border-radius: 0px"
+                            required value="{{ $item->movieId }}">
+                        <input type="hidden" class="form-control pl-3" name="movie_name" style="border-radius: 0px"
+                            required value="{{ $item->originalTitleText }}">
+
+                        <input type="text" class="form-control pl-3" name="commentor" style="border-radius: 0px"
+                            required>
+
+                        <label for="" class="mt-3">Your comment</label>
+                        <textarea name="comment" id="" cols="30" rows="5" class="form-control"
+                            style="border-radius: 0px;" required></textarea>
+
+                        <div class="mt-3">
+                            <button class="btn btn-primary" style="border-radius: 0px;">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
+
+            <div class="col-xl-3 col-lg-4 mt-4">
+                <h5>Recommended Shows </h5>
+                @unless (count($recom) == 0)
+                    @foreach ($recom as $recommended)
+                        <div class="accordion accordion-flush border"
+                            style="box-shadow: none; border: none; border-radius: 3px" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#{{ $recommended->id }}" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                        {{ $recommended->originalTitleText }}
+                                    </button>
+                                </h2>
+
+                                <div id="{{ $recommended->id }}" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body" style="font-size: 15px">{{ $recommended->plotText }} <a
+                                            href="{{ url('media/' . $recommended->originalTitleText . '/' . $recommended->titleType) }} ">More
+                                            Details</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endunless
+            </div>
         </div>
-    @endsection
+    </div>
+@endsection

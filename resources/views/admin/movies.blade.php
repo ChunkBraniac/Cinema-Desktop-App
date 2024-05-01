@@ -95,6 +95,8 @@
                                         <th>Country</th>
                                         <th>Runtime</th>
                                         <th>Genres</th>
+                                        <th>TMDBID</th>
+                                        <th>Trailer</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -108,6 +110,8 @@
                                                 <td>{{ $movies->country ? $movies->country : 'N/A' }}</td>
                                                 <td>{{ $movies->runtime ? $movies->runtime : 'N/A' }}</td>
                                                 <td>{{ $movies->genres ? $movies->genres : 'N/A'}}</td>
+                                                <td>{{ $movies->tmdbid ? $movies->tmdbid : 'N/A' }}</td>
+                                                <td>{{ $movies->trailer ? $movies->trailer : 'N/A'}}</td>
                                             </tr>
                                         @endforeach
                                     @endunless
