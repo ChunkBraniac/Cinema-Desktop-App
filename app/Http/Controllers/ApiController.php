@@ -73,7 +73,7 @@ class ApiController extends Controller
                             // if it is, break out of the loop
                             $fetch_movies = mysqli_query($connection, "SELECT * FROM series");
 
-                            if (mysqli_num_rows($fetch_movies) >= 50) {
+                            if (mysqli_num_rows($fetch_movies) >= 100) {
                                 exit;
                             }
 
@@ -97,7 +97,7 @@ class ApiController extends Controller
                                 $select_movies = mysqli_query($connection, "SELECT * FROM series");
 
                                 // Insert the movie into the database
-                                if (mysqli_num_rows($select_movies) < 50) {
+                                if (mysqli_num_rows($select_movies) < 100) {
 
                                     // check if the fetched movies is series
                                     if ($titleType == 'tvSeries' || $titleType == 'tvMiniSeries') {
@@ -194,7 +194,7 @@ class ApiController extends Controller
 
                             $fetch_movies = mysqli_query($connection, "SELECT * FROM movies");
 
-                            if (mysqli_num_rows($fetch_movies) >= 20) {
+                            if (mysqli_num_rows($fetch_movies) >= 100) {
                                 exit();
                             }
 
@@ -218,7 +218,7 @@ class ApiController extends Controller
                                 $select_movies = mysqli_query($connection, "SELECT * FROM movies");
 
                                 // Insert the movie into the database
-                                if (mysqli_num_rows($select_movies) < 20) {
+                                if (mysqli_num_rows($select_movies) < 100) {
 
                                     // check if the fetched movies is series
                                     if ($titleType == 'movie') {

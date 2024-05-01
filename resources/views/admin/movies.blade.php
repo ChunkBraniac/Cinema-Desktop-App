@@ -52,7 +52,7 @@
                                     @unless (count($allmovies) == 0)
                                         @foreach ($allmovies as $movies)
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $loop->iteration + ($allseries->currentPage() - 1) * $allmovies->perPage() }}</td>
                                                 <td>{{ $movies->movieId }}</td>
                                                 <td class="text-truncate">{{ $movies->originalTitleText }}</td>
                                                 <td>{{ $movies->titleType }}</td>
@@ -65,7 +65,7 @@
                                 </tbody>
                             </table>
 
-                            {{ $allmovies->onEachSide(0)->links() }}
+                            {{ $allmovies->onEachSide(1)->links() }}
                             <!-- End Table with stripped rows -->
 
                         </div>
@@ -118,7 +118,7 @@
                                 </tbody>
                             </table>
 
-                            {{ $allseries->onEachSide(0)->links() }}
+                            {{ $allseries->onEachSide(1)->links() }}
                             <!-- End Table with stripped rows -->
 
                         </div>

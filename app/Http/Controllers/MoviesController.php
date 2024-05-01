@@ -16,7 +16,7 @@ class MoviesController extends Controller
     {
         $series_all = Series::paginate(24)->sortByDesc('releaseDate');
         $movies_all = Movies::paginate(24)->sortByDesc('releaseDate');
-
+        
         return view('home', compact('series_all', 'movies_all'));
     }
 

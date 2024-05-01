@@ -26,23 +26,55 @@
                             <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Release
                                 year:
                                 {{ $item->releaseYear }}</h6>
-                            <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Genre:
-                                {{ $item->genres }}</h6>
 
-                            @if (isset($item->details) && isset($item->details->runtime))
+                            
+                            @if ($item->genres == '0')
                                 <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
-                                    Runtime: {{ $item->details->runtime }}
+                                    Genre:
+                                    N/A
+                                </h6>
+                            @elseif ($item->genres == '')
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    Genre:
+                                    N/A
                                 </h6>
                             @else
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    Genre: {{ $item->genres }}
+                                </h6>
+                            @endif
+
+                            @if ($item->runtime == '0')
                                 <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
                                     Runtime:
                                     N/A
                                 </h6>
+                            @elseif ($item->runtime == '')
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    Runtime:
+                                    N/A
+                                </h6>
+                            @else
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    Runtime: {{ $item->runtime }}
+                                </h6>
                             @endif
 
-                            <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
-                                Country:
-                            </h6>
+                            @if ($item->country == '0')
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    Country:
+                                    N/A
+                                </h6>
+                            @elseif ($item->country == '')
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    Country:
+                                    N/A
+                                </h6>
+                            @else
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    Country: {{ $item->country }}
+                                </h6>
+                            @endif
 
                             <div class="mt-3">
                                 {{ $item->plotText ? $item->plotText : 'N/A' }}

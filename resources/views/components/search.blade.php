@@ -30,9 +30,20 @@
                                 <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
                                     {{ $search->originalTitleText }}</h6>
                             </a>
-                            <h6 class="text-truncate"
-                                style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">
-                                {{ $search->genres }}</h6>
+                            
+                            @if ($search->genres == '0')
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    N/A
+                                </h6>
+                            @elseif ($search->genres == '')
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    N/A
+                                </h6>
+                            @else
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    {{ $search->genres }}
+                                </h6>
+                            @endif
                         </div>
                     @endforeach
                 @endunless
@@ -51,9 +62,20 @@
                                 <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
                                     {{ $search->originalTitleText }}</h6>
                             </a>
-                            <h6 class="text-truncate"
-                                style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">
-                                {{ $search->genres }}</h6>
+
+                            @if ($search->genres == '0')
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    N/A
+                                </h6>
+                            @elseif ($search->genres == '')
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    N/A
+                                </h6>
+                            @else
+                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    {{ $search->genres }}
+                                </h6>
+                            @endif
                         </div>
                     @endforeach
                 @endunless
