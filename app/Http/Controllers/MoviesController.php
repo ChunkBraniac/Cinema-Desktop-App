@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Movies;
 use App\Models\Series;
+use App\Models\Comment;
 use App\Models\Seasons;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -233,7 +234,9 @@ class MoviesController extends Controller
 
         $seasons = Seasons::where('movieName', $name)->paginate(12);
 
-        return view('media.show', compact('all', 'type', 'merged', 'recom', 'seasons'));
+        $comments = Comment::where('movie_name', $name)->get();
+
+        return view('media.show', compact('all', 'type', 'merged', 'recom', 'seasons', 'comments'));
     }
 
     public static function search(Request $request)

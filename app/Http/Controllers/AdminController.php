@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Models\Top10;
 use App\Models\Movies;
 use App\Models\Series;
+use App\Models\Comment;
 use App\Models\Popular;
 use App\Models\Streaming;
 use App\Mail\RegisterMail;
@@ -25,7 +26,12 @@ class AdminController extends Controller
 
     public static function loginPage()
     {
-        return view('admin.auth.login');
+        if (!empty(Auth::check())) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are already logged in');
+        }
+        else {
+            return view('admin.auth.login');
+        }
     }
 
     public static function registerPage()
@@ -105,5 +111,12 @@ class AdminController extends Controller
         $allmovies = Movies::paginate(10);
 
         return view('admin.movies', compact('allmovies', 'allseries'));
+    }
+
+    public function displayComments()
+    {
+        $all_comments = Comment::paginate(10);
+
+        return view('admin.components.comments', compact('all_comments'));
     }
 }

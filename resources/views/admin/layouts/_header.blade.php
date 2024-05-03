@@ -235,6 +235,13 @@
         </li><!-- End Dashboard Nav -->
 
         <li class="nav-item">
+            <a class="nav-link collapsed" href="comments">
+                <i class="fa fa-comment" aria-hidden="true"></i>
+                <span>Comments</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        {{-- <li class="nav-item">
             <a class="nav-link collapsed" href="movies">
                 <i class="fa fa-video"></i>
                 <span>Movies</span>
@@ -261,13 +268,6 @@
                 <span>Update Series Type</span>
             </a>
         </li><!-- End Login Page Nav -->
-
-        {{-- <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-error-404.html">
-                <i class="bi bi-dash-circle"></i>
-                <span>Error 404</span>
-            </a>
-        </li><!-- End Error 404 Page Nav --> --}}
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="series/description">
@@ -344,7 +344,91 @@
                 <i class="bi bi-youtube"></i>
                 <span>Get Series Seasons 2</span>
             </a>
-        </li><!-- End Blank Page Nav -->
+        </li><!-- End Blank Page Nav --> --}}
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Components</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="movies">
+                        <i class="bi bi-circle"></i><span>Movies</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="series">
+                        <i class="bi bi-circle"></i><span>Fetch Series</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="fetch">
+                        <i class="bi bi-circle"></i><span>Fetch Movies</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="update">
+                        <i class="bi bi-circle"></i><span>Update Series Type</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="series/description">
+                        <i class="bi bi-circle"></i><span>Update Series Description</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="movies/description">
+                        <i class="bi bi-circle"></i><span>Update Movies Description</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="movies/genre">
+                        <i class="bi bi-circle"></i><span>Update Movies Genre</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="series/genre">
+                        <i class="bi bi-circle"></i><span>Update Series Genre</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="series/genre2">
+                        <i class="bi bi-circle"></i><span>Update 2nd Series Genre</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="movies/genre2">
+                        <i class="bi bi-circle"></i><span>Update 2nd Movies Genre</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="series/trailer">
+                        <i class="bi bi-circle"></i><span>Fetch Series Trailer</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="movies/trailer">
+                        <i class="bi bi-circle"></i><span>Fetch Movies Trailer</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="series/tmdb">
+                        <i class="bi bi-circle"></i><span>Fetch Series TMDB ID</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="series/seasons">
+                        <i class="bi bi-circle"></i><span>Get Series Seasons</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="series/seasons2">
+                        <i class="bi bi-circle"></i><span>Get Series Seasons 2</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Components Nav -->
 
     </ul>
 

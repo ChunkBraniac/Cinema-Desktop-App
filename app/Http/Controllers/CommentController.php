@@ -29,12 +29,7 @@ class CommentController extends Controller
 
         $storeComment->save();
 
-        $movieId = $request->movie_id;
-        $comments = Comment::where('movie_id', $movieId)->get();
-
-        // dd($comments);
-
-        return redirect()->route('media.show', ['name' => $name, 'type' => $type])->with('success', 'Comment added successfully')->with('comments', $comments);
+        return redirect()->route('media.show', ['name' => $name, 'type' => $type])->with('success', 'Comment added successfully');
     }
 
 }

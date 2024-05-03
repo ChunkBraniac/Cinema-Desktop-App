@@ -58,6 +58,7 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('logout', [AdminController::class, 'logout'])->name('admin.logout');
     Route::get('admin/movies', [AdminController::class, 'showMovies'])->name('admin.movies');
     Route::get('admin/movies', [AdminController::class, 'movies'])->name('admin.all');
+    Route::get('admin/comments', [AdminController::class, 'displayComments'])->name('admin.comments');
 
     // route to fetch the movies and series and other settings
     Route::get('admin/series', [ApiController::class, 'fetchSeries'])->name('fetch.series');
@@ -80,3 +81,4 @@ Route::group(['middleware' => 'admin'], function() {
 Route::get('download/{name}/season/{season}/episode/{episode}', [SeasonsController::class, 'download'])->name('download');
 
 Route::get('show-more', [MoviesController::class, 'showMore'])->name('moremovies');
+
