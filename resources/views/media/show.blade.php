@@ -167,8 +167,8 @@
                                 <div class="row mt-3 pt-3 pb-3"
                                     style="border-radius: 0px; background: #f9f9f9; border: 1px solid #ccc;">
                                     <div class="col-xl-2">
-                                        <h5 style="font-family: 'Roboto', sans-serif; font-weight: normal">
-                                            {{ $comment->commentor }}
+                                        <h5 style="font-size: 19px">
+                                            {{ $comment->commentor }} <span style="font-size: 13px">[{{ $comment->created_at }}]</span>
                                         </h5>
                                     </div>
                                     <div class="col-xl-6 m-auto">
@@ -186,9 +186,29 @@
                                         </p>
 
                                     </div>
-                                    <div class="collapse" id="{{ $comment->id }}">
+
+                                    <div class="mt-2 text-center">
+                                        <h6 class="text-center">- Replies -</h6>
+
+                                        <div class="row mt-3">
+                                            <div class="col-xl-4">
+                                                <h6>Baba yaga <span style="font-family: 'Roboto', sans-serif; font-weight: normal">[{{$comment->created_at }}]</span></h6>
+                                            </div>
+
+                                            <div class="col-xl-8">
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, veniam, repellat minus accusamus dolor unde maiores neque temporibus quis eos, architecto adipisci nulla suscipit ad quae consequuntur maxime non voluptates.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="collapse mt-3" id="{{ $comment->id }}">
                                         <div class="card card-body" style="background: #f9f9f9; border-radius: 0px">
-                                            <form action="" method="post">
+                                            <form action="{{ route('media.show', ['name' => $item->originalTitleText, 'type' => $item->titleType]) }}" method="post">
+
+                                                <input type="hidden" value="{{ $comment->id }}" name="comment_id">
+                                                <input type="hidden" value="{{ $item->originalTitleText }}" name="movie_name">
+                                                <input type="hidden" value="{{ $item->movieId }}" name="movie_id">
+                                                
                                                 <label for="" style="font-size: 15px">Name: </label>
                                                 <input type="text" class="form-control" name="reply_name"
                                                     style="border-radius: 0px" required>

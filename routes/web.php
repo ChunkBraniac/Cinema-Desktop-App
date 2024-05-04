@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\CinemaController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\SeasonsController;
 use App\Models\Api;
 
@@ -44,6 +45,7 @@ Route::group(['middleware' => 'xframe'], function() {
 Route::get('search', [MoviesController::class, 'search'])->name('movie.search');
 
 Route::post('media/{name}/{type}', [CommentController::class, 'store'])->name('comment');
+Route::post('media/{name}/{type}', [ReplyController::class, 'reply'])->name('reply');
 
 // Admin Routes
 Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
