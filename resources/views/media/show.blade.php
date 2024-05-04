@@ -168,7 +168,8 @@
                                     style="border-radius: 0px; background: #f9f9f9; border: 1px solid #ccc;">
                                     <div class="col-xl-2">
                                         <h5 style="font-size: 19px">
-                                            {{ $comment->commentor }} <span style="font-size: 13px">[{{ $comment->created_at }}]</span>
+                                            {{ $comment->commentor }} <span
+                                                style="font-size: 13px">[{{ $comment->created_at }}]</span>
                                         </h5>
                                     </div>
                                     <div class="col-xl-6 m-auto">
@@ -188,27 +189,40 @@
                                     </div>
 
                                     <div class="mt-2 text-center">
-                                        <h6 class="text-center">- Replies -</h6>
 
-                                        <div class="row mt-3">
-                                            <div class="col-xl-4">
-                                                <h6>Baba yaga <span style="font-family: 'Roboto', sans-serif; font-weight: normal">[{{$comment->created_at }}]</span></h6>
-                                            </div>
+                                        @if (count($replies->where('comment_id', $comment->id)) > 0)
+                                            <h6 class="text-center">- Replies -</h6>
+                                        @endif
 
-                                            <div class="col-xl-8">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, veniam, repellat minus accusamus dolor unde maiores neque temporibus quis eos, architecto adipisci nulla suscipit ad quae consequuntur maxime non voluptates.
-                                            </div>
-                                        </div>
+                                        @unless (count($replies) == 0)
+                                            @foreach ($replies->where('comment_id', $comment->id) as $reply)
+                                                <div class="row mt-3">
+                                                    <div class="col-xl-5">
+                                                        <h6>{{ $reply->reply_name }} <span
+                                                                style="font-family: 'Roboto', sans-serif; font-weight: normal; font-size: 13px">[{{ $reply->created_at }}]</span>
+                                                        </h6>
+                                                    </div>
+
+                                                    <div class="col-xl-7">
+                                                        {{ $reply->reply_text }}
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endunless
                                     </div>
 
                                     <div class="collapse mt-3" id="{{ $comment->id }}">
                                         <div class="card card-body" style="background: #f9f9f9; border-radius: 0px">
-                                            <form action="{{ route('media.show', ['name' => $item->originalTitleText, 'type' => $item->titleType]) }}" method="post">
+                                            <form
+                                                action="{{ route('reply', ['name' => $item->originalTitleText, 'type' => $item->titleType]) }}"
+                                                method="post">
+                                                {{ csrf_field() }}
 
                                                 <input type="hidden" value="{{ $comment->id }}" name="comment_id">
-                                                <input type="hidden" value="{{ $item->originalTitleText }}" name="movie_name">
+                                                <input type="hidden" value="{{ $item->originalTitleText }}"
+                                                    name="movie_name">
                                                 <input type="hidden" value="{{ $item->movieId }}" name="movie_id">
-                                                
+
                                                 <label for="" style="font-size: 15px">Name: </label>
                                                 <input type="text" class="form-control" name="reply_name"
                                                     style="border-radius: 0px" required>
@@ -237,7 +251,7 @@
 
                 <div class="mt-4">
                     <form
-                        action="{{ route('media.show', ['name' => $item->originalTitleText, 'type' => $item->titleType]) }}"
+                        action="{{ route('comment', ['name' => $item->originalTitleText, 'type' => $item->titleType]) }}"
                         method="post">
                         {{ csrf_field() }}
                         <label for="">Name</label>

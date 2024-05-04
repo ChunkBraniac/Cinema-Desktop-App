@@ -430,6 +430,27 @@
             </ul>
         </li><!-- End Components Nav -->
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav1" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Components</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="components-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="series">
+                        <i class="bi bi-circle"></i><span>Fetch Series</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="popular">
+                        <i class="bi bi-circle"></i><span>Fetch Movies</span>
+                    </a>
+                </li>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Components Nav -->
+
     </ul>
 
 </aside><!-- End Sidebar-->

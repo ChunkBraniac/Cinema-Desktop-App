@@ -26,7 +26,7 @@
                     {{-- Streaming movies table --}}
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Series</h5>
+                            <h5 class="card-title">Comments</h5>
                             <p>Add lightweight datatables to your project with using the <a
                                     href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple
                                     DataTables</a> library. Just add <code>.datatable</code> class name to any table you
@@ -71,6 +71,63 @@
                             </table>
 
                             {{ $all_comments->onEachSide(1)->links() }}
+                            <!-- End Table with stripped rows -->
+
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Replies</h5>
+                            <p>Add lightweight datatables to your project with using the <a
+                                    href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple
+                                    DataTables</a> library. Just add <code>.datatable</code> class name to any table you
+                                wish to conver to a datatable. Check for <a
+                                    href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more
+                                    examples</a>.</p>
+
+                            <!-- Table with stripped rows -->
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Comment Id</th>
+                                        <th>
+                                            Reply Name
+                                        </th>
+                                        <th>
+                                            Reply Text
+                                        </th>
+                                        <th>Movie Id</th>
+                                        <th>Movie Name</th>
+                                        <th>Created At</th>
+                                        <th>Updated At</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @unless (count($all_replies) == 0)
+                                        @foreach ($all_replies as $comment)
+                                            <tr>
+                                                <td>{{ $loop->iteration + ($all_replies->currentPage() - 1) * $all_replies->perPage() }}</td>
+                                                <td>{{ $comment->comment_id }}</td>
+                                                <td class="text-truncate">{{ $comment->reply_name }}</td>
+                                                <td>{{ $comment->reply_text }}</td>
+                                                <td>{{ $comment->movie_id ? $comment->movie_id : 'N/A' }}</td>
+                                                <td>{{ $comment->movie_name  ? $comment->movie_name  : 'N/A' }}</td>
+                                                <td>{{ $comment->created_at ? $comment->created_at : 'N/A'}}</td>
+                                                <td>{{ $comment->updated_at ? $comment->updated_at : 'N/A'}}</td>
+                                                
+                                                <td>
+                                                    <button class="btn btn-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endunless
+                                </tbody>
+                            </table>
+
+                            {{ $all_replies->onEachSide(1)->links() }}
                             <!-- End Table with stripped rows -->
 
                         </div>

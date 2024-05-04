@@ -44,7 +44,7 @@ class ApiController extends Controller
                 CURLOPT_CUSTOMREQUEST => "GET",
                 CURLOPT_HTTPHEADER => [
                     "X-RapidAPI-Host: imdb188.p.rapidapi.com",
-                    "X-RapidAPI-Key: 85391acd3cmsh02760f9d15463d2p145d38jsn69e076280407"
+                    "X-RapidAPI-Key: 9ee9e0beddmsh5fbc336f49f77d4p1132ebjsnf695e8172456"
                 ],
             ]);
 
@@ -73,7 +73,7 @@ class ApiController extends Controller
                             // if it is, break out of the loop
                             $fetch_movies = mysqli_query($connection, "SELECT * FROM series");
 
-                            if (mysqli_num_rows($fetch_movies) >= 100) {
+                            if (mysqli_num_rows($fetch_movies) >= 200) {
                                 exit;
                             }
 
@@ -97,7 +97,7 @@ class ApiController extends Controller
                                 $select_movies = mysqli_query($connection, "SELECT * FROM series");
 
                                 // Insert the movie into the database
-                                if (mysqli_num_rows($select_movies) < 100) {
+                                if (mysqli_num_rows($select_movies) < 200) {
 
                                     // check if the fetched movies is series
                                     if ($titleType == 'tvSeries' || $titleType == 'tvMiniSeries') {
@@ -127,7 +127,7 @@ class ApiController extends Controller
                     }
                 }
             } else {
-                return redirect()->route('admin.dashboard')->with('error', var_dump($data));
+                var_dump($data);
             }
         }
     }
@@ -164,7 +164,7 @@ class ApiController extends Controller
                 CURLOPT_CUSTOMREQUEST => "GET",
                 CURLOPT_HTTPHEADER => [
                     "X-RapidAPI-Host: imdb188.p.rapidapi.com",
-                    "X-RapidAPI-Key: 85391acd3cmsh02760f9d15463d2p145d38jsn69e076280407"
+                    "X-RapidAPI-Key: 9ee9e0beddmsh5fbc336f49f77d4p1132ebjsnf695e8172456"
                 ],
             ]);
 
@@ -194,7 +194,7 @@ class ApiController extends Controller
 
                             $fetch_movies = mysqli_query($connection, "SELECT * FROM movies");
 
-                            if (mysqli_num_rows($fetch_movies) >= 100) {
+                            if (mysqli_num_rows($fetch_movies) >= 300) {
                                 exit();
                             }
 
@@ -218,7 +218,7 @@ class ApiController extends Controller
                                 $select_movies = mysqli_query($connection, "SELECT * FROM movies");
 
                                 // Insert the movie into the database
-                                if (mysqli_num_rows($select_movies) < 100) {
+                                if (mysqli_num_rows($select_movies) < 300) {
 
                                     // check if the fetched movies is series
                                     if ($titleType == 'movie') {
@@ -1100,5 +1100,158 @@ class ApiController extends Controller
 
         var_dump($data);
 
+    }
+
+    public function popularMovies()
+    {
+        $dbhost = "127.0.0.1";
+        $dbus = "root";
+        $dbpass = '';
+        $dbname = 'cinema';
+
+        $connection = mysqli_connect($dbhost, $dbus, $dbpass, $dbname);
+
+        if (!$connection) {
+            die('Failed to connect' . mysqli_connect_error());
+        } else {
+            mysqli_error($connection);
+        }
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://imdb188.p.rapidapi.com/api/v1/getPopularMovies",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode([
+                'country' => [
+                    'anyPrimaryCountries' => [
+                        'IN',
+                        'US',
+                        'GB',
+                        'CA',
+                        'AU',
+                        'DE',
+                    ]
+                ],
+                'limit' => 200,
+                'releaseDate' => [
+                    'releaseDateRange' => [
+                        'end' => '2029-12-31',
+                        'start' => '2020-01-01'
+                    ]
+                ],
+                'userRatings' => [
+                    'aggregateRatingRange' => [
+                        'max' => 10,
+                        'min' => 6
+                    ],
+                    'ratingsCountRange' => [
+                        'min' => 1000
+                    ]
+                ],
+                'genre' => [
+                    'allGenreIds' => [
+                        'Action'
+                    ]
+                ],
+                'runtime' => [
+                    'runtimeRangeMinutes' => [
+                        'max' => 120,
+                        'min' => 0
+                    ]
+                ]
+            ]),
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: imdb188.p.rapidapi.com",
+                "X-RapidAPI-Key: 9ee9e0beddmsh5fbc336f49f77d4p1132ebjsnf695e8172456",
+                "content-type: application/json"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        if ($err) {
+            return redirect()->route('admin.dashboard')->with('error', 'Failed to fetch movies: ' . $err);
+        }
+
+        curl_close($curl);
+
+        $data = json_decode($response, true);
+
+        if (isset($data['data']['list']) && is_array($data['data']['list'])) {
+            foreach ($data['data']['list'] as $list) {
+                $movie_id = $list['title']['id'];
+
+                // check if the movie is already in the db
+                $fetch = mysqli_query($connection, "SELECT * FROM movies WHERE id = '$movie_id'");
+
+                if (mysqli_num_rows($fetch) == 0) {
+
+                    $fetch_movies = mysqli_query($connection, "SELECT * FROM movies");
+
+                    if (mysqli_num_rows($fetch_movies) >= 300) {
+                        // exit();
+                        return redirect()->route('admin.dashboard')->with('error', 'Movie limit reached');
+                    }
+
+                    $releaseYear = isset($list['title']['releaseYear']['year']) ? mysqli_real_escape_string($connection, $list['title']['releaseYear']['year']) : 0;
+
+                    if ($releaseYear >= '2010' && $releaseYear <= '2024') {
+                        $isAdult = isset($list["title"]["isAdult"]) ? $list["title"]["isAdult"] : 0;
+                        $isRatable = isset($list['title']['canRateTitle']['isRatable']) ? $list['title']['canRateTitle']['isRatable'] : false;
+                        $originalTitleText = isset($list['title']['originalTitleText']['text']) ? mysqli_real_escape_string($connection, $list['title']['originalTitleText']['text']) : 'No name';
+                        $primaryImage = isset($list['title']['primaryImage']['imageUrl']) ? mysqli_real_escape_string($connection, $list['title']['primaryImage']['imageUrl']) : 'No image url';
+                        $ratingsSummary = isset($list['title']['ratingsSummary']['aggregateRating']) ? $list['title']['ratingsSummary']['aggregateRating'] : 0;
+                        $releaseYear = isset($list['title']['releaseYear']['year']) ? mysqli_real_escape_string($connection, $list['title']['releaseYear']['year']) : 0;
+                        $titleType = isset($list['title']['titleType']['id']) ? mysqli_real_escape_string($connection, $list['title']['titleType']['id']) : 0;
+                        $titleTypeText = isset($list['title']['titleType']['text']) ? mysqli_real_escape_string($connection, $list['title']['titleType']['text']) : 0;
+                        $canHaveEpisodes = isset($list['title']['titleType']['canHaveEpisodes']) ? $list['title']['titleType']['canHaveEpisodes'] : 0;
+                        $isSeries = isset($list['title']['titleType']['isSeries']) ? $list['title']['titleType']['isSeries'] : 0;
+
+                        $current_timestamp = date('Y-m-d H:i:s');
+                        // before inserting, let us check if the movies we are adding aleardy exists
+                        $fetch_all = mysqli_query($connection, "SELECT * FROM movies WHERE originalTitleText = '$originalTitleText'");
+
+                        if (mysqli_num_rows($fetch_all) > 0) {
+                            echo "movie already exists";
+                        } else {
+
+                            $num_movies = mysqli_query($connection, "SELECT * FROM movies");
+
+                            if (mysqli_num_rows($num_movies) < 300) {
+
+                                if ($titleType == 'movie') {
+                                    // insert the movie into the db
+                                    $insert = mysqli_query($connection, "INSERT INTO movies (movieId, isAdult, isRatable, originalTitleText, imageUrl, aggregateRating, releaseYear, titleType, titleTypeText, isSeries, country, runtime, genres, tmdbId, trailer, plotText, created_at) VALUES ('$movie_id', '$isAdult', '$isRatable', '$originalTitleText', '$primaryImage', '$ratingsSummary', '$releaseYear', '$titleType', '$titleTypeText', '$isSeries', '0', '0', '0', '','', '', '$current_timestamp')");
+
+                                    if ($insert) {
+                                        echo "Movie added successfully";
+                                    } else {
+                                        echo "Failed to add movie";
+                                    }
+                                }
+                                else {
+                                    echo "type is not movie";
+                                }
+                            } else{
+                                echo "movie limit reached";
+                            }
+                        }
+                    } else {
+                        echo "Movie not in range";
+                    }
+                } else {
+                    echo "Movie already exists";
+                }
+            }
+        } else {
+            var_dump($data);
+        }
     }
 }

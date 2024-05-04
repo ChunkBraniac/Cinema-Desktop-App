@@ -29,6 +29,6 @@ class ReplyController extends Controller
 
         $reply->save();
 
-        return redirect()->route('media.show', ['name' => $name, 'type' => $type])->with('success', 'Comment added successfully');
+        return redirect()->route('media.show', ['name' => $name, 'type' => $type])->with('success', 'Reply added successfully');
     }
 }

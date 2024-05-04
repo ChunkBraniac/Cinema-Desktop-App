@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Reply;
 use App\Models\Top10;
 use App\Models\Movies;
 use App\Models\Series;
@@ -116,7 +117,8 @@ class AdminController extends Controller
     public function displayComments()
     {
         $all_comments = Comment::paginate(10);
+        $all_replies = Reply::paginate(10);
 
-        return view('admin.components.comments', compact('all_comments'));
+        return view('admin.components.comments', compact('all_comments', 'all_replies'));
     }
 }

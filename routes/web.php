@@ -44,8 +44,8 @@ Route::group(['middleware' => 'xframe'], function() {
 
 Route::get('search', [MoviesController::class, 'search'])->name('movie.search');
 
-Route::post('media/{name}/{type}', [CommentController::class, 'store'])->name('comment');
-Route::post('media/{name}/{type}', [ReplyController::class, 'reply'])->name('reply');
+Route::post('media/{name}/{type}/comment', [CommentController::class, 'store'])->name('comment');
+Route::post('media/{name}/{type}/reply', [ReplyController::class, 'reply'])->name('reply');
 
 // Admin Routes
 Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -77,6 +77,9 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('admin/series/tmdb', [ApiController::class, 'getTmdbIdSeries'])->name('series.tmdb');
     Route::get('admin/series/seasons', [ApiController::class, 'getSeasons'])->name('series.seasons');
     Route::get('admin/series/seasons2', [ApiController::class, 'getSeriesSeasons'])->name('series.seasons.2');
+
+    // popular movies
+    Route::get('admin/popular', [ApiController::class, 'popularMovies'])->name('fetch.popular');
 });
 
 // Download page

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reply;
 use App\Models\Movies;
 use App\Models\Series;
 use App\Models\Comment;
@@ -17,7 +18,7 @@ class MoviesController extends Controller
     {
         $series_all = Series::paginate(24)->sortByDesc('releaseDate');
         $movies_all = Movies::paginate(24)->sortByDesc('releaseDate');
-        
+
         return view('home', compact('series_all', 'movies_all'));
     }
 
@@ -181,11 +182,8 @@ class MoviesController extends Controller
         $recom = Cache::get($cache);
 
         if (!$recom) {
-            // $recommend = Series::where('aggregateRating', '>', '7')->inRandomOrder()->limit(1);
-            // $recommend2 = Movies::where('aggregateRating', '>', '7')->inRandomOrder()->limit(1);
-            // $recommend3 = Popular::where('aggregateRating', '>', '7')->inRandomOrder()->limit(1);
 
-            $recommend= DB::table('series')->where('aggregateRating', '>', '7')->where('originalTitleText', '<>', $name)->inRandomOrder()->limit(9)->get();
+            $recommend = DB::table('series')->where('aggregateRating', '>', '7')->where('originalTitleText', '<>', $name)->inRandomOrder()->limit(9)->get();
             $recommend2 = DB::table('movies')->where('aggregateRating', '>', '7')->where('originalTitleText', '<>', $name)->inRandomOrder()->limit(9)->get();
 
             $recom = $recommend->union($recommend2);
@@ -229,14 +227,24 @@ class MoviesController extends Controller
 
             $merged = $merged->union($merged2);
 
-            Cache::put($cacheKey, $merged, 60);
+            Cache::put($cacheKey, $merged, 160);
         }
 
         $seasons = Seasons::where('movieName', $name)->paginate(12);
 
         $comments = Comment::where('movie_name', $name)->get();
 
-        return view('media.show', compact('all', 'type', 'merged', 'recom', 'seasons', 'comments'));
+        // Initialize an array to store comment IDs
+        $commentIds = [];
+
+        // Loop through comments to extract comment IDs
+        foreach ($comments as $comment) {
+            $commentIds[] = $comment->id;
+        }
+
+        $replies = Reply::whereIn('comment_id', $commentIds)->get();
+
+        return view('media.show', compact('all', 'type', 'merged', 'recom', 'seasons', 'comments', 'replies'));
     }
 
     public static function search(Request $request)
@@ -270,8 +278,7 @@ class MoviesController extends Controller
 
         if (!$searchWord) {
             return redirect()->back()->with('error', 'Please enter a search word');
-        }
-        elseif (strlen($searchWord) < 3) {
+        } elseif (strlen($searchWord) < 3) {
             return redirect()->back()->with('error', 'Search term must be at least 3 characters');
         }
 
