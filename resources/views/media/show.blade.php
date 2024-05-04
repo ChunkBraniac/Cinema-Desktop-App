@@ -158,7 +158,7 @@
                 <div class="mt-4">
                     <h4 class="mb-4">Comment</h4>
                     @if (session('success'))
-                        <h6 class="alert alert-success">{{ session('success') }}</h6>
+                        <h6 class="alert alert-success" style="font-weight: normal; font-size: 15px;">{{ session('success') }}</h6>
                     @endif
 
                     @if (isset($comments) && count($comments) > 0)
@@ -188,7 +188,7 @@
 
                                     </div>
 
-                                    <div class="mt-2 text-center">
+                                    <div class="mt-2 text-center col-xl-10 m-auto">
 
                                         @if (count($replies->where('comment_id', $comment->id)) > 0)
                                             <h6 class="text-center">- Replies -</h6>
@@ -196,14 +196,14 @@
 
                                         @unless (count($replies) == 0)
                                             @foreach ($replies->where('comment_id', $comment->id) as $reply)
-                                                <div class="row mt-3">
+                                                <div class="row mt-2 border p-2" style="border-radius: 5px">
                                                     <div class="col-xl-5">
                                                         <h6>{{ $reply->reply_name }} <span
                                                                 style="font-family: 'Roboto', sans-serif; font-weight: normal; font-size: 13px">[{{ $reply->created_at }}]</span>
                                                         </h6>
                                                     </div>
 
-                                                    <div class="col-xl-7">
+                                                    <div class="col-xl-7" style="font-size: 14px">
                                                         {{ $reply->reply_text }}
                                                     </div>
                                                 </div>
