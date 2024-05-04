@@ -10,6 +10,7 @@ use App\Models\Seasons;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class MoviesController extends Controller
 {
@@ -250,44 +251,29 @@ class MoviesController extends Controller
     public static function search(Request $request)
     {
 
-        /*
-            This code handles a search request in Laravel:
-
-            1. **Retrieves Search Term:** It grabs the "search" input from the user's request using `$request->input('search')`.
-
-            2. **Validates Search Term:** If no search term is provided (`!$searchWord`), it redirects the user back with an error message.
-
-            3. **Performs Separate Searches:** It executes three separate database searches:
-            - One for `Series` models.
-            - Another for `Movies` models.
-            - The last one for `Popular` models.
-            - Each search uses `like` with wildcards (`%`) to search for titles containing the search word.
-            - They are distinct (`distinct`) to avoid duplicates and ordered by ID in descending order (`Desc`).
-            - Each search is paginated with a specific number of results (e.g., 15 for `Series`).
-
-            4. **Merges Results:** It combines all results from the three searches into a single `$allResults` collection using `merge`.
-
-            5. **Passes Data to View:** It returns a view named "search" and passes the following data:
-            - `allResults`: The merged collection of all search results.
-            - Individual results for each category (optional for further processing in the view).
-
-            In summary, this code validates a search term, performs separate searches across different models, combines the results, and sends them to a view for display. 
-        */
-
         $searchWord = $request->input('search');
 
         if (!$searchWord) {
             return redirect()->back()->with('error', 'Please enter a search word');
-        } elseif (strlen($searchWord) < 3) {
-            return redirect()->back()->with('error', 'Search term must be at least 3 characters');
         }
 
-        $SeriesResults = Series::where('originalTitleText', 'like', "%$searchWord%")->distinct()->orderBy('id', 'Desc')->paginate(15);
-        $MoviesResults = Movies::where('originalTitleText', 'like', "%$searchWord%")->distinct()->orderBy('id', 'Desc')->paginate(15);
+        $SeriesResults = Series::where('originalTitleText', 'like', "%$searchWord%")->orderBy('id', 'Desc')->get();
+        $MoviesResults = Movies::where('originalTitleText', 'like', "%$searchWord%")->orderBy('id', 'Desc')->get();
 
-        $allResults = $SeriesResults->merge($MoviesResults);
+        $allResults = $SeriesResults->concat($MoviesResults);
 
-        return view('components.search', compact('allResults', 'SeriesResults', 'MoviesResults'));
+        $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
+
+        // Items per page
+        $perPage = 24;
+
+        // Slice the collection to get the items to display in current page
+        $currentPageResults = $allResults->slice(($page * $perPage) - $perPage, $perPage)->values();
+
+        // Create our paginator and add it to the view
+        $paginatedResults = new LengthAwarePaginator($currentPageResults, count($allResults), $perPage, $page, ['path' => LengthAwarePaginator::resolveCurrentPath()]);
+
+        return view('components.search', compact('paginatedResults', 'SeriesResults', 'MoviesResults'));
     }
 
     public static function showMore()

@@ -85,11 +85,11 @@
                         </div>
 
                         <div class="col-xl-6 mt-3 mt-xl-0">
-                            <iframe height="400"
+                            <iframe
                                 src="{{ $item->trailer ? 'https://www.youtube.com/embed/' . explode('?v=', $item->trailer)[1] : 'N/A' }}"
                                 title="YouTube video player" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen width="100%">
+                                allowfullscreen style="width: 100%; aspect-ratio: 3/2;">
                             </iframe>
                         </div>
                     </div>
