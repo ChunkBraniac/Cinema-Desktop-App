@@ -25,7 +25,7 @@ The Movie Website Project is a web application designed to provide users with in
 - PHP
 - Laravel
 - MySQL database
-
+- Xampp server (or any of your choice)
 ### Installation Steps
 1. Clone the repository:
    ```bash
