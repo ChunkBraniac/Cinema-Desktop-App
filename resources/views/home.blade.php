@@ -5,25 +5,6 @@
 @endsection
 
 @section('content')
-    {{-- main --}}
-    {{-- <div class="container mt-5">
-        <h4>TOP 10</h4>
-        <div class="owl-carousel owl-theme">
-            @unless (count($top10) == 0)
-                @foreach ($top10 as $item)
-                    <div class="item">
-                        <a href="{{ url('media/' . $item->originalTitleText . '/' . $item->titleType) }}"><img src="{{ asset($item->imageUrl) }}" alt=""
-                                style="height: 400px; object-fit: fill;" loading="lazy"></a>
-                        <a href="{{ url('media/' . $item->originalTitleText . '/' . $item->titleType) }}" class="text-decoration-none text-dark">
-                            <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">{{ $item->originalTitleText }}</h6>
-                        </a>
-                        <h6 style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">{{ $item->genres }}</h6>
-                    </div>
-                @endforeach
-            @endunless
-        </div>
-    </div> --}}
-
     {{-- <hr class="mt-5"> --}}
 
     <div class="container-xl mt-5">
@@ -33,8 +14,8 @@
                 @foreach ($series_all as $streamed)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
                         <a href="{{ url('media/' . $streamed->originalTitleText . '/' . $streamed->titleType) }}"><img
-                                src="{{ asset($streamed->imageUrl) }}" alt="" class="img-fluid"
-                                style="height: 400px; object-fit: fill;" loading="lazy"></a>
+                                data-original="{{ asset($streamed->imageUrl) }}" alt="" class="img-fluid blurry-image"
+                                style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
                         <a href="{{ url('media/' . $streamed->originalTitleText . '/' . $streamed->titleType) }}"
                             class="text-decoration-none text-dark">
                             <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
@@ -72,8 +53,8 @@
                 @foreach ($movies_all as $popularMovies)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
                         <a href="{{ url('media/' . $popularMovies->originalTitleText . '/' . $popularMovies->titleType) }}"><img
-                                loading="lazy" src="{{ asset($popularMovies->imageUrl) }}" alt="" class="img-fluid"
-                                style="height: 400px; object-fit: fill;"></a>
+                                loading="lazy" data-original="{{ asset($popularMovies->imageUrl) }}" alt="" class="img-fluid"
+                                style="width: 100%; aspect-ratio: 1/2;"></a>
                         <a href="{{ url('media/' . $popularMovies->originalTitleText . '/' . $popularMovies->titleType) }}"
                             class="text-decoration-none text-dark">
                             <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">

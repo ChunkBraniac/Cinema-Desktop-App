@@ -73,13 +73,15 @@
             </div>
 
             {{ $more_Movies->appends(request()->query())->onEachSide(1)->links() }}
+
+
         @elseif ($cartegory == 'series')
             <div class="row mb-4">
                 @unless (count($more_Series) == 0)
                     @foreach ($more_Series as $action)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"><img
-                                    src="{{ asset($action->imageUrl) }}" alt="" class="img-fluid"
+                                data-original="{{ asset($action->imageUrl) }}" alt="" class="img-fluid"
                                     style="height: 400px; object-fit: fill;" loading="lazy"></a>
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"
                                 class="text-decoration-none text-dark">

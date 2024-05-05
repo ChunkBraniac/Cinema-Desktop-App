@@ -35,9 +35,6 @@ Route::get('horror', [MoviesController::class, 'getHorror'])->name('movies.horro
 Route::get('thriller', [MoviesController::class, 'getThriller'])->name('movies.thriller');
 Route::get('scifi', [MoviesController::class, 'getScifi'])->name('movies.scifi');
 
-Route::get('top10/{name}', [MoviesController::class, 'getMovie']);
-Route::get('streaming/{name}', [MoviesController::class, 'getStreams']);
-
 Route::group(['middleware' => 'xframe'], function() {
     Route::get('/media/{name}/{type}', [MoviesController::class, 'show'])->name('media.show');
 });

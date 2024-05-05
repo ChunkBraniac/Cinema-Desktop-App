@@ -123,8 +123,8 @@
                         @foreach ($merged as $more)
                             <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
                                 <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
-                                        src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
-                                        style="height: 400px; object-fit: fill;" loading="lazy"></a>
+                                        data-control="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
+                                        style="width: 100%; aspect-ratio: 1/2;" loading="lazy"></a>
                                 <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }}"
                                     class="text-decoration-none text-dark">
                                     <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">

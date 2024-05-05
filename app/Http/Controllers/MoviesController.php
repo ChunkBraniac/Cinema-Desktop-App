@@ -140,44 +140,6 @@ class MoviesController extends Controller
 
     public static function show($name, $type)
     {
-
-        /*
-            fetching recommended movies
-
-            This code snippet represents a caching mechanism in Laravel to retrieve and display recommended content. Here's a breakdown of the process:
-
-            **1. Cache Key Generation:**
-
-            - The code starts by creating a cache key using string concatenation. The variable `$name` is likely used to identify a specific user or context for the recommendations. The key is constructed as `"recommend_" . $name` (e.g., "recommend_user123").
-
-            **2. Checking the Cache:**
-
-            - It then attempts to retrieve data from the Laravel cache using the `Cache::get($cache)` method. This method takes the cache key (`$cache`) as an argument and returns the cached data if it exists, or `null` otherwise.
-
-            **3. Processing If No Cache Exists:**
-
-            - If the cache lookup returns `null` (meaning there's no cached data for the given key), the code proceeds to fetch recommendations from the database:
-            - Three separate queries are executed:
-                - One fetches recommendations from the `Series` model.
-                - Another fetches recommendations from the `Movies` model.
-                - The last one fetches recommendations from the `Popular` model.
-            - Each query filters for items with an `aggregateRating` greater than 7 and applies `inRandomOrder` to randomize the results.
-            - The `paginate(4)` method is used on each query to retrieve only the first 4 results (this can be customized).
-            - The results from these three queries are then merged together using the `merge` method, creating a single collection of recommendations.
-
-            **4. Caching the Results:**
-
-            - The merged collection of recommendations is stored in the cache using the `Cache::put($cache, $recom, 60)` method:
-            - The first argument (`$cache`) is the same cache key used earlier.
-            - The second argument (`$recom`) is the collection of recommendations to be cached.
-            - The third argument (`60`) specifies the cache duration in minutes (here, 60 minutes). This means the recommendations will be kept in cache for 1 hour before being refreshed.
-
-            **5. Returning the Recommendations:**
-
-            - Presumably, the `$recom` variable (containing the cached or fetched recommendations) would be used in your application to display them to the user.
-
-            **Overall, this code snippet improves performance by efficiently retrieving recommendations. If the recommendations haven't changed within the past hour, they'll be retrieved from the cache, saving database queries. Otherwise, fresh recommendations will be fetched and cached for future use.**
-        */
         $cache = "recommend_" . $name;
 
         $recom = Cache::get($cache);
