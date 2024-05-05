@@ -1,10 +1,9 @@
-Sure, let's incorporate some icons to make the README more visually appealing. We'll use icons from the popular Font Awesome library. Here's the updated README.md:
 
 ```markdown
 # 🎬 Movie Website Project
 
 ## Overview
-The Movie Website Project is a web application designed to provide users with information about movies, including details such as title, release date, cast, plot summary, and user ratings. It allows users to browse movies, search for specific titles, and view detailed information about each movie.
+The Movie Website Project is a web application designed to provide users with <br> information about movies, including details such as title, release date, cast, plot summary, and user ratings.<br> It allows users to browse movies, search for specific titles, and view detailed information about each movie.
 
 ## Features
 - **Browse Movies:** Users can browse a list of movies available in the database.
