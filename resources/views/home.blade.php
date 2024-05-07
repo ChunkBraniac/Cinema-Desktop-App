@@ -14,8 +14,8 @@
                 @foreach ($series_all as $streamed)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
                         <a href="{{ url('media/' . $streamed->originalTitleText . '/' . $streamed->titleType) }}"><img
-                                data-original="{{ asset($streamed->imageUrl) }}" alt="" class="img-fluid blurry-image"
-                                style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
+                                data-src="{{ asset($streamed->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                                style="width: 100%; aspect-ratio: 3/5;" loading="lazy" data-srcset="{{ asset($streamed->imageUrl) }} 1x, {{ asset($streamed->imageUrl) }} 2x" ></a>
                         <a href="{{ url('media/' . $streamed->originalTitleText . '/' . $streamed->titleType) }}"
                             class="text-decoration-none text-dark">
                             <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
@@ -53,8 +53,8 @@
                 @foreach ($movies_all as $popularMovies)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
                         <a href="{{ url('media/' . $popularMovies->originalTitleText . '/' . $popularMovies->titleType) }}"><img
-                                loading="lazy" data-original="{{ asset($popularMovies->imageUrl) }}" alt="" class="img-fluid"
-                                style="width: 100%; aspect-ratio: 1/2;"></a>
+                            data-src="{{ asset($popularMovies->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                            style="width: 100%; aspect-ratio: 3/5;" loading="lazy" data-srcset="{{ asset($popularMovies->imageUrl) }} 1x, {{ asset($popularMovies->imageUrl) }} 2x" ></a>
                         <a href="{{ url('media/' . $popularMovies->originalTitleText . '/' . $popularMovies->titleType) }}"
                             class="text-decoration-none text-dark">
                             <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">

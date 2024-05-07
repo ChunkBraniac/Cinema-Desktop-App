@@ -19,12 +19,13 @@
     <hr>
     <div class="container mt-5">
         <div class="row">
-            @unless (count($currentPageItems) == 0)
-                @foreach ($currentPageItems as $action)
+            @unless (count($paginatedResults) == 0)
+                @foreach ($paginatedResults as $action)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"><img
-                                src="{{ asset($action->imageUrl) }}" alt="" class="img-fluid"
-                                style="height: 400px; object-fit: fill;" loading="lazy"></a>
+                                data-src="{{ asset($action->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                                style="width: 100%; aspect-ratio: 3/5;" loading="lazy"
+                                data-srcset="{{ asset($action->imageUrl) }} 1x, {{ asset($action->imageUrl) }} 2x"></a>
                         <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"
                             class="text-decoration-none text-dark">
                             <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
@@ -37,44 +38,6 @@
             @endunless
         </div>
 
-
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <!-- Previous Page Link -->
-                <li class="page-item {{ $page == 1 ? 'disabled' : '' }}">
-                    <a class="page-link" href="?page={{ $page > 1 ? $page - 1 : 1 }}"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-                </li>
-        
-                <!-- Page Links -->
-                @for($i = $startPage; $i <= $endPage; $i++)
-                    <li class="page-item {{ $page == $i ? 'active' : '' }}">
-                        <a class="page-link" href="?page={{ $i }}">{{ $i }}</a>
-                    </li>
-                @endfor
-        
-                <!-- Ellipsis -->
-                @if($endPage < $totalPages)
-                    <li class="page-item disabled">
-                        <span class="page-link">...</span>
-                    </li>
-                @endif
-        
-                <!-- Last Page Link -->
-                @if($endPage < $totalPages)
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ $totalPages }}">{{ $totalPages }}</a>
-                    </li>
-                @endif
-        
-                <!-- Next Page Link -->
-                <li class="page-item {{ $page == $totalPages ? 'disabled' : '' }}">
-                    <a class="page-link" href="?page={{ $page < $totalPages ? $page + 1 : $totalPages }}"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                </li>
-            </ul>
-        </nav>
-        
-        
-        
-
+        {{ $paginatedResults->onEachSide(1)->links() }}
     </div>
 @endsection

@@ -14,8 +14,9 @@
                     <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">{{ $item->originalTitleText }}</h3>
                     <div class="row">
                         <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
-                            <img src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid"
-                                style="height: 350px; object-fit: fill;" loading="lazy">
+                            <img
+                                data-src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy" data-srcset="{{ asset($item->imageUrl) }} 1x, {{ asset($item->imageUrl) }} 2x">
                         </div>
 
                         <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
@@ -123,8 +124,9 @@
                         @foreach ($merged as $more)
                             <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
                                 <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
-                                        data-control="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
-                                        style="width: 100%; aspect-ratio: 1/2;" loading="lazy"></a>
+                                    data-src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                                    style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy" data-srcset="{{ asset($more->imageUrl) }} 1x, {{ asset($more->imageUrl) }} 2x"></a>
+                                    
                                 <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }}"
                                     class="text-decoration-none text-dark">
                                     <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">

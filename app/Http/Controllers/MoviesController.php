@@ -25,45 +25,29 @@ class MoviesController extends Controller
 
     public static function getAction()
     {
-        // Determine the current page
-        $page = request()->get('page', 1);
-
-        // Define the number of items per page
-        $perPage = 30;
-
         // Perform your query for each set of movies
         $actionMoviesSeries = Series::where('genres', 'like', '%Action%')->get();
         $actionMovies = Movies::where('genres', 'like', '%Action%')->get();
 
         // Merge the collections
-        $allActionMovies = $actionMoviesSeries->merge($actionMovies);
+        $allActionMovies = $actionMoviesSeries->concat($actionMovies);
 
         // Sort the merged collection
         $allActionMovies = $allActionMovies->sortByDesc('id');
 
-        // Calculate the total number of pages
-        $totalPages = ceil($allActionMovies->count() / $perPage);
+        $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
-        // Define the number of pages to display before and after the "..." separator
-        $pagesToShow = 3;
+        // Items per page
+        $perPage = 36;
 
-        // Calculate the start and end page numbers to display
-        $startPage = max(1, $page - $pagesToShow);
-        $endPage = min($totalPages, $page + $pagesToShow);
+        // Slice the collection to get the items to display in current page
+        $currentPageResults = $allActionMovies->slice(($page * $perPage) - $perPage, $perPage)->values();
 
-        // Adjust the start and end page numbers if they are too close to the boundaries
-        if ($startPage == 1) {
-            $endPage = min($totalPages, $startPage + ($pagesToShow * 2));
-        } elseif ($endPage == $totalPages) {
-            $startPage = max(1, $endPage - ($pagesToShow * 2));
-        }
-
-        $currentPageItems = $allActionMovies
-            ->slice(($page - 1) * $perPage, $perPage)
-            ->values();
+        // Create our paginator and add it to the view
+        $paginatedResults = new LengthAwarePaginator($currentPageResults, count($allActionMovies), $perPage, $page, ['path' => LengthAwarePaginator::resolveCurrentPath()]);
 
         // Pass the current page items, total pages, start page, end page, and current page to the view
-        return view('page.action', compact('totalPages', 'startPage', 'endPage', 'page', 'currentPageItems'));
+        return view('page.action', compact('paginatedResults', 'page'));
     }
 
     public static function getAnimation()
@@ -227,7 +211,7 @@ class MoviesController extends Controller
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
         // Items per page
-        $perPage = 24;
+        $perPage = 36;
 
         // Slice the collection to get the items to display in current page
         $currentPageResults = $allResults->slice(($page * $perPage) - $perPage, $perPage)->values();
@@ -235,7 +219,7 @@ class MoviesController extends Controller
         // Create our paginator and add it to the view
         $paginatedResults = new LengthAwarePaginator($currentPageResults, count($allResults), $perPage, $page, ['path' => LengthAwarePaginator::resolveCurrentPath()]);
 
-        return view('components.search', compact('paginatedResults', 'SeriesResults', 'MoviesResults'));
+        return view('components.search', compact('paginatedResults', 'SeriesResults', 'MoviesResults', 'page'));
     }
 
     public static function showMore()

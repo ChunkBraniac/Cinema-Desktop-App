@@ -47,8 +47,8 @@
                     @foreach ($more_Movies as $action)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"><img
-                                    src="{{ asset($action->imageUrl) }}" alt="" class="img-fluid"
-                                    style="height: 400px; object-fit: fill;" loading="lazy"></a>
+                                data-src="{{ asset($action->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy" data-srcset="{{ asset($action->imageUrl) }} 1x, {{ asset($action->imageUrl) }} 2x"></a>
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"
                                 class="text-decoration-none text-dark">
                                 <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
@@ -72,7 +72,7 @@
                 @endunless
             </div>
 
-            {{ $more_Movies->appends(request()->query())->onEachSide(1)->links() }}
+            {{ $more_Movies->appends(request()->query())->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
 
 
         @elseif ($cartegory == 'series')
@@ -81,8 +81,8 @@
                     @foreach ($more_Series as $action)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"><img
-                                data-original="{{ asset($action->imageUrl) }}" alt="" class="img-fluid"
-                                    style="height: 400px; object-fit: fill;" loading="lazy"></a>
+                                data-src="{{ asset($action->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy" data-srcset="{{ asset($action->imageUrl) }} 1x, {{ asset($action->imageUrl) }} 2x"></a>
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"
                                 class="text-decoration-none text-dark">
                                 <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
@@ -106,7 +106,7 @@
                 @endunless
             </div>
 
-            {{ $more_Series->appends(request()->query())->onEachSide(1)->links() }}
+            {{ $more_Series->appends(request()->query())->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
         @else
             {{ abort(404) }}
         @endif

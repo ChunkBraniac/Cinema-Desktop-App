@@ -47,16 +47,50 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ url('js/bootstrap.bundle.min.js') }}"></script>
 
-    <script src="js/script.js"></script>
+    {{-- <script src="js/script.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"
         integrity="sha512-jNDtFf7qgU0eH/+Z42FG4fw3w7DM/9zbgNPe3wfJlCylVDTT3IgKW5r92Vy9IHa6U50vyMz5gRByIu4YIXFtaQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
-            $("img").lazyload({
-                threshold : 200
-            });
+            $("img").lazyload();
+        });
+    </script> --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            if (lazyImage.dataset.srcset) {
+                                lazyImage.srcset = lazyImage.dataset.srcset;
+                            }
+                            lazyImage.classList.remove("lazy");
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                }, {
+                    rootMargin: "200px" // Adjust the root margin as needed for your design
+                });
+
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            } else {
+                // Fallback for browsers that don't support Intersection Observer
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImage.src = lazyImage.dataset.src;
+                    if (lazyImage.dataset.srcset) {
+                        lazyImage.srcset = lazyImage.dataset.srcset;
+                    }
+                    lazyImage.classList.remove("lazy");
+                });
+            }
         });
     </script>
 </body>
