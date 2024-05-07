@@ -19,8 +19,8 @@
     <hr>
     <div class="container mt-5">
         <div class="row">
-            @unless (count($allAnimationMovies) == 0)
-                @foreach ($allAnimationMovies as $animation)
+            @unless (count($paginatedResults) == 0)
+                @foreach ($paginatedResults as $animation)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ url('media/' . $animation->originalTitleText . '/' . $animation->titleType) }}"><img src="{{ asset($animation->imageUrl) }}"
                                 alt="" class="img-fluid" style="height: 400px; object-fit: fill;" loading="lazy"></a>
@@ -31,6 +31,10 @@
                     </div>
                 @endforeach
             @endunless
+        </div>
+
+        <div class="mt-3">
+            {{ $paginatedResults->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
         </div>
     </div>
 @endsection

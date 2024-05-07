@@ -38,6 +38,8 @@
             @endunless
         </div>
 
-        {{ $paginatedResults->onEachSide(1)->links() }}
+        <div class="mt-3">
+            {{ $paginatedResults->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
+        </div>
     </div>
 @endsection

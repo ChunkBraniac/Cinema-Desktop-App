@@ -19,8 +19,8 @@
     <hr>
     <div class="container mt-5">
         <div class="row">
-            @unless (count($allHorrorMovies) == 0)
-                @foreach ($allHorrorMovies as $horror)
+            @unless (count($paginatedResults) == 0)
+                @foreach ($paginatedResults as $horror)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ url('media/' . $horror->originalTitleText . '/' . $horror->titleType) }}"><img src="{{ asset($horror->imageUrl) }}"
                                 alt="" class="img-fluid" style="height: 400px; object-fit: fill;" loading="lazy"></a>
@@ -33,20 +33,8 @@
             @endunless
         </div>
 
-        <div class="mt-4">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end">
-                    <li class="page-item disabled">
-                        <a class="page-link">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+        <div class="mt-3">
+            {{ $paginatedResults->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
+        </div>    
     </div>
 @endsection

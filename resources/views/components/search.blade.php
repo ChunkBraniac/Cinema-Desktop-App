@@ -56,7 +56,7 @@
                 {{-- <p>No results found in Top 10.</p> --}}
             @endif
 
-            <div class="mt-4">
+            <div class="mt-3">
                 {{ $paginatedResults->appends(request()->query())->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
             </div>
         </div>

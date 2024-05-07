@@ -241,111 +241,6 @@
             </a>
         </li><!-- End Dashboard Nav -->
 
-        {{-- <li class="nav-item">
-            <a class="nav-link collapsed" href="movies">
-                <i class="fa fa-video"></i>
-                <span>Movies</span>
-            </a>
-        </li><!-- End movies Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="series">
-                <i class="fa fa-camera-retro" aria-hidden="true"></i>
-                <span>Fetch Series</span>
-            </a>
-        </li><!-- End Register Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="fetch">
-                <i class="fa fa-camera-retro" aria-hidden="true"></i>
-                <span>Fetch Movies</span>
-            </a>
-        </li><!-- End Login Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="update">
-                <i class="bi bi-camera-video"></i>
-                <span>Update Series Type</span>
-            </a>
-        </li><!-- End Login Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="series/description">
-                <i class="bi bi-check"></i>
-                <span>Update Series Description</span>
-            </a>
-        </li><!-- End Blank Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="movies/description">
-                <i class="bi bi-check"></i>
-                <span>Update Movies Description</span>
-            </a>
-        </li><!-- End Blank Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="movies/genre">
-                <i class="bi bi-check"></i>
-                <span>Update Movies Genre</span>
-            </a>
-        </li><!-- End Blank Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="series/genre">
-                <i class="bi bi-check"></i>
-                <span>Update Series Genre</span>
-            </a>
-        </li><!-- End Blank Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="series/genre2">
-                <i class="bi bi-moisture"></i>
-                <span>Update 2nd Series Genre</span>
-            </a>
-        </li><!-- End Blank Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="movies/genre2">
-                <i class="bi bi-file-arrow-down"></i>
-                <span>Update 2nd Movies Genre</span>
-            </a>
-        </li><!-- End Blank Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="series/trailer">
-                <i class="bi bi-youtube"></i>
-                <span>Fetch Series Trailer</span>
-            </a>
-        </li><!-- End Blank Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="movies/trailer">
-                <i class="bi bi-youtube"></i>
-                <span>Fetch Movies Trailer</span>
-            </a>
-        </li><!-- End Blank Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="series/tmdb">
-                <i class="bi bi-youtube"></i>
-                <span>Fetch Series TMDB ID</span>
-            </a>
-        </li><!-- End Blank Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="series/seasons">
-                <i class="bi bi-youtube"></i>
-                <span>Get Series Seasons</span>
-            </a>
-        </li><!-- End Blank Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="series/seasons2">
-                <i class="bi bi-youtube"></i>
-                <span>Get Series Seasons 2</span>
-            </a>
-        </li><!-- End Blank Page Nav --> --}}
-
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-menu-button-wide"></i><span>Components</span><i
@@ -432,7 +327,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#components-nav1" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Components</span><i
+                <i class="bi bi-menu-button-wide"></i><span>Others</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="components-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
