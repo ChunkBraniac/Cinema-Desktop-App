@@ -14,7 +14,7 @@
                 @foreach ($series_all as $streamed)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
                         <a href="{{ url('media/' . $streamed->originalTitleText . '/' . $streamed->titleType) }}"><img
-                                data-src="{{ asset($streamed->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                                data-control="{{ asset($streamed->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
                                 style="width: 100%; aspect-ratio: 3/5;" loading="lazy" data-srcset="{{ asset($streamed->imageUrl) }} 1x, {{ asset($streamed->imageUrl) }} 2x" ></a>
                         <a href="{{ url('media/' . $streamed->originalTitleText . '/' . $streamed->titleType) }}"
                             class="text-decoration-none text-dark">

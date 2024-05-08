@@ -44,7 +44,7 @@ class ApiController extends Controller
                 CURLOPT_CUSTOMREQUEST => "GET",
                 CURLOPT_HTTPHEADER => [
                     "X-RapidAPI-Host: imdb188.p.rapidapi.com",
-                    "X-RapidAPI-Key: 9ee9e0beddmsh5fbc336f49f77d4p1132ebjsnf695e8172456"
+                    "X-RapidAPI-Key: 67aceb234fmshffdfd7d36c364c5p167eb3jsn92249749c17f"
                 ],
             ]);
 
@@ -164,7 +164,7 @@ class ApiController extends Controller
                 CURLOPT_CUSTOMREQUEST => "GET",
                 CURLOPT_HTTPHEADER => [
                     "X-RapidAPI-Host: imdb188.p.rapidapi.com",
-                    "X-RapidAPI-Key: 9ee9e0beddmsh5fbc336f49f77d4p1132ebjsnf695e8172456"
+                    "X-RapidAPI-Key: 67aceb234fmshffdfd7d36c364c5p167eb3jsn92249749c17f"
                 ],
             ]);
 
@@ -635,7 +635,7 @@ class ApiController extends Controller
                 }
 
                 // update the genres
-                $update = mysqli_query($connection, "UPDATE streamings SET genres = '$updatedGenreId' WHERE id = '$movieMainId'");
+                $update = mysqli_query($connection, "UPDATE movies SET genres = '$updatedGenreId' WHERE id = '$movieMainId'");
 
                 if ($update) {
                     // return redirect()->route('admin.dashboard')->with('success', 'Movie genre has been update');
@@ -1168,7 +1168,7 @@ class ApiController extends Controller
             ]),
             CURLOPT_HTTPHEADER => [
                 "X-RapidAPI-Host: imdb188.p.rapidapi.com",
-                "X-RapidAPI-Key: 9ee9e0beddmsh5fbc336f49f77d4p1132ebjsnf695e8172456",
+                "X-RapidAPI-Key: 67aceb234fmshffdfd7d36c364c5p167eb3jsn92249749c17f",
                 "content-type: application/json"
             ],
         ]);

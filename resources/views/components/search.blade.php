@@ -53,7 +53,7 @@
                     @endforeach
                 @endunless
             @else
-                {{-- <p>No results found in Top 10.</p> --}}
+                <p class="alert alert-danger">No results found for '{{ $searchWord }}'</p>
             @endif
 
             <div class="mt-3">

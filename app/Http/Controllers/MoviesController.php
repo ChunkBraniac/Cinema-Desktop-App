@@ -309,7 +309,7 @@ class MoviesController extends Controller
         // Create our paginator and add it to the view
         $paginatedResults = new LengthAwarePaginator($currentPageResults, count($allResults), $perPage, $page, ['path' => LengthAwarePaginator::resolveCurrentPath()]);
 
-        return view('components.search', compact('paginatedResults', 'SeriesResults', 'MoviesResults', 'page'));
+        return view('components.search', compact('paginatedResults', 'SeriesResults', 'MoviesResults', 'page', 'searchWord'));
     }
 
     public static function showMore()
