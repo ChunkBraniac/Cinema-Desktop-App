@@ -950,7 +950,7 @@ class ApiController extends Controller
         if (mysqli_num_rows($fetch_tmdbid) > 0) {
             while ($tmdbids = mysqli_fetch_assoc($fetch_tmdbid)) {
                 $movie_id = $tmdbids['movieId'];
-                $movie_name = $tmdbids['originalTitleText'];
+                $movie_name = mysqli_real_escape_string($connection, $tmdbids['originalTitleText']);
                 $movie_type = $tmdbids['titleType'];
                 $movie_image = $tmdbids['imageUrl'];
                 $tmdbid = $tmdbids['tmdbId'];
