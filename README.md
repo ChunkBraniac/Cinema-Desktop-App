@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-<h3>I'M JUST TOO GOOD!!! 😁😁</h3>
+<h3 align="center">I'M JUST TOO GOOD!!! 😁😁</h3>
 
 # 🎬 Movie Website Project
 
