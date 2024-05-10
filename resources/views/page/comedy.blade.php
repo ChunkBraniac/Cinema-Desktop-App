@@ -22,8 +22,8 @@
             @unless (count($paginatedResults) == 0)
                 @foreach ($paginatedResults as $comedy)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                        <a href="{{ url('media/' . $comedy->originalTitleText . '/' . $comedy->titleType) }}"><img src="{{ asset($comedy->imageUrl) }}"
-                                alt="" class="img-fluid" style="height: 400px; object-fit: fill;" loading="lazy"></a>
+                        <a href="{{ url('media/' . $comedy->originalTitleText . '/' . $comedy->titleType) }}"><img data-src="{{ asset($comedy->imageUrl) }}"
+                                alt="" class="img-fluid" style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
                         <a href="{{ url('media/' . $comedy->originalTitleText . '/' . $comedy->titleType) }}" class="text-decoration-none text-dark">
                             <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">{{ $comedy->originalTitleText }}</h6>
                         </a>

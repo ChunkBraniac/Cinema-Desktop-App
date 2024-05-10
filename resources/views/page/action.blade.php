@@ -24,8 +24,7 @@
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"><img
                                 data-src="{{ asset($action->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
-                                style="width: 100%; aspect-ratio: 3/5;" loading="lazy"
-                                data-srcset="{{ asset($action->imageUrl) }} 1x, {{ asset($action->imageUrl) }} 2x"></a>
+                                style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
                         <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"
                             class="text-decoration-none text-dark">
                             <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">

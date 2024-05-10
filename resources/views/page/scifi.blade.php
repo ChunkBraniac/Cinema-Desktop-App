@@ -22,8 +22,8 @@
             @unless (count($paginatedResults) == 0)
                 @foreach ($paginatedResults as $scifi)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                        <a href="{{ url('media/' . $scifi->originalTitleText . '/' . $scifi->titleType) }}"><img src="{{ asset($scifi->imageUrl) }}"
-                                alt="" class="img-fluid" style="height: 400px; object-fit: fill;" loading="lazy"></a>
+                        <a href="{{ url('media/' . $scifi->originalTitleText . '/' . $scifi->titleType) }}"><img data-src="{{ asset($scifi->imageUrl) }}"
+                                alt="" class="img-fluid" style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
                         <a href="{{ url('media/' . $scifi->originalTitleText . '/' . $scifi->titleType) }}" class="text-decoration-none text-dark">
                             <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">{{ $scifi->originalTitleText }}</h6>
                         </a>
