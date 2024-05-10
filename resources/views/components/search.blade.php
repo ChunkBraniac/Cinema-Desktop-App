@@ -31,7 +31,8 @@
                             <a href="{{ url('media/' . $search->originalTitleText . '/' . $search->titleType) }}"><img
                                 data-src="{{ asset($search->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
                                 style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
-                            <a href="{{ url('media/' . $search->originalTitleText . '/' . $search->titleType) }}" class="text-decoration-none text-dark">
+                            <a href="{{ url('media/' . $search->originalTitleText . '/' . $search->titleType) }}" class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $search->originalTitleText . ' ' . '(' . $search->releaseYear . ')' }}">
+
                                 <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
                                     {{ $search->originalTitleText }}</h6>
                             </a>
