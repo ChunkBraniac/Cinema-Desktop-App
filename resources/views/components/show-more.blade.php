@@ -6,11 +6,11 @@
 
 @if ($cartegory == 'series')
     @section('title')
-        Series
+        All Series
     @endsection
 @elseif ($cartegory == 'movies')
     @section('title')
-        Movies
+        All Movies
     @endsection
 @endif
 
@@ -41,6 +41,7 @@
     <hr>
     <div class="container mt-5">
 
+        {{-- Movies Pane --}}
         @if ($cartegory == 'movies')
             <div class="row mb-4">
                 @unless (count($more_Movies) == 0)
@@ -51,7 +52,7 @@
                                 style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy"></a>
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"
                                 class="text-decoration-none text-dark">
-                                <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
+                                <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')' }}">
                                     {{ $action->originalTitleText }}</h6>
                             </a>
                             @if ($action->genres == 0)
@@ -75,6 +76,7 @@
             {{ $more_Movies->appends(request()->query())->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
 
 
+        {{-- Series Pane --}}
         @elseif ($cartegory == 'series')
             <div class="row mb-4">
                 @unless (count($more_Series) == 0)
@@ -82,7 +84,7 @@
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"><img
                                 data-src="{{ asset($action->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
-                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy"></a>
+                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493);" loading="lazy"></a>
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"
                                 class="text-decoration-none text-dark">
                                 <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">

@@ -17,8 +17,8 @@ class MoviesController extends Controller
     //
     public function getAll()
     {
-        $series_all = Series::paginate(24)->sortByDesc('releaseDate');
-        $movies_all = Movies::paginate(24)->sortByDesc('releaseDate');
+        $series_all = Series::orderByDesc('releaseYear')->paginate(24);
+        $movies_all = Movies::orderByDesc('releaseYear')->paginate(24);
 
         return view('home', compact('series_all', 'movies_all'));
     }
@@ -314,7 +314,7 @@ class MoviesController extends Controller
 
     public static function showMore()
     {
-        $more_Movies = Movies::paginate(36);
+        $more_Movies = Movies::orderByDesc('releaseYear')->paginate(36);
         $more_Series = Series::paginate(36);
 
         return view('components.show-more', compact('more_Movies', 'more_Series'));

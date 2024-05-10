@@ -73,6 +73,9 @@
         document.querySelectorAll('img[data-src]').forEach(img => {
             observer.observe(img); // Start observing each image
         });
+
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
 </body>
 

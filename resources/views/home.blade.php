@@ -11,28 +11,29 @@
         <h4>Series</h4>
         <div class="row">
             @unless (count($series_all) == 0)
-                @foreach ($series_all as $streamed)
+                @foreach ($series_all as $series)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
-                        <a href="{{ url('media/' . $streamed->originalTitleText . '/' . $streamed->titleType) }}"><img
-                                data-src="{{ asset($streamed->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
-                                style="width: 100%; aspect-ratio: 3/5;" loading="lazy" ></a>
-                        <a href="{{ url('media/' . $streamed->originalTitleText . '/' . $streamed->titleType) }}"
-                            class="text-decoration-none text-dark">
+                        <a href="{{ url('media/' . $series->originalTitleText . '/' . $series->titleType) }}"><img
+                                data-src="{{ asset($series->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493);" loading="lazy" ></a>
+                        <a href="{{ url('media/' . $series->originalTitleText . '/' . $series->titleType) }}"
+                            class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $series->originalTitleText . ' ' . '(' . $series->releaseYear . ')' }}">
+
                             <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
-                                {{ $streamed->originalTitleText }}</h6>
+                                {{ $series->originalTitleText }}</h6>
                         </a>
-                        @if ($streamed->genres == 0)
+                        @if ($series->genres == 0)
                             <h6 class="text-truncate"
                                 style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">
-                                {{ $streamed->genres = 'N/A' }}</h6>
-                        @elseif ($streamed->genres == '')
+                                {{ $series->genres = 'N/A' }}</h6>
+                        @elseif ($series->genres == '')
                             <h6 class="text-truncate"
                                 style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">
-                                {{ $streamed->genres = 'N/A' }}</h6>
+                                {{ $series->genres = 'N/A' }}</h6>
                         @else
                             <h6 class="text-truncate"
                                 style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">
-                                {{ $streamed->genres }}</h6>
+                                {{ $series->genres }}</h6>
                         @endif
                     </div>
                 @endforeach
@@ -50,28 +51,29 @@
         <h4>Movies</h4>
         <div class="row">
             @unless (count($movies_all) == 0)
-                @foreach ($movies_all as $popularMovies)
+                @foreach ($movies_all as $movies)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
-                        <a href="{{ url('media/' . $popularMovies->originalTitleText . '/' . $popularMovies->titleType) }}"><img
-                            data-src="{{ asset($popularMovies->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
-                            style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
-                        <a href="{{ url('media/' . $popularMovies->originalTitleText . '/' . $popularMovies->titleType) }}"
-                            class="text-decoration-none text-dark">
+                        <a href="{{ url('media/' . $movies->originalTitleText . '/' . $movies->titleType) }}"><img
+                            data-src="{{ asset($movies->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                            style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493);" loading="lazy"></a>
+                        <a href="{{ url('media/' . $movies->originalTitleText . '/' . $movies->titleType) }}"
+                            class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $movies->originalTitleText . ' ' . '(' . $movies->releaseYear . ')' }}">
+
                             <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
-                                {{ $popularMovies->originalTitleText }}</h6>
+                                {{ $movies->originalTitleText }}</h6>
                         </a>
-                        @if ($popularMovies->genres == 0)
+                        @if ($movies->genres == 0)
                             <h6 class="text-truncate"
                                 style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">
-                                {{ $popularMovies->genres = 'N/A' }}</h6>
-                        @elseif ($popularMovies->genres == '')
+                                {{ $movies->genres = 'N/A' }}</h6>
+                        @elseif ($movies->genres == '')
                             <h6 class="text-truncate"
                                 style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">
-                                {{ $popularMovies->genres = 'N/A' }}</h6>
+                                {{ $movies->genres = 'N/A' }}</h6>
                         @else
                             <h6 class="text-truncate"
                                 style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">
-                                {{ $popularMovies->genres }}</h6>
+                                {{ $movies->genres }}</h6>
                         @endif
                     </div>
                 @endforeach
