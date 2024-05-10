@@ -16,7 +16,7 @@
                         <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
                             <img
                                 data-src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
-                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy" data-srcset="{{ asset($item->imageUrl) }} 1x, {{ asset($item->imageUrl) }} 2x">
+                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy">
                         </div>
 
                         <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
@@ -125,7 +125,7 @@
                             <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
                                 <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
                                     data-src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
-                                    style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy" data-srcset="{{ asset($more->imageUrl) }} 1x, {{ asset($more->imageUrl) }} 2x"></a>
+                                    style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy"></a>
                                     
                                 <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }}"
                                     class="text-decoration-none text-dark">
@@ -142,8 +142,8 @@
                             <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
                                 <a
                                     href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }} "><img
-                                        src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
-                                        style="height: 400px; object-fit: fill;" loading="lazy"></a>
+                                        data-src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
+                                        style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy"></a>
                                 <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
                                     class="text-decoration-none text-dark">
                                     <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">Season
