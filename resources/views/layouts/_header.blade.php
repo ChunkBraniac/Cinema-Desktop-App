@@ -14,18 +14,18 @@
                 <div class="collapse navbar-collapse" id="collapsibleNavId">
                     <ul class="navbar-nav me-auto mt-2 mt-lg-0 m-auto">
                         <li class="nav-item">
-                            <a class="nav-link active text-light" style="font-size: 15px; margin-right: 10px"
+                            <a class="nav-link active text-light" style="font-size: 16px; margin-right: 20px"
                                 href="{{ url('/') }}" aria-current="page">Home
                                 <span class="visually-hidden">(current)</span></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link text-light" href="{{ url('#') }}" id="dropdownId"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                style="font-size: 15px; margin-right: 10px">Genres <i class="fa fa-plus"
+                                style="font-size: 16px; margin-right: 20px">Genres <i class="fa fa-plus"
                                     aria-hidden="true" style="font-size: 12px"></i></a>
                             <div class="dropdown-menu bg-dark mt-0 mt-xl-3 m-lg-auto justify-content-center position-absolute text-left text-xl-left"
                                 aria-labelledby="dropdownId"
-                                style="border-radius: 0px; font-size: 15px; margin-top: 10px">
+                                style="border-radius: 0px; font-size: 16px; margin-top: 10px">
                                 <a class="dropdown-item text-light"m id="hover"
                                     href="{{ url('action') }}">Action</a>
                                 <a class="dropdown-item text-light"m id="hover"
@@ -43,29 +43,11 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" href="{{ url('#') }}"
-                                style="font-size: 15px; margin-right: 10px">Help</a>
+                                style="font-size: 16px; margin-right: 20px">Help</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ url('#') }}" style="font-size: 15px">About
+                            <a class="nav-link text-light" href="{{ url('#') }}" style="font-size: 16px">About
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ url('premium') }}" style="font-size: 15px">Premium
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-light" href="{{ url('#') }}" id="dropdownId"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                style="font-size: 15px; margin-right: 10px">Auth <i class="fa fa-plus"
-                                    aria-hidden="true" style="font-size: 12px"></i></a>
-                            <div class="dropdown-menu bg-dark mt-0 mt-xl-3 m-lg-auto justify-content-center position-absolute text-left text-xl-left"
-                                aria-labelledby="dropdownId"
-                                style="border-radius: 0px; font-size: 15px; margin-top: 10px">
-                                <a class="dropdown-item text-light"m id="hover" href="{{ url('register') }}">Sign
-                                    Up</a>
-                                <a class="dropdown-item text-light"m id="hover" href="{{ url('animation') }}">Sign
-                                    In</a>
-                            </div>
                         </li>
                     </ul>
                     <form class="d-flex" role="search" action="{{ route('movie.search') }}" method="get">

@@ -5,12 +5,9 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MoviesController;
-use App\Http\Controllers\CinemaController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\SeasonsController;
-use App\Http\Controllers\UserController;
-use App\Models\Api;
 
 Route::get('/', [PageController::class, 'home'])->name('home.page');
 Route::get('top10', [PageController::class, 'series']);
@@ -84,9 +81,3 @@ Route::group(['middleware' => 'admin'], function() {
 Route::get('download/{name}/season/{season}/episode/{episode}', [SeasonsController::class, 'download'])->name('download');
 
 Route::get('show-more', [MoviesController::class, 'showMore'])->name('moremovies');
-
-
-// user auths
-Route::get('/register', [UserController::class, 'register'])->name('user.register.page');
-Route::get('/login', [UserController::class, 'login'])->name('user.login.page');
-Route::post('/register', [UserController::class, 'register_user'])->name('user.register');
