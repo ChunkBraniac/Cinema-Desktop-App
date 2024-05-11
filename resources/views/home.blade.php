@@ -19,7 +19,7 @@
                         <a href="{{ url('media/' . $series->originalTitleText . '/' . $series->titleType) }}"
                             class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $series->originalTitleText . ' ' . '(' . $series->releaseYear . ')' }}">
 
-                            <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
+                            <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
                                 {{ $series->originalTitleText . ' ' . '(' . $series->releaseYear . ')' }}</h6>
                         </a>
                         @if ($series->genres == 0)
@@ -59,7 +59,7 @@
                         <a href="{{ url('media/' . $movies->originalTitleText . '/' . $movies->titleType) }}"
                             class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $movies->originalTitleText . ' ' . '(' . $movies->releaseYear . ')' }}">
 
-                            <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
+                            <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
                                 {{ $movies->originalTitleText }}</h6>
                         </a>
                         @if ($movies->genres == 0)

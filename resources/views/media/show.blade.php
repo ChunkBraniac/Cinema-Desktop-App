@@ -24,57 +24,57 @@
                                 <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3">
                                     {{ $item->originalTitleText }}
                                 </h4>
-                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                     {{ isset($item->aggregateRating) ? $item->aggregateRating : 'N/A' }}</h6>
-                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">Release
+                                <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">Release
                                     year:
                                     {{ $item->releaseYear }}</h6>
 
 
                                 @if ($item->genres == '0')
-                                    <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Genre:
                                         N/A
                                     </h6>
                                 @elseif ($item->genres == '')
-                                    <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Genre:
                                         N/A
                                     </h6>
                                 @else
-                                    <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Genre: {{ $item->genres }}
                                     </h6>
                                 @endif
 
                                 @if ($item->runtime == '0')
-                                    <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Runtime:
                                         N/A
                                     </h6>
                                 @elseif ($item->runtime == '')
-                                    <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Runtime:
                                         N/A
                                     </h6>
                                 @else
-                                    <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Runtime: {{ $item->runtime }}
                                     </h6>
                                 @endif
 
                                 @if ($item->country == '0')
-                                    <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Country:
                                         N/A
                                     </h6>
                                 @elseif ($item->country == '')
-                                    <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Country:
                                         N/A
                                     </h6>
                                 @else
-                                    <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Country: {{ $item->country }}
                                     </h6>
                                 @endif
@@ -146,7 +146,7 @@
                                         style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy"></a>
                                 <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
                                     class="text-decoration-none text-dark">
-                                    <h6 class="mt-1" style="font-family: 'Robot', sans-serif; font-weight: 500">Season
+                                    <h6 class="mt-1" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">Season
                                         {{ $more->season_number }} Episode {{ $more->episode_number }}
                                     </h6>
                                 </a>
@@ -158,7 +158,7 @@
                 @endif
 
                 <div class="mt-4">
-                    <h4 class="mb-4">Comment</h4>
+                    <h5 class="mb-4">Comment</h5>
                     @if (session('success'))
                         <h6 class="alert alert-success" style="font-weight: normal; font-size: 15px;">{{ session('success') }}</h6>
                     @endif
@@ -201,7 +201,7 @@
                                                 <div class="row mt-2 border p-2" style="border-radius: 5px">
                                                     <div class="col-xl-5">
                                                         <h6>{{ $reply->reply_name }} <span
-                                                                style="font-family: 'Roboto', sans-serif; font-weight: normal; font-size: 13px">[{{ $reply->created_at }}]</span>
+                                                                style="font-family: 'Ubuntu sans', sans-serif; font-weight: normal; font-size: 13px">[{{ $reply->created_at }}]</span>
                                                         </h6>
                                                     </div>
 

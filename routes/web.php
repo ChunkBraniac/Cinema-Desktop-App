@@ -9,9 +9,10 @@ use App\Http\Controllers\CinemaController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\SeasonsController;
+use App\Http\Controllers\UserController;
 use App\Models\Api;
 
-Route::get('/', [PageController::class, 'home']);
+Route::get('/', [PageController::class, 'home'])->name('home.page');
 Route::get('top10', [PageController::class, 'series']);
 
 Route::get('fetch', [ApiController::class, 'fetchMovies']);
@@ -84,3 +85,8 @@ Route::get('download/{name}/season/{season}/episode/{episode}', [SeasonsControll
 
 Route::get('show-more', [MoviesController::class, 'showMore'])->name('moremovies');
 
+
+// user auths
+Route::get('/register', [UserController::class, 'register'])->name('user.register.page');
+Route::get('/login', [UserController::class, 'login'])->name('user.login.page');
+Route::post('/register', [UserController::class, 'register_user'])->name('user.register');
