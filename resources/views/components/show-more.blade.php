@@ -54,7 +54,7 @@
                                 class="text-decoration-none text-dark">
 
                                 <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')' }}">
-                                    {{ $action->originalTitleText }}</h6>
+                                    {{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')'  }}</h6>
                             </a>
                             @if ($action->genres == 0)
                                 <h6 class="text-truncate"
@@ -90,7 +90,7 @@
                                 class="text-decoration-none text-dark">
 
                                 <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')' }}">
-                                    {{ $action->originalTitleText }}</h6>
+                                    {{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')' }}</h6>
                             </a>
                             @if ($action->genres == 0)
                                 <h6 class="text-truncate"

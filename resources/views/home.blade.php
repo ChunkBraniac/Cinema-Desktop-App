@@ -20,7 +20,7 @@
                             class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $series->originalTitleText . ' ' . '(' . $series->releaseYear . ')' }}">
 
                             <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
-                                {{ $series->originalTitleText }}</h6>
+                                {{ $series->originalTitleText . ' ' . '(' . $series->releaseYear . ')' }}</h6>
                         </a>
                         @if ($series->genres == 0)
                             <h6 class="text-truncate"
