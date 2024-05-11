@@ -21,7 +21,8 @@ use Illuminate\Support\Facades\Mail;
 class AdminController extends Controller
 {
     //
-    public static function dashboard() {
+    public static function dashboard()
+    {
         return view('admin.dashboard');
     }
 
@@ -29,8 +30,7 @@ class AdminController extends Controller
     {
         if (!empty(Auth::check())) {
             return redirect()->route('admin.dashboard')->with('error', 'You are already logged in');
-        }
-        else {
+        } else {
             return view('admin.auth.login');
         }
     }
@@ -54,54 +54,54 @@ class AdminController extends Controller
     {
         $request->validate([
             'admin_name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:6|confirmed'
+            'admin_email' => 'required|string|email|unique:admins',
+            'admin_password' => 'required|string|min:6|confirmed'
         ]);
 
-        $register_admin = new User([
+        $register_admin = new Admin([
             'admin_name' => $request->admin_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'admin_email' => $request->admin_email,
+            'admin_password' => Hash::make($request->admin_password)
         ]);
 
         $register_admin->save();
 
         if ($register_admin->save()) {
-            
+
             return redirect()->route('admin.home.login')->with('success', 'Admin registered successfully');
-        }
-        else {
+        } else {
             return view('admin.auth.register')->with('error', 'Failed to register admin');
         }
     }
 
     public function login(Request $request)
     {
-        $remember = !empty($request->remember) ? true : false;
+        $remember = $request->has('remember');
 
         $credentials = $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string'
+            'admin_email' => 'required|string|email',
+            'admin_password' => 'required|string'
         ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
-            // log the admin in
-            if (Auth::user()->isAdmin == 1) {
+        if (Auth::guard('admin')->attempt(['admin_email' => $credentials['admin_email'], 'password' => $credentials['admin_password']], $remember)) {
+            // Check if the authenticated user is an admin
+            if (Auth::guard('admin')->user()->role == 'admin') {
+                // Redirect to admin dashboard
                 return redirect()->route('admin.dashboard')->with('status', 'Login successful, welcome back');
-            }
-            else {
-                Auth::logout();
+            } else {
+                // Logout the user if not an admin
+                Auth::guard('admin')->logout();
                 return redirect()->route('admin.home.login')->with('error', 'You are not an admin!!!');
             }
-        }
-        else {
+        } else {
             return redirect()->back()->with('error', 'Invalid credentials');
         }
     }
 
+
     public function logout()
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
 
         return redirect()->route('admin.home.login')->with('stat', 'Logout successful');
     }

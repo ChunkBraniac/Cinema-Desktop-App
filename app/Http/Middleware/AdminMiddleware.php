@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthMiddleware
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,10 @@ class AuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!empty(Auth::check())) {
-            return $next($request);
+        if (!Auth::guard('admin')->check()) {
+            return redirect('admin')->with('error', 'Login required'); // Redirect to login page if not admin
         }
-        else {
-            Auth::logout();
-            return redirect()->route('admin.home.login')->with('error', 'Login required');
-        }
+
+        return $next($request);
     }
 }
