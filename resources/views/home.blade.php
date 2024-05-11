@@ -7,7 +7,7 @@
 @section('content')
     {{-- <hr class="mt-5"> --}}
 
-    <div class="container-xl mt-5">
+    <div class="container-xl mt-xl-5 pt-xl-5 mt-5 pt-0">
         <h4>Series</h4>
         <div class="row">
             @unless (count($series_all) == 0)

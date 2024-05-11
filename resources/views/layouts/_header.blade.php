@@ -3,12 +3,13 @@
     <div class="container-fluid bg-dark p-0">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-fixed p-3"
             style="width: 100%; top: 0; z-index: 3">
-            <div class="container-xl">
+            <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ url('icons/video.png') }}"
                         style="height: 35px; width: 30px" alt=""> Cinema<span class="text-info">Hub</span></a>
+
                 <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
-                    aria-label="Toggle navigation" style="border-radius: 0px; font-size: 14px; box-shadow: none">
+                    aria-label="Toggle navigation" style="border-radius: 0px; font-size: 14px; box-shadow: none;">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="collapsibleNavId">
