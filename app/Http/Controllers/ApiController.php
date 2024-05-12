@@ -538,7 +538,7 @@ class ApiController extends Controller
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => [
                         "X-RapidAPI-Host: imdb146.p.rapidapi.com",
-                        "X-RapidAPI-Key: 85391acd3cmsh02760f9d15463d2p145d38jsn69e076280407"
+                        "X-RapidAPI-Key: 67aceb234fmshffdfd7d36c364c5p167eb3jsn92249749c17f"
                     ],
                 ]);
 
