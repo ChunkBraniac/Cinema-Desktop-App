@@ -114,4 +114,28 @@ class AdminController extends Controller
 
         return view('admin.components.comments', compact('all_comments', 'all_replies'));
     }
+
+    public function reset(Request $request, $name)
+    {
+        $request->validate([
+            'password' => 'required|string',
+            'newpassword' => 'required|string|min:6',
+        ]);
+
+        $admin = Auth::guard('admin')->user();
+
+        if (Hash::check($request->password, $admin->admin_password)) {
+            $update = Admin::findOrFail($name);
+
+            $newpassword = Hash::make($request->newpassword);
+
+            $update->admin_password = $newpassword;
+            $update->save();
+
+            return redirect()->route('admin.dashboard')->with('success', 'Password updated');
+        }
+        else {
+            return redirect()->route('admin.dashboard')->with('error', 'Password does not match');
+        }
+    }
 }

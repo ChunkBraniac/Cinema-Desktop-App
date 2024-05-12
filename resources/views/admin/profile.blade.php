@@ -1,5 +1,9 @@
 @extends('admin.layouts.app')
 
+@section('title')
+    Profile
+@endsection
+
 @section('content')
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
@@ -260,7 +264,7 @@
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
                             <img src="{{ asset('assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
-                            <h2>{{ Auth::user()->admin_name }}</h2>
+                            <h2>{{ Auth::guard('admin')->user()->admin_name }}</h2>
                             <h3>Web Designer</h3>
                             <div class="social-links mt-2">
                                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -314,7 +318,7 @@
 
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                                        <div class="col-lg-9 col-md-8">{{ Auth::user()->admin_name }}</div>
+                                        <div class="col-lg-9 col-md-8">{{ Auth::guard('admin')->user()->admin_name }}</div>
                                     </div>
 
                                     <div class="row">
@@ -372,7 +376,7 @@
                                                 Name</label>
                                             <div class="col-md-8 col-lg-9">
                                                 <input name="fullName" type="text" class="form-control"
-                                                    id="fullName" value="{{ Auth::user()->admin_name }}">
+                                                    id="fullName" value="{{ Auth::guard('admin')->user()->admin_name }}">
                                             </div>
                                         </div>
 
@@ -380,7 +384,7 @@
                                             <label for="company" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                             <div class="col-md-8 col-lg-9">
                                                 <input name="email" type="text" class="form-control" id="company"
-                                                    value="{{ Auth::user()->email }}">
+                                                    value="{{ Auth::guard('admin')->user()->email }}">
                                             </div>
                                         </div>
 
@@ -439,8 +443,9 @@
 
                                 <div class="tab-pane fade pt-3" id="profile-change-password">
                                     <!-- Change Password Form -->
-                                    <form>
+                                    <form action="{{ route('admin.reset', ['name' => Auth::guard('admin')->user()->admin_name ]) }}" method="post">
 
+                                        {{ csrf_field() }}
                                         <div class="row mb-3">
                                             <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current
                                                 Password</label>
@@ -456,15 +461,6 @@
                                             <div class="col-md-8 col-lg-9">
                                                 <input name="newpassword" type="password" class="form-control"
                                                     id="newPassword">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter
-                                                New Password</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="renewpassword" type="password" class="form-control"
-                                                    id="renewPassword">
                                             </div>
                                         </div>
 

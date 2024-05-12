@@ -74,6 +74,8 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('admin/series/seasons', [ApiController::class, 'getSeasons'])->name('series.seasons');
     Route::get('admin/series/seasons2', [ApiController::class, 'getSeriesSeasons'])->name('series.seasons.2');
 
+    Route::post('admin/reset/{name}', [AdminController::class, 'reset'])->name('admin.reset');
+
     // popular movies
     Route::get('admin/popular', [ApiController::class, 'popularMovies'])->name('fetch.popular');
 });
