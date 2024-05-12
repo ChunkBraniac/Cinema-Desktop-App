@@ -2,21 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Admin;
 use App\Models\Reply;
-use App\Models\Top10;
 use App\Models\Movies;
 use App\Models\Series;
 use App\Models\Comment;
-use App\Models\Popular;
-use App\Models\Streaming;
-use App\Mail\RegisterMail;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
