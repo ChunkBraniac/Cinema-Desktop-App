@@ -519,7 +519,7 @@ class ApiController extends Controller
         }
 
         // fetch the movies to find description
-        $fetchStreaming = mysqli_query($connection, "SELECT * FROM movies WHERE plotText = '' OR plotText = '0'");
+        $fetchStreaming = mysqli_query($connection, "SELECT * FROM movies WHERE plotText = '0'");
 
         if (mysqli_num_rows($fetchStreaming) > 0) {
             while ($stream = mysqli_fetch_assoc($fetchStreaming)) {
