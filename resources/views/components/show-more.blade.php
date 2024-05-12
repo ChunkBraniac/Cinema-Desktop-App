@@ -20,16 +20,17 @@
     @if ($cartegory == 'series')
         <div class="container">
             <h4 style="float: left">Series</h4>
-            <h6 class="" style="float: right; font-family: 'Robot', sans-serif; font-weight: normal"><span
+            <h6 class="" style="float: right; font-family: 'Roboto', sans-serif; font-weight: normal"><span
                     style="margin-right: 5px; font-size: 14px"><a href="{{ url('/') }} "
                         class="text-decoration-none text-dark text-muted">Home</a></span> <i
                     class="fa fa-arrow-right text-muted" style="font-size: 13px" aria-hidden="true"></i> <span
                     style="margin-left: 5px; font-size: 14px" class="text-muted">Series</span></h6>
         </div>
+
     @elseif ($cartegory == 'movies')
         <div class="container">
             <h4 style="float: left">Movies</h4>
-            <h6 class="" style="float: right; font-family: 'Robot', sans-serif; font-weight: normal"><span
+            <h6 class="" style="float: right; font-family: 'Roboto', sans-serif; font-weight: normal"><span
                     style="margin-right: 5px; font-size: 14px"><a href="{{ url('/') }} "
                         class="text-decoration-none text-dark text-muted">Home</a></span> <i
                     class="fa fa-arrow-right text-muted" style="font-size: 13px" aria-hidden="true"></i> <span
@@ -53,7 +54,7 @@
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"
                                 class="text-decoration-none text-dark">
 
-                                <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')' }}">
+                                <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')' }}">
                                     {{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')'  }}</h6>
                             </a>
                             @if ($action->genres == 0)
@@ -89,7 +90,7 @@
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"
                                 class="text-decoration-none text-dark">
 
-                                <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')' }}">
+                                <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')' }}">
                                     {{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')' }}</h6>
                             </a>
                             @if ($action->genres == 0)

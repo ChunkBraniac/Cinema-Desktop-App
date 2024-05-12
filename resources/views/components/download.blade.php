@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container mt-5">
         @unless (count($download_series) == 0)
             @foreach ($download_series as $item)
                 <div class="col-xl-3 m-auto">

@@ -44,10 +44,10 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" href="{{ url('#') }}"
-                                style="font-size: 16px; margin-right: 20px">Help</a>
+                                style="font-size: 16px; margin-right: 20px;">Help</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ url('#') }}" style="font-size: 16px">About
+                            <a class="nav-link text-light" href="{{ url('#') }}" style="font-size: 16px;">About
                             </a>
                         </li>
                     </ul>
