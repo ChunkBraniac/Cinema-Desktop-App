@@ -115,6 +115,7 @@ class AdminController extends Controller
         return view('admin.components.comments', compact('all_comments', 'all_replies'));
     }
 
+    // Reset password
     public function reset(Request $request)
     {
         $request->validate([
