@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Google\Client;
 use Google\Service\YouTube;
-use App\Models\Top10;
-use App\Models\Cinema;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
