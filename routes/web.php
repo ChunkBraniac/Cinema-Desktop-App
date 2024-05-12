@@ -44,7 +44,6 @@ Route::post('media/{name}/{type}/comment', [CommentController::class, 'store'])-
 Route::post('media/{name}/{type}/reply', [ReplyController::class, 'reply'])->name('reply');
 
 // Admin Routes
-Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('admin/register', [AdminController::class, 'registerPage'])->name('admin.home.register');
 Route::post('admin/register', [AdminController::class, 'register'])->name('register.admin');
 Route::get('admin', [AdminController::class, 'loginPage'])->name('admin.home.login');
@@ -74,7 +73,7 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('admin/series/seasons', [ApiController::class, 'getSeasons'])->name('series.seasons');
     Route::get('admin/series/seasons2', [ApiController::class, 'getSeriesSeasons'])->name('series.seasons.2');
 
-    Route::post('admin/reset/{name}', [AdminController::class, 'reset'])->name('admin.reset');
+    Route::post('admin/reset', [AdminController::class, 'reset'])->name('admin.reset');
 
     // popular movies
     Route::get('admin/popular', [ApiController::class, 'popularMovies'])->name('fetch.popular');

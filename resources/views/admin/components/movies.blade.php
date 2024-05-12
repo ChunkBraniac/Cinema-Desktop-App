@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('title')
-    NiceAdmin - Movies
+    Movies
 @endsection
 
 @section('content')

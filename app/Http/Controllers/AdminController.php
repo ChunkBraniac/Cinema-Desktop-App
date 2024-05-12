@@ -35,12 +35,12 @@ class AdminController extends Controller
 
     public static function profile()
     {
-        return view('admin.profile');
+        return view('admin.components.profile');
     }
 
     public static function showMovies()
     {
-        return view('admin.movies');
+        return view('admin.components.movies');
     }
 
     public function register(Request $request)
@@ -104,7 +104,7 @@ class AdminController extends Controller
         $allseries = Series::paginate(10);
         $allmovies = Movies::paginate(10);
 
-        return view('admin.movies', compact('allmovies', 'allseries'));
+        return view('admin.components.movies', compact('allmovies', 'allseries'));
     }
 
     public function displayComments()
@@ -115,7 +115,7 @@ class AdminController extends Controller
         return view('admin.components.comments', compact('all_comments', 'all_replies'));
     }
 
-    public function reset(Request $request, $name)
+    public function reset(Request $request)
     {
         $request->validate([
             'password' => 'required|string',
@@ -125,14 +125,14 @@ class AdminController extends Controller
         $admin = Auth::guard('admin')->user();
 
         if (Hash::check($request->password, $admin->admin_password)) {
-            $update = Admin::findOrFail($name);
+            $update = Admin::where('admin_name', $admin->admin_name)->first();
 
             $newpassword = Hash::make($request->newpassword);
 
             $update->admin_password = $newpassword;
             $update->save();
 
-            return redirect()->route('admin.dashboard')->with('success', 'Password updated');
+            return redirect()->route('admin.dashboard')->with('status', 'Password updated');
         }
         else {
             return redirect()->route('admin.dashboard')->with('error', 'Password does not match');
