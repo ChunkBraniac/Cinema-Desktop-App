@@ -22,6 +22,7 @@ Route::get('drama', [PageController::class, 'drama']);
 Route::get('horror', [PageController::class, 'horror']);
 Route::get('thriller', [PageController::class, 'thriller']);
 Route::get('scifi', [PageController::class, 'scifi']);
+Route::get('404', [PageController::class, 'error'])->name('error.404');
 
 
 Route::get('/', [MoviesController::class, 'getAll'])->name('movies.top10');

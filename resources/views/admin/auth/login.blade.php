@@ -48,7 +48,7 @@
                                             <div class="input-group has-validation">
                                                 <input type="email" name="admin_email"
                                                     class="form-control @error('email') is-invalid @enderror"
-                                                    id="yourUsername">
+                                                    id="yourUsername" @required(true)>
                                             </div>
                                             @error('admin_email')
                                                 <span class="text-danger" style="font-size: 14px;">
@@ -61,7 +61,7 @@
                                             <label for="yourPassword" class="form-label">Password</label>
                                             <input type="password" name="admin_password"
                                                 class="form-control @error('admin_password') is-invalid @enderror"
-                                                id="yourPassword">
+                                                id="yourPassword" @required(true)>
 
                                             @error('admin_password')
                                                 <span class="text-danger" style="font-size: 14px;">

@@ -1,4 +1,4 @@
-@if (!Request::is('register') && !Request::is('login'))
+@if (!Request::is('register') && !Request::is('login') && !Request::is('404'))
     {{-- header begins here --}}
     <div class="container-fluid bg-dark p-0">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-fixed p-3"

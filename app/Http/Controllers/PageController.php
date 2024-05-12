@@ -51,4 +51,9 @@ class PageController extends Controller
     {
         return view('page.scifi');
     }
+
+    public static function error()
+    {
+        return view('page.404');
+    }
 }

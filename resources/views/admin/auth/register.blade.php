@@ -1,5 +1,8 @@
 @extends('admin.layouts.app')
 
+@section('title')
+    Register
+@endsection
 
 @section('content')
     <main>
@@ -34,7 +37,7 @@
                                             <label for="yourName" class="form-label">Admin Name</label>
                                             <input type="text" name="admin_name"
                                                 class="form-control @error('admin_name') is-invalid @enderror"
-                                                id="yourName">
+                                                id="yourName" @required(true)>
 
                                             @error('admin_name')
                                                 <span class="text-danger" style="font-size: 14px;">
@@ -49,7 +52,7 @@
                                                 class="form-control @error('admin_email')
                                                 is-invalid
                                             @enderror"
-                                                id="yourEmail">
+                                                id="yourEmail" @required(true)>
 
                                             @error('admin_email')
                                                 <span class="text-danger" style="font-size: 14px;">
@@ -62,7 +65,7 @@
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Password</label>
                                             <input type="password" name="admin_password" class="form-control"
-                                                id="yourPassword">
+                                                id="yourPassword" @required(true)>
 
                                             @error('admin_password')
                                                 <span class="text-danger" style="font-size: 14px;">
@@ -74,7 +77,7 @@
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Confirm Password</label>
                                             <input type="password" name="admin_password_confirmation" class="form-control"
-                                                id="yourPassword">
+                                                id="yourPassword" @required(true)>
 
                                             @error('admin_password_confirmation')
                                                 <span class="text-danger" style="font-size: 14px;">
