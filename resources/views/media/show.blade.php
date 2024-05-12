@@ -129,7 +129,7 @@
                                     
                                 <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }}"
                                     class="text-decoration-none text-dark">
-                                    <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $more->originalTitleText . ' ' . '(' . $more->releaseYear . ')' }}">
+                                    <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $more->originalTitleText . ' ' . '(' . $more->releaseYear . ')' }}">
                                         {{ $more->originalTitleText }}</h6>
                                 </a>
                             </div>

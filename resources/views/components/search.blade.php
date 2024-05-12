@@ -5,14 +5,18 @@
 @endsection
 
 @section('content')
-    <br><br>
+    <br>
+    <br>
     <div class="container-xl">
         <h4 style="float: left">Search @if ($page == 1)
-            
-        @else
-            <span><h6 style="font-family: 'Roboto', sans-serif; font-weight: normal; font-size: 14px;">Page {{ $page }}</h6></span>
-        @endif</h4>
-        
+            @else
+                <span>
+                    <h6 style="font-family: 'Roboto', sans-serif; font-weight: normal; font-size: 14px;">Page
+                        {{ $page }}</h6>
+                </span>
+            @endif
+        </h4>
+
         <h6 class="" style="float: right; font-family: 'Robot', sans-serif; font-weight: normal"><span
                 style="margin-right: 5px; font-size: 14px"><a href="{{ url('/') }} "
                     class="text-decoration-none text-dark text-muted">Home</a></span> <i class="fa fa-arrow-right text-muted"
@@ -29,14 +33,16 @@
                     @foreach ($paginatedResults as $search)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                             <a href="{{ url('media/' . $search->originalTitleText . '/' . $search->titleType) }}"><img
-                                data-src="{{ asset($search->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
-                                style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
-                            <a href="{{ url('media/' . $search->originalTitleText . '/' . $search->titleType) }}" class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $search->originalTitleText . ' ' . '(' . $search->releaseYear . ')' }}">
+                                    data-src="{{ asset($search->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                                    style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
+                            <a href="{{ url('media/' . $search->originalTitleText . '/' . $search->titleType) }}"
+                                class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                data-bs-title="{{ $search->originalTitleText . ' ' . '(' . $search->releaseYear . ')' }}">
 
                                 <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
                                     {{ $search->originalTitleText }}</h6>
                             </a>
-                            
+
                             @if ($search->genres == '0')
                                 <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
                                     N/A
@@ -55,6 +61,14 @@
                 @endunless
             @else
                 <p class="alert alert-danger">No results found for '{{ $searchWord }}'</p>
+
+                <script>
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "No result found",
+                    });
+                </script>
             @endif
 
             <div class="mt-3">

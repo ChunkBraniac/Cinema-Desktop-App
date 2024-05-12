@@ -26,9 +26,10 @@
                                 data-src="{{ asset($action->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
                                 style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
                         <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"
-                            class="text-decoration-none text-dark">
-                            <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
-                                {{ $action->originalTitleText }}</h6>
+                            class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')' }}">
+                            
+                            <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
+                                {{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')' }}</h6>
                         </a>
                         <h6 class="text-truncate" style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">
                             {{ $action->genres }}</h6>

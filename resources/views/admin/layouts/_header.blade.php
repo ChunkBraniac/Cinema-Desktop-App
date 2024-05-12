@@ -176,12 +176,12 @@
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="{{ url('#') }}"
                         data-bs-toggle="dropdown">
                         <img src="{{ url('assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2"></span>
+                        <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::guard('admin')->user()->admin_name }}</span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6></h6>
+                            <h6>{{ Auth::guard('admin')->user()->admin_name }}</h6>
                             <span>Web Developer</span>
                         </li>
                         <li>

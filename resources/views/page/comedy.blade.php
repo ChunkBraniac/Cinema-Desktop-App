@@ -24,8 +24,8 @@
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ url('media/' . $comedy->originalTitleText . '/' . $comedy->titleType) }}"><img data-src="{{ asset($comedy->imageUrl) }}"
                                 alt="" class="img-fluid" style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
-                        <a href="{{ url('media/' . $comedy->originalTitleText . '/' . $comedy->titleType) }}" class="text-decoration-none text-dark">
-                            <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">{{ $comedy->originalTitleText }}</h6>
+                        <a href="{{ url('media/' . $comedy->originalTitleText . '/' . $comedy->titleType) }}" class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $comedy->originalTitleText . ' ' . '(' . $comedy->releaseYear . ')' }}">
+                            <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">{{ $comedy->originalTitleText . ' ' . '(' . $comedy->releaseYear . ')' }}</h6>
                         </a>
                         <h6 class="text-truncate" style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">{{ $comedy->genres }}</h6>
                     </div>
