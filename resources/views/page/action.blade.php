@@ -39,7 +39,7 @@
         </div>
 
         <div class="mt-3">
-            {{ $paginatedResults->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
+            {{ $paginatedResults->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
         </div>
     </div>
 @endsection

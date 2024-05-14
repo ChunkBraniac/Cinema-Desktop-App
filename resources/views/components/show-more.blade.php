@@ -111,7 +111,7 @@
                 @endunless
             </div>
 
-            {{ $more_Series->appends(request()->query())->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
+            {{ $more_Series->appends(request()->query())->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
         @else
             {{ abort(404) }}
         @endif
