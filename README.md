@@ -80,7 +80,7 @@ We welcome contributions from the community to improve the Movie Website Project
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
-- The Movie Website Project utilizes Laravel, a PHP framework, for building web applications [laravel.com][php.net].
+- The Movie Website Project utilizes Laravel, a PHP framework, for building web applications `laravel.com`.`php.net`.
 - Bootstrap is used for the frontend design and layout [getboostrap.com].
 - JavaScript is used for client-side interactivity.
 
