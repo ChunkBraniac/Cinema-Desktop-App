@@ -85,4 +85,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - JavaScript is used for client-side interactivity.
 
 ## 📧 Contact
-For any inquiries or support, please contact [anthonyobah37@gmail.com](mailto:project@email.com).
+For any inquiries or support, please contact [anthonyobah37@gmail.com](mailto:anthonyobah37@email.com).
