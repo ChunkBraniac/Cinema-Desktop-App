@@ -41,5 +41,10 @@
         <div class="mt-3">
             {{ $paginatedResults->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
         </div>
+
+        @if (count($paginatedResults) == 0)
+            {{ abort(404) }}
+        @endif
     </div>
+    
 @endsection

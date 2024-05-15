@@ -12,7 +12,7 @@
         <div class="row">
             @unless (count($series_all) == 0)
                 @foreach ($series_all as $series)
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ url('media/' . $series->originalTitleText . '/' . $series->titleType) }}"><img
                                 data-src="{{ asset($series->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
                                 style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493);" loading="lazy" ></a>
@@ -52,7 +52,7 @@
         <div class="row">
             @unless (count($movies_all) == 0)
                 @foreach ($movies_all as $movies)
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ url('media/' . $movies->originalTitleText . '/' . $movies->titleType) }}"><img
                             data-src="{{ asset($movies->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
                             style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493);" loading="lazy"></a>

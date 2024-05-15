@@ -14,67 +14,77 @@
                     <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">{{ $item->originalTitleText }}</h3>
                     <div class="row">
                         <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
-                            <img
-                                data-src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                            <img data-src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
                                 style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy">
                         </div>
 
                         <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
                             <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
-                                <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3">
+                                <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3"
+                                    style="font-family: 'Ubuntu sans', sans-serif;">
                                     {{ $item->originalTitleText }}
                                 </h4>
                                 <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                     {{ isset($item->aggregateRating) ? $item->aggregateRating : 'N/A' }}</h6>
-                                <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">Release
+                                <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                    Release
                                     year:
                                     {{ $item->releaseYear }}</h6>
 
 
                                 @if ($item->genres == '0')
-                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                    <h6
+                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Genre:
                                         N/A
                                     </h6>
                                 @elseif ($item->genres == '')
-                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                    <h6
+                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Genre:
                                         N/A
                                     </h6>
                                 @else
-                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                    <h6
+                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Genre: {{ $item->genres }}
                                     </h6>
                                 @endif
 
                                 @if ($item->runtime == '0')
-                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                    <h6
+                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Runtime:
                                         N/A
                                     </h6>
                                 @elseif ($item->runtime == '')
-                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                    <h6
+                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Runtime:
                                         N/A
                                     </h6>
                                 @else
-                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                    <h6
+                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Runtime: {{ $item->runtime }}
                                     </h6>
                                 @endif
 
                                 @if ($item->country == '0')
-                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                    <h6
+                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Country:
                                         N/A
                                     </h6>
                                 @elseif ($item->country == '')
-                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                    <h6
+                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Country:
                                         N/A
                                     </h6>
                                 @else
-                                    <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                    <h6
+                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                         Country: {{ $item->country }}
                                     </h6>
                                 @endif
@@ -107,7 +117,7 @@
     <div class="container-xl">
         @if ($type == 'movie')
             <div class="m-auto text-center">
-                <a href="" class="btn btn-success btn-lg"
+                <a href="" class="btn btn-success btn-lg mr-3"
                     style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 13px; padding-bottom: 13px">Download
                     Video</a>
             </div>
@@ -124,12 +134,17 @@
                         @foreach ($merged as $more)
                             <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
                                 <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
-                                    data-src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
-                                    style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy"></a>
-                                    
+                                        data-src="{{ asset($more->imageUrl) }}" alt=""
+                                        class="img-fluid blurry-image lazy"
+                                        style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)"
+                                        loading="lazy"></a>
+
                                 <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }}"
                                     class="text-decoration-none text-dark">
-                                    <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $more->originalTitleText . ' ' . '(' . $more->releaseYear . ')' }}">
+                                    <h6 class="mt-1 text-truncate"
+                                        style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500"
+                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                        data-bs-title="{{ $more->originalTitleText . ' ' . '(' . $more->releaseYear . ')' }}">
                                         {{ $more->originalTitleText }}</h6>
                                 </a>
                             </div>
@@ -143,10 +158,12 @@
                                 <a
                                     href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }} "><img
                                         data-src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
-                                        style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy"></a>
+                                        style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)"
+                                        loading="lazy"></a>
                                 <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
                                     class="text-decoration-none text-dark">
-                                    <h6 class="mt-1" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">Season
+                                    <h6 class="mt-1" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
+                                        Season
                                         {{ $more->season_number }} Episode {{ $more->episode_number }}
                                     </h6>
                                 </a>
@@ -155,18 +172,41 @@
                     </div>
 
                     {{ $seasons->onEachSide(1)->links() }}
+
+                    @if (count($seasons) == 0)
+                        <p>No data for this title</p>
+                    @endif
                 @endif
 
+                <hr class="mt-4 mb-4">
+
                 <div class="mt-4">
-                    <h5 class="mb-4">Comment</h5>
+                    <h5 class="mb-3">Comment</h5>
                     @if (session('success'))
-                        <h6 class="alert alert-success" style="font-weight: normal; font-size: 15px;">{{ session('success') }}</h6>
+
+                        <script>
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: "success",
+                                title: "Comment added successfully"
+                            });
+                        </script>
                     @endif
 
                     @if (isset($comments) && count($comments) > 0)
                         <div class="container-xl">
                             @foreach ($comments as $comment)
-                                <div class="row mt-3 pt-3 pb-3"
+                                <div class="row mt-2 pt-3 pb-3"
                                     style="border-radius: 0px; background: #f9f9f9; border: 1px solid #ccc;">
                                     <div class="col-xl-2">
                                         <h5 style="font-size: 19px">

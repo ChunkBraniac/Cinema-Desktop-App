@@ -75,7 +75,11 @@
                 @endunless
             </div>
 
-            {{ $more_Movies->appends(request()->query())->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
+            {{ $more_Movies->appends(request()->query())->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
+
+            @if (count($more_Movies) == 0)
+                {{ abort(404) }}
+            @endif
 
 
         {{-- Series Pane --}}
@@ -112,8 +116,11 @@
             </div>
 
             {{ $more_Series->appends(request()->query())->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
-        @else
-            {{ abort(404) }}
+
+            @if (count($more_Series) == 0)
+                {{ abort(404) }}
+            @endif
+
         @endif
 
     </div>
