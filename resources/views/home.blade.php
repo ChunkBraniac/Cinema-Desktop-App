@@ -13,13 +13,14 @@
             <input type="search" class="form-control pt-2 pb-2" style="border-radius: 0px; box-shadow: none" placeholder="Enter keyword" name="search" @required(true)>
         </form>
 
+        {{-- SERIES PANE --}}
         <h4>Series</h4>
         <div class="row">
             @unless (count($series_all) == 0)
                 @foreach ($series_all as $series)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ url('media/' . $series->originalTitleText . '/' . $series->titleType) }}" class="text-decoration-none text-dark"><img
-                                data-src="{{ asset($series->imageUrl) }}" alt="{{ $series->originalTitleText . ' ' . '(' . $series->releaseYear . ')' }}" class="img-fluid blurry-image lazy"
+                                data-src="{{ asset($series->imageUrl) }}" alt="{{ str_replace('-', ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}" class="img-fluid blurry-image lazy"
                                 style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.315);" loading="lazy"></a>
                         <a href="{{ url('media/' . $series->originalTitleText . '/' . $series->titleType) }}"
                             class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ str_replace('-', ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}">
@@ -53,6 +54,8 @@
     <hr class="mt-5">
 
     <div class="container-md mt-5">
+
+        {{-- MOVIES PANE --}}
         <h4>Movies</h4>
         <div class="row">
             @unless (count($movies_all) == 0)
