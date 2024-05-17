@@ -121,9 +121,6 @@
                     style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 13px; padding-bottom: 13px">Download
                     Video</a>
             </div>
-        @elseif ($type == 'tvSeries')
-
-        @elseif ($type == 'tvMiniSeries')
         @endif
         <div class="row">
             <div class="col-xl-9 col-lg-8 mt-3">
@@ -144,8 +141,8 @@
                                     <h6 class="mt-1 text-truncate"
                                         style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500"
                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                        data-bs-title="{{ $more->originalTitleText . ' ' . '(' . $more->releaseYear . ')' }}">
-                                        {{ $more->originalTitleText }}</h6>
+                                        data-bs-title="{{ str_replace('-', ' ', $more->originalTitleText) . ' ' . '(' . $more->releaseYear . ')' }}">
+                                        {{ str_replace('-', ' ', $more->originalTitleText) }}</h6>
                                 </a>
                             </div>
                         @endforeach
@@ -327,7 +324,7 @@
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#{{ $recommended->id }}" aria-expanded="false"
                                         aria-controls="flush-collapseOne">
-                                        {{ $recommended->originalTitleText }}
+                                        {{ str_replace('-', ' ', $recommended->originalTitleText) }}
                                     </button>
                                 </h2>
 

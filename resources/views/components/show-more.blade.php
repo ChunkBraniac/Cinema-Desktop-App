@@ -6,7 +6,7 @@
 
 @if ($cartegory == 'series')
     @section('title')
-        All Series
+        TV Series
     @endsection
 @elseif ($cartegory == 'movies')
     @section('title')
@@ -54,8 +54,8 @@
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"
                                 class="text-decoration-none text-dark">
 
-                                <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')' }}">
-                                    {{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')'  }}</h6>
+                                <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ str_replace('-', ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}">
+                                    {{ str_replace('-', ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')'  }}</h6>
                             </a>
                             @if ($action->genres == 0)
                                 <h6 class="text-truncate"
@@ -94,8 +94,8 @@
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"
                                 class="text-decoration-none text-dark">
 
-                                <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')' }}">
-                                    {{ $action->originalTitleText . ' ' . '(' . $action->releaseYear . ')' }}</h6>
+                                <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ str_replace('-', ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}">
+                                    {{ str_replace('-', ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}</h6>
                             </a>
                             @if ($action->genres == 0)
                                 <h6 class="text-truncate"
