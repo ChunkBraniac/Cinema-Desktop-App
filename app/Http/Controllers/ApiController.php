@@ -82,6 +82,9 @@ class ApiController extends Controller
                                 $isAdult = isset($movie["title"]["isAdult"]) ? $movie["title"]["isAdult"] : 0;
                                 $isRatable = isset($movie['title']['canRateTitle']['isRatable']) ? $movie['title']['canRateTitle']['isRatable'] : 0;
                                 $originalTitleText = isset($movie['title']['originalTitleText']['text']) ? mysqli_real_escape_string($connection, $movie['title']['originalTitleText']['text']) : 'No name';
+                                // sanitizing the url
+                                $originalTitleText = str_replace(' ', '-', $originalTitleText);
+                                
                                 $primaryImage = isset($movie['title']['primaryImage']['imageUrl']) ? mysqli_real_escape_string($connection, $movie['title']['primaryImage']['imageUrl']) : 'No image url';
                                 $ratingsSummary = isset($movie['title']['ratingsSummary']['aggregateRating']) ? $movie['title']['ratingsSummary']['aggregateRating'] : 0;
                                 $titleType = isset($movie['title']['titleType']['id']) ? mysqli_real_escape_string($connection, $movie['title']['titleType']['id']) : 0;
@@ -203,6 +206,9 @@ class ApiController extends Controller
                                 $isAdult = isset($movie["title"]["isAdult"]) ? $movie["title"]["isAdult"] : 0;
                                 $isRatable = isset($movie['title']['canRateTitle']['isRatable']) ? $movie['title']['canRateTitle']['isRatable'] : 0;
                                 $originalTitleText = isset($movie['title']['originalTitleText']['text']) ? mysqli_real_escape_string($connection, $movie['title']['originalTitleText']['text']) : 'No name';
+
+                                // sanitizing the url
+                                $originalTitleText = str_replace(' ', '-', $originalTitleText);
                                 $primaryImage = isset($movie['title']['primaryImage']['imageUrl']) ? mysqli_real_escape_string($connection, $movie['title']['primaryImage']['imageUrl']) : 'No image url';
                                 $ratingsSummary = isset($movie['title']['ratingsSummary']['aggregateRating']) ? $movie['title']['ratingsSummary']['aggregateRating'] : 0;
                                 $titleType = isset($movie['title']['titleType']['id']) ? mysqli_real_escape_string($connection, $movie['title']['titleType']['id']) : 0;

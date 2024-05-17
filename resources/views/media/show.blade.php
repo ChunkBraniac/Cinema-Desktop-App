@@ -11,7 +11,7 @@
                         {{ $item->originalTitleText }}
                     @endsection
                     <!-- Iterate over each item in the collection -->
-                    <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">{{ $item->originalTitleText }}</h3>
+                    <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">{{ str_replace('-', ' ', $item->originalTitleText) }}</h3>
                     <div class="row">
                         <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
                             <img data-src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
@@ -22,7 +22,7 @@
                             <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
                                 <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3"
                                     style="font-family: 'Ubuntu sans', sans-serif;">
-                                    {{ $item->originalTitleText }}
+                                    {{ str_replace('-', ' ', $item->originalTitleText) }}
                                 </h4>
                                 <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                     {{ isset($item->aggregateRating) ? $item->aggregateRating : 'N/A' }}</h6>
@@ -100,7 +100,7 @@
                                 src="{{ $item->trailer ? 'https://www.youtube.com/embed/' . explode('?v=', $item->trailer)[1] : 'N/A' }}"
                                 title="YouTube video player" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen style="width: 100%; aspect-ratio: 3/2;">
+                                allowfullscreen style="width: 100%; aspect-ratio: 4/2.3;">
                             </iframe>
                         </div>
                     </div>

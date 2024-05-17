@@ -20,12 +20,12 @@
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ url('media/' . $series->originalTitleText . '/' . $series->titleType) }}" class="text-decoration-none text-dark"><img
                                 data-src="{{ asset($series->imageUrl) }}" alt="{{ $series->originalTitleText . ' ' . '(' . $series->releaseYear . ')' }}" class="img-fluid blurry-image lazy"
-                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493);" loading="lazy"></a>
+                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.315);" loading="lazy"></a>
                         <a href="{{ url('media/' . $series->originalTitleText . '/' . $series->titleType) }}"
-                            class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $series->originalTitleText . ' ' . '(' . $series->releaseYear . ')' }}">
+                            class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ str_replace('-', ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}">
 
                             <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
-                                {{ $series->originalTitleText . ' ' . '(' . $series->releaseYear . ')' }}</h6>
+                                {{ str_replace('-', ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}</h6>
                         </a>
                         @if ($series->genres == 0)
                             <h6 class="text-truncate"
@@ -58,14 +58,14 @@
             @unless (count($movies_all) == 0)
                 @foreach ($movies_all as $movies)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                        <a href="{{ url('media/' . $movies->originalTitleText . '/' . $movies->titleType) }}"><img
+                        <a href="{{ url('media/' . $movies->originalTitleText . '/' . $movies->titleType) }}" class="text-decoration-none text-dark"><img
                             data-src="{{ asset($movies->imageUrl) }}" alt="{{ $movies->originalTitleText . ' ' . '(' . $movies->releaseYear . ')' }}" class="img-fluid blurry-image lazy"
-                            style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493);" loading="lazy"></a>
+                            style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.315);" loading="lazy"></a>
                         <a href="{{ url('media/' . $movies->originalTitleText . '/' . $movies->titleType) }}"
-                            class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $movies->originalTitleText . ' ' . '(' . $movies->releaseYear . ')' }}">
+                            class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ str_replace('-', ' ', $movies->originalTitleText) . ' ' . '(' . $movies->releaseYear . ')' }}">
 
                             <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
-                                {{ $movies->originalTitleText . ' ' . '(' . $movies->releaseYear . ')' }}</h6>
+                                {{ str_replace('-', ' ', $movies->originalTitleText) . ' ' . '(' . $movies->releaseYear . ')' }}</h6>
                         </a>
                         @if ($movies->genres == 0)
                             <h6 class="text-truncate"
