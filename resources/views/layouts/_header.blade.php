@@ -52,7 +52,7 @@
                         </li>
                     </ul>
                     <form class="d-flex" role="search" action="{{ route('movie.search') }}" method="get">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search"
                             name="search" required style="border-radius: 0px; box-shadow: none">
                         <button class="btn btn-outline-primary" type="submit" style="border-radius: 0px;"><i
                                 class="fa fa-search" aria-hidden="true"></i></button>

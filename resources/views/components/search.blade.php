@@ -40,7 +40,7 @@
                                 data-bs-title="{{ $search->originalTitleText . ' ' . '(' . $search->releaseYear . ')' }}">
 
                                 <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
-                                    {{ $search->originalTitleText }}</h6>
+                                    {{ $search->originalTitleText . ' ' . '(' . $search->releaseYear . ')' }}</h6>
                             </a>
 
                             @if ($search->genres == '0')
@@ -72,7 +72,7 @@
             @endif
 
             <div class="mt-3">
-                {{ $paginatedResults->appends(request()->query())->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
+                {{ $paginatedResults->appends(request()->query())->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
             </div>
         </div>
 

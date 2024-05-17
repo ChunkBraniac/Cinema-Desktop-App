@@ -17,8 +17,8 @@ class MoviesController extends Controller
     //
     public function getAll()
     {
-        $series_all = Series::orderByDesc('releaseYear')->paginate(24);
-        $movies_all = Movies::orderByDesc('releaseYear')->paginate(24);
+        $series_all = Series::latest()->paginate(24);
+        $movies_all = Movies::latest()->paginate(24);
 
         return view('home', compact('series_all', 'movies_all'));
     }

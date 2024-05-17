@@ -71,7 +71,7 @@ class ApiController extends Controller
                             // if it is, break out of the loop
                             $fetch_movies = mysqli_query($connection, "SELECT * FROM series");
 
-                            if (mysqli_num_rows($fetch_movies) >= 200) {
+                            if (mysqli_num_rows($fetch_movies) >= 250) {
                                 exit;
                             }
 
@@ -95,13 +95,13 @@ class ApiController extends Controller
                                 $select_movies = mysqli_query($connection, "SELECT * FROM series");
 
                                 // Insert the movie into the database
-                                if (mysqli_num_rows($select_movies) < 200) {
+                                if (mysqli_num_rows($select_movies) < 250) {
 
                                     // check if the fetched movies is series
                                     if ($titleType == 'tvSeries' || $titleType == 'tvMiniSeries') {
 
                                         // if it is series, insert it into the series table
-                                        $insert = mysqli_query($connection, "INSERT INTO series (movieId, isAdult, isRatable, originalTitleText, imageUrl, aggregateRating, releaseYear, titleType, titleTypeText, isSeries, country, runtime, genres, tmdbId, trailer, plotText, created_at) VALUES ('$movie_id', '$isAdult', '$isRatable', '$originalTitleText', '$primaryImage', '$ratingsSummary', '$releaseYear', '$titleType', '$titleTypeText', '$isSeries', '0', '0', '0', '', '0', '', '$current_timestamp')");
+                                        $insert = mysqli_query($connection, "INSERT INTO series (movieId, isAdult, isRatable, originalTitleText, imageUrl, aggregateRating, releaseYear, titleType, titleTypeText, isSeries, country, runtime, genres, tmdbId, trailer, plotText, created_at) VALUES ('$movie_id', '$isAdult', '$isRatable', '$originalTitleText', '$primaryImage', '$ratingsSummary', '$releaseYear', 'series', '$titleTypeText', '$isSeries', '0', '0', '0', '', '0', '', '$current_timestamp')");
 
                                         if ($insert) {
                                             echo "Movie inserted successfully";
