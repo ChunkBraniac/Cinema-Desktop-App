@@ -10,21 +10,8 @@ use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\SeasonsController;
 
 Route::get('/', [PageController::class, 'home'])->name('home.page');
-Route::get('top10', [PageController::class, 'series']);
-
-Route::get('fetch', [ApiController::class, 'fetchMovies']);
 
 // page routes
-Route::get('action', [PageController::class, 'action']);
-Route::get('animation', [PageController::class, 'animation']);
-Route::get('comedy', [PageController::class, 'comedy']);
-Route::get('drama', [PageController::class, 'drama']);
-Route::get('horror', [PageController::class, 'horror']);
-Route::get('thriller', [PageController::class, 'thriller']);
-Route::get('scifi', [PageController::class, 'scifi']);
-Route::get('404', [PageController::class, 'error'])->name('error.404');
-
-
 Route::get('/', [MoviesController::class, 'getAll'])->name('movies.top10');
 Route::get('action', [MoviesController::class, 'getAction'])->name('movies.action');
 Route::get('animation', [MoviesController::class, 'getAnimation'])->name('movies.animation');
@@ -33,6 +20,9 @@ Route::get('drama', [MoviesController::class, 'getDrama'])->name('movies.drama')
 Route::get('horror', [MoviesController::class, 'getHorror'])->name('movies.horror');
 Route::get('thriller', [MoviesController::class, 'getThriller'])->name('movies.thriller');
 Route::get('scifi', [MoviesController::class, 'getScifi'])->name('movies.scifi');
+
+// 404 page
+Route::get('404', [PageController::class, 'error'])->name('error.404');
 
 Route::group(['middleware' => 'xframe'], function() {
     Route::get('/media/{name}/{type}', [MoviesController::class, 'show'])->name('media.show');

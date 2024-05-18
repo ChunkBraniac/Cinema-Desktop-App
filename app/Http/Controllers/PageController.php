@@ -12,11 +12,6 @@ class PageController extends Controller
         return view('home');
     }
 
-    public static function series()
-    {
-        return view('top10.series');
-    }
-
     public static function action()
     {
         return view('page.action');
