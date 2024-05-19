@@ -26,7 +26,7 @@
                                     aria-hidden="true" style="font-size: 12px"></i></a>
                             <div class="dropdown-menu bg-dark mt-0 mt-xl-3 m-lg-auto justify-content-center position-absolute text-left text-xl-left"
                                 aria-labelledby="dropdownId"
-                                style="border-radius: 0px; font-size: 16px; margin-top: 10px">
+                                style="border-radius: 0px; font-size: 16px; margin-top: 10px; border-top: transparent">
                                 <a class="dropdown-item text-light"m id="hover"
                                     href="{{ url('action') }}">Action</a>
                                 <a class="dropdown-item text-light"m id="hover"

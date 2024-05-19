@@ -84,7 +84,7 @@ class ApiController extends Controller
                                 $originalTitleText = isset($movie['title']['originalTitleText']['text']) ? mysqli_real_escape_string($connection, $movie['title']['originalTitleText']['text']) : 'No name';
                                 // sanitizing the url
                                 $originalTitleText = str_replace(' ', '-', $originalTitleText);
-                                
+
                                 $primaryImage = isset($movie['title']['primaryImage']['imageUrl']) ? mysqli_real_escape_string($connection, $movie['title']['primaryImage']['imageUrl']) : 'No image url';
                                 $ratingsSummary = isset($movie['title']['ratingsSummary']['aggregateRating']) ? $movie['title']['ratingsSummary']['aggregateRating'] : 0;
                                 $titleType = isset($movie['title']['titleType']['id']) ? mysqli_real_escape_string($connection, $movie['title']['titleType']['id']) : 0;
@@ -476,7 +476,7 @@ class ApiController extends Controller
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => [
                         "X-RapidAPI-Host: imdb146.p.rapidapi.com",
-                        "X-RapidAPI-Key: 85391acd3cmsh02760f9d15463d2p145d38jsn69e076280407"
+                        "X-RapidAPI-Key: 9ee9e0beddmsh5fbc336f49f77d4p1132ebjsnf695e8172456"
                     ],
                 ]);
 
@@ -525,7 +525,7 @@ class ApiController extends Controller
         }
 
         // fetch the movies to find description
-        $fetchStreaming = mysqli_query($connection, "SELECT * FROM movies WHERE plotText = '0'");
+        $fetchStreaming = mysqli_query($connection, "SELECT * FROM movies WHERE plotText = '' OR plotText = '0'");
 
         if (mysqli_num_rows($fetchStreaming) > 0) {
             while ($stream = mysqli_fetch_assoc($fetchStreaming)) {
@@ -544,7 +544,7 @@ class ApiController extends Controller
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => [
                         "X-RapidAPI-Host: imdb146.p.rapidapi.com",
-                        "X-RapidAPI-Key: 67aceb234fmshffdfd7d36c364c5p167eb3jsn92249749c17f"
+                        "X-RapidAPI-Key: 9ee9e0beddmsh5fbc336f49f77d4p1132ebjsnf695e8172456"
                     ],
                 ]);
 
@@ -1239,11 +1239,10 @@ class ApiController extends Controller
                                     } else {
                                         echo "Failed to add movie";
                                     }
-                                }
-                                else {
+                                } else {
                                     echo "type is not movie";
                                 }
-                            } else{
+                            } else {
                                 echo "movie limit reached";
                             }
                         }
@@ -1256,6 +1255,101 @@ class ApiController extends Controller
             }
         } else {
             var_dump($data);
+        }
+    }
+
+    public function updateRuntime()
+    {
+        $dbhost = "127.0.0.1";
+        $dbus = "root";
+        $dbpass = '';
+        $dbname = 'cinema';
+
+        $connection = mysqli_connect($dbhost, $dbus, $dbpass, $dbname);
+
+        if (!$connection) {
+            die('Failed to connect' . mysqli_connect_error());
+        } else {
+            mysqli_error($connection);
+        }
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://mdblist.p.rapidapi.com/?i=tt0073195",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                    "X-RapidAPI-Host: mdblist.p.rapidapi.com",
+                    "X-RapidAPI-Key: 9ee9e0beddmsh5fbc336f49f77d4p1132ebjsnf695e8172456"
+                ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            return redirect()->route('admin.dashboard')->with('error', 'Failed to fetch movies: ' . $err);
+        }
+
+        $data = json_decode($response, true);
+
+        // fetch the movies to find description
+        $fetchStreaming = mysqli_query($connection, "SELECT * FROM series WHERE runtime = '0'");
+
+        if (mysqli_num_rows($fetchStreaming) > 0) {
+            while ($stream = mysqli_fetch_assoc($fetchStreaming)) {
+                $id = $stream['movieId'];
+                $streamId = $stream['id'];
+
+                $curl = curl_init();
+
+                curl_setopt_array($curl, [
+                    CURLOPT_URL => "https://imdb146.p.rapidapi.com/v1/title/?id={$id}",
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => "",
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_HTTPHEADER => [
+                        "X-RapidAPI-Host: imdb146.p.rapidapi.com",
+                        "X-RapidAPI-Key: 9ee9e0beddmsh5fbc336f49f77d4p1132ebjsnf695e8172456"
+                    ],
+                ]);
+
+                $response = curl_exec($curl);
+                $err = curl_error($curl);
+
+                if ($err) {
+                    return redirect()->route('admin.dashboard')->with('error', 'Failed to fetch movies: ' . $err);
+                }
+
+                curl_close($curl);
+
+                $data = json_decode($response, true);
+
+                foreach ($data as $item) {
+                    $runtime = isset($item['runtime']) ? mysqli_real_escape_string($connection, $item['runtime']) : 0;
+
+                    // update the description
+                    $updateDescription = mysqli_query($connection, "UPDATE series SET runtime = '$runtime' WHERE id = '$streamId'");
+
+                    if ($updateDescription) {
+                        echo "Runtime updated successfully" . "<br>";
+                    } else {
+                        echo "Runtime not updated" . "<br>";
+                    }
+                }
+            }
+        } else {
+            return redirect()->route('admin.dashboard')->with('error', 'No empty runtime field found');
         }
     }
 }

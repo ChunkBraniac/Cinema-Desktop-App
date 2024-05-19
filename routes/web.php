@@ -62,6 +62,7 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('admin/series/tmdb', [ApiController::class, 'getTmdbIdSeries'])->name('series.tmdb');
     Route::get('admin/series/seasons', [ApiController::class, 'getSeasons'])->name('series.seasons');
     Route::get('admin/series/seasons2', [ApiController::class, 'getSeriesSeasons'])->name('series.seasons.2');
+    Route::get('admin/runtime', [ApiController::class, 'updateRuntime'])->name('update.runtime');
 
     Route::post('admin/reset', [AdminController::class, 'reset'])->name('admin.reset');
 
