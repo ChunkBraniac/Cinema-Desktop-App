@@ -42,7 +42,7 @@ class ApiController extends Controller
                 CURLOPT_CUSTOMREQUEST => "GET",
                 CURLOPT_HTTPHEADER => [
                     "X-RapidAPI-Host: imdb188.p.rapidapi.com",
-                    "X-RapidAPI-Key: 67aceb234fmshffdfd7d36c364c5p167eb3jsn92249749c17f"
+                    "X-RapidAPI-Key: 5ef0b6f66cmsh532d0eff9a9b4c4p198ce9jsne03904e61220"
                 ],
             ]);
 
@@ -1273,33 +1273,6 @@ class ApiController extends Controller
             mysqli_error($connection);
         }
 
-        $curl = curl_init();
-
-        curl_setopt_array($curl, [
-            CURLOPT_URL => "https://mdblist.p.rapidapi.com/?i=tt0073195",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => [
-                    "X-RapidAPI-Host: mdblist.p.rapidapi.com",
-                    "X-RapidAPI-Key: 9ee9e0beddmsh5fbc336f49f77d4p1132ebjsnf695e8172456"
-                ],
-        ]);
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        if ($err) {
-            return redirect()->route('admin.dashboard')->with('error', 'Failed to fetch movies: ' . $err);
-        }
-
-        $data = json_decode($response, true);
-
         // fetch the movies to find description
         $fetchStreaming = mysqli_query($connection, "SELECT * FROM series WHERE runtime = '0'");
 
@@ -1320,7 +1293,7 @@ class ApiController extends Controller
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => [
                         "X-RapidAPI-Host: imdb146.p.rapidapi.com",
-                        "X-RapidAPI-Key: 9ee9e0beddmsh5fbc336f49f77d4p1132ebjsnf695e8172456"
+                        "X-RapidAPI-Key: 5ef0b6f66cmsh532d0eff9a9b4c4p198ce9jsne03904e61220"
                     ],
                 ]);
 
@@ -1335,17 +1308,18 @@ class ApiController extends Controller
 
                 $data = json_decode($response, true);
 
-                foreach ($data as $item) {
-                    $runtime = isset($item['runtime']) ? mysqli_real_escape_string($connection, $item['runtime']) : 0;
+                $new_runtime = isset($data['runtime']['seconds']) ? $data['runtime']['seconds'] : 0;
 
-                    // update the description
-                    $updateDescription = mysqli_query($connection, "UPDATE series SET runtime = '$runtime' WHERE id = '$streamId'");
+                $hours = floor($new_runtime / 3600);
+                $minutes = floor(($new_runtime / 60) % 60);
+                
+                $runtime = $hours . ' hours ' . $minutes . ' minutes';
 
-                    if ($updateDescription) {
-                        echo "Runtime updated successfully" . "<br>";
-                    } else {
-                        echo "Runtime not updated" . "<br>";
-                    }
+                // update the runtime in database
+                $update_runtime = mysqli_query($connection, "UPDATE series SET runtime = '$runtime' WHERE id = '$streamId'");
+
+                if ($update_runtime) {
+                    echo "Movie runtime updated";
                 }
             }
         } else {

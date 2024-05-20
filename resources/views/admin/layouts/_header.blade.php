@@ -326,6 +326,11 @@
                             <i class="bi bi-circle"></i><span>Get Series Seasons 2</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="runtime">
+                            <i class="bi bi-circle"></i><span>Update runtime</span>
+                        </a>
+                    </li>
                 </ul>
             </li><!-- End Components Nav -->
 
