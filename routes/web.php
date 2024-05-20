@@ -68,9 +68,15 @@ Route::group(['middleware' => 'admin'], function() {
 
     // popular movies
     Route::get('admin/popular', [ApiController::class, 'popularMovies'])->name('fetch.popular');
+
+    // another api version
+    
 });
 
 // Download page
 Route::get('download/{name}/season/{season}/episode/{episode}', [SeasonsController::class, 'download'])->name('download');
 
 Route::get('show-more', [MoviesController::class, 'showMore'])->name('moremovies');
+
+Route::get('get', [ApiController::class, 'fetchSeries'])->name('series.api');
+Route::get('movie', [ApiController::class, 'fetchMovies'])->name('series.api');

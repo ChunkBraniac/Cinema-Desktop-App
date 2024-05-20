@@ -13,22 +13,25 @@ return new class extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
+            // $table->string('tmdbId');
             $table->string('movieId');
             $table->string('isAdult');
-            $table->string('isRatable');
+            // $table->string('isRatable');
             $table->string('originalTitleText');
             $table->string('imageUrl');
-            $table->string('aggregateRating');
-            $table->string('releaseYear');
-            $table->string('titleType');
-            $table->string('titleTypeText');
-            $table->string('isSeries');
+            $table->string('backdrop_path');
             $table->string('country');
+            $table->string('language');
+            $table->longText('plotText');
+            $table->string('releaseDate');
+            $table->string('releaseYear');
+            $table->string('aggregateRating');
+            $table->string('titleType');
+            // $table->string('titleTypeText');
+            // $table->string('isSeries');
             $table->string('runtime');
             $table->string('genres');
-            $table->string('tmdbId');
             $table->string('trailer');
-            $table->longText('plotText');
             $table->timestamps();
         });
     }
