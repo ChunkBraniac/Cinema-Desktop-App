@@ -11,7 +11,8 @@
                         {{ $item->originalTitleText }}
                     @endsection
                     <!-- Iterate over each item in the collection -->
-                    <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">{{ str_replace('-', ' ', $item->originalTitleText) }}</h3>
+                    <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">
+                        {{ str_replace('-', ' ', $item->originalTitleText) }}</h3>
                     <div class="row">
                         <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
                             <img data-src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
@@ -25,6 +26,8 @@
                                     {{ str_replace('-', ' ', $item->originalTitleText) }}
                                 </h4>
                                 <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                    <i class="fa fa-star" aria-hidden="true" style="font-size: 11px"></i>
+
                                     {{ isset($item->aggregateRating) ? $item->aggregateRating : 'N/A' }}</h6>
                                 <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                     Release
@@ -90,7 +93,28 @@
                                 @endif
 
                                 <div class="mt-3">
-                                    {{ $item->plotText ? $item->plotText : 'N/A' }}
+                                    {{-- {{ $item->plotText ? $item->plotText : 'N/A' }} --}}
+
+
+                                    @if (strlen($item->plotText) > 352)
+                                        {{ substr($item->plotText, 0, 352) }}
+
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="">
+                                                {{ substr($item->plotText, 352) }}
+                                            </div>
+                                        </div>
+                                        <br>
+
+                                        <div class="text-center">
+                                            <a class="" data-bs-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                <i class="fa fa-ellipsis-h" aria-hidden="true" style="font-size: 20px;"></i>
+                                            </a>
+                                        </div>
+                                    @else
+                                        {{ $item->plotText ? $item->plotText : 'N/A' }}
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
@@ -117,9 +141,9 @@
     <div class="container-xl">
         @if ($type == 'movie')
             <div class="m-auto text-center">
-                <a href="" class="btn btn-success btn-lg mr-3"
-                    style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 13px; padding-bottom: 13px">Download
-                    Video</a>
+                <a href="" class="btn btn-success btn-md mr-3"
+                    style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 12px; padding-bottom: 12px">Download
+                    Video <i class="fa fa-download" aria-hidden="true"></i></a>
             </div>
         @endif
         <div class="row">
@@ -180,7 +204,6 @@
                 <div class="mt-4">
                     <h5 class="mb-3">Comment</h5>
                     @if (session('success'))
-
                         <script>
                             const Toast = Swal.mixin({
                                 toast: true,
@@ -332,7 +355,8 @@
                                     data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body" style="font-size: 15px">{{ $recommended->plotText }} <a
                                             href="{{ url('media/' . $recommended->originalTitleText . '/' . $recommended->titleType) }} ">More
-                                            Details</a></div>
+                                            Details</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

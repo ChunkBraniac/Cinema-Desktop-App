@@ -226,7 +226,7 @@ class MoviesController extends Controller
 
             $recom = $recommend->union($recommend2);
 
-            Cache::put($cache, $recom, 60);
+            Cache::put($cache, $recom, 360);
 
         }
 
