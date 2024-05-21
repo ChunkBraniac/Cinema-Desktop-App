@@ -76,9 +76,9 @@
             <div class="mt-3">
                 {{ $paginatedResults->appends(request()->query())->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
 
-                @if (count($paginatedResults) == 0)
+                {{-- @if (count($paginatedResults) == 0)
                     {{ abort(404) }}
-                @endif
+                @endif --}}
             </div>
         </div>
 

@@ -24,7 +24,7 @@ Route::get('scifi', [MoviesController::class, 'getScifi'])->name('movies.scifi')
 // 404 page
 Route::get('404', [PageController::class, 'error'])->name('error.404');
 
-Route::group(['middleware' => 'xframe'], function() {
+Route::group(['middleware' => 'xframe'], function () {
     Route::get('/media/{name}/{type}', [MoviesController::class, 'show'])->name('media.show');
 });
 
@@ -39,38 +39,35 @@ Route::post('admin/register', [AdminController::class, 'register'])->name('regis
 Route::get('admin', [AdminController::class, 'loginPage'])->name('admin.home.login');
 Route::post('admin', [AdminController::class, 'login'])->name('admin.login');
 
-Route::group(['middleware' => 'admin'], function() {
+Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::get('logout', [AdminController::class, 'logout'])->name('admin.logout');
-    Route::get('admin/movies', [AdminController::class, 'showMovies'])->name('admin.movies');
     Route::get('admin/movies', [AdminController::class, 'movies'])->name('admin.all');
     Route::get('admin/comments', [AdminController::class, 'displayComments'])->name('admin.comments');
 
     // route to fetch the movies and series and other settings
-    Route::get('admin/series', [ApiController::class, 'fetchSeries'])->name('fetch.series');
-    Route::get('admin/fetch', [ApiController::class, 'fetchMovies'])->name('fetch.movies');
-    Route::get('admin/update', [ApiController::class, 'updateSeriesType'])->name('update.series');
-    Route::get('admin/series/genre', [ApiController::class, 'updateSeriesGenre'])->name('update.series.genre');
-    Route::get('admin/movies/genre', [ApiController::class, 'updateMoviesGenre'])->name('update.movies.genre');
-    Route::get('admin/series/genre2', [ApiController::class, 'updateSeriesGenre2'])->name('update.series.genre');
-    Route::get('admin/movies/genre2', [ApiController::class, 'updateMoviesGenre2'])->name('update.movies.genre');
-    Route::get('admin/series/description', [ApiController::class, 'updateSeriesDescription'])->name('series.description');
-    Route::get('admin/movies/description', [ApiController::class, 'updateMoviesDescription'])->name('movies.description');
+    Route::get('admin/series/v1', [ApiController::class, 'seriesV1'])->name('seriesV1.api');
+    Route::get('admin/series/v2', [ApiController::class, 'seriesV2'])->name('seriesV2.api');
+    Route::get('admin/series/v3', [ApiController::class, 'seriesV3'])->name('seriesV3.api');
+
+    // route to fetch the movies
+    Route::get('admin/movies/v1', [ApiController::class, 'moviesV1'])->name('moviesV1.api');
+    Route::get('admin/movies/v2', [ApiController::class, 'moviesV2'])->name('moviesV2.api');
+    Route::get('admin/movies/v3', [ApiController::class, 'moviesV3'])->name('moviesV3.api');
+
+    // update the movies and series
+    Route::get('admin/update/movies', [ApiController::class, 'updateMoviesInfo'])->name('moviesUpdate.api');
+    Route::get('admin/update/series', [ApiController::class, 'updateSeriesInfo'])->name('seriesUpdate.api');
+
+    // update the trailer
     Route::get('admin/series/trailer', [ApiController::class, 'updateSeriesTrailer'])->name('series.trailer');
     Route::get('admin/movies/trailer', [ApiController::class, 'updateMoviesTrailer'])->name('movies.trailer');
-    Route::get('admin/series/tmdb', [ApiController::class, 'getTmdbIdSeries'])->name('series.tmdb');
-    Route::get('admin/series/seasons', [ApiController::class, 'getSeasons'])->name('series.seasons');
-    Route::get('admin/series/seasons2', [ApiController::class, 'getSeriesSeasons'])->name('series.seasons.2');
-    Route::get('admin/runtime', [ApiController::class, 'updateRuntime'])->name('update.runtime');
 
     Route::post('admin/reset', [AdminController::class, 'reset'])->name('admin.reset');
 
     // popular movies
     Route::get('admin/popular', [ApiController::class, 'popularMovies'])->name('fetch.popular');
-
-    // another api version
-    
 });
 
 // Download page
@@ -78,10 +75,3 @@ Route::get('download/{name}/season/{season}/episode/{episode}', [SeasonsControll
 
 Route::get('show-more', [MoviesController::class, 'showMore'])->name('moremovies');
 
-Route::get('get', [ApiController::class, 'seriesV1'])->name('series.api');
-Route::get('movie', [ApiController::class, 'moviesV1'])->name('series.api');
-Route::get('movie2', [ApiController::class, 'moviesV2'])->name('series.api');
-Route::get('series', [ApiController::class, 'seriesV2'])->name('series.api');
-Route::get('series2', [ApiController::class, 'seriesV3'])->name('series.api');
-// Route::get('update', [ApiController::class, 'updateMoviesInfo'])->name('update.api');
-Route::get('update', [ApiController::class, 'updateSeriesInfo'])->name('update.api');

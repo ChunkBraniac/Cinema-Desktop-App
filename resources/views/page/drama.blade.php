@@ -26,10 +26,10 @@
                                 data-src="{{ asset($drama->imageUrl) }}" alt="" class="img-fluid"
                                 style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
                         <a href="{{ url('media/' . $drama->originalTitleText . '/' . $drama->titleType) }}"
-                            class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $drama->originalTitleText . ' ' . '(' . $drama->releaseYear . ')' }}">
+                            class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ str_replace('-', ' ', $drama->originalTitleText) . ' ' . '(' . $drama->releaseYear . ')' }}">
 
                             <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
-                                {{ $drama->originalTitleText . ' ' . '(' . $drama->releaseYear . ')' }}</h6>
+                                {{ str_replace('-', ' ', $drama->originalTitleText) . ' ' . '(' . $drama->releaseYear . ')' }}</h6>
                         </a>
                         <h6 class="text-truncate" style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">
                             {{ $drama->genres }}</h6>

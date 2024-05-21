@@ -252,83 +252,60 @@
                 </a>
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="movies">
-                            <i class="bi bi-circle"></i><span>Movies</span>
+                        <a href="{{ route('admin.all') }}">
+                            <i class="bi bi-circle"></i><span>Movies & Series</span>
                         </a>
                     </li>
                     <li>
-                        <a href="series">
-                            <i class="bi bi-circle"></i><span>Fetch Series</span>
+                    <li>
+                        <a href="{{ route('seriesV1.api') }}">
+                            <i class="bi bi-circle"></i><span>Series V1</span>
                         </a>
                     </li>
                     <li>
-                        <a href="fetch">
-                            <i class="bi bi-circle"></i><span>Fetch Movies</span>
+                        <a href="{{ route('seriesV2.api') }}">
+                            <i class="bi bi-circle"></i><span>Series V2</span>
                         </a>
                     </li>
                     <li>
-                        <a href="update">
-                            <i class="bi bi-circle"></i><span>Update Series Type</span>
+                        <a href="{{ route('seriesV3.api') }}">
+                            <i class="bi bi-circle"></i><span>Series V3</span>
                         </a>
                     </li>
                     <li>
-                        <a href="series/description">
-                            <i class="bi bi-circle"></i><span>Update Series Description</span>
+                        <a href="{{ route('moviesV1.api') }}">
+                            <i class="bi bi-circle"></i><span>Movies V1</span>
                         </a>
                     </li>
                     <li>
-                        <a href="movies/description">
-                            <i class="bi bi-circle"></i><span>Update Movies Description</span>
+                        <a href="{{ route('moviesV2.api') }}">
+                            <i class="bi bi-circle"></i><span>Movies V2</span>
                         </a>
                     </li>
                     <li>
-                        <a href="movies/genre">
-                            <i class="bi bi-circle"></i><span>Update Movies Genre</span>
+                        <a href="{{ route('moviesV3.api') }}">
+                            <i class="bi bi-circle"></i><span>Movies V3</span>
                         </a>
                     </li>
                     <li>
-                        <a href="series/genre">
-                            <i class="bi bi-circle"></i><span>Update Series Genre</span>
+                        <a href="{{ route('seriesUpdate.api') }}">
+                            <i class="bi bi-circle"></i><span>Update Series Info</span>
                         </a>
                     </li>
                     <li>
-                        <a href="series/genre2">
-                            <i class="bi bi-circle"></i><span>Update 2nd Series Genre</span>
+                        <a href="{{ route('moviesUpdate.api') }}">
+                            <i class="bi bi-circle"></i><span>Update Movies Info</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('series.trailer') }}">
+                            <i class="bi bi-circle"></i><span>Update Series Trailer</span>
                         </a>
                     </li>
                     <li>
-                        <a href="movies/genre2">
-                            <i class="bi bi-circle"></i><span>Update 2nd Movies Genre</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="series/trailer">
-                            <i class="bi bi-circle"></i><span>Fetch Series Trailer</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="movies/trailer">
-                            <i class="bi bi-circle"></i><span>Fetch Movies Trailer</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="series/tmdb">
-                            <i class="bi bi-circle"></i><span>Fetch Series TMDB ID</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="series/seasons">
-                            <i class="bi bi-circle"></i><span>Get Series Seasons</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="series/seasons2">
-                            <i class="bi bi-circle"></i><span>Get Series Seasons 2</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="runtime">
-                            <i class="bi bi-circle"></i><span>Update runtime</span>
+                        <a href="{{ route('movies.trailer') }}">
+                            <i class="bi bi-circle"></i><span>Update Movies Trailer</span>
                         </a>
                     </li>
                 </ul>
