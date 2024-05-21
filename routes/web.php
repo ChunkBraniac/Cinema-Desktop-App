@@ -78,5 +78,10 @@ Route::get('download/{name}/season/{season}/episode/{episode}', [SeasonsControll
 
 Route::get('show-more', [MoviesController::class, 'showMore'])->name('moremovies');
 
-Route::get('get', [ApiController::class, 'fetchSeries'])->name('series.api');
-Route::get('movie', [ApiController::class, 'fetchMovies'])->name('series.api');
+Route::get('get', [ApiController::class, 'seriesV1'])->name('series.api');
+Route::get('movie', [ApiController::class, 'moviesV1'])->name('series.api');
+Route::get('movie2', [ApiController::class, 'moviesV2'])->name('series.api');
+Route::get('series', [ApiController::class, 'seriesV2'])->name('series.api');
+Route::get('series2', [ApiController::class, 'seriesV3'])->name('series.api');
+// Route::get('update', [ApiController::class, 'updateMoviesInfo'])->name('update.api');
+Route::get('update', [ApiController::class, 'updateSeriesInfo'])->name('update.api');
