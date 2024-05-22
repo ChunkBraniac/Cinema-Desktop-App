@@ -32,9 +32,19 @@ class PageController extends Controller
         return view('page.drama');
     }
 
+    public static function fantasy()
+    {
+        return view('page.fantasy');
+    }
+
     public static function horror()
     {
         return view('page.horror');
+    }
+
+    public function mystery()
+    {
+        return view('page.mystery');
     }
 
     public static function thriller()

@@ -300,12 +300,17 @@
 
                     <li>
                         <a href="{{ route('series.trailer') }}">
-                            <i class="bi bi-circle"></i><span>Update Series Trailer</span>
+                            <i class="bi bi-circle"></i><span>Get Series Trailer</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('movies.trailer') }}">
-                            <i class="bi bi-circle"></i><span>Update Movies Trailer</span>
+                            <i class="bi bi-circle"></i><span>Get Movies Trailer</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.seasons') }}">
+                            <i class="bi bi-circle"></i><span>Get Seasons</span>
                         </a>
                     </li>
                 </ul>

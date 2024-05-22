@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Animation
+    Animation & Anime
 @endsection
 
 @section('content')

@@ -139,7 +139,7 @@
     </div>
 
     <div class="container-xl">
-        @if ($type == 'movie')
+        @if ($item->titleType == 'movie')
             <div class="m-auto text-center">
                 <a href="" class="btn btn-success btn-md mr-3"
                     style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 12px; padding-bottom: 12px">Download
@@ -148,7 +148,7 @@
         @endif
         <div class="row">
             <div class="col-xl-9 col-lg-8 mt-3">
-                @if ($type == 'movie')
+                @if ($item->titleType  == 'movie')
                     <h4>You may also like: </h4>
                     <div class="row">
 
@@ -171,7 +171,7 @@
                             </div>
                         @endforeach
                     </div>
-                @elseif ($type == 'series')
+                @elseif ($item->titleType == 'series')
                     <div class="row mb-3">
 
                         @foreach ($seasons as $more)

@@ -49,7 +49,7 @@
                     @foreach ($more_Series as $action)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}" class="text-decoration-none text-dark"><img
-                                    data-src="{{ asset($action->imageUrl) }}" alt="{{ str_replace('-', ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}" class="img-fluid blurry-image lazy"
+                                data-src="{{ $action->imageUrl ? asset($action->imageUrl) : asset('images/no-image.jpg') }}" alt="{{ str_replace('-', ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}" class="img-fluid blurry-image lazy"
                                     style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493);"
                                     loading="lazy"></a>
                             <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"

@@ -30,12 +30,14 @@
                                 <a class="dropdown-item text-light"m id="hover"
                                     href="{{ url('action') }}">Action</a>
                                 <a class="dropdown-item text-light"m id="hover"
-                                    href="{{ url('animation') }}">Animation</a>
+                                    href="{{ url('animation') }}">Animation & Anime</a>
                                 <a class="dropdown-item text-light"m id="hover"
                                     href="{{ url('comedy') }}">Comedy</a>
                                 <a class="dropdown-item text-light"m id="hover" href="{{ url('drama') }}">Drama</a>
+                                <a class="dropdown-item text-light"m id="hover" href="{{ url('fantasy') }}">Fantasy</a>
                                 <a class="dropdown-item text-light"m id="hover"
                                     href="{{ url('horror') }}">Horror</a>
+                                <a class="dropdown-item text-light"m id="hover" href="{{ url('mystery') }}">Mystery</a>
                                 <a class="dropdown-item text-light"m id="hover"
                                     href="{{ url('thriller') }}">Thriller</a>
                                 <a class="dropdown-item text-light"m id="hover"

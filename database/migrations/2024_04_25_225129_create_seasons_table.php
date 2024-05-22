@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('movieType');
             $table->string('season_number');
             $table->string('episode_number');
-            $table->string('episode_title');
             $table->string('air_date');
             $table->string('imageUrl');
             $table->timestamps();

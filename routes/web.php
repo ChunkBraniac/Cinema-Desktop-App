@@ -17,8 +17,10 @@ Route::get('action', [MoviesController::class, 'getAction'])->name('movies.actio
 Route::get('animation', [MoviesController::class, 'getAnimation'])->name('movies.animation');
 Route::get('comedy', [MoviesController::class, 'getComedy'])->name('movies.comedy');
 Route::get('drama', [MoviesController::class, 'getDrama'])->name('movies.drama');
+Route::get('fantasy', [MoviesController::class, 'getFantasy'])->name('movies.fantasy');
 Route::get('horror', [MoviesController::class, 'getHorror'])->name('movies.horror');
 Route::get('thriller', [MoviesController::class, 'getThriller'])->name('movies.thriller');
+Route::get('mystery', [MoviesController::class, 'getMystery'])->name('movies.mystery');
 Route::get('scifi', [MoviesController::class, 'getScifi'])->name('movies.scifi');
 
 // 404 page
@@ -66,8 +68,8 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::post('admin/reset', [AdminController::class, 'reset'])->name('admin.reset');
 
-    // popular movies
-    Route::get('admin/popular', [ApiController::class, 'popularMovies'])->name('fetch.popular');
+    // get seasons
+    Route::get('admin/seasons', [ApiController::class, 'getSeasons'])->name('admin.seasons');
 });
 
 // Download page

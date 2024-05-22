@@ -26,14 +26,14 @@ class MoviesController extends Controller
     public static function getAction()
     {
         // Perform your query for each set of movies
-        $actionMoviesSeries = Series::where('genres', 'like', '%Action%')->get();
+        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Action%')->get();
         $actionMovies = Movies::where('genres', 'like', '%Action%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
 
         // Sort the merged collection
-        $allActionMovies = $allActionMovies->sortByDesc('id');
+        $allActionMovies = $allActionMovies->sortByDesc('releaseYear');
 
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
@@ -53,14 +53,14 @@ class MoviesController extends Controller
     public static function getAnimation()
     {
 
-        $actionMoviesSeries = Series::where('genres', 'like', '%Animation%')->get();
-        $actionMovies = Movies::where('genres', 'like', '%Animation%')->get();
+        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Animation%')->get();
+        $actionMovies = Movies::latest()->where('genres', 'like', '%Animation%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
 
         // Sort the merged collection
-        $allActionMovies = $allActionMovies->sortByDesc('id');
+        $allActionMovies = $allActionMovies->sortByDesc('releaseYear');
 
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
@@ -80,14 +80,14 @@ class MoviesController extends Controller
     public static function getComedy()
     {
 
-        $actionMoviesSeries = Series::where('genres', 'like', '%Comedy%')->get();
-        $actionMovies = Movies::where('genres', 'like', '%Comedy%')->get();
+        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Comedy%')->get();
+        $actionMovies = Movies::latest()->where('genres', 'like', '%Comedy%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
 
         // Sort the merged collection
-        $allActionMovies = $allActionMovies->sortByDesc('id');
+        $allActionMovies = $allActionMovies->sortByDesc('releaseYear');
 
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
@@ -107,14 +107,14 @@ class MoviesController extends Controller
     public static function getDrama()
     {
 
-        $actionMoviesSeries = Series::where('genres', 'like', '%Drama%')->get();
-        $actionMovies = Movies::where('genres', 'like', '%Drama%')->get();
+        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Drama%')->get();
+        $actionMovies = Movies::latest()->where('genres', 'like', '%Drama%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
 
         // Sort the merged collection
-        $allActionMovies = $allActionMovies->sortByDesc('id');
+        $allActionMovies = $allActionMovies->sortByDesc('releaseYear');
 
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
@@ -131,17 +131,44 @@ class MoviesController extends Controller
         return view('page.drama', compact('paginatedResults', 'page'));
     }
 
-    public static function getHorror()
+    public static function getFantasy()
     {
 
-        $actionMoviesSeries = Series::where('genres', 'like', '%Horror%')->get();
-        $actionMovies = Movies::where('genres', 'like', '%Horror%')->get();
+        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Fantasy%')->get();
+        $actionMovies = Movies::latest()->where('genres', 'like', '%Fantasy%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
 
         // Sort the merged collection
-        $allActionMovies = $allActionMovies->sortByDesc('id');
+        $allActionMovies = $allActionMovies->sortByDesc('releaseYear');
+
+        $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
+
+        // Items per page
+        $perPage = 36;
+
+        // Slice the collection to get the items to display in current page
+        $currentPageResults = $allActionMovies->slice(($page * $perPage) - $perPage, $perPage)->values();
+
+        // Create our paginator and add it to the view
+        $paginatedResults = new LengthAwarePaginator($currentPageResults, count($allActionMovies), $perPage, $page, ['path' => LengthAwarePaginator::resolveCurrentPath()]);
+
+        // Pass the current page items, total pages, start page, end page, and current page to the view
+        return view('page.fantasy', compact('paginatedResults', 'page'));
+    }
+
+    public static function getHorror()
+    {
+
+        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Horror%')->get();
+        $actionMovies = Movies::latest()->where('genres', 'like', '%Horror%')->get();
+
+        // Merge the collections
+        $allActionMovies = $actionMoviesSeries->concat($actionMovies);
+
+        // Sort the merged collection
+        $allActionMovies = $allActionMovies->sortByDesc('releaseYear');
 
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
@@ -158,17 +185,44 @@ class MoviesController extends Controller
         return view('page.horror', compact('paginatedResults', 'page'));
     }
 
-    public static function getThriller()
+    public static function getMystery()
     {
 
-        $actionMoviesSeries = Series::where('genres', 'like', '%Thriller%')->get();
-        $actionMovies = Movies::where('genres', 'like', '%Thriller%')->get();
+        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Mystery%')->get();
+        $actionMovies = Movies::latest()->where('genres', 'like', '%Mystery%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
 
         // Sort the merged collection
-        $allActionMovies = $allActionMovies->sortByDesc('id');
+        $allActionMovies = $allActionMovies->sortByDesc('releaseYear');
+
+        $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
+
+        // Items per page
+        $perPage = 36;
+
+        // Slice the collection to get the items to display in current page
+        $currentPageResults = $allActionMovies->slice(($page * $perPage) - $perPage, $perPage)->values();
+
+        // Create our paginator and add it to the view
+        $paginatedResults = new LengthAwarePaginator($currentPageResults, count($allActionMovies), $perPage, $page, ['path' => LengthAwarePaginator::resolveCurrentPath()]);
+
+        // Pass the current page items, total pages, start page, end page, and current page to the view
+        return view('page.mystery', compact('paginatedResults', 'page'));
+    }
+
+    public static function getThriller()
+    {
+
+        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Thriller%')->get();
+        $actionMovies = Movies::latest()->where('genres', 'like', '%Thriller%')->get();
+
+        // Merge the collections
+        $allActionMovies = $actionMoviesSeries->concat($actionMovies);
+
+        // Sort the merged collection
+        $allActionMovies = $allActionMovies->sortByDesc('releaseYear');
 
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
@@ -188,14 +242,14 @@ class MoviesController extends Controller
     public static function getScifi()
     {
 
-        $actionMoviesSeries = Series::where('genres', 'like', '%Science Fiction%')->get();
-        $actionMovies = Movies::where('genres', 'like', '%Science Fiction%')->get();
+        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Science Fiction%')->get();
+        $actionMovies = Movies::latest()->where('genres', 'like', '%Science Fiction%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
 
         // Sort the merged collection
-        $allActionMovies = $allActionMovies->sortByDesc('id');
+        $allActionMovies = $allActionMovies->sortByDesc('releaseYear');
 
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
@@ -282,7 +336,7 @@ class MoviesController extends Controller
 
         $replies = Reply::whereIn('comment_id', $commentIds)->get();
 
-        return view('media.show', compact('all', 'type', 'merged', 'recom', 'seasons', 'comments', 'replies'));
+        return view('media.show', compact('all', 'merged', 'recom', 'seasons', 'comments', 'replies'));
     }
 
     public static function search(Request $request)
