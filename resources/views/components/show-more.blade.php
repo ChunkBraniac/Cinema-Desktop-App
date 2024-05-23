@@ -48,17 +48,17 @@
                 @unless (count($more_Series) == 0)
                     @foreach ($more_Series as $action)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                            <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}" class="text-decoration-none text-dark"><img
+                            <a href="{{ url('media/' . $action->originalTitleText) }}" class="text-decoration-none text-dark"><img
                                 data-src="{{ $action->imageUrl ? asset($action->imageUrl) : asset('images/no-image.jpg') }}" alt="{{ str_replace('-', ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}" class="img-fluid blurry-image lazy"
                                     style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493);"
                                     loading="lazy"></a>
-                            <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"
+                            <a href="{{ url('media/' . $action->originalTitleText) }}"
                                 class="text-decoration-none text-dark">
 
                                 <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500"
                                     data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    data-bs-title="{{ str_replace('-', ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}">
-                                    {{ str_replace('-', ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}
+                                    data-bs-title="{{ str_replace(['-', $action->releaseYear], ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}">
+                                    {{ str_replace(['-', $action->releaseYear], ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}
                                 </h6>
                             </a>
                             @if ($action->genres == 0)

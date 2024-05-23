@@ -27,7 +27,7 @@ Route::get('scifi', [MoviesController::class, 'getScifi'])->name('movies.scifi')
 Route::get('404', [PageController::class, 'error'])->name('error.404');
 
 Route::group(['middleware' => 'xframe'], function () {
-    Route::get('/media/{name}/{type}', [MoviesController::class, 'show'])->name('media.show');
+    Route::get('/media/{name}', [MoviesController::class, 'show'])->name('media.show');
 });
 
 Route::get('search', [MoviesController::class, 'search'])->name('movie.search');

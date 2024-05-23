@@ -266,7 +266,7 @@ class MoviesController extends Controller
         return view('page.scifi', compact('paginatedResults', 'page'));
     }
 
-    public static function show($name, $type)
+    public static function show($name)
     {
         
         $cache = "recommend_" . $name;
@@ -286,12 +286,12 @@ class MoviesController extends Controller
 
         $media = DB::table('series')
             ->where('originalTitleText', $name)
-            ->where('titleType', $type)
+            // ->where('titleType', $type)
             ->get();
 
         $media2 = DB::table('movies')
             ->where('originalTitleText', $name)
-            ->where('titleType', $type)
+            // ->where('titleType', $type)
             ->get();
 
         $all = $media->union($media2);

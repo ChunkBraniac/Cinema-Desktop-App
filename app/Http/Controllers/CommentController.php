@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
 
-    public function store(Request $request, $name, $type)
+    public function store(Request $request, $name)
     {
         $request->validate([
             'commentor' => 'required|string',
@@ -29,7 +29,7 @@ class CommentController extends Controller
 
         $storeComment->save();
 
-        return redirect()->route('media.show', ['name' => $name, 'type' => $type])->with('success', 'Comment added successfully');
+        return redirect()->route('media.show', ['name' => $name])->with('success', 'Comment added successfully');
     }
 
 }
