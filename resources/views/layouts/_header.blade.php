@@ -1,9 +1,9 @@
 @if (!Request::is('register') && !Request::is('login') && !Request::is('404'))
     {{-- header begins here --}}
     <div class="container-fluid bg-dark p-0">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-fixed pt-3 pb-3 container-fluid"
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-fixed pt-3 pb-3"
             style="width: 100%; top: 0; z-index: 3">
-            <div class="container-md">
+            <div class="container-sm">
                 <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ url('icons/video.png') }}"
                         style="height: 35px; width: 30px" alt=""> Cinema<span class="text-info">Hub</span></a>
 

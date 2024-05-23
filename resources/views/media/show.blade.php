@@ -154,13 +154,13 @@
 
                         @foreach ($merged as $more)
                             <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
-                                <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }} "><img
+                                <a href="{{ url('media/' . $more->originalTitleText) }} "><img
                                         data-src="{{ asset($more->imageUrl) }}" alt=""
                                         class="img-fluid blurry-image lazy"
                                         style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)"
                                         loading="lazy"></a>
 
-                                <a href="{{ url('media/' . $more->originalTitleText . '/' . $more->titleType) }}"
+                                <a href="{{ url('media/' . $more->originalTitleText) }}"
                                     class="text-decoration-none text-dark">
                                     <h6 class="mt-1 text-truncate"
                                         style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500"

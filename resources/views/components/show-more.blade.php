@@ -40,8 +40,6 @@
     <br><br>
     <hr>
     <div class="container mt-5">
-
-
         {{-- Series Pane --}}
         @if ($cartegory == 'series')
             <div class="row mb-4">
@@ -91,12 +89,12 @@
                     @unless (count($more_Movies) == 0)
                         @foreach ($more_Movies as $action)
                             <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                                <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}" class="text-decoration-none text-dark"><img
+                                <a href="{{ url('media/' . $action->originalTitleText) }}" class="text-decoration-none text-dark"><img
                                         data-src="{{ asset($action->imageUrl) }}" alt="{{ str_replace('-', ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}"
                                         class="img-fluid blurry-image lazy"
                                         style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)"
                                         loading="lazy"></a>
-                                <a href="{{ url('media/' . $action->originalTitleText . '/' . $action->titleType) }}"
+                                <a href="{{ url('media/' . $action->originalTitleText) }}"
                                     class="text-decoration-none text-dark">
 
                                     <h6 class="mt-1 text-truncate"
