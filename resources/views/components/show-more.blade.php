@@ -6,11 +6,11 @@
 
 @if ($cartegory == 'series')
     @section('title')
-        TV Series
+        TV Series (Page {{ $page }})
     @endsection
 @elseif ($cartegory == 'movies')
     @section('title')
-        All Movies
+        All Movies (Page {{ $page }})
     @endsection
 @endif
 
@@ -19,7 +19,15 @@
     <br><br>
     @if ($cartegory == 'series')
         <div class="container">
-            <h4 style="float: left">Series</h4>
+            <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif;">Series @if ($page == 1)
+                @else
+                    <span>
+                        <h6 style="font-family: 'Roboto', sans-serif; font-weight: normal; font-size: 14px;">Page
+                            {{ $page }}</h6>
+                    </span>
+                @endif
+            </h4>
+
             <h6 class="" style="float: right; font-family: 'Roboto', sans-serif; font-weight: normal"><span
                     style="margin-right: 5px; font-size: 14px"><a href="{{ url('/') }} "
                         class="text-decoration-none text-dark text-muted">Home</a></span> <i
@@ -28,7 +36,14 @@
         </div>
     @elseif ($cartegory == 'movies')
         <div class="container">
-            <h4 style="float: left">Movies</h4>
+            <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif;">Movies  @if ($page == 1)
+                @else
+                    <span>
+                        <h6 style="font-family: 'Roboto', sans-serif; font-weight: normal; font-size: 14px;">Page
+                            {{ $page }}</h6>
+                    </span>
+                @endif
+            </h4>
             <h6 class="" style="float: right; font-family: 'Roboto', sans-serif; font-weight: normal"><span
                     style="margin-right: 5px; font-size: 14px"><a href="{{ url('/') }} "
                         class="text-decoration-none text-dark text-muted">Home</a></span> <i
@@ -77,7 +92,7 @@
                 @endunless
             </div>
 
-            {{ $more_Series->appends(request()->query())->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
+            {{ $more_Series->appends(request()->query())->onEachSide(2)->links('vendor.pagination.bootstrap-5') }}
 
             @if (count($more_Series) == 0)
                 {{ abort(404) }}
@@ -122,7 +137,7 @@
                     @endunless
                 </div>
 
-                {{ $more_Movies->appends(request()->query())->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
+                {{ $more_Movies->appends(request()->query())->onEachSide(2)->links('vendor.pagination.bootstrap-5') }}
 
                 @if (count($more_Movies) == 0)
                     {{ abort(404) }}

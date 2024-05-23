@@ -1,13 +1,20 @@
 @extends('layouts.app')
 
 @section('title')
-    Comedy
+    Comedy (Page {{ $page }})
 @endsection
 
 @section('content')
     <br><br>
     <div class="container">
-        <h4 style="float: left">Comedy</h4>
+        <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif;">Comedy @if ($page == 1)
+            @else
+                <span>
+                    <h6 style="font-family: 'Roboto', sans-serif; font-weight: normal; font-size: 14px;">Page
+                        {{ $page }}</h6>
+                </span>
+            @endif
+        </h4>
         <h6 class="" style="float: right; font-family: 'Robot', sans-serif; font-weight: normal"><span
                 style="margin-right: 5px; font-size: 14px"><a href="{{ url('/') }} "
                     class="text-decoration-none text-dark text-muted">Home</a></span> <i class="fa fa-arrow-right text-muted"
@@ -22,10 +29,10 @@
             @unless (count($paginatedResults) == 0)
                 @foreach ($paginatedResults as $comedy)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                        <a href="{{ url('media/' . $comedy->originalTitleText . '/' . $comedy->titleType) }}"><img data-src="{{ asset($comedy->imageUrl) }}"
-                                alt="" class="img-fluid" style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
-                        <a href="{{ url('media/' . $comedy->originalTitleText . '/' . $comedy->titleType) }}" class="text-decoration-none text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ str_replace('-', ' ', $comedy->originalTitleText) . ' ' . '(' . $comedy->releaseYear . ')' }}">
-                            <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">{{ str_replace('-', ' ', $comedy->originalTitleText) . ' ' . '(' . $comedy->releaseYear . ')' }}</h6>
+                        <a href="{{ url('media/' . $comedy->originalTitleText) }}"><img data-src="{{ asset($comedy->imageUrl) }}"
+                                alt="{{ str_replace(['-', $comedy->releaseYear], ' ', $comedy->originalTitleText) . ' ' . '(' . $comedy->releaseYear . ')' }}" class="img-fluid" style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
+                        <a href="{{ url('media/' . $comedy->originalTitleText) }}" class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ str_replace(['-', $comedy->releaseYear], ' ', $comedy->originalTitleText) . ' ' . '(' . $comedy->releaseYear . ')' }}">
+                            <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">{{ str_replace(['-', $comedy->releaseYear], ' ', $comedy->originalTitleText) . ' ' . '(' . $comedy->releaseYear . ')' }}</h6>
                         </a>
                         <h6 class="text-truncate" style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">{{ $comedy->genres }}</h6>
                     </div>
@@ -34,7 +41,7 @@
         </div>
 
         <div class="mt-3">
-            {{ $paginatedResults->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
+            {{ $paginatedResults->onEachSide(2)->links('vendor.pagination.bootstrap-5') }}
         </div>
 
         @if (count($paginatedResults) == 0)

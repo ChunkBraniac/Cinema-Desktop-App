@@ -372,6 +372,8 @@ class MoviesController extends Controller
         $more_Movies = Movies::orderByDesc('releaseYear')->paginate(36);
         $more_Series = Series::orderByDesc('releaseYear')->paginate(36);
 
-        return view('components.show-more', compact('more_Movies', 'more_Series'));
+        $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
+
+        return view('components.show-more', compact('more_Movies', 'more_Series', 'page'));
     }
 }

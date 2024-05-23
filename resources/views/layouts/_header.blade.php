@@ -2,7 +2,7 @@
     {{-- header begins here --}}
     <div class="container-fluid bg-dark p-0">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-fixed pt-3 pb-3"
-            style="width: 100%; top: 0; z-index: 3">
+            style="width: 100%; top: 0; z-index: 3; box-shadow: 0px 0px 60px black;">
             <div class="container-sm">
                 <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ url('icons/video.png') }}"
                         style="height: 35px; width: 30px" alt=""> Cinema<span class="text-info">Hub</span></a>
@@ -56,7 +56,7 @@
                     <form class="d-flex" role="search" action="{{ route('movie.search') }}" method="get">
                         <input class="form-control" type="search" placeholder="Search" aria-label="Search"
                             name="search" required style="border-radius: 0px; box-shadow: none">
-                        <button class="btn btn-outline-success" type="submit" style="border-radius: 0px;"><i
+                        <button class="btn btn-outline-primary" type="submit" style="border-radius: 0px;"><i
                                 class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
