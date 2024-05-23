@@ -77,3 +77,5 @@ Route::get('download/{name}/season/{season}/episode/{episode}', [SeasonsControll
 
 Route::get('show-more', [MoviesController::class, 'showMore'])->name('moremovies');
 
+Route::get('latest', [ApiController::class, 'latest'])->name('latest');
+
