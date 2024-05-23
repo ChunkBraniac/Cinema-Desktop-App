@@ -151,7 +151,7 @@ class ApiController extends Controller
                         $adult = $result['adult'];
                         $backdrop_path = isset($result['backdrop_path']) ? mysqli_real_escape_string($connection, $result['backdrop_path']) : 0;
                         $language = strtoupper($result['original_language']);
-                        $name = mysqli_real_escape_string($connection, $result['name']);
+                        $name = mysqli_real_escape_string($connection, $result['name'] . ' ' . $year);
                         $overview = mysqli_real_escape_string($connection, $result['overview']);
                         $poster_path = mysqli_real_escape_string($connection, $result['poster_path']);
                         $vote_average = mysqli_real_escape_string($connection, $result['vote_average']);
@@ -243,7 +243,7 @@ class ApiController extends Controller
                             $origin_country = $results['origin_country'][0];
                             $original_language = strtoupper($results['original_language']);
                             $overview = mysqli_real_escape_string($connection, $results['overview']);
-                            $name = mysqli_real_escape_string($connection, $results['name']);
+                            $name = mysqli_real_escape_string($connection, $results['name'] . ' ' . $year);
                             $votecount = $results['vote_count'];
 
                             $formatted_name = str_replace(' ', '-', $name);
@@ -328,7 +328,7 @@ class ApiController extends Controller
                             $adult = $result['adult'];
                             $backdrop_path = isset($result['backdrop_path']) ? mysqli_real_escape_string($connection, $result['backdrop_path']) : 0;
                             $language = strtoupper($result['original_language']);
-                            $name = mysqli_real_escape_string($connection, $result['title']);
+                            $name = mysqli_real_escape_string($connection, $result['title'] . ' ' . $year);
                             $overview = mysqli_real_escape_string($connection, $result['overview']);
                             $poster_path = mysqli_real_escape_string($connection, $result['poster_path']);
                             $vote_average = mysqli_real_escape_string($connection, $result['vote_average']);
@@ -414,7 +414,7 @@ class ApiController extends Controller
                         $adult = $result['adult'];
                         $backdrop_path = isset($result['backdrop_path']) ? mysqli_real_escape_string($connection, $result['backdrop_path']) : 0;
                         $language = strtoupper($result['original_language']);
-                        $name = mysqli_real_escape_string($connection, $result['title']);
+                        $name = mysqli_real_escape_string($connection, $result['title'] . ' ' . $year);
                         $overview = mysqli_real_escape_string($connection, $result['overview']);
                         $poster_path = mysqli_real_escape_string($connection, $result['poster_path']);
                         $vote_average = mysqli_real_escape_string($connection, $result['vote_average']);
@@ -504,7 +504,7 @@ class ApiController extends Controller
                             $poster_path = mysqli_real_escape_string($connection, $results['poster_path']);
                             $origin_country = $results['origin_country'][0];
                             $overview = mysqli_real_escape_string($connection, $results['overview']);
-                            $name = mysqli_real_escape_string($connection, $results['title']);
+                            $name = mysqli_real_escape_string($connection, $results['title'] . ' ' . $year);
                             $votecount = $results['vote_count'];
 
                             $formatted_name = str_replace(' ', '-', $name);
@@ -591,8 +591,8 @@ class ApiController extends Controller
                     $genres .= ', ' . $data['genres'][2]['name'];
                 }
 
-                $origin_country = $data['origin_country'][0];
-                $runtime = $data['runtime'];
+                $origin_country = isset($data['origin_country'][0]) ? $data['origin_country'][0] : 0;
+                $runtime = isset($data['runtime']) ? $data['runtime'] : 0;
 
                 $hours = intdiv($runtime, 60); // Integer division to get the number of hours
                 $minutes = $runtime % 60; // Modulus to get the remaining minutes

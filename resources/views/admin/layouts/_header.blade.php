@@ -259,32 +259,32 @@
                     <li>
                     <li>
                         <a href="{{ route('seriesV1.api') }}">
-                            <i class="bi bi-circle"></i><span>Series V1</span>
+                            <i class="bi bi-circle"></i><span>Discover Series</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('seriesV2.api') }}">
-                            <i class="bi bi-circle"></i><span>Series V2</span>
+                            <i class="bi bi-circle"></i><span>Trending Series</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('seriesV3.api') }}">
-                            <i class="bi bi-circle"></i><span>Series V3</span>
+                            <i class="bi bi-circle"></i><span>Popular Series</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('moviesV1.api') }}">
-                            <i class="bi bi-circle"></i><span>Movies V1</span>
+                            <i class="bi bi-circle"></i><span>Discover Movies</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('moviesV2.api') }}">
-                            <i class="bi bi-circle"></i><span>Movies V2</span>
+                            <i class="bi bi-circle"></i><span>Trending Movies</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('moviesV3.api') }}">
-                            <i class="bi bi-circle"></i><span>Movies V3</span>
+                            <i class="bi bi-circle"></i><span>Popular Movies</span>
                         </a>
                     </li>
                     <li>

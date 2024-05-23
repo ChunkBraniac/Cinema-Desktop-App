@@ -12,7 +12,7 @@
                     @endsection
                     <!-- Iterate over each item in the collection -->
                     <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">
-                        {{ str_replace('-', ' ', $item->originalTitleText) }}</h3>
+                        {{ str_replace(['-', $item->releaseYear], ' ', $item->originalTitleText) }}</h3>
                     <div class="row">
                         <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
                             <img data-src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
@@ -347,7 +347,7 @@
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#{{ $recommended->id }}" aria-expanded="false"
                                         aria-controls="flush-collapseOne">
-                                        {{ str_replace('-', ' ', $recommended->originalTitleText) }}
+                                        {{ str_replace(['-', $recommended->releaseYear], ' ', $recommended->originalTitleText) }}
                                     </button>
                                 </h2>
 
