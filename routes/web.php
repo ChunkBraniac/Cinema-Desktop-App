@@ -53,6 +53,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/series/v2', [ApiController::class, 'seriesV2'])->name('seriesV2.api');
     Route::get('admin/series/v3', [ApiController::class, 'seriesV3'])->name('seriesV3.api');
 
+    // Route::get('admin/movies/latest', [ApiController::class, 'latestMovies'])->name('movies.latest');
+    // Route::get('admin/series/latest', [ApiController::class, 'latestSeries'])->name('series.latest');
+
+
     // route to fetch the movies
     Route::get('admin/movies/v1', [ApiController::class, 'moviesV1'])->name('moviesV1.api');
     Route::get('admin/movies/v2', [ApiController::class, 'moviesV2'])->name('moviesV2.api');
@@ -76,6 +80,4 @@ Route::group(['middleware' => 'admin'], function () {
 Route::get('download/{name}/season/{season}/episode/{episode}', [SeasonsController::class, 'download'])->name('download');
 
 Route::get('show-more', [MoviesController::class, 'showMore'])->name('moremovies');
-
-Route::get('latest', [ApiController::class, 'latest'])->name('latest');
 

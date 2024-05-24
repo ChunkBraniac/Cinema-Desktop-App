@@ -14,10 +14,11 @@
                 placeholder="Enter keyword" name="search" @required(true)>
         </form>
 
+        {{-- <h4 style="font-family: 'Ubuntu sans', sans-serif;">Latest Movies & TV Series</h4>
         <div class="owl-carousel owl-theme">
             @unless (count($latest_all) == 0)
                 @foreach ($latest_all as $latest)
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-12 mt-3">
+                    <div class="col-6 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
                         <a href="{{ url('media/' . $latest->originalTitleText) }}" class="text-decoration-none text-dark"><img
                                 data-src="{{ asset($latest->imageUrl) }}"
                                 alt="{{ str_replace(['-', $latest->releaseYear], ' ', $latest->originalTitleText) . ' ' . '(' . $latest->releaseYear . ')' }}"
@@ -47,10 +48,10 @@
                     </div>
                 @endforeach
             @endunless
-        </div>
+        </div> --}}
 
         {{-- SERIES PANE --}}
-        <h4>Series</h4>
+        <h4 style="font-family: 'Ubuntu sans', sans-serif;">Series</h4>
         <div class="row">
             @unless (count($series_all) == 0)
                 @foreach ($series_all as $series)
@@ -96,7 +97,7 @@
     <div class="container-md mt-5">
 
         {{-- MOVIES PANE --}}
-        <h4>Movies</h4>
+        <h4 style="font-family: 'Ubuntu sans', sans-serif;">Movies</h4>
         <div class="row">
             @unless (count($movies_all) == 0)
                 @foreach ($movies_all as $movies)

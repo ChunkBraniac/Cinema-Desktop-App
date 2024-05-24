@@ -20,9 +20,8 @@ class MoviesController extends Controller
     {
         $series_all = Series::orderByDesc('releaseYear')->latest()->paginate(24);
         $movies_all = Movies::orderByDesc('releaseYear')->latest()->paginate(24);
-        $latest_all = Latest::orderByDesc('releaseYear')->latest()->paginate(24);
 
-        return view('home', compact('series_all', 'movies_all', 'latest_all'));
+        return view('home', compact('series_all', 'movies_all'));
     }
 
     public static function getAction()
@@ -279,9 +278,8 @@ class MoviesController extends Controller
 
             $recommend = DB::table('series')->where('aggregateRating', '>', '7')->where('originalTitleText', '<>', $name)->inRandomOrder()->limit(9)->get();
             $recommend2 = DB::table('movies')->where('aggregateRating', '>', '7')->where('originalTitleText', '<>', $name)->inRandomOrder()->limit(9)->get();
-            $recommend3 = DB::table('latests')->where('aggregateRating', '>', '7')->where('originalTitleText', '<>', $name)->inRandomOrder()->limit(9)->get();
 
-            $recom = $recommend->union($recommend2)->union($recommend3);
+            $recom = $recommend->union($recommend2);
 
             Cache::put($cache, $recom, 360);
 
@@ -297,12 +295,7 @@ class MoviesController extends Controller
             // ->where('titleType', $type)
             ->get();
 
-        $media3 = DB::table('latests')
-            ->where('originalTitleText', $name)
-            // ->where('titleType', $type)
-            ->get();
-
-        $all = $media->union($media2)->union($media3);
+        $all = $media->union($media2);
 
         /* 
         the below code uses the same structure as above
@@ -325,13 +318,7 @@ class MoviesController extends Controller
                 ->limit(4)
                 ->get();
 
-            $media3 = DB::table('latests')
-                ->where('originalTitleText', '<>', $name)
-                ->inRandomOrder()
-                ->limit(2)
-                ->get();
-
-            $merged = $merged->union($merged2)->union($media3);
+            $merged = $merged->union($merged2);
 
             Cache::put($cacheKey, $merged, 160);
         }
