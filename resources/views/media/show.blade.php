@@ -347,14 +347,14 @@
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#{{ $recommended->id }}" aria-expanded="false"
                                         aria-controls="flush-collapseOne">
-                                        {{ str_replace(['-', $recommended->releaseYear], ' ', $recommended->originalTitleText) }}
+                                        {{ $recommended->full_name }}
                                     </button>
                                 </h2>
 
                                 <div id="{{ $recommended->id }}" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body" style="font-size: 15px">{{ $recommended->plotText }} <a
-                                            href="{{ url('media/' . $recommended->originalTitleText . '/' . $recommended->titleType) }} ">More
+                                            href="{{ url('media/' . $recommended->originalTitleText) }} ">More
                                             Details</a>
                                     </div>
                                 </div>

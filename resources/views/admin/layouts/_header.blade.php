@@ -257,11 +257,11 @@
                         </a>
                     </li>
 
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('seriesV1.api') }}">
                             <i class="bi bi-circle"></i><span>Discover Series</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a href="{{ route('seriesV2.api') }}">
                             <i class="bi bi-circle"></i><span>Trending Series</span>
