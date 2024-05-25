@@ -19,7 +19,7 @@
 
         <h6 class="" style="float: right; font-family: 'Robot', sans-serif; font-weight: normal"><span
                 style="margin-right: 5px; font-size: 14px"><a href="{{ url('/') }} "
-                    class="text-decoration-none text-dark text-muted">Home</a></span> <i class="fa fa-arrow-right text-muted"
+                    class="text-decoration-none text-reset text-muted">Home</a></span> <i class="fa fa-arrow-right text-muted"
                 style="font-size: 13px" aria-hidden="true"></i> <span style="margin-left: 5px; font-size: 14px"
                 class="text-muted">Search</span></h6>
     </div>

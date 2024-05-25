@@ -30,7 +30,7 @@
 
             <h6 class="" style="float: right; font-family: 'Roboto', sans-serif; font-weight: normal"><span
                     style="margin-right: 5px; font-size: 14px"><a href="{{ url('/') }} "
-                        class="text-decoration-none text-dark text-muted">Home</a></span> <i
+                        class="text-decoration-none text-reset text-muted">Home</a></span> <i
                     class="fa fa-arrow-right text-muted" style="font-size: 13px" aria-hidden="true"></i> <span
                     style="margin-left: 5px; font-size: 14px" class="text-muted">Series</span></h6>
         </div>
@@ -46,7 +46,7 @@
             </h4>
             <h6 class="" style="float: right; font-family: 'Roboto', sans-serif; font-weight: normal"><span
                     style="margin-right: 5px; font-size: 14px"><a href="{{ url('/') }} "
-                        class="text-decoration-none text-dark text-muted">Home</a></span> <i
+                        class="text-decoration-none text-reset text-muted">Home</a></span> <i
                     class="fa fa-arrow-right text-muted" style="font-size: 13px" aria-hidden="true"></i> <span
                     style="margin-left: 5px; font-size: 14px" class="text-muted">Movies</span></h6>
         </div>
@@ -104,13 +104,13 @@
                     @unless (count($more_Movies) == 0)
                         @foreach ($more_Movies as $action)
                             <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                                <a href="{{ url('media/' . $action->originalTitleText) }}" class="text-decoration-none text-dark"><img
+                                <a href="{{ url('media/' . $action->originalTitleText) }}" class="text-decoration-none text-reset"><img
                                         data-src="{{ asset($action->imageUrl) }}" alt="{{ str_replace('-', ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}"
                                         class="img-fluid blurry-image lazy"
                                         style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)"
                                         loading="lazy"></a>
                                 <a href="{{ url('media/' . $action->originalTitleText) }}"
-                                    class="text-decoration-none text-dark">
+                                    class="text-decoration-none text-reset">
 
                                     <h6 class="mt-1 text-truncate"
                                         style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500"
@@ -139,9 +139,9 @@
 
                 {{ $more_Movies->appends(request()->query())->onEachSide(2)->links('vendor.pagination.bootstrap-5') }}
 
-                @if (count($more_Movies) == 0)
+                {{-- @if (count($more_Movies) == 0)
                     {{ abort(404) }}
-                @endif
+                @endif --}}
             @endif
 
     </div>

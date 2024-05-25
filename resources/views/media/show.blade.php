@@ -161,7 +161,7 @@
                                         loading="lazy"></a>
 
                                 <a href="{{ url('media/' . $more->originalTitleText) }}"
-                                    class="text-decoration-none text-dark">
+                                    class="text-decoration-none text-reset">
                                     <h6 class="mt-1 text-truncate"
                                         style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500"
                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -182,7 +182,7 @@
                                         style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)"
                                         loading="lazy"></a>
                                 <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
-                                    class="text-decoration-none text-dark">
+                                    class="text-decoration-none text-reset">
                                     <h6 class="mt-1" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
                                         Season
                                         {{ $more->season_number }} Episode {{ $more->episode_number }}

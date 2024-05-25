@@ -256,17 +256,6 @@
                             <i class="bi bi-circle"></i><span>Movies & Series</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('movies.latest') }}">
-                            <i class="bi bi-circle"></i><span>Latest Movies</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('series.latest') }}">
-                            <i class="bi bi-circle"></i><span>Latest Series</span>
-                        </a>
-                    </li>
-
 
                     <li>
                         <a href="{{ route('seriesV1.api') }}">
@@ -276,11 +265,6 @@
                     <li>
                         <a href="{{ route('seriesV2.api') }}">
                             <i class="bi bi-circle"></i><span>Trending Series</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('moviesV1.api') }}">
-                            <i class="bi bi-circle"></i><span>Discover Movies</span>
                         </a>
                     </li>
                     <li>
@@ -301,17 +285,6 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('latestMoviesUpdate.api') }}">
-                            <i class="bi bi-circle"></i><span>Update Latest Movies Info</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('latestSeriesUpdate.api') }}">
-                            <i class="bi bi-circle"></i><span>Update Latest Series Info</span>
-                        </a>
-                    </li>
-
-                    <li>
                         <a href="{{ route('series.trailer') }}">
                             <i class="bi bi-circle"></i><span>Get Series Trailer</span>
                         </a>
@@ -319,11 +292,6 @@
                     <li>
                         <a href="{{ route('movies.trailer') }}">
                             <i class="bi bi-circle"></i><span>Get Movies Trailer</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('latestmovies.trailer') }}">
-                            <i class="bi bi-circle"></i><span>Get Latest Movies Trailer</span>
                         </a>
                     </li>
                     <li>

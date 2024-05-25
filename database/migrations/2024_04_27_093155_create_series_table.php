@@ -16,6 +16,7 @@ return new class extends Migration
             // $table->string('tmdbId');
             $table->string('movieId');
             $table->string('isAdult');
+            $table->string('full_name');
             // $table->string('isRatable');
             $table->string('originalTitleText');
             $table->string('imageUrl');

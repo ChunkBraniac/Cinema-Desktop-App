@@ -49,7 +49,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/comments', [AdminController::class, 'displayComments'])->name('admin.comments');
 
     // route to fetch the movies and series and other settings
-    Route::get('admin/series/v1', [ApiController::class, 'seriesV1'])->name('seriesV1.api');
+    // Route::get('admin/series/v1', [ApiController::class, 'seriesV1'])->name('seriesV1.api');
     Route::get('admin/series/v2', [ApiController::class, 'seriesV2'])->name('seriesV2.api');
     // Route::get('admin/series/v3', [ApiController::class, 'seriesV3'])->name('seriesV3.api');
 
@@ -58,7 +58,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 
     // route to fetch the movies
-    Route::get('admin/movies/v1', [ApiController::class, 'moviesV1'])->name('moviesV1.api');
+    // Route::get('admin/movies/v1', [ApiController::class, 'moviesV1'])->name('moviesV1.api');
     Route::get('admin/movies/v2', [ApiController::class, 'moviesV2'])->name('moviesV2.api');
     // Route::get('admin/movies/v3', [ApiController::class, 'moviesV3'])->name('moviesV3.api');
 
