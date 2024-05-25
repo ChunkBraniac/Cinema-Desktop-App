@@ -20,7 +20,7 @@ class MoviesController extends Controller
     {
         $series_all = Series::orderByDesc('releaseYear')->latest()->paginate(24);
         $movies_all = Movies::orderByDesc('releaseYear')->latest()->paginate(24);
-        $latest_all = Latest::orderBy('releaseYear')->latest()->where('imageUrl', '!=', '')->paginate(24);
+        $latest_all = Latest::orderBy('releaseYear')->paginate(24);
 
         return view('home', compact('series_all', 'movies_all', 'latest_all'));
     }

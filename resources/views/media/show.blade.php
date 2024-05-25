@@ -12,7 +12,7 @@
                     @endsection
                     <!-- Iterate over each item in the collection -->
                     <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">
-                        {{ str_replace(['-', $item->releaseYear], ' ', $item->originalTitleText) }}</h3>
+                        {{ str_replace(['-', $item->movieId], ' ', $item->originalTitleText) }}</h3>
                     <div class="row">
                         <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
                             <img data-src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"

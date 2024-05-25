@@ -77,7 +77,7 @@ class ApiController extends Controller
                                 $backdrop_path = isset($result['backdrop_path']) ? mysqli_real_escape_string($connection, $result['backdrop_path']) : 0;
                                 $country = isset($result['origin_country'][0]) ? $result['origin_country'][0] : null;
                                 $language = strtoupper($result['original_language']);
-                                $name = mysqli_real_escape_string($connection, $result['name'] . ' ' . $year);
+                                $name = mysqli_real_escape_string($connection, $result['name'] . ' ' . $id);
                                 $overview = mysqli_real_escape_string($connection, $result['overview']);
                                 $poster_path = mysqli_real_escape_string($connection, $result['poster_path']);
                                 $vote_average = mysqli_real_escape_string($connection, $result['vote_average']);
@@ -177,7 +177,7 @@ class ApiController extends Controller
                             $adult = $result['adult'];
                             $backdrop_path = isset($result['backdrop_path']) ? mysqli_real_escape_string($connection, $result['backdrop_path']) : 0;
                             $language = strtoupper($result['original_language']);
-                            $name = mysqli_real_escape_string($connection, $result['name'] . ' ' . $year);
+                            $name = mysqli_real_escape_string($connection, $result['name'] . ' ' . $id);
                             $overview = mysqli_real_escape_string($connection, $result['overview']);
                             $poster_path = mysqli_real_escape_string($connection, $result['poster_path']);
                             $vote_average = mysqli_real_escape_string($connection, $result['vote_average']);
@@ -189,7 +189,7 @@ class ApiController extends Controller
                             } else {
                                 $base_url = "";
                             }
-                            $formatted_name = str_replace(' ', '-', $name);
+                            $formatted_name = str_replace([' ', '?'], '-', $name);
                             $rating = floor($vote_average * 10) / 10;
 
                             // insert into the series table

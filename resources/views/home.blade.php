@@ -45,16 +45,16 @@
                 @foreach ($latest_all as $latest)
                     <div class="col-12 col-xsm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
                         <a href="{{ url('media/' . $latest->originalTitleText) }}" class="text-decoration-none text-dark"><img
-                                data-src="{{ $latest->imageUrl ? asset($latest->imageUrl) : asset('images/No-Image-Placeholder.svg.webp') }}"
-                                alt="{{ str_replace(['-', $latest->releaseYear], ' ', $latest->originalTitleText) . ' ' . '(' . $latest->releaseYear . ')' }}"
+                                data-src="{{ $latest->imageUrl ? asset($latest->imageUrl) : asset('images/no-image.jpg') }}"
+                                alt="{{ str_replace(['-', $latest->movieId], ' ', $latest->originalTitleText) . ' ' . '(' . $latest->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy"
                                 style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.315);" loading="lazy"></a>
                         <a href="{{ url('media/' . $latest->originalTitleText) }}" class="text-decoration-none text-reset"
                             data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-title="{{ str_replace(['-', $latest->releaseYear], ' ', $latest->originalTitleText) . ' ' . '(' . $latest->releaseYear . ')' }}">
+                            data-bs-title="{{ str_replace(['-', $latest->movieId], ' ', $latest->originalTitleText) . ' ' . '(' . $latest->releaseYear . ')' }}">
 
                             <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
-                                {{ str_replace(['-', $latest->releaseYear], ' ', $latest->originalTitleText) . ' ' . '(' . $latest->releaseYear . ')' }}
+                                {{ str_replace(['-', $latest->movieId], ' ', $latest->originalTitleText) . ' ' . '(' . $latest->releaseYear . ')' }}
                             </h6>
                         </a>
                         {{-- @if ($latest->genres == 0)
@@ -88,15 +88,15 @@
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ url('media/' . $series->originalTitleText) }}" class="text-decoration-none text-dark"><img
                                 data-src="{{ $series->imageUrl ? asset($series->imageUrl) : asset('images/No-Image-Placeholder.svg.webp') }}"
-                                alt="{{ str_replace(['-', $series->releaseYear], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}"
+                                alt="{{ str_replace(['-', $series->movieId], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy"
                                 style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.315);" loading="lazy"></a>
                         <a href="{{ url('media/' . $series->originalTitleText) }}" class="text-decoration-none text-reset"
                             data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-title="{{ str_replace(['-', $series->releaseYear], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}">
+                            data-bs-title="{{ str_replace(['-', $series->movieId], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}">
 
                             <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
-                                {{ str_replace(['-', $series->releaseYear], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}
+                                {{ str_replace(['-', $series->movieId], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}
                             </h6>
                         </a>
                         @if ($series->genres == 0)

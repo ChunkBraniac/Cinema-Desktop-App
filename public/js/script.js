@@ -16,7 +16,7 @@ $(document).ready(function(){
             },
             1000: {
                 items: 6,
-                loop: true,
+                loop: false,
                 dots: false
             }
         }
