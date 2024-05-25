@@ -33,7 +33,7 @@
                     @foreach ($paginatedResults as $search)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                             <a href="{{ url('media/' . $search->originalTitleText) }}" class="text-decoration-none text-reset"><img
-                                    data-src="{{ asset($search->imageUrl) }}" alt="{{ str_replace(['-', $search->releaseYear], ' ', $search->originalTitleText) . ' ' . '(' . $search->releaseYear . ')' }}" class="img-fluid blurry-image lazy"
+                                    data-src="{{ $search->imageUrl ? asset($search->imageUrl) : asset('images/No-Image-Placeholder.svg.webp') }}" alt="{{ str_replace(['-', $search->releaseYear], ' ', $search->originalTitleText) . ' ' . '(' . $search->releaseYear . ')' }}" class="img-fluid blurry-image lazy"
                                     style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493);" loading="lazy"></a>
                             <a href="{{ url('media/' . $search->originalTitleText) }}"
                                 class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom"

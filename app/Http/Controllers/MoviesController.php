@@ -20,8 +20,9 @@ class MoviesController extends Controller
     {
         $series_all = Series::orderByDesc('releaseYear')->latest()->paginate(24);
         $movies_all = Movies::orderByDesc('releaseYear')->latest()->paginate(24);
+        $latest_all = Latest::orderBy('releaseYear')->latest()->where('imageUrl', '!=', '')->paginate(24);
 
-        return view('home', compact('series_all', 'movies_all'));
+        return view('home', compact('series_all', 'movies_all', 'latest_all'));
     }
 
     public static function getAction()
@@ -29,9 +30,10 @@ class MoviesController extends Controller
         // Perform your query for each set of movies
         $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Action%')->get();
         $actionMovies = Movies::where('genres', 'like', '%Action%')->get();
+        $actionLatest = Latest::where('genres', 'like', '%Action%')->get();
 
         // Merge the collections
-        $allActionMovies = $actionMoviesSeries->concat($actionMovies);
+        $allActionMovies = $actionMoviesSeries->concat($actionMovies)->concat($actionLatest);
 
         // Sort the merged collection
         $allActionMovies = $allActionMovies->sortByDesc('releaseYear');
@@ -278,8 +280,9 @@ class MoviesController extends Controller
 
             $recommend = DB::table('series')->where('aggregateRating', '>', '7')->where('originalTitleText', '<>', $name)->inRandomOrder()->limit(9)->get();
             $recommend2 = DB::table('movies')->where('aggregateRating', '>', '7')->where('originalTitleText', '<>', $name)->inRandomOrder()->limit(9)->get();
+            $recommend3 = DB::table('latests')->where('aggregateRating', '>', '7')->where('originalTitleText', '<>', $name)->inRandomOrder()->limit(9)->get();
 
-            $recom = $recommend->union($recommend2);
+            $recom = $recommend->union($recommend2)->union($recommend3);
 
             Cache::put($cache, $recom, 360);
 
@@ -294,8 +297,12 @@ class MoviesController extends Controller
             ->where('originalTitleText', $name)
             // ->where('titleType', $type)
             ->get();
+        $media3 = DB::table('latests')
+            ->where('originalTitleText', $name)
+            // ->where('titleType', $type)
+            ->get();
 
-        $all = $media->union($media2);
+        $all = $media->union($media2)->union($media3);
 
         /* 
         the below code uses the same structure as above
@@ -318,7 +325,13 @@ class MoviesController extends Controller
                 ->limit(4)
                 ->get();
 
-            $merged = $merged->union($merged2);
+            $media3 = DB::table('latests')
+                ->where('originalTitleText', '<>', $name)
+                ->inRandomOrder()
+                ->limit(4)
+                ->get();
+
+            $merged = $merged->union($merged2)->union($media3);
 
             Cache::put($cacheKey, $merged, 160);
         }
@@ -351,8 +364,9 @@ class MoviesController extends Controller
 
         $SeriesResults = Series::where('originalTitleText', 'like', "%$searchWord%")->orderBy('releaseYear', 'Desc')->get();
         $MoviesResults = Movies::where('originalTitleText', 'like', "%$searchWord%")->orderBy('releaseYear', 'Desc')->get();
+        $latestResults = Latest::where('originalTitleText', 'like', "%$searchWord%")->orderBy('releaseYear', 'Desc')->get();
 
-        $allResults = $SeriesResults->concat($MoviesResults);
+        $allResults = $SeriesResults->concat($MoviesResults)->concat($latestResults);
 
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
@@ -365,7 +379,7 @@ class MoviesController extends Controller
         // Create our paginator and add it to the view
         $paginatedResults = new LengthAwarePaginator($currentPageResults, count($allResults), $perPage, $page, ['path' => LengthAwarePaginator::resolveCurrentPath()]);
 
-        return view('components.search', compact('paginatedResults', 'SeriesResults', 'MoviesResults', 'page', 'searchWord'));
+        return view('components.search', compact('paginatedResults', 'SeriesResults', 'MoviesResults', 'page', 'searchWord', 'latestResults'));
     }
 
     public static function showMore()
