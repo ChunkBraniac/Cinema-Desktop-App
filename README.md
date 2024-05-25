@@ -14,8 +14,7 @@
 ## Overview
 The Movie Website Project is a web application designed to provide users with information about movies, including details such as title, release date, cast, plot summary, and user ratings It allows users to browse movies, search for specific titles, and view detailed information about each movie.
 
-<img src="public/app1.png">
-<img src="public/app2.png">
+<img src="public/new.png">
 
 ## Features
 - **Browse Movies:** Users can browse a list of movies available in the database.
