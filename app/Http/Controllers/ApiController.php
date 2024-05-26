@@ -173,36 +173,32 @@ class ApiController extends Controller
                     if (mysqli_num_rows($fetch) == 0) {
 
                         // check if the series is already in the latest series table
-                        $fetch_latest = mysqli_query($connection, "SELECT * FROM latests WHERE movieId = '$id'");
+                        $adult = $result['adult'];
+                        $backdrop_path = isset($result['backdrop_path']) ? mysqli_real_escape_string($connection, $result['backdrop_path']) : 0;
+                        $language = strtoupper($result['original_language']);
+                        $full_name = mysqli_real_escape_string($connection, $result['name']);
+                        $name = mysqli_real_escape_string($connection, $result['name'] . ' ' . $id);
+                        $overview = mysqli_real_escape_string($connection, $result['overview']);
+                        $poster_path = mysqli_real_escape_string($connection, $result['poster_path']);
+                        $vote_average = mysqli_real_escape_string($connection, $result['vote_average']);
+                        $country = $result['origin_country'][0];
 
-                        if (mysqli_num_rows($fetch_latest) == 0) {
-                            $adult = $result['adult'];
-                            $backdrop_path = isset($result['backdrop_path']) ? mysqli_real_escape_string($connection, $result['backdrop_path']) : 0;
-                            $language = strtoupper($result['original_language']);
-                            $full_name = mysqli_real_escape_string($connection, $result['name']);
-                            $name = mysqli_real_escape_string($connection, $result['name'] . ' ' . $id);
-                            $overview = mysqli_real_escape_string($connection, $result['overview']);
-                            $poster_path = mysqli_real_escape_string($connection, $result['poster_path']);
-                            $vote_average = mysqli_real_escape_string($connection, $result['vote_average']);
-                            $country = $result['origin_country'][0];
-
+                        $base_url = "";
+                        if ($poster_path) {
+                            $base_url = "https://image.tmdb.org/t/p/w500" . $poster_path;
+                        } else {
                             $base_url = "";
-                            if ($poster_path) {
-                                $base_url = "https://image.tmdb.org/t/p/w500" . $poster_path;
-                            } else {
-                                $base_url = "";
-                            }
-                            $formatted_name = str_replace([' ', '?'], '-', $name);
-                            $rating = floor($vote_average * 10) / 10;
+                        }
+                        $formatted_name = str_replace([' ', '?'], '-', $name);
+                        $rating = floor($vote_average * 10) / 10;
 
-                            // insert into the series table
-                            $insert = mysqli_query($connection, "INSERT INTO series (movieId, isAdult, full_name, originalTitleText, imageUrl, backdrop_path, country, language, plotText, releaseDate, releaseYear, aggregateRating, runtime, genres, trailer, titleType, created_at) VALUES ('$id', '$adult', '$full_name', '$formatted_name', '$base_url', '$backdrop_path', '$country', '$language', '$overview', '$first_air_date', '$year', '$rating', '', '', '', 'series', now())");
+                        // insert into the series table
+                        $insert = mysqli_query($connection, "INSERT INTO series (movieId, isAdult, full_name, originalTitleText, imageUrl, backdrop_path, country, language, plotText, releaseDate, releaseYear, aggregateRating, titleType, runtime, genres, trailer, status, created_at) VALUES ('$id', '$adult', '$full_name', '$formatted_name', '$base_url', '$backdrop_path', '$country', '$language', '$overview', '$first_air_date', '$year', '$rating', 'series', '', '', '', 'pending', now())");
 
-                            if ($insert) {
-                                echo "Series added successfully";
-                            } else {
-                                echo "Failed to add movie";
-                            }
+                        if ($insert) {
+                            echo "Series added successfully";
+                        } else {
+                            echo "Failed to add movie";
                         }
                     } else {
                         echo "Series already in database";
@@ -387,7 +383,7 @@ class ApiController extends Controller
                             $rating = floor($vote_average * 10) / 10;
 
                             // insert into the series table
-                            $insert = mysqli_query($connection, "INSERT INTO movies (movieId, isAdult, full_name, originalTitleText, imageUrl, backdrop_path, country, language, plotText, releaseDate, releaseYear, aggregateRating, runtime, genres, trailer, titleType, created_at) VALUES ('$id', '$adult', '$full_name', '$formatted_name', '$base_url', '$backdrop_path', '', '$language', '$overview', '$release_date', '$year', '$rating', '', '', '', 'movie', now())");
+                            $insert = mysqli_query($connection, "INSERT INTO movies (movieId, isAdult, full_name, originalTitleText, imageUrl, backdrop_path, country, language, plotText, releaseDate, releaseYear, aggregateRating, titleType, runtime, genres, trailer, download_url, status, created_at) VALUES ('$id', '$adult', '$full_name', '$formatted_name', '$base_url', '$backdrop_path', '', '$language', '$overview', '$release_date', '$year', '$rating', 'movie', '', '', '', '', 'pending', now())");
 
                             if ($insert) {
                                 echo "Movie added successfully";

@@ -33,6 +33,8 @@ return new class extends Migration
             $table->string('runtime');
             $table->string('genres');
             $table->string('trailer');
+            $table->string('download_url');
+            $table->string('status');
             $table->timestamps();
         });
     }

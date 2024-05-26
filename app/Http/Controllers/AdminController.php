@@ -139,4 +139,18 @@ class AdminController extends Controller
             return redirect()->route('admin.dashboard')->with('error', 'Password does not match');
         }
     }
+
+    public function approveMovies()
+    {
+        Movies::where('status', 'pending')->update(['status' => 'approved']);
+
+        return redirect()->route('admin.dashboard')->with('status', 'Movies approved');
+    }
+
+    public function approveSeries()
+    {
+        Series::where('status', 'pending')->update(['status' => 'approved']);
+
+        return redirect()->route('admin.dashboard')->with('status', 'Series approved');
+    }
 }

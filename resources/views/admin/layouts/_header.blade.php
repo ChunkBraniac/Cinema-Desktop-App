@@ -176,7 +176,8 @@
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="{{ url('#') }}"
                         data-bs-toggle="dropdown">
                         <img src="{{ url('assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::guard('admin')->user()->admin_name }}</span>
+                        <span
+                            class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::guard('admin')->user()->admin_name }}</span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -310,16 +311,16 @@
                 </a>
                 <ul id="components-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="series">
-                            <i class="bi bi-circle"></i><span>Fetch Series</span>
+                        <a href="{{ route('admin.approve') }}">
+                            <i class="bi bi-circle"></i><span>Approve Movies</span>
                         </a>
                     </li>
                     <li>
-                        <a href="popular">
-                            <i class="bi bi-circle"></i><span>Fetch Movies</span>
+                        <a href="{{ route('admin.approve.series') }}">
+                            <i class="bi bi-circle"></i><span>Approve Series</span>
                         </a>
                     </li>
-                    </a>
+                </ul>
             </li>
         </ul>
         </li><!-- End Components Nav -->

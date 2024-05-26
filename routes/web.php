@@ -77,6 +77,9 @@ Route::group(['middleware' => 'admin'], function () {
 
     // get seasons
     Route::get('admin/seasons', [ApiController::class, 'getSeasons'])->name('admin.seasons');
+
+    Route::get('admin/approve/movies', [AdminController::class, 'approveMovies'])->name('admin.approve');
+    Route::get('admin/approve/series', [AdminController::class, 'approveSeries'])->name('admin.approve.series');
 });
 
 // Download page
