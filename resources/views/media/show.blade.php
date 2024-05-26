@@ -28,7 +28,8 @@
                                 <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                     <i class="fa fa-star" aria-hidden="true" style="font-size: 11px"></i>
 
-                                    {{ isset($item->aggregateRating) ? $item->aggregateRating : 'N/A' }}</h6>
+                                    {{ isset($item->aggregateRating) ? $item->aggregateRating : 'N/A' }}
+                                </h6>
                                 <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
                                     Release
                                     year:
@@ -73,6 +74,16 @@
                                     </h6>
                                 @endif
 
+                                {{-- Release Date --}}
+                                <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                    Release Date: {{ $item->releaseDate }}
+                                </h6>
+
+                                {{-- Language --}}
+                                <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                    Language: {{ $item->language }}
+                                </h6>
+
                                 @if ($item->country == '0')
                                     <h6
                                         style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
@@ -107,7 +118,8 @@
                                         <br>
 
                                         <div class="text-center">
-                                            <a class="" data-bs-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                            <a class="" data-bs-toggle="collapse" href="#collapseExample"
+                                                aria-expanded="false" aria-controls="collapseExample">
                                                 <i class="fa fa-ellipsis-h" aria-hidden="true" style="font-size: 20px;"></i>
                                             </a>
                                         </div>
@@ -120,9 +132,8 @@
                         </div>
 
                         <div class="col-xl-6 mt-3 mt-xl-0">
-                            <iframe
-                                src="{{ $item->trailer ? $item->trailer : 'N/A' }}"
-                                title="YouTube video player" frameborder="0"
+                            <iframe src="{{ $item->trailer ? $item->trailer : 'N/A' }}" title="YouTube video player"
+                                frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen style="width: 100%; aspect-ratio: 4/2.3;">
                             </iframe>
@@ -148,7 +159,7 @@
         @endif
         <div class="row">
             <div class="col-xl-9 col-lg-8 mt-3">
-                @if ($item->titleType  == 'movie')
+                @if ($item->titleType == 'movie')
                     <h4>You may also like: </h4>
                     <div class="row">
 

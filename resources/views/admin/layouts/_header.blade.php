@@ -258,11 +258,11 @@
                         </a>
                     </li>
 
-                    {{-- <li>
-                        <a href="{{ route('seriesV1.api') }}">
-                            <i class="bi bi-circle"></i><span>Discover Series</span>
+                    <li>
+                        <a href="{{ route('moviesV1.api') }}">
+                            <i class="bi bi-circle"></i><span>Discover Movies</span>
                         </a>
-                    </li> --}}
+                    </li>
                     <li>
                         <a href="{{ route('seriesV2.api') }}">
                             <i class="bi bi-circle"></i><span>Trending Series</span>
@@ -273,7 +273,6 @@
                             <i class="bi bi-circle"></i><span>Trending Movies</span>
                         </a>
                     </li>
-                    <li>
                     <li>
                         <a href="{{ route('seriesUpdate.api') }}">
                             <i class="bi bi-circle"></i><span>Update Series Info</span>

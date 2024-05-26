@@ -58,7 +58,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 
     // route to fetch the movies
-    // Route::get('admin/movies/v1', [ApiController::class, 'moviesV1'])->name('moviesV1.api');
+    Route::get('admin/movies/v1', [ApiController::class, 'moviesV1'])->name('moviesV1.api');
     Route::get('admin/movies/v2', [ApiController::class, 'moviesV2'])->name('moviesV2.api');
     // Route::get('admin/movies/v3', [ApiController::class, 'moviesV3'])->name('moviesV3.api');
 
