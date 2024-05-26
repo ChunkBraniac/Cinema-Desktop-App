@@ -8,6 +8,7 @@ use App\Models\Movies;
 use App\Models\Series;
 use App\Models\Comment;
 use App\Models\Seasons;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
@@ -27,8 +28,8 @@ class MoviesController extends Controller
     public static function getAction()
     {
         // Perform your query for each set of movies
-        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Action%')->get();
-        $actionMovies = Movies::where('genres', 'like', '%Action%')->get();
+        $actionMoviesSeries = Series::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Action%')->get();
+        $actionMovies = Movies::where('status', '!=', 'pending')->where('genres', 'like', '%Action%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
@@ -54,8 +55,8 @@ class MoviesController extends Controller
     public static function getAnimation()
     {
 
-        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Animation%')->get();
-        $actionMovies = Movies::latest()->where('genres', 'like', '%Animation%')->get();
+        $actionMoviesSeries = Series::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Animation%')->get();
+        $actionMovies = Movies::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Animation%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
@@ -81,8 +82,8 @@ class MoviesController extends Controller
     public static function getComedy()
     {
 
-        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Comedy%')->get();
-        $actionMovies = Movies::latest()->where('genres', 'like', '%Comedy%')->get();
+        $actionMoviesSeries = Series::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Comedy%')->get();
+        $actionMovies = Movies::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Comedy%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
@@ -108,8 +109,8 @@ class MoviesController extends Controller
     public static function getDrama()
     {
 
-        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Drama%')->get();
-        $actionMovies = Movies::latest()->where('genres', 'like', '%Drama%')->get();
+        $actionMoviesSeries = Series::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Drama%')->get();
+        $actionMovies = Movies::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Drama%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
@@ -135,8 +136,8 @@ class MoviesController extends Controller
     public static function getFantasy()
     {
 
-        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Fantasy%')->get();
-        $actionMovies = Movies::latest()->where('genres', 'like', '%Fantasy%')->get();
+        $actionMoviesSeries = Series::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Fantasy%')->get();
+        $actionMovies = Movies::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Fantasy%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
@@ -162,8 +163,8 @@ class MoviesController extends Controller
     public static function getHorror()
     {
 
-        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Horror%')->get();
-        $actionMovies = Movies::latest()->where('genres', 'like', '%Horror%')->get();
+        $actionMoviesSeries = Series::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Horror%')->get();
+        $actionMovies = Movies::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Horror%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
@@ -189,8 +190,8 @@ class MoviesController extends Controller
     public static function getMystery()
     {
 
-        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Mystery%')->get();
-        $actionMovies = Movies::latest()->where('genres', 'like', '%Mystery%')->get();
+        $actionMoviesSeries = Series::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Mystery%')->get();
+        $actionMovies = Movies::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Mystery%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
@@ -216,8 +217,8 @@ class MoviesController extends Controller
     public static function getThriller()
     {
 
-        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Thriller%')->get();
-        $actionMovies = Movies::latest()->where('genres', 'like', '%Thriller%')->get();
+        $actionMoviesSeries = Series::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Thriller%')->get();
+        $actionMovies = Movies::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Thriller%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
@@ -243,8 +244,8 @@ class MoviesController extends Controller
     public static function getScifi()
     {
 
-        $actionMoviesSeries = Series::latest()->where('genres', 'like', '%Science Fiction%')->get();
-        $actionMovies = Movies::latest()->where('genres', 'like', '%Science Fiction%')->get();
+        $actionMoviesSeries = Series::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Science Fiction%')->get();
+        $actionMovies = Movies::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Science Fiction%')->get();
 
         // Merge the collections
         $allActionMovies = $actionMoviesSeries->concat($actionMovies);
@@ -349,8 +350,8 @@ class MoviesController extends Controller
             return redirect()->back()->with('error', 'Please enter a search word');
         }
 
-        $SeriesResults = Series::where('originalTitleText', 'like', "%$searchWord%")->orderBy('releaseYear', 'Desc')->get();
-        $MoviesResults = Movies::where('originalTitleText', 'like', "%$searchWord%")->orderBy('releaseYear', 'Desc')->get();
+        $SeriesResults = Series::where('status', '!=', 'pending')->where('originalTitleText', 'like', "%$searchWord%")->orderBy('releaseYear', 'Desc')->get();
+        $MoviesResults = Movies::where('status', '!=', 'pending')->where('originalTitleText', 'like', "%$searchWord%")->orderBy('releaseYear', 'Desc')->get();
 
         $allResults = $SeriesResults->concat($MoviesResults);
 
@@ -370,8 +371,8 @@ class MoviesController extends Controller
 
     public static function showMore()
     {
-        $more_Movies = Movies::orderByDesc('releaseYear')->paginate(36);
-        $more_Series = Series::orderByDesc('releaseYear')->paginate(36);
+        $more_Movies = Movies::where('status', '!=', 'pending')->orderByDesc('releaseYear')->paginate(36);
+        $more_Series = Series::where('status', '!=', 'pending')->orderByDesc('releaseYear')->paginate(36);
 
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 

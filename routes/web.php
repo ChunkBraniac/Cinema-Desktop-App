@@ -49,7 +49,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/comments', [AdminController::class, 'displayComments'])->name('admin.comments');
 
     // route to fetch the movies and series and other settings
-    // Route::get('admin/series/v1', [ApiController::class, 'seriesV1'])->name('seriesV1.api');
+    Route::get('admin/series/v1', [ApiController::class, 'seriesV1'])->name('seriesV1.api');
     Route::get('admin/series/v2', [ApiController::class, 'seriesV2'])->name('seriesV2.api');
     // Route::get('admin/series/v3', [ApiController::class, 'seriesV3'])->name('seriesV3.api');
 
@@ -77,6 +77,9 @@ Route::group(['middleware' => 'admin'], function () {
 
     // get seasons
     Route::get('admin/seasons', [ApiController::class, 'getSeasons'])->name('admin.seasons');
+
+    // show pending series and movies
+    Route::get('admin/series/pending', [AdminController::class, 'showPendingSeries'])->name('pending.series');
 
     Route::get('admin/approve/movies', [AdminController::class, 'approveMovies'])->name('admin.approve');
     Route::get('admin/approve/series', [AdminController::class, 'approveSeries'])->name('admin.approve.series');

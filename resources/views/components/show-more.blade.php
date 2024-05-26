@@ -50,6 +50,8 @@
                     class="fa fa-arrow-right text-muted" style="font-size: 13px" aria-hidden="true"></i> <span
                     style="margin-left: 5px; font-size: 14px" class="text-muted">Movies</span></h6>
         </div>
+    @else
+        {{ abort(404) }}
     @endif
 
     <br><br>
@@ -104,8 +106,8 @@
                     @unless (count($more_Movies) == 0)
                         @foreach ($more_Movies as $action)
                             <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                                <a href="{{ url('media/' . $action->originalTitleText) }}" class="text-decoration-none text-reset"><img
-                                        data-src="{{ asset($action->imageUrl) }}" alt="{{ str_replace('-', ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}"
+                                <a href="{{ url('media/' . $action->originalTitleText) }}"><img
+                                        data-src="{{ asset($action->imageUrl) }}" alt="{{ $action->full_name . ' ' . '(' . $action->releaseYear . ')' }}"
                                         class="img-fluid blurry-image lazy"
                                         style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)"
                                         loading="lazy"></a>
@@ -115,8 +117,8 @@
                                     <h6 class="mt-1 text-truncate"
                                         style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500"
                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                        data-bs-title="{{ str_replace('-', ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}">
-                                        {{ str_replace('-', ' ', $action->originalTitleText) . ' ' . '(' . $action->releaseYear . ')' }}
+                                        data-bs-title="{{ $action->full_name . ' ' . '(' . $action->releaseYear . ')' }}">
+                                        {{ $action->full_name . ' ' . '(' . $action->releaseYear . ')' }}
                                     </h6>
                                 </a>
                                 @if ($action->genres == 0)

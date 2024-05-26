@@ -40,7 +40,7 @@
                                 data-bs-title="{{ str_replace(['-', $search->releaseYear], ' ', $search->originalTitleText) . ' ' . '(' . $search->releaseYear . ')' }}">
 
                                 <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
-                                    {{ str_replace(['-', $search->releaseYear], ' ', $search->originalTitleText) . ' ' . '(' . $search->releaseYear . ')' }}</h6>
+                                    {{ $search->full_name . ' ' . '(' . $search->releaseYear . ')' }}</h6>
                             </a>
 
                             @if ($search->genres == '0')

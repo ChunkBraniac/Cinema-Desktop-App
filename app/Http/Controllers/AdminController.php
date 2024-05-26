@@ -153,4 +153,11 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard')->with('status', 'Series approved');
     }
+
+    public function showPendingSeries()
+    {
+        $pending_series = Series::where('status', '=', 'pending')->paginate(10);
+
+        return view('admin.components.pending-series', compact('pending_series'));
+    }
 }

@@ -232,7 +232,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="dashboard">
+                <a class="nav-link collapsed" href="{{ route('admin.dashboard') }}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -309,6 +309,11 @@
                         class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="components-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{ route('pending.series') }}">
+                            <i class="bi bi-circle"></i><span>Pending Series</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="{{ route('admin.approve') }}">
                             <i class="bi bi-circle"></i><span>Approve Movies</span>

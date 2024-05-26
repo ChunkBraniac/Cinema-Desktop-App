@@ -74,16 +74,6 @@
                                     </h6>
                                 @endif
 
-                                {{-- Release Date --}}
-                                <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
-                                    Release Date: {{ $item->releaseDate }}
-                                </h6>
-
-                                {{-- Language --}}
-                                <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
-                                    Language: {{ $item->language }}
-                                </h6>
-
                                 @if ($item->country == '0')
                                     <h6
                                         style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
@@ -150,64 +140,72 @@
     </div>
 
     <div class="container-xl">
-        @if ($item->titleType == 'movie')
-            <div class="m-auto text-center">
-                <a href="" class="btn btn-success btn-md mr-3"
-                    style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 12px; padding-bottom: 12px">Download
-                    Video <i class="fa fa-download" aria-hidden="true"></i></a>
-            </div>
+        @if (isset($item))
+            @if ($item->titleType == 'movie')
+                <div class="m-auto text-center">
+                    <a href="" class="btn btn-success btn-md mr-3"
+                        style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 12px; padding-bottom: 12px">Download
+                        Video <i class="fa fa-download" aria-hidden="true"></i></a>
+                </div>
+            @endif
+        @else
+            {{ abort(404) }}
         @endif
         <div class="row">
             <div class="col-xl-9 col-lg-8 mt-3">
-                @if ($item->titleType == 'movie')
-                    <h4>You may also like: </h4>
-                    <div class="row">
+                @if (isset($item))
+                    @if ($item->titleType == 'movie')
+                        <h4>You may also like: </h4>
+                        <div class="row">
 
-                        @foreach ($merged as $more)
-                            <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
-                                <a href="{{ url('media/' . $more->originalTitleText) }} "><img
-                                        data-src="{{ asset($more->imageUrl) }}" alt=""
-                                        class="img-fluid blurry-image lazy"
-                                        style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)"
-                                        loading="lazy"></a>
+                            @foreach ($merged as $more)
+                                <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
+                                    <a href="{{ url('media/' . $more->originalTitleText) }} "><img
+                                            data-src="{{ asset($more->imageUrl) }}" alt=""
+                                            class="img-fluid blurry-image lazy"
+                                            style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)"
+                                            loading="lazy"></a>
 
-                                <a href="{{ url('media/' . $more->originalTitleText) }}"
-                                    class="text-decoration-none text-reset">
-                                    <h6 class="mt-1 text-truncate"
-                                        style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500"
-                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                        data-bs-title="{{ $more->full_name . ' ' . '(' . $more->releaseYear . ')' }}">
-                                        {{ $more->full_name }}</h6>
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-                @elseif ($item->titleType == 'series')
-                    <div class="row mb-3">
+                                    <a href="{{ url('media/' . $more->originalTitleText) }}"
+                                        class="text-decoration-none text-reset">
+                                        <h6 class="mt-1 text-truncate"
+                                            style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500"
+                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                            data-bs-title="{{ $more->full_name . ' ' . '(' . $more->releaseYear . ')' }}">
+                                            {{ $more->full_name }}</h6>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+                    @elseif ($item->titleType == 'series')
+                        <div class="row mb-3">
 
-                        @foreach ($seasons as $more)
-                            <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
-                                <a
-                                    href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }} "><img
-                                        data-src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
-                                        style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)"
-                                        loading="lazy"></a>
-                                <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
-                                    class="text-decoration-none text-reset">
-                                    <h6 class="mt-1" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
-                                        Season
-                                        {{ $more->season_number }} Episode {{ $more->episode_number }}
-                                    </h6>
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
+                            @foreach ($seasons as $more)
+                                <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
+                                    <a
+                                        href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }} "><img
+                                            data-src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
+                                            style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)"
+                                            loading="lazy"></a>
+                                    <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
+                                        class="text-decoration-none text-reset">
+                                        <h6 class="mt-1" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
+                                            Season
+                                            {{ $more->season_number }} Episode {{ $more->episode_number }}
+                                        </h6>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
 
-                    {{ $seasons->onEachSide(1)->links() }}
+                        {{ $seasons->onEachSide(1)->links() }}
 
-                    @if (count($seasons) == 0)
-                        <p>No data for this title</p>
+                        @if (count($seasons) == 0)
+                            <p>No data for this title</p>
+                        @endif
                     @endif
+                @else
+                    {{ abort(404) }}
                 @endif
 
                 <hr class="mt-4 mb-4">
