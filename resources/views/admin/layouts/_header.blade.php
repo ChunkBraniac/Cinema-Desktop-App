@@ -260,7 +260,7 @@
 
                     <li>
                         <a href="{{ route('moviesV1.api') }}">
-                            <i class="bi bi-circle"></i><span>Discover Movies</span>
+                            <i class="bi bi-circle"></i><span>Movies Playing Now</span>
                         </a>
                     </li>
                     <li>
