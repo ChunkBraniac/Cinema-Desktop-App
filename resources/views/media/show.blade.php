@@ -121,7 +121,7 @@
 
                         <div class="col-xl-6 mt-3 mt-xl-0">
                             <iframe
-                                src="{{ $item->trailer ? 'https://www.youtube.com/embed/' . explode('?v=', $item->trailer)[1] : 'N/A' }}"
+                                src="{{ $item->trailer ? $item->trailer : 'N/A' }}"
                                 title="YouTube video player" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen style="width: 100%; aspect-ratio: 4/2.3;">
@@ -165,8 +165,8 @@
                                     <h6 class="mt-1 text-truncate"
                                         style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500"
                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                        data-bs-title="{{ str_replace('-', ' ', $more->originalTitleText) . ' ' . '(' . $more->releaseYear . ')' }}">
-                                        {{ str_replace('-', ' ', $more->originalTitleText) }}</h6>
+                                        data-bs-title="{{ $more->full_name . ' ' . '(' . $more->releaseYear . ')' }}">
+                                        {{ $more->full_name }}</h6>
                                 </a>
                             </div>
                         @endforeach

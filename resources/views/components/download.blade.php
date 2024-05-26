@@ -16,7 +16,7 @@
                         <img src="{{ $item->imageUrl }}"
                             class="card-img-top" alt="...">
                         <div class="card-body text-center">
-                            <h5 class="card-title">{{ $item->movieName }}</h5>
+                            <h5 class="card-title">{{ str_replace(['-', $item->movieId], ' ', $item->movieName) }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted ">Season {{ $item->season_number }} Episode {{ $item->episode_number }}</h6>
                             
                             <button class="btn btn-primary btn-lg" style="font-size: 17px; text-transform: uppercase" id="show-more">Download</button>

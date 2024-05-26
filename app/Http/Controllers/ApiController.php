@@ -134,7 +134,7 @@ class ApiController extends Controller
         $date = date('Y-m-d');
 
         curl_setopt_array($curl, [
-            CURLOPT_URL => "https://api.themoviedb.org/3/trending/tv/week?language=en-US&page=1&with_runtime.gte={$minRuntime}&release_date.lte=$date",
+            CURLOPT_URL => "https://api.themoviedb.org/3/trending/tv/day?language=en-US&page=1&with_runtime.gte={$minRuntime}&release_date.lte=$date",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -336,7 +336,7 @@ class ApiController extends Controller
             $curl = curl_init();
 
             curl_setopt_array($curl, [
-                CURLOPT_URL => "https://api.themoviedb.org/3/trending/movie/week?language=en-US&page={$pages}&with_runtime.gte={$minRuntime}&release_date.lte=$date",
+                CURLOPT_URL => "https://api.themoviedb.org/3/trending/movie/day?language=en-US&page={$pages}&with_runtime.gte={$minRuntime}&release_date.lte=$date",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
@@ -627,7 +627,7 @@ class ApiController extends Controller
 
                     // Display the results
                     foreach ($response['items'] as $item) {
-                        $videoTrailer = mysqli_real_escape_string($connection, "https://www.youtube.com/watch?v=" . $item['id']['videoId']);
+                        $videoTrailer = mysqli_real_escape_string($connection, "https://www.youtube.com/embed/" . $item['id']['videoId']);
 
                         // Update the database with the trailer
                         $updateTrailer = mysqli_query($connection, "UPDATE series SET trailer = '$videoTrailer' WHERE full_name = '$movieName'");
@@ -696,7 +696,7 @@ class ApiController extends Controller
 
                     // Display the results
                     foreach ($response['items'] as $item) {
-                        $videoTrailer = mysqli_real_escape_string($connection, "https://www.youtube.com/watch?v=" . $item['id']['videoId']);
+                        $videoTrailer = mysqli_real_escape_string($connection, "https://www.youtube.com/embed/" . $item['id']['videoId']);
 
                         // Update the database with the trailer
                         $updateTrailer = mysqli_query($connection, "UPDATE movies SET trailer = '$videoTrailer' WHERE full_name = '$movieName'");
