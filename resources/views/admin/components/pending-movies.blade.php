@@ -6,6 +6,14 @@
 
 @section('content')
 
+    @if (session('status'))
+        <h6 class="alert alert-success">{{ session('status') }}</h6>
+    @endif
+
+    @if (session('error'))
+        <h6 class="alert alert-danger">{{ session('error') }}</h6>
+    @endif
+
     <main id="main" class="main">
 
         <div class="pagetitle">
@@ -42,10 +50,13 @@
                                         <th>
                                             <b>N</b>ame
                                         </th>
-                                        <th>Type.</th>
+                                        <th>Image</th>
+                                        <th>Type</th>
                                         <th>Country</th>
-                                        <th>Runtime</th>
+                                        <th>Rating</th>
+                                        <th>Description</th>
                                         <th>Genres</th>
+                                        <th>Release Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -53,17 +64,25 @@
                                     @unless (count($pending_movies) == 0)
                                         @foreach ($pending_movies as $series)
                                             <tr>
-                                                <td>{{ $loop->iteration + ($pending_movies->currentPage() - 1) * $pending_movies->perPage() }}</td>
+                                                <td>{{ $loop->iteration + ($pending_movies->currentPage() - 1) * $pending_movies->perPage() }}
+                                                </td>
                                                 <td>{{ $series->movieId }}</td>
                                                 <td class="text-truncate">{{ $series->full_name }}</td>
+                                                <td><img src="{{ $series->imageUrl }}" alt=""
+                                                        style="width: 70px; height: 70px;">
+                                                </td>
                                                 <td>{{ $series->titleType }}</td>
                                                 <td>{{ $series->country ? $series->country : 'N/A' }}</td>
-                                                <td>{{ $series->runtime ? $series->runtime : 'N/A' }}</td>
-                                                <td>{{ $series->genres ? $series->genres : 'N/A'}}</td>
+                                                <td>{{ $series->aggregateRating ? $series->aggregateRating : 'N/A' }}</td>
+                                                <td>{{ $series->plotText ? $series->plotText : 'N/A' }}</td>
+                                                <td>{{ $series->genres ? $series->genres : 'N/A' }}</td>
+                                                <td>{{ $series->releaseDate }}</td>
                                                 <td>
-                                                    <a href="" class="btn btn-outline-success">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>
+                                                    <a href="" class="btn btn-outline-success">Edit <i class="fa fa-edit"
+                                                            aria-hidden="true"></i></a>
 
-                                                    <a href="{{ route('delete.series', ['id'=>$series->id]) }}" class="btn btn-outline-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                    <a href="{{ route('delete.movie', ['id' => $series->id]) }}"
+                                                        class="btn btn-outline-danger mt-2">Delete</a>
                                                 </td>
                                             </tr>
                                         @endforeach

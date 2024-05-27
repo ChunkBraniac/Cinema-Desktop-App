@@ -42,7 +42,8 @@
                                         <th>
                                             <b>N</b>ame
                                         </th>
-                                        <th>Type.</th>
+                                        <th>Image</th>
+                                        <th>Type</th>
                                         <th>Country</th>
                                         <th>Genres</th>
                                         <th>Description</th>
@@ -56,6 +57,10 @@
                                                 <td>{{ $loop->iteration + ($pending_series->currentPage() - 1) * $pending_series->perPage() }}</td>
                                                 <td>{{ $series->movieId }}</td>
                                                 <td class="text-truncate">{{ $series->full_name }}</td>
+                                                <td>
+                                                    <img src="{{ $series->imageUrl }}" alt=""
+                                                    style="width: 70px; height: 70px;">
+                                                </td>
                                                 <td>{{ $series->titleType }}</td>
                                                 <td>{{ $series->country ? $series->country : 'N/A' }}</td>
                                                 <td>{{ $series->genres ? $series->genres : 'N/A'}}</td>

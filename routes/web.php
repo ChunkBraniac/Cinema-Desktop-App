@@ -71,7 +71,7 @@ Route::group(['middleware' => 'admin'], function () {
     // update the trailer
     Route::get('admin/series/trailer', [ApiController::class, 'updateSeriesTrailer'])->name('series.trailer');
     Route::get('admin/movies/trailer', [ApiController::class, 'updateMoviesTrailer'])->name('movies.trailer');
-    Route::get('admin/update/movies/trailer', [ApiController::class, 'updateLatestTrailer'])->name('latestmovies.trailer');
+    Route::get('admin/series/trailer/v2', [ApiController::class, 'updateSeriesTrailerV2'])->name('series.trailer.v2');
 
     Route::post('admin/reset', [AdminController::class, 'reset'])->name('admin.reset');
 
@@ -88,6 +88,9 @@ Route::group(['middleware' => 'admin'], function () {
     // deleting a series
     Route::get('admin/delete/series/{id}', [AdminController::class, 'deleteSeries'])->name('delete.series');
     Route::get('admin/delete/movie/{id}', [AdminController::class, 'deleteMovie'])->name('delete.movie');
+
+    // search for a movie
+    Route::get('admin/search', [AdminController::class, 'search'])->name('search');
 });
 
 // Download page

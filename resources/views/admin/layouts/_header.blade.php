@@ -11,7 +11,7 @@
         </div><!-- End Logo -->
 
         <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
+            <form class="search-form d-flex align-items-center" method="get" action="{{ route('search') }}">
                 <input type="text" name="query" placeholder="Search" title="Enter search keyword">
                 <button type="submit" title="Search"><i class="bi bi-search"></i></button>
             </form>
@@ -259,17 +259,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('moviesV1.api') }}">
-                            <i class="bi bi-circle"></i><span>Discover Movies</span>
-                        </a>
-                    </li>
-                    <li>
                         <a href="{{ route('seriesV1.api') }}">
-                            <i class="bi bi-circle"></i><span>Discover Series</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('seriesV2.api') }}">
                             <i class="bi bi-circle"></i><span>Trending Series</span>
                         </a>
                     </li>
@@ -292,6 +282,11 @@
                     <li>
                         <a href="{{ route('series.trailer') }}">
                             <i class="bi bi-circle"></i><span>Get Series Trailer</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('series.trailer.v2') }}">
+                            <i class="bi bi-circle"></i><span>Get Series Trailer V2</span>
                         </a>
                     </li>
                     <li>

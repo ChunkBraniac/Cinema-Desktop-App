@@ -183,6 +183,18 @@ class AdminController extends Controller
 
         $movie->delete();
 
-        return redirect()->route('admin.dashboard')->with('status', 'Movie deleted');
+        return redirect()->route('pending.movies')->with('status', 'Movie deleted');
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('query');
+
+        $movies = Movies::where('full_name', 'like', '%' . $search . '%')->paginate(10);
+        $series = Series::where('full_name', 'like', '%' . $search . '%')->paginate(10);
+
+        $merge = $movies->concat($series);
+
+        return view('admin.components.search', compact('merge'));
     }
 }
