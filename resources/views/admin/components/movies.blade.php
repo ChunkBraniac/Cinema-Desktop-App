@@ -46,6 +46,7 @@
                                         <th>Country</th>
                                         <th>Runtime</th>
                                         <th>Genres</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,6 +60,12 @@
                                                 <td>{{ $movies->country ? $movies->country : 'N/A' }}</td>
                                                 <td>{{ $movies->runtime ? $movies->runtime : 'N/A' }}</td>
                                                 <td>{{ $movies->genres ? $movies->genres : 'N/A'}}</td>
+                                                <td>
+                                                    <a href="" class="btn btn-outline-success">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>
+
+                                                    <a href="{{ route('delete.movie', ['id'=>$movies->id]) }}" class="btn btn-outline-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                </td>
+                                            </tr>
                                             </tr>
                                         @endforeach
                                     @endunless
@@ -87,7 +94,6 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Movie Id</th>
                                         <th>
                                             <b>N</b>ame
                                         </th>
@@ -95,8 +101,7 @@
                                         <th>Country</th>
                                         <th>Runtime</th>
                                         <th>Genres</th>
-                                        <th>TMDBID</th>
-                                        <th>Trailer</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -104,14 +109,16 @@
                                         @foreach ($allseries as $movies)
                                             <tr>
                                                 <td>{{ $loop->iteration + ($allseries->currentPage() - 1) * $allseries->perPage() }}</td>
-                                                <td>{{ $movies->movieId }}</td>
                                                 <td class="text-truncate">{{ $movies->originalTitleText }}</td>
                                                 <td>{{ $movies->titleType }}</td>
                                                 <td>{{ $movies->country ? $movies->country : 'N/A' }}</td>
                                                 <td>{{ $movies->runtime ? $movies->runtime : 'N/A' }}</td>
                                                 <td>{{ $movies->genres ? $movies->genres : 'N/A'}}</td>
-                                                <td>{{ $movies->tmdbid ? $movies->tmdbid : 'N/A' }}</td>
-                                                <td>{{ $movies->trailer ? $movies->trailer : 'N/A'}}</td>
+                                                <td>
+                                                    <a href="" class="btn btn-outline-success">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>
+
+                                                    <a href="{{ route('delete.series', ['id'=>$movies->id]) }}" class="btn btn-outline-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endunless

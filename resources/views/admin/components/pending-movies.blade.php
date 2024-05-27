@@ -9,7 +9,7 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Data Tables</h1>
+            <h1>Pending Movies</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
@@ -44,26 +44,26 @@
                                         </th>
                                         <th>Type.</th>
                                         <th>Country</th>
+                                        <th>Runtime</th>
                                         <th>Genres</th>
-                                        <th>Description</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @unless (count($pending_series) == 0)
-                                        @foreach ($pending_series as $series)
+                                    @unless (count($pending_movies) == 0)
+                                        @foreach ($pending_movies as $series)
                                             <tr>
-                                                <td>{{ $loop->iteration + ($pending_series->currentPage() - 1) * $pending_series->perPage() }}</td>
+                                                <td>{{ $loop->iteration + ($pending_movies->currentPage() - 1) * $pending_movies->perPage() }}</td>
                                                 <td>{{ $series->movieId }}</td>
                                                 <td class="text-truncate">{{ $series->full_name }}</td>
                                                 <td>{{ $series->titleType }}</td>
                                                 <td>{{ $series->country ? $series->country : 'N/A' }}</td>
+                                                <td>{{ $series->runtime ? $series->runtime : 'N/A' }}</td>
                                                 <td>{{ $series->genres ? $series->genres : 'N/A'}}</td>
-                                                <td>{{ $series->plotText ? $series->plotText : 'N/A'}}</td>
                                                 <td>
                                                     <a href="" class="btn btn-outline-success">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>
 
-                                                    <a href="{{ route('delete.series', ['id'=>$series->id]) }}" class="btn btn-outline-danger mt-2">Delete </a>
+                                                    <a href="{{ route('delete.series', ['id'=>$series->id]) }}" class="btn btn-outline-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -71,7 +71,7 @@
                                 </tbody>
                             </table>
 
-                            {{ $pending_series->onEachSide(1)->links() }}
+                            {{ $pending_movies->onEachSide(1)->links() }}
                             <!-- End Table with stripped rows -->
 
                         </div>

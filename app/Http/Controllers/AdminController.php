@@ -160,4 +160,29 @@ class AdminController extends Controller
 
         return view('admin.components.pending-series', compact('pending_series'));
     }
+
+    public function showPendingMovies()
+    {
+        $pending_movies = Movies::where('status', '=', 'pending')->paginate(10);
+
+        return view('admin.components.pending-movies', compact('pending_movies'));
+    }
+
+    public function deleteSeries($id)
+    {
+        $series = Series::find($id);
+
+        $series->delete();
+
+        return redirect()->route('admin.dashboard')->with('status', 'Series deleted');
+    }
+
+    public function deleteMovie($id)
+    {
+        $movie = Movies::find($id);
+
+        $movie->delete();
+
+        return redirect()->route('admin.dashboard')->with('status', 'Movie deleted');
+    }
 }

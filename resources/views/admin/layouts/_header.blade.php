@@ -260,7 +260,12 @@
 
                     <li>
                         <a href="{{ route('moviesV1.api') }}">
-                            <i class="bi bi-circle"></i><span>Movies Playing Now</span>
+                            <i class="bi bi-circle"></i><span>Discover Movies</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('seriesV1.api') }}">
+                            <i class="bi bi-circle"></i><span>Discover Series</span>
                         </a>
                     </li>
                     <li>
@@ -312,6 +317,11 @@
                     <li>
                         <a href="{{ route('pending.series') }}">
                             <i class="bi bi-circle"></i><span>Pending Series</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('pending.movies') }}">
+                            <i class="bi bi-circle"></i><span>Pending Movies</span>
                         </a>
                     </li>
                     <li>

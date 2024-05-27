@@ -80,9 +80,14 @@ Route::group(['middleware' => 'admin'], function () {
 
     // show pending series and movies
     Route::get('admin/series/pending', [AdminController::class, 'showPendingSeries'])->name('pending.series');
+    Route::get('admin/movies/pending', [AdminController::class, 'showPendingMovies'])->name('pending.movies');
 
     Route::get('admin/approve/movies', [AdminController::class, 'approveMovies'])->name('admin.approve');
     Route::get('admin/approve/series', [AdminController::class, 'approveSeries'])->name('admin.approve.series');
+
+    // deleting a series
+    Route::get('admin/delete/series/{id}', [AdminController::class, 'deleteSeries'])->name('delete.series');
+    Route::get('admin/delete/movie/{id}', [AdminController::class, 'deleteMovie'])->name('delete.movie');
 });
 
 // Download page
