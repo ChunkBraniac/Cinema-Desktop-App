@@ -112,210 +112,6 @@ class ApiController extends Controller
         }
     }
 
-    public function seriesV2()
-    {
-        $dbhost = "127.0.0.1";
-        $dbus = "root";
-        $dbpass = '';
-        $dbname = 'cinema';
-
-        $connection = mysqli_connect($dbhost, $dbus, $dbpass, $dbname);
-
-        if (!$connection) {
-            die('Failed to connect' . mysqli_connect_error());
-        } else {
-            mysqli_error($connection);
-        }
-
-
-        $curl = curl_init();
-        $minRuntime = 60; // Minimum runtime in minutes to exclude short films
-        $date = date('Y-m-d');
-
-        $page = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-        foreach ($page as $pages) {
-            curl_setopt_array($curl, [
-                CURLOPT_URL => "https://api.themoviedb.org/3/trending/tv/day?language=en-US&page={$pages}&with_runtime.gte={$minRuntime}&release_date.lte=$date",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET",
-                CURLOPT_HTTPHEADER => [
-                    "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTg4ZDY3NDI1ZmJiN2VhYjIzNWViMDM4NTQyYjY0ZiIsInN1YiI6IjY1MjU3Y2FhMDcyMTY2NDViNDAwMTVhOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GaTStrEdn0AWqdlwpzn75h8vo_-X5qoOxVxZEEBYJXc",
-                    "accept: application/json"
-                ],
-            ]);
-
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-
-            curl_close($curl);
-
-            if ($err) {
-                return redirect()->route('admin.dashboard')->with('error', 'Failed to fetch movies: ' . $err);
-            }
-
-            $data = json_decode($response, true);
-
-            if (isset($data['results']) && is_array($data['results'])) {
-                foreach ($data['results'] as $result) {
-                    $first_air_date = mysqli_real_escape_string($connection, $result['first_air_date']);
-                    $year = substr($first_air_date, 0, 4); // Extract the first four characters
-
-                    if ($year >= '2020' && $year <= '2024') {
-                        $id = $result['id'];
-
-                        // check if the series is already in the db
-
-                        $fetch = mysqli_query($connection, "SELECT * FROM series WHERE movieId = '$id'");
-
-                        if (mysqli_num_rows($fetch) == 0) {
-
-                            // check if the series is already in the latest series table
-                            $adult = $result['adult'];
-                            $backdrop_path = isset($result['backdrop_path']) ? mysqli_real_escape_string($connection, $result['backdrop_path']) : 0;
-                            $language = strtoupper($result['original_language']);
-                            $full_name = mysqli_real_escape_string($connection, $result['name']);
-                            $name = mysqli_real_escape_string($connection, $result['name'] . ' ' . $id);
-                            $overview = mysqli_real_escape_string($connection, $result['overview']);
-                            $poster_path = mysqli_real_escape_string($connection, $result['poster_path']);
-                            $vote_average = mysqli_real_escape_string($connection, $result['vote_average']);
-                            $country = $result['origin_country'][0];
-
-                            $base_url = "";
-                            if ($poster_path) {
-                                $base_url = "https://image.tmdb.org/t/p/w500" . $poster_path;
-                            } else {
-                                $base_url = "";
-                            }
-                            $formatted_name = str_replace([' ', '?'], '-', $name);
-                            $rating = floor($vote_average * 10) / 10;
-
-                            // insert into the series table
-                            $insert = mysqli_query($connection, "INSERT INTO series (movieId, isAdult, full_name, originalTitleText, imageUrl, backdrop_path, country, language, plotText, releaseDate, releaseYear, aggregateRating, titleType, runtime, genres, trailer, status, created_at) VALUES ('$id', '$adult', '$full_name', '$formatted_name', '$base_url', '$backdrop_path', '$country', '$language', '$overview', '$first_air_date', '$year', '$rating', 'series', '', '', '', 'pending', now())");
-
-                            if ($insert) {
-                                echo "Series added successfully";
-                            } else {
-                                echo "Failed to add movie";
-                            }
-                        } else {
-                            echo "Series already in database";
-                        }
-                    } else {
-                        echo "Series not in range";
-                    }
-                }
-            }
-        }
-    }
-
-    public function moviesV1()
-    {
-        $dbhost = "127.0.0.1";
-        $dbus = "root";
-        $dbpass = '';
-        $dbname = 'cinema';
-
-        $connection = mysqli_connect($dbhost, $dbus, $dbpass, $dbname);
-
-        if (!$connection) {
-            die('Failed to connect' . mysqli_connect_error());
-        } else {
-            mysqli_error($connection);
-        }
-
-        $page = [1];
-        $origin_country = ['KR', 'US'];
-        $minRuntime = 60; // Minimum runtime in minutes to exclude short films
-        $date = date('Y-m-d');
-
-        foreach ($origin_country as $country) {
-            foreach ($page as $pages) {
-                $curl = curl_init();
-
-                curl_setopt_array($curl, [
-                    CURLOPT_URL => "https://api.themoviedb.org/3/movie/now_playing?&language=en-US&page={$pages}&release_date.lte=$date&with_origin_country={$country}&sort_by=primary_release_date.desc",
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => "",
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 30,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => "GET",
-                    CURLOPT_HTTPHEADER => [
-                        "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTg4ZDY3NDI1ZmJiN2VhYjIzNWViMDM4NTQyYjY0ZiIsInN1YiI6IjY1MjU3Y2FhMDcyMTY2NDViNDAwMTVhOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GaTStrEdn0AWqdlwpzn75h8vo_-X5qoOxVxZEEBYJXc",
-                        "accept: application/json"
-                    ],
-                ]);
-
-                $response = curl_exec($curl);
-                $err = curl_error($curl);
-
-                curl_close($curl);
-
-                if ($err) {
-                    return redirect()->route('admin.dashboard')->with('error', 'Failed to fetch movies: ' . $err);
-                }
-
-                $data = json_decode($response, true);
-
-                if (isset($data['results']) && is_array($data['results'])) {
-                    foreach ($data['results'] as $result) {
-                        $release_date = mysqli_real_escape_string($connection, isset($result['release_date']) ? $result['release_date'] : 0);
-                        $year = substr($release_date, 0, 4); // Extract the first four characters
-                        $full_name = mysqli_real_escape_string($connection, $result['title']);
-
-                        if ($year >= '2018' && $release_date <= $date && $year <= '2024') {
-                            $id = $result['id'];
-
-                            // check if the series is already in the db
-
-                            $fetch = mysqli_query($connection, "SELECT * FROM movies WHERE movieId = '$id'");
-
-                            if (mysqli_num_rows($fetch) == 0) {
-                                $adult = $result['adult'];
-                                $date = date('Y-m-d');
-                                $backdrop_path = isset($result['backdrop_path']) ? mysqli_real_escape_string($connection, $result['backdrop_path']) : 0;
-                                $language = strtoupper($result['original_language']);
-                                $full_name = mysqli_real_escape_string($connection, $result['title']);
-                                $name = mysqli_real_escape_string($connection, $result['title'] . ' ' . $id);
-                                $overview = mysqli_real_escape_string($connection, $result['overview']);
-                                $poster_path = mysqli_real_escape_string($connection, $result['poster_path']);
-                                $vote_average = mysqli_real_escape_string($connection, $result['vote_average']);
-
-                                $base_url = "";
-                                if ($poster_path) {
-                                    $base_url = "https://image.tmdb.org/t/p/w500" . $poster_path;
-                                } else {
-                                    $base_url = "";
-                                }
-
-                                $formatted_name = str_replace(' ', '-', $name);
-                                $rating = floor($vote_average * 10) / 10;
-
-                                // insert into the series table
-                                $insert = mysqli_query($connection, "INSERT INTO movies (movieId, isAdult, full_name, originalTitleText, imageUrl, backdrop_path, country, language, plotText, releaseDate, releaseYear, aggregateRating, titleType, runtime, genres, trailer, download_url, status, created_at) VALUES ('$id', '$adult', '$full_name', '$formatted_name', '$base_url', '$backdrop_path', '', '$language', '$overview', '$release_date', '$year', '$rating', 'movie', '', '', '', '', 'pending', now())");
-
-                                if ($insert) {
-                                    echo $full_name . ": has been added successfully" . "<br>";
-                                } else {
-                                    echo "Failed to add " . $full_name . "<br>";
-                                }
-                            } else {
-                                echo $full_name . ": already in database" . "<br>";
-                            }
-                        } else {
-                            echo $full_name . ": not in range" . "<br>";
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     public function moviesV2()
     {
         $dbhost = "127.0.0.1";
@@ -694,6 +490,7 @@ class ApiController extends Controller
             while ($movie = mysqli_fetch_assoc($getMovies)) {
                 $movie_id = $movie['movieId'];
                 $id = $movie['id'];
+                $movie_name = $movie['full_name'];
 
                 $curl = curl_init();
 
@@ -730,7 +527,7 @@ class ApiController extends Controller
                             $update = mysqli_query($connection, "UPDATE movies SET trailer = '$trailer' WHERE id = '$id'");
 
                             if ($update) {
-                                echo "Trailer updated successfully";
+                                echo "Trailer updated successfully for " . $movie_name . "<br>";
                             } else {
                                 echo "Failed to update trailer";
                             }

@@ -181,8 +181,6 @@ class AdminController extends Controller
     {
         $movie = Movies::find($id);
 
-        $movie->delete();
-
         return redirect()->route('pending.movies')->with('status', 'Movie deleted');
     }
 
@@ -196,5 +194,19 @@ class AdminController extends Controller
         $merge = $movies->concat($series);
 
         return view('admin.components.search', compact('merge'));
+    }
+
+    public function approve_series($id)
+    {
+        $series = Series::where('status', 'pending')->where('id', $id)->update(['status' => 'approved']);
+
+        return redirect()->route('admin.dashboard')->with('status', 'Series approved');
+    }
+
+    public function approve_movies($id)
+    {
+        $movie = Movies::where('status', 'pending')->where('id', $id)->update(['status' => 'approved']);
+
+        return redirect()->route('admin.dashboard')->with('status', 'Movie approved');
     }
 }

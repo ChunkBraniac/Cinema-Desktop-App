@@ -30,9 +30,9 @@
                 @foreach ($paginatedResults as $animation)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ url('media/' . $animation->originalTitleText) }}"><img data-src="{{ asset($animation->imageUrl) }}"
-                                alt="{{ str_replace(['-', $animation->releaseYear], ' ', $animation->originalTitleText) . ' ' . '(' . $animation->releaseYear . ')' }}" class="img-fluid " style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
-                        <a href="{{ url('media/' . $animation->originalTitleText) }}" class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ str_replace(['-', $animation->releaseYear], ' ', $animation->originalTitleText) . ' ' . '(' . $animation->releaseYear . ')' }}">
-                            <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">{{ str_replace(['-', $animation->releaseYear], ' ', $animation->originalTitleText) . ' ' . '(' . $animation->releaseYear . ')' }}</h6>
+                                alt="{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}" class="img-fluid " style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
+                        <a href="{{ url('media/' . $animation->originalTitleText) }}" class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}">
+                            <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}</h6>
                         </a>
                         <h6 class="text-truncate" style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">{{ $animation->genres }}</h6>
                     </div>

@@ -30,13 +30,13 @@
                 @foreach ($paginatedResults as $fantasy)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ url('media/' . $fantasy->originalTitleText) }}"><img
-                                data-src="{{ asset($fantasy->imageUrl) }}" alt="{{ str_replace(['-', $fantasy->releaseYear], ' ', $fantasy->originalTitleText) . ' ' . '(' . $fantasy->releaseYear . ')' }}" class="img-fluid"
+                                data-src="{{ asset($fantasy->imageUrl) }}" alt="{{ $fantasy->full_name . ' ' . '(' . $fantasy->releaseYear . ')' }}" class="img-fluid"
                                 style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
                         <a href="{{ url('media/' . $fantasy->originalTitleText) }}"
-                            class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ str_replace(['-', $fantasy->releaseYear], ' ', $fantasy->originalTitleText) . ' ' . '(' . $fantasy->releaseYear . ')' }}">
+                            class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $fantasy->full_name . ' ' . '(' . $fantasy->releaseYear . ')' }}">
 
                             <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
-                                {{ str_replace(['-', $fantasy->releaseYear], ' ', $fantasy->originalTitleText) . ' ' . '(' . $fantasy->releaseYear . ')' }}</h6>
+                                {{ $fantasy->full_name . ' ' . '(' . $fantasy->releaseYear . ')' }}</h6>
                         </a>
                         <h6 class="text-truncate" style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">
                             {{ $fantasy->genres }}</h6>

@@ -50,23 +50,13 @@ Route::group(['middleware' => 'admin'], function () {
 
     // route to fetch the movies and series and other settings
     Route::get('admin/series/v1', [ApiController::class, 'seriesV1'])->name('seriesV1.api');
-    Route::get('admin/series/v2', [ApiController::class, 'seriesV2'])->name('seriesV2.api');
-    // Route::get('admin/series/v3', [ApiController::class, 'seriesV3'])->name('seriesV3.api');
-
-    Route::get('admin/series/latest', [ApiController::class, 'latestSeries'])->name('series.latest');
-    Route::get('admin/movies/latest', [ApiController::class, 'latestMovies'])->name('movies.latest');
-
 
     // route to fetch the movies
-    Route::get('admin/movies/v1', [ApiController::class, 'moviesV1'])->name('moviesV1.api');
     Route::get('admin/movies/v2', [ApiController::class, 'moviesV2'])->name('moviesV2.api');
-    // Route::get('admin/movies/v3', [ApiController::class, 'moviesV3'])->name('moviesV3.api');
 
     // update the movies and series
     Route::get('admin/update/movies', [ApiController::class, 'updateMoviesInfo'])->name('moviesUpdate.api');
     Route::get('admin/update/series', [ApiController::class, 'updateSeriesInfo'])->name('seriesUpdate.api');
-    Route::get('admin/update/movies/latest', [ApiController::class, 'updateLatestMoviesInfo'])->name('latestMoviesUpdate.api');
-    Route::get('admin/update/series/latest', [ApiController::class, 'updateLatestSeriesInfo'])->name('latestSeriesUpdate.api');
 
     // update the trailer
     Route::get('admin/series/trailer', [ApiController::class, 'updateSeriesTrailer'])->name('series.trailer');
@@ -91,6 +81,10 @@ Route::group(['middleware' => 'admin'], function () {
 
     // search for a movie
     Route::get('admin/search', [AdminController::class, 'search'])->name('search');
+
+    // Route to approve series and movies per each 
+    Route::get('admin/approve/series/{id}', [AdminController::class, 'approve_series'])->name('approve.series');
+    Route::get('admin/approve/movie/{id}', [AdminController::class, 'approve_movies'])->name('approve.movie');
 });
 
 // Download page

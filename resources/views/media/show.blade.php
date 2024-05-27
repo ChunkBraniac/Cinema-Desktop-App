@@ -280,7 +280,7 @@
         @if (isset($item))
             @if ($item->titleType == 'movie')
                 <div class="m-auto text-center">
-                    <a href="" class="btn btn-success btn-md mr-3"
+                    <a href="{{ $item->download_url }}" download="{{ $item->full_name }} {{ ($item->releaseYear) }}" class="btn btn-success btn-md mr-3"
                         style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 12px; padding-bottom: 12px">Download
                         Video <i class="fa fa-download" aria-hidden="true"></i></a>
                 </div>

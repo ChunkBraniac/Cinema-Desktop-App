@@ -68,7 +68,7 @@
                                                 <td>
                                                     <a href="" class="btn btn-outline-success">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>
 
-                                                    <a href="{{ route('delete.series', ['id'=>$series->id]) }}" class="btn btn-outline-danger mt-2">Delete </a>
+                                                    <a href="{{ route('approve.series', ['id'=>$series->id]) }}" class="btn btn-outline-danger mt-2">Approve </a>
                                                 </td>
                                             </tr>
                                         @endforeach
