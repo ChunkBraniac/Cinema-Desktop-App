@@ -7,128 +7,265 @@
             @if ($all->isNotEmpty())
                 <!-- Check if the collection is not empty -->
                 @foreach ($all->unique('movieId') as $item)
-                    @section('title')
-                        {{ $item->originalTitleText }}
-                    @endsection
-                    <!-- Iterate over each item in the collection -->
-                    <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">
-                        {{ str_replace(['-', $item->movieId], ' ', $item->originalTitleText) }}</h3>
-                    <div class="row">
-                        <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
-                            <img data-src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
-                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy">
-                        </div>
 
-                        <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
-                            <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
-                                <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3"
-                                    style="font-family: 'Ubuntu sans', sans-serif;">
-                                    {{ str_replace('-', ' ', $item->originalTitleText) }}
-                                </h4>
-                                <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
-                                    <i class="fa fa-star" aria-hidden="true" style="font-size: 11px"></i>
+                    {{-- THIS IS A SERIES PANE --}}
+                    @if ($item->titleType == 'series')
+                        @section('title')
+                            {{ $item->originalTitleText }}
+                        @endsection
+                        <!-- Iterate over each item in the collection -->
+                        <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">
+                            {{ str_replace(['-', $item->movieId], ' ', $item->originalTitleText) }}</h3>
+                        <div class="row">
+                            <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
+                                <img data-src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                                    style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy">
+                            </div>
 
-                                    {{ isset($item->aggregateRating) ? $item->aggregateRating : 'N/A' }}
-                                </h6>
-                                <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
-                                    Release
-                                    year:
-                                    {{ $item->releaseYear }}</h6>
-
-
-                                @if ($item->genres == '0')
+                            <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
+                                <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
+                                    <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3"
+                                        style="font-family: 'Ubuntu sans', sans-serif;">
+                                        {{ str_replace('-', ' ', $item->originalTitleText) }}
+                                    </h4>
                                     <h6
                                         style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
-                                        Genre:
-                                        N/A
-                                    </h6>
-                                @elseif ($item->genres == '')
-                                    <h6
-                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
-                                        Genre:
-                                        N/A
-                                    </h6>
-                                @else
-                                    <h6
-                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
-                                        Genre: {{ $item->genres }}
-                                    </h6>
-                                @endif
+                                        <i class="fa fa-star" aria-hidden="true" style="font-size: 11px"></i>
 
-                                @if ($item->runtime == '0')
+                                        {{ isset($item->aggregateRating) ? $item->aggregateRating : 'N/A' }}
+                                    </h6>
                                     <h6
                                         style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
-                                        Runtime:
-                                        N/A
-                                    </h6>
-                                @elseif ($item->runtime == '')
-                                    <h6
-                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
-                                        Runtime:
-                                        N/A
-                                    </h6>
-                                @else
-                                    <h6
-                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
-                                        Runtime: {{ $item->runtime }}
-                                    </h6>
-                                @endif
-
-                                @if ($item->country == '0')
-                                    <h6
-                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
-                                        Country:
-                                        N/A
-                                    </h6>
-                                @elseif ($item->country == '')
-                                    <h6
-                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
-                                        Country:
-                                        N/A
-                                    </h6>
-                                @else
-                                    <h6
-                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
-                                        Country: {{ $item->country }}
-                                    </h6>
-                                @endif
-
-                                <div class="mt-3">
-                                    {{-- {{ $item->plotText ? $item->plotText : 'N/A' }} --}}
+                                        Release
+                                        year:
+                                        {{ $item->releaseYear }}</h6>
 
 
-                                    @if (strlen($item->plotText) > 352)
-                                        {{ substr($item->plotText, 0, 352) }}
-
-                                        <div class="collapse" id="collapseExample">
-                                            <div class="">
-                                                {{ substr($item->plotText, 352) }}
-                                            </div>
-                                        </div>
-                                        <br>
-
-                                        <div class="text-center">
-                                            <a class="" data-bs-toggle="collapse" href="#collapseExample"
-                                                aria-expanded="false" aria-controls="collapseExample">
-                                                <i class="fa fa-ellipsis-h" aria-hidden="true" style="font-size: 20px;"></i>
-                                            </a>
-                                        </div>
+                                    @if ($item->genres == '0')
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Genre:
+                                            N/A
+                                        </h6>
+                                    @elseif ($item->genres == '')
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Genre:
+                                            N/A
+                                        </h6>
                                     @else
-                                        {{ $item->plotText ? $item->plotText : 'N/A' }}
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Genre: {{ $item->genres }}
+                                        </h6>
                                     @endif
 
+                                    @if ($item->language == '0')
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Language:
+                                            N/A
+                                        </h6>
+                                    @elseif ($item->language == '')
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Language:
+                                            N/A
+                                        </h6>
+                                    @else
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Language: {{ strtolower($item->language) }}
+                                        </h6>
+                                    @endif
+
+                                    @if ($item->country == '0')
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Country:
+                                            N/A
+                                        </h6>
+                                    @elseif ($item->country == '')
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Country:
+                                            N/A
+                                        </h6>
+                                    @else
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Country: {{ $item->country }}
+                                        </h6>
+                                    @endif
+
+                                    <div class="mt-3">
+                                        {{-- {{ $item->plotText ? $item->plotText : 'N/A' }} --}}
+
+
+                                        @if (strlen($item->plotText) > 352)
+                                            {{ substr($item->plotText, 0, 352) }}
+
+                                            <div class="collapse" id="collapseExample">
+                                                <div class="">
+                                                    {{ substr($item->plotText, 352) }}
+                                                </div>
+                                            </div>
+                                            <br>
+
+                                            <div class="text-center">
+                                                <a class="" data-bs-toggle="collapse" href="#collapseExample"
+                                                    aria-expanded="false" aria-controls="collapseExample">
+                                                    <i class="fa fa-ellipsis-h" aria-hidden="true"
+                                                        style="font-size: 20px;"></i>
+                                                </a>
+                                            </div>
+                                        @else
+                                            {{ $item->plotText ? $item->plotText : 'N/A' }}
+                                        @endif
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-xl-6 mt-3 mt-xl-0">
-                            <iframe src="{{ $item->trailer ? $item->trailer : 'N/A' }}" title="YouTube video player"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen style="width: 100%; aspect-ratio: 4/2.3;">
-                            </iframe>
+                            <div class="col-xl-6 mt-3 mt-xl-0">
+                                <iframe src="{{ $item->trailer ? $item->trailer : 'N/A' }}" title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen style="width: 100%; aspect-ratio: 4/2.3;">
+                                </iframe>
+                            </div>
                         </div>
-                    </div>
+                    @endif
+
+                    {{-- THIS IS A MOVIES PANE --}}
+                    @if ($item->titleType == 'movie')
+                        @section('title')
+                            {{ $item->originalTitleText }}
+                        @endsection
+                        <!-- Iterate over each item in the collection -->
+                        <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">
+                            {{ str_replace(['-', $item->movieId], ' ', $item->originalTitleText) }}</h3>
+                        <div class="row">
+                            <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
+                                <img data-src="{{ asset($item->imageUrl) }}" alt=""
+                                    class="img-fluid blurry-image lazy"
+                                    style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy">
+                            </div>
+
+                            <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
+                                <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
+                                    <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3"
+                                        style="font-family: 'Ubuntu sans', sans-serif;">
+                                        {{ str_replace('-', ' ', $item->originalTitleText) }}
+                                    </h4>
+                                    <h6
+                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                        <i class="fa fa-star" aria-hidden="true" style="font-size: 11px"></i>
+
+                                        {{ isset($item->aggregateRating) ? $item->aggregateRating : 'N/A' }}
+                                    </h6>
+                                    <h6
+                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                        Release
+                                        year:
+                                        {{ $item->releaseYear }}</h6>
+
+
+                                    @if ($item->genres == '0')
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Genre:
+                                            N/A
+                                        </h6>
+                                    @elseif ($item->genres == '')
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Genre:
+                                            N/A
+                                        </h6>
+                                    @else
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Genre: {{ $item->genres }}
+                                        </h6>
+                                    @endif
+
+                                    @if ($item->runtime == '0')
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Runtime:
+                                            N/A
+                                        </h6>
+                                    @elseif ($item->runtime == '')
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Runtime:
+                                            N/A
+                                        </h6>
+                                    @else
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Runtime: {{ $item->runtime }}
+                                        </h6>
+                                    @endif
+
+                                    @if ($item->country == '0')
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Country:
+                                            N/A
+                                        </h6>
+                                    @elseif ($item->country == '')
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Country:
+                                            N/A
+                                        </h6>
+                                    @else
+                                        <h6
+                                            style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                            Country: {{ $item->country }}
+                                        </h6>
+                                    @endif
+
+                                    <div class="mt-3">
+                                        {{-- {{ $item->plotText ? $item->plotText : 'N/A' }} --}}
+
+
+                                        @if (strlen($item->plotText) > 352)
+                                            {{ substr($item->plotText, 0, 352) }}
+
+                                            <div class="collapse" id="collapseExample">
+                                                <div class="">
+                                                    {{ substr($item->plotText, 352) }}
+                                                </div>
+                                            </div>
+                                            <br>
+
+                                            <div class="text-center">
+                                                <a class="" data-bs-toggle="collapse" href="#collapseExample"
+                                                    aria-expanded="false" aria-controls="collapseExample">
+                                                    <i class="fa fa-ellipsis-h" aria-hidden="true"
+                                                        style="font-size: 20px;"></i>
+                                                </a>
+                                            </div>
+                                        @else
+                                            {{ $item->plotText ? $item->plotText : 'N/A' }}
+                                        @endif
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 mt-3 mt-xl-0">
+                                <iframe src="{{ $item->trailer ? $item->trailer : 'N/A' }}" title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen style="width: 100%; aspect-ratio: 4/2.3;">
+                                </iframe>
+                            </div>
+                        </div>
+                    @endif
                 @endforeach
             @else
                 <p>No data found for this title.</p>
@@ -189,7 +326,8 @@
                                             loading="lazy"></a>
                                     <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
                                         class="text-decoration-none text-reset">
-                                        <h6 class="mt-1" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
+                                        <h6 class="mt-1"
+                                            style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
                                             Season
                                             {{ $more->season_number }} Episode {{ $more->episode_number }}
                                         </h6>

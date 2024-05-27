@@ -64,7 +64,7 @@ class ApiController extends Controller
                     $year = substr($first_air_date, 0, 4); // Extract the first four characters
                     $full_name = mysqli_real_escape_string($connection, $result['name']);
 
-                    if ($year >= '2018' && $first_air_date <= $date && $year <= '2024') {
+                    if ($year >= '2017' && $first_air_date <= $date && $year <= '2024') {
                         $id = $result['id'];
 
                         // check if the series is already in the db
@@ -425,7 +425,7 @@ class ApiController extends Controller
             mysqli_error($connection);
         }
 
-        $fetch = mysqli_query($connection, "SELECT * FROM movies");
+        $fetch = mysqli_query($connection, "SELECT * FROM movies WHERE country = ''");
 
         if (mysqli_num_rows($fetch) > 0) {
             while ($movie = mysqli_fetch_assoc($fetch)) {
@@ -486,7 +486,13 @@ class ApiController extends Controller
                     $hour = "hour";
                 }
 
-                $runtime = $hours . ' ' . $hour . ' ' . $minutes . ' minutes';
+                $runtime = '';
+
+                if ($hour == '0' && $minutes == '0') {
+                    $runtime = '';
+                } else {
+                    $runtime = $hours . ' ' . $hour . ' ' . $minutes . ' minutes';
+                }
 
                 // update the movie in the database
                 $update = mysqli_query($connection, "UPDATE movies SET genres = '$genres', country = '$origin_country', runtime = '$runtime' WHERE id = '$movieId'");
@@ -718,7 +724,7 @@ class ApiController extends Controller
 
                 if (isset($data['results']) && is_array($data['results'])) {
                     foreach ($data['results'] as $video) {
-                        if ($video['name'] === 'Official Trailer' && $video['site'] === 'YouTube') {
+                        if (stripos($video['name'], 'Trailer') !== false && $video['site'] === 'YouTube') {
                             $trailer = "https://www.youtube.com/embed/" . $video['key'];
 
                             $update = mysqli_query($connection, "UPDATE movies SET trailer = '$trailer' WHERE id = '$id'");

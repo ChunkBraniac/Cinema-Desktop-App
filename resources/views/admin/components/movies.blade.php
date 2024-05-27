@@ -62,8 +62,6 @@
                                                 <td>{{ $movies->genres ? $movies->genres : 'N/A'}}</td>
                                                 <td>
                                                     <a href="" class="btn btn-outline-success">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>
-
-                                                    <a href="{{ route('delete.movie', ['id'=>$movies->id]) }}" class="btn btn-outline-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>
                                                 </td>
                                             </tr>
                                             </tr>
@@ -116,8 +114,6 @@
                                                 <td>{{ $movies->genres ? $movies->genres : 'N/A'}}</td>
                                                 <td>
                                                     <a href="" class="btn btn-outline-success">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>
-
-                                                    <a href="{{ route('delete.series', ['id'=>$movies->id]) }}" class="btn btn-outline-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
