@@ -2,7 +2,7 @@
     {{-- header begins here --}}
     <div class="container-fluid bg-dark p-0">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-fixed pt-3 pb-3"
-            style="width: 100%; top: 0; z-index: 3;">
+            style="width: 100%; top: 0; z-index: 3; box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.623);">
             <div class="container-sm">
                 <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ url('icons/video.png') }}"
                         style="height: 35px; width: 30px" alt=""> Cinema<span class="text-info">Hub</span></a>
@@ -49,7 +49,11 @@
                                 style="font-size: 15px; margin-right: 20px;">Help</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ url('#') }}" style="font-size: 15px;">About
+                            <a class="nav-link text-light" href="{{ url('#') }}" style="font-size: 15px; margin-right: 20px;">About
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ route('request.movie') }}" style="font-size: 15px;"> Request Movie
                             </a>
                         </li>
                     </ul>

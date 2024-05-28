@@ -19,9 +19,16 @@ class MoviesController extends Controller
     //
     public function getAll()
     {
-        $series_all = Series::where('status', '!=', 'pending')->latest()->paginate(24);
-        $movies_all = Movies::where('status', '!=', 'pending')->latest()->paginate(24);
-        $seasons = Seasons::latest()->paginate(24);
+        $series_all = Series::where('status', '!=', 'pending')->orderBy('updated_at', 'Desc')->paginate(24);
+        $movies_all = Movies::where('status', '!=', 'pending')->orderBy('updated_at', 'Desc')->paginate(24);
+        $seasons = DB::table('seasons as s1')
+        ->select('s1.*')
+        ->join(DB::raw('(SELECT MAX(episode_number) as episode_number, movieId FROM seasons GROUP BY movieId) as s2'), function($join) {
+            $join->on('s1.episode_number', '=', 's2.episode_number');
+            $join->on('s1.movieId', '=', 's2.movieId');
+        })
+        ->latest()
+        ->paginate(9);
 
         return view('home', compact('series_all', 'movies_all', 'seasons'));
     }

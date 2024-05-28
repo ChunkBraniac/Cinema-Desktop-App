@@ -11,10 +11,10 @@
                     {{-- THIS IS A SERIES PANE --}}
                     @if ($item->titleType == 'series')
                         @section('title')
-                            {{ $item->originalTitleText }}
+                            {{ $item->full_name }}
                         @endsection
                         <!-- Iterate over each item in the collection -->
-                        <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">
+                        <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block" style="font-family: 'Roboto', sans-serif; font-size: 20px;">
                             {{ $item->full_name }}
                         </h3>
                         <div class="row">
@@ -26,7 +26,7 @@
                             <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
                                 <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
                                     <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3"
-                                        style="font-family: 'Ubuntu sans', sans-serif;">
+                                        style="font-family: 'Roboto', sans-serif; font-size: 20px;">
                                         {{ $item->full_name }}
                                     </h4>
                                     <h6
@@ -141,11 +141,12 @@
                     {{-- THIS IS A MOVIES PANE --}}
                     @if ($item->titleType == 'movie')
                         @section('title')
-                            {{ $item->originalTitleText }}
+                            {{ $item->full_name }}
                         @endsection
                         <!-- Iterate over each item in the collection -->
-                        <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">
-                            {{ str_replace(['-', $item->movieId], ' ', $item->originalTitleText) }}</h3>
+                        <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block" style="font-family: 'Roboto', sans-serif; font-size: 20px;">
+                            {{ $item->full_name }}
+                        </h3>
                         <div class="row">
                             <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
                                 <img data-src="{{ asset($item->imageUrl) }}" alt=""
@@ -156,8 +157,8 @@
                             <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
                                 <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
                                     <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3"
-                                        style="font-family: 'Ubuntu sans', sans-serif;">
-                                        {{ str_replace('-', ' ', $item->originalTitleText) }}
+                                        style="font-family: 'Roboto', sans-serif; font-size: 19px;">
+                                        {{ $item->full_name }}
                                     </h4>
                                     <h6
                                         style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
@@ -282,8 +283,7 @@
             @if ($item->titleType == 'movie')
                 <div class="m-auto text-center">
                     <a href="{{ $item->download_url }}" download="{{ $item->full_name }} {{ ($item->releaseYear) }}" class="btn btn-success btn-md mr-3"
-                        style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 12px; padding-bottom: 12px">Download
-                        Video <i class="fa fa-download" aria-hidden="true"></i></a>
+                        style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 12px; padding-bottom: 12px">Download <i class="fa fa-download" aria-hidden="true"></i></a>
                 </div>
             @endif
         @else

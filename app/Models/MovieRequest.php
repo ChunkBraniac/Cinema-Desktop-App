@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Movies extends Model
+class MovieRequest extends Model
 {
     use HasFactory;
 
-    public function seasons()
-    {
-        return $this->hasMany(Seasons::class);
-    }
+    protected $fillable = [
+        'name',
+        'email',
+        'movie_title',
+        'comment'
+    ];
 }

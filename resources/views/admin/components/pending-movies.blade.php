@@ -74,7 +74,7 @@
                                                 <td>{{ $series->titleType }}</td>
                                                 <td>{{ $series->country ? $series->country : 'N/A' }}</td>
                                                 <td>{{ $series->aggregateRating ? $series->aggregateRating : 'N/A' }}</td>
-                                                <td>{{ $series->plotText ? $series->plotText : 'N/A' }}</td>
+                                                <td>{{ Str::limit($series->plotText ? $series->plotText : 'N/A', 10, '...') }}</td>
                                                 <td>{{ $series->genres ? $series->genres : 'N/A' }}</td>
                                                 <td>{{ $series->releaseDate }}</td>
                                                 <td>

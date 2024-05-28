@@ -32,8 +32,8 @@
                             data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode '. $series->episode_number  }}">
 
-                            <h6 class="mt-1" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
-                                {{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode '. $series->episode_number  }}
+                            <h6 class="mt-1" style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
+                                {{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode '. $series->episode_number  }} Added
                             </h6>
                         </a>
 
@@ -62,7 +62,7 @@
                             data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ str_replace(['-', $series->movieId], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}">
 
-                            <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
+                            <h6 class="mt-1 text-truncate" style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
                                 {{ $series->full_name . ' ' . '(' . $series->releaseYear . ')' }}
                             </h6>
                         </a>
@@ -108,7 +108,7 @@
                             data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ $movies->full_name . ' ' . '(' . $movies->releaseYear . ')' }}">
 
-                            <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
+                            <h6 class="mt-1 text-truncate" style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
                                 {{ $movies->full_name . ' ' . '(' . $movies->releaseYear . ')' }}
                             </h6>
                         </a>

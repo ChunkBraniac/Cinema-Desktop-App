@@ -6,13 +6,14 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\MovieRequestController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\SeasonsController;
 
 Route::get('/', [PageController::class, 'home'])->name('home.page');
 
 // page routes
-Route::get('/', [MoviesController::class, 'getAll'])->name('movies.top10');
+Route::get('/', [MoviesController::class, 'getAll'])->name('movies.all');
 Route::get('action', [MoviesController::class, 'getAction'])->name('movies.action');
 Route::get('animation', [MoviesController::class, 'getAnimation'])->name('movies.animation');
 Route::get('comedy', [MoviesController::class, 'getComedy'])->name('movies.comedy');
@@ -99,4 +100,8 @@ Route::group(['middleware' => 'admin'], function () {
 Route::get('download/{name}/season/{season}/episode/{episode}', [SeasonsController::class, 'download'])->name('download');
 
 Route::get('show-more', [MoviesController::class, 'showMore'])->name('moremovies');
+
+// Route for requesting movie
+Route::get('/movie-request', [MovieRequestController::class, 'create'])->name('request.movie');
+Route::post('/movie-request', [MovieRequestController::class, 'store'])->name('send.request');
 

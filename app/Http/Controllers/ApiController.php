@@ -410,8 +410,8 @@ class ApiController extends Controller
             $movie_id = $data_info['movieId'];
             $movie_name = mysqli_real_escape_string($connection, $data_info['originalTitleText']);
             $movie_type = $data_info['titleType'];
-            $movie_image = $data_info['imageUrl'];
-            $full_name = $data_info['full_name'];
+            $movie_image = mysqli_real_escape_string($connection, $data_info['imageUrl']);
+            $full_name = mysqli_real_escape_string($connection, $data_info['full_name']);
 
             foreach ($seasons as $season) {
                 $curl = curl_init();
