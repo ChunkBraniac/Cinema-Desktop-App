@@ -12,9 +12,14 @@ $(document).ready(function(){
                 dots: false
             },
             600: {
-                items: 3
+                items: 3,
+                dots: false,
             },
             1000: {
+                items: 5,
+                dots: false,
+            },
+            1200: {
                 items: 6,
                 loop: false,
                 dots: false

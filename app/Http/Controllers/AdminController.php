@@ -134,8 +134,7 @@ class AdminController extends Controller
             $update->save();
 
             return redirect()->route('admin.dashboard')->with('status', 'Password updated');
-        }
-        else {
+        } else {
             return redirect()->route('admin.dashboard')->with('error', 'Password does not match');
         }
     }
@@ -198,15 +197,41 @@ class AdminController extends Controller
 
     public function approve_series($id)
     {
-        $series = Series::where('status', 'pending')->where('id', $id)->update(['status' => 'approved']);
+        Series::where('status', 'pending')->where('id', $id)->update(['status' => 'approved']);
 
         return redirect()->route('admin.dashboard')->with('status', 'Series approved');
     }
 
     public function approve_movies($id)
     {
-        $movie = Movies::where('status', 'pending')->where('id', $id)->update(['status' => 'approved']);
+        Movies::where('status', 'pending')->where('id', $id)->update(['status' => 'approved']);
 
         return redirect()->route('admin.dashboard')->with('status', 'Movie approved');
+    }
+
+    public function edit_movie($id)
+    {
+        $movie = Movies::find($id);
+
+        return view('admin.components.edit-movies', compact('movie'));
+    }
+
+    public function update_movie(Request $request, $id)
+    {
+        $movie = Movies::find($id);
+
+        $movie->full_name = $request->input('edit_name');
+        $movie->imageUrl = $request->input('edit_image');
+        $movie->country = $request->input('edit_country');
+        $movie->plotText = $request->input('edit_plotText');
+        $movie->releaseDate = $request->input('edit_releaseDate');
+        $movie->runtime = $request->input('edit_runtime');
+        $movie->genres = $request->input('edit_genres');
+        $movie->trailer = $request->input('edit_trailer');
+        $movie->download_url = $request->input('edit_download_url');
+
+        $movie->save();
+
+        return redirect()->route('admin.dashboard')->with('status', 'Movie updated');
     }
 }

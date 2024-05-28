@@ -411,6 +411,7 @@ class ApiController extends Controller
             $movie_name = mysqli_real_escape_string($connection, $data_info['originalTitleText']);
             $movie_type = $data_info['titleType'];
             $movie_image = $data_info['imageUrl'];
+            $full_name = $data_info['full_name'];
 
             foreach ($seasons as $season) {
                 $curl = curl_init();
@@ -451,7 +452,7 @@ class ApiController extends Controller
                         $fetch_old = mysqli_query($connection, $fetch_old_query);
 
                         if (mysqli_num_rows($fetch_old) == 0) {
-                            $insert_query = "INSERT INTO seasons (movieId, movieName, movieType, season_number, episode_number, air_date, imageUrl, created_at) VALUES ('$movie_id', '$movie_name', '$movie_type', '$season_number', '$episode_number', '$air_date', '$movie_image', NOW())";
+                            $insert_query = "INSERT INTO seasons (movieId, full_name, movieName, movieType, season_number, episode_number, air_date, imageUrl, created_at) VALUES ('$movie_id', '$full_name', '$movie_name', '$movie_type', '$season_number', '$episode_number', '$air_date', '$movie_image', NOW())";
                             $insert = mysqli_query($connection, $insert_query);
 
                             if ($insert) {

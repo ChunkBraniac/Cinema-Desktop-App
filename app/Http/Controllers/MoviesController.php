@@ -21,8 +21,9 @@ class MoviesController extends Controller
     {
         $series_all = Series::where('status', '!=', 'pending')->latest()->paginate(24);
         $movies_all = Movies::where('status', '!=', 'pending')->latest()->paginate(24);
+        $seasons = Seasons::latest()->paginate(24);
 
-        return view('home', compact('series_all', 'movies_all'));
+        return view('home', compact('series_all', 'movies_all', 'seasons'));
     }
 
     public static function getAction()

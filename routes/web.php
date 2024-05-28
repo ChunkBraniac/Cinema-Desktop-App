@@ -85,6 +85,10 @@ Route::group(['middleware' => 'admin'], function () {
     // Route to approve series and movies per each 
     Route::get('admin/approve/series/{id}', [AdminController::class, 'approve_series'])->name('approve.series');
     Route::get('admin/approve/movie/{id}', [AdminController::class, 'approve_movies'])->name('approve.movie');
+
+    // edting the series and movies
+    Route::get('admin/edit/movie/{id}', [AdminController::class, 'edit_movie'])->name('edit.movie');
+    Route::post('admin/edit/movie/{id}', [AdminController::class, 'update_movie'])->name('update.movie');
 });
 
 // Download page

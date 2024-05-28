@@ -7,7 +7,7 @@
 @section('content')
     <br>
     <br>
-    <div class="container-xl">
+    <div class="container-sm">
         <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif;">Search @if ($page == 1)
             @else
                 <span>
@@ -26,7 +26,7 @@
 
     <br><br>
     <hr>
-    <div class="container-xl mt-5">
+    <div class="container-sm mt-5">
         <div class="row">
             @if ($paginatedResults->isNotEmpty())
                 @unless (count($paginatedResults) == 0)

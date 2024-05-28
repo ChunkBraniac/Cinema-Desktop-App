@@ -7,10 +7,48 @@
 @section('content')
     {{-- <hr class="mt-5"> --}}
 
-    <div class="container-md mt-5">
+    <div class="container-sm mt-5">
+
+        {{-- OWLCAROUSEL PANE --}}
+        <h4 style="font-family: 'Ubuntu sans', sans-serif;" class="mt-5 pt-4">New Seasons & Episodes
+            <span style="float: right;">
+                <button class="customPrevBtn">‹</button>
+                <button class="customNextBtn">›</button>
+            </span>
+        </h4>
+        <div class="owl-carousel owl-theme">
+            {{-- <div class="item">
+                <h4>1</h4>
+            </div> --}}
+            @unless (count($seasons) == 0)
+                @foreach ($seasons as $series)
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3 item">
+                        <a href="{{ url('download/' . $series->movieName . '/season/' . $series->season_number . '/episode/' . $series->episode_number) }}"><img
+                                data-src="{{ $series->imageUrl ? asset($series->imageUrl) : asset('images/No-Image-Placeholder.svg.webp') }}"
+                                alt="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode '. $series->episode_number  }}"
+                                class="img-fluid blurry-image lazy"
+                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.315);" loading="lazy"></a>
+                        <a href="{{ url('download/' . $series->movieName . '/season/' . $series->season_number . '/episode/' . $series->episode_number) }}" class="text-decoration-none text-reset"
+                            data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            data-bs-title="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode '. $series->episode_number  }}">
+
+                            <h6 class="mt-1" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
+                                {{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode '. $series->episode_number  }}
+                            </h6>
+                        </a>
+
+                    </div>
+                @endforeach
+            @endunless
+        </div>
+    </div>
+
+    <hr class="mt-5">
+
+    <div class="container-sm mt-5">
 
         {{-- SERIES PANE --}}
-        <h4 style="font-family: 'Ubuntu sans', sans-serif;" class="mt-5 pt-4">New Series</h4>
+        <h4 style="font-family: 'Ubuntu sans', sans-serif;">New Series</h4>
         <div class="row">
             @unless (count($series_all) == 0)
                 @foreach ($series_all as $series)
@@ -53,7 +91,7 @@
 
     <hr class="mt-5">
 
-    <div class="container-md mt-5">
+    <div class="container-sm mt-5">
 
         {{-- MOVIES PANE --}}
         <h4 style="font-family: 'Ubuntu sans', sans-serif;">New Movies</h4>
