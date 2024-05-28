@@ -368,69 +368,6 @@ class ApiController extends Controller
         }
     }
 
-    public function updateMoviesTrailer()
-    {
-        // fetch the movies to update the trailer
-        $dbhost = "127.0.0.1";
-        $dbus = "root";
-        $dbpass = '';
-        $dbname = 'cinema';
-
-        $connection = mysqli_connect($dbhost, $dbus, $dbpass, $dbname);
-
-        if (!$connection) {
-            die('Failed to connect: ' . mysqli_connect_error());
-        }
-
-        $getMovies = Movies::where('trailer', '')->get();
-
-        if (count($getMovies) > 0) {
-            foreach ($getMovies as $movie) {
-                $movie_id = $movie->movieId;
-
-                $curl = curl_init();
-
-                curl_setopt_array($curl, [
-                    CURLOPT_URL => "https://api.themoviedb.org/3/movie/{$movie_id}/videos",
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => "",
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 30,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => "GET",
-                    CURLOPT_HTTPHEADER => [
-                        "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTg4ZDY3NDI1ZmJiN2VhYjIzNWViMDM4NTQyYjY0ZiIsInN1YiI6IjY1MjU3Y2FhMDcyMTY2NDViNDAwMTVhOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GaTStrEdn0AWqdlwpzn75h8vo_-X5qoOxVxZEEBYJXc",
-                        "accept: application/json"
-                    ],
-                ]);
-
-                $response = curl_exec($curl);
-                $err = curl_error($curl);
-
-                curl_close($curl);
-
-                if ($err) {
-                    echo "cURL Error #:" . $err;
-                }
-
-                $data = json_decode($response, true);
-
-                if (isset($data['results']) && is_array($data['results'])) {
-                    foreach ($data['results'] as $video) {
-                        if (stripos($video['name'], 'Trailer') !== false && $video['site'] === 'YouTube') {
-                            $trailer = "https://www.youtube.com/embed/" . $video['key'];
-
-                            $movie->trailer = $trailer;
-                            $movie->save();
-
-                            echo "Trailer updated successfully for " . $movie->full_name . "<br>";
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     public function updateSeriesTrailer()
     {
 
@@ -523,6 +460,58 @@ class ApiController extends Controller
             }
         } else {
             return redirect()->route('admin.dashboard')->with('error', 'No empty trailer field found');
+        }
+    }
+
+    public function updateMoviesTrailer()
+    {
+
+        $getMovies = Movies::where('trailer', '')->get();
+
+        if (count($getMovies) > 0) {
+            foreach ($getMovies as $movie) {
+                $movie_id = $movie->movieId;
+
+                $curl = curl_init();
+
+                curl_setopt_array($curl, [
+                    CURLOPT_URL => "https://api.themoviedb.org/3/movie/{$movie_id}/videos",
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => "",
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_HTTPHEADER => [
+                        "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTg4ZDY3NDI1ZmJiN2VhYjIzNWViMDM4NTQyYjY0ZiIsInN1YiI6IjY1MjU3Y2FhMDcyMTY2NDViNDAwMTVhOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GaTStrEdn0AWqdlwpzn75h8vo_-X5qoOxVxZEEBYJXc",
+                        "accept: application/json"
+                    ],
+                ]);
+
+                $response = curl_exec($curl);
+                $err = curl_error($curl);
+
+                curl_close($curl);
+
+                if ($err) {
+                    echo "cURL Error #:" . $err;
+                }
+
+                $data = json_decode($response, true);
+
+                if (isset($data['results']) && is_array($data['results'])) {
+                    foreach ($data['results'] as $video) {
+                        if (stripos($video['name'], 'Trailer') !== false && $video['site'] === 'YouTube') {
+                            $trailer = "https://www.youtube.com/embed/" . $video['key'];
+
+                            $movie->trailer = $trailer;
+                            $movie->save();
+
+                            echo "Trailer updated successfully for " . $movie->full_name . "<br>";
+                        }
+                    }
+                }
+            }
         }
     }
 
