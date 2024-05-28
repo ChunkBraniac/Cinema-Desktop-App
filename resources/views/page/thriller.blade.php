@@ -33,9 +33,9 @@
                                 alt="{{ $thriller->full_name . ' ' . '(' . $thriller->releaseYear . ')' }}" class="img-fluid" style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
                         <a href="{{ url('media/' . $thriller->originalTitleText) }}" class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $thriller->full_name . ' ' . '(' . $thriller->releaseYear . ')' }}">
 
-                            <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">{{ $thriller->full_name . ' ' . '(' . $thriller->releaseYear . ')' }}</h6>
+                            <h6 class="mt-1 text-truncate" style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">{{ $thriller->full_name . ' ' . '(' . $thriller->releaseYear . ')' }}</h6>
                         </a>
-                        <h6 class="text-truncate" style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">{{ $thriller->genres }}</h6>
+                        <h6 class="text-truncate" style="font-size: 13px; font-family: 'Roboto', sans-serif; font-weight: 400; margin-top: -4px;">{{ $thriller->genres }}</h6>
                     </div>
                 @endforeach
             @endunless

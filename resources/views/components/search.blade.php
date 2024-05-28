@@ -33,26 +33,26 @@
                     @foreach ($paginatedResults as $search)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                             <a href="{{ url('media/' . $search->originalTitleText) }}" class="text-decoration-none text-reset"><img
-                                    data-src="{{ $search->imageUrl ? asset($search->imageUrl) : asset('images/No-Image-Placeholder.svg.webp') }}" alt="{{ str_replace(['-', $search->releaseYear], ' ', $search->originalTitleText) . ' ' . '(' . $search->releaseYear . ')' }}" class="img-fluid blurry-image lazy"
+                                    data-src="{{ $search->imageUrl ? asset($search->imageUrl) : asset('images/No-Image-Placeholder.svg.webp') }}" alt="{{ $search->full_name . ' ' . '(' . $search->releaseYear . ')' }}" class="img-fluid blurry-image lazy"
                                     style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493);" loading="lazy"></a>
                             <a href="{{ url('media/' . $search->originalTitleText) }}"
                                 class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                data-bs-title="{{ str_replace(['-', $search->releaseYear], ' ', $search->originalTitleText) . ' ' . '(' . $search->releaseYear . ')' }}">
+                                data-bs-title="{{ $search->full_name . ' ' . '(' . $search->releaseYear . ')' }}">
 
-                                <h6 class="mt-1 text-truncate" style="font-family: 'Robot', sans-serif; font-weight: 500">
+                                <h6 class="mt-1 text-truncate" style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
                                     {{ $search->full_name . ' ' . '(' . $search->releaseYear . ')' }}</h6>
                             </a>
 
                             @if ($search->genres == '0')
-                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                <h6 style="font-size: 13px; font-family: 'Roboto', sans-serif; font-weight: 400; margin-top: -4px;">
                                     N/A
                                 </h6>
                             @elseif ($search->genres == '')
-                                <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: normal;">
+                                <h6 style="font-size: 13px; font-family: 'Roboto', sans-serif; font-weight: 400; margin-top: -4px;">
                                     N/A
                                 </h6>
                             @else
-                                <h6 style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;">
+                                <h6 class="text-truncate" style="font-size: 13px; font-family: 'Roboto', sans-serif; font-weight: 400; margin-top: -4px;">
                                     {{ $search->genres }}
                                 </h6>
                             @endif

@@ -9,8 +9,25 @@ class Movies extends Model
 {
     use HasFactory;
 
-    public function seasons()
-    {
-        return $this->hasMany(Seasons::class);
-    }
+    protected $fillable = [
+        'movieId',
+        'isAdult',
+        'full_name',
+        'originalTitleText',
+        'imageUrl',
+        'backdrop_path',
+        'country',
+        'language',
+        'plotText',
+        'releaseDate',
+        'releaseYear',
+        'aggregateRating',
+        'titleType',
+        'runtime',
+        'genres',
+        'trailer',
+        'download_url',
+        'status',
+        'created_at',
+    ];
 }

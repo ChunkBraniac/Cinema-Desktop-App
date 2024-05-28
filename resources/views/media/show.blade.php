@@ -282,8 +282,8 @@
         @if (isset($item))
             @if ($item->titleType == 'movie')
                 <div class="m-auto text-center">
-                    <a href="{{ $item->download_url }}" download="{{ $item->full_name }} {{ ($item->releaseYear) }}" class="btn btn-success btn-md mr-3"
-                        style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 12px; padding-bottom: 12px">Download <i class="fa fa-download" aria-hidden="true"></i></a>
+                    <button data-url="{{ $item->download_url }}" data-filename="{{ $item->full_name }} {{ ($item->releaseYear) }}" class="btn btn-success btn-md mr-3"
+                        style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 12px; padding-bottom: 12px" id="downloadButton">Download <i class="fa fa-download" aria-hidden="true"></i></button>
                 </div>
             @endif
         @else
@@ -293,7 +293,7 @@
             <div class="col-xl-9 col-lg-8 mt-3">
                 @if (isset($item))
                     @if ($item->titleType == 'movie')
-                        <h4>You may also like: </h4>
+                        <h4 style="font-size: 19px;">{{ Str::upper('You may also like: ')}}</h4>
                         <div class="row">
 
                             @foreach ($merged as $more)

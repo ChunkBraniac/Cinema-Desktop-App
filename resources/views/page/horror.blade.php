@@ -33,9 +33,9 @@
                                 alt="{{ $horror->full_name . ' ' . '(' . $horror->releaseYear . ')' }}" class="img-fluid" style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
                         <a href="{{ url('media/' . $horror->originalTitleText) }}" class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $horror->full_name . ' ' . '(' . $horror->releaseYear . ')' }}">
 
-                            <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">{{ $horror->full_name . ' ' . '(' . $horror->releaseYear . ')' }}</h6>
+                            <h6 class="mt-1 text-truncate" style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">{{ $horror->full_name . ' ' . '(' . $horror->releaseYear . ')' }}</h6>
                         </a>
-                        <h6 class="text-truncate" style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">{{ $horror->genres }}</h6>
+                        <h6 class="text-truncate" style="font-size: 13px; font-family: 'Roboto', sans-serif; font-weight: 400; margin-top: -4px;">{{ $horror->genres }}</h6>
                     </div>
                 @endforeach
             @endunless

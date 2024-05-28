@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
     var owl = $('.owl-carousel');
 
     owl.owlCarousel({
@@ -28,10 +28,10 @@ $(document).ready(function(){
     });
 
     // Custom Navigation Events
-    $(".customNextBtn").click(function(){
+    $(".customNextBtn").click(function () {
         owl.trigger('next.owl.carousel');
     });
-    $(".customPrevBtn").click(function(){
+    $(".customPrevBtn").click(function () {
         owl.trigger('prev.owl.carousel');
     });
 });
@@ -41,7 +41,7 @@ $(document).ready(function(){
 let mybutton = document.getElementById("backToTop");
 
 // Show the button when the user scrolls down 20px from the top of the document
-window.onscroll = function() {
+window.onscroll = function () {
     scrollFunction();
 };
 
@@ -54,7 +54,38 @@ function scrollFunction() {
 }
 
 // Scroll to the top of the document when the user clicks the button
-mybutton.onclick = function() {
+mybutton.onclick = function () {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 };
+
+
+document.getElementById('downloadButton').addEventListener('click', function () {
+    // Retrieve the download URL and filename from the data attributes
+    const fileUrl = this.getAttribute('data-url');
+    const filename = this.getAttribute('data-filename');
+
+    if (fileUrl && filename) {
+        // Create a new link element
+        const link = document.createElement('a');
+
+        // Set the download attribute with the dynamic filename
+        link.download = filename;
+
+        // Set the href attribute to the file URL
+        link.href = fileUrl;
+
+        // Append the link to the body (required for Firefox)
+        document.body.appendChild(link);
+
+        // Programmatically click the link to trigger the download
+        link.click();
+
+        // Remove the link from the document
+        document.body.removeChild(link);
+    } else {
+        console.error('File URL or filename not found.');
+    }
+});
+
+

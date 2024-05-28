@@ -17,9 +17,9 @@
         </h4>
         <h6 class="" style="float: right; font-family: 'Robot', sans-serif; font-weight: normal"><span
                 style="margin-right: 5px;"><a href="{{ url('/') }} "
-                    class="text-decoration-none text-dark text-muted">Home</a></span> <i class="fa fa-arrow-right text-muted"
-                style="font-size: 13px" aria-hidden="true"></i> <span style="margin-left: 5px;"
-                class="text-muted">Animation</span></h6>
+                    class="text-decoration-none text-dark text-muted" style="font-size: 14px;">Home</a></span> <i class="fa fa-arrow-right text-muted"
+                style="font-size: 13px" aria-hidden="true"></i> <span style="margin-left: 5px; font-size: 14px"
+                class="text-muted">Animation & Anime</span></h6>
     </div>
 
     <br><br>
@@ -32,9 +32,9 @@
                         <a href="{{ url('media/' . $animation->originalTitleText) }}"><img data-src="{{ asset($animation->imageUrl) }}"
                                 alt="{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}" class="img-fluid " style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
                         <a href="{{ url('media/' . $animation->originalTitleText) }}" class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}">
-                            <h6 class="mt-1 text-truncate" style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}</h6>
+                            <h6 class="mt-1 text-truncate" style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}</h6>
                         </a>
-                        <h6 class="text-truncate" style="font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400">{{ $animation->genres }}</h6>
+                        <h6 class="text-truncate" style="font-size: 13px; font-family: 'Roboto', sans-serif; font-weight: 400; margin-top: -4px;">{{ $animation->genres }}</h6>
                     </div>
                 @endforeach
             @endunless
