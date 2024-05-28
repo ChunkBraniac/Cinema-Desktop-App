@@ -11,14 +11,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Class AdminController
+ * 
+ * This controller handles administrative tasks for the admin panel including
+ * displaying the dashboard, login, registration, profile management, movie and 
+ * series management, and more.
+ */
 class AdminController extends Controller
 {
-    //
+    /**
+     * Display the admin dashboard.
+     *
+     * @return \Illuminate\View\View
+     */
     public static function dashboard()
     {
         return view('admin.dashboard');
     }
 
+    /**
+     * Display the login page or redirect to dashboard if already logged in.
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public static function loginPage()
     {
         if (!empty(Auth::check())) {
@@ -28,21 +44,42 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Display the registration page.
+     *
+     * @return \Illuminate\View\View
+     */
     public static function registerPage()
     {
         return view('admin.auth.register');
     }
 
+    /**
+     * Display the profile page.
+     *
+     * @return \Illuminate\View\View
+     */
     public static function profile()
     {
         return view('admin.components.profile');
     }
 
+    /**
+     * Display the movies management page.
+     *
+     * @return \Illuminate\View\View
+     */
     public static function showMovies()
     {
         return view('admin.components.movies');
     }
 
+    /**
+     * Handle admin registration.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function register(Request $request)
     {
         $request->validate([
@@ -60,13 +97,18 @@ class AdminController extends Controller
         $register_admin->save();
 
         if ($register_admin->save()) {
-
             return redirect()->route('admin.home.login')->with('success', 'Admin registered successfully');
         } else {
             return view('admin.auth.register')->with('error', 'Failed to register admin');
         }
     }
 
+    /**
+     * Handle admin login.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(Request $request)
     {
         $remember = $request->has('remember');
@@ -91,7 +133,11 @@ class AdminController extends Controller
         }
     }
 
-
+    /**
+     * Handle admin logout.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout()
     {
         Auth::guard('admin')->logout();
@@ -99,6 +145,11 @@ class AdminController extends Controller
         return redirect()->route('admin.home.login')->with('stat', 'Logout successful');
     }
 
+    /**
+     * Display the movies page with paginated movies and series.
+     *
+     * @return \Illuminate\View\View
+     */
     public function movies()
     {
         $allseries = Series::paginate(10);
@@ -107,6 +158,11 @@ class AdminController extends Controller
         return view('admin.components.movies', compact('allmovies', 'allseries'));
     }
 
+    /**
+     * Display the comments page with paginated comments and replies.
+     *
+     * @return \Illuminate\View\View
+     */
     public function displayComments()
     {
         $all_comments = Comment::paginate(10);
@@ -115,7 +171,12 @@ class AdminController extends Controller
         return view('admin.components.comments', compact('all_comments', 'all_replies'));
     }
 
-    // Reset password
+    /**
+     * Handle password reset for the admin.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function reset(Request $request)
     {
         $request->validate([
@@ -139,6 +200,11 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Approve all pending movies.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function approveMovies()
     {
         Movies::where('status', 'pending')->update(['status' => 'approved']);
@@ -146,6 +212,11 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('status', 'Movies approved');
     }
 
+    /**
+     * Approve all pending series.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function approveSeries()
     {
         Series::where('status', 'pending')->update(['status' => 'approved']);
@@ -153,6 +224,11 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('status', 'Series approved');
     }
 
+    /**
+     * Display the pending series page.
+     *
+     * @return \Illuminate\View\View
+     */
     public function showPendingSeries()
     {
         $pending_series = Series::where('status', '=', 'pending')->paginate(10);
@@ -160,6 +236,11 @@ class AdminController extends Controller
         return view('admin.components.pending-series', compact('pending_series'));
     }
 
+    /**
+     * Display the pending movies page.
+     *
+     * @return \Illuminate\View\View
+     */
     public function showPendingMovies()
     {
         $pending_movies = Movies::where('status', '=', 'pending')->paginate(10);
@@ -167,6 +248,12 @@ class AdminController extends Controller
         return view('admin.components.pending-movies', compact('pending_movies'));
     }
 
+    /**
+     * Delete a series by its ID.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function deleteSeries($id)
     {
         $series = Series::find($id);
@@ -176,13 +263,27 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('status', 'Series deleted');
     }
 
+    /**
+     * Delete a movie by its ID.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function deleteMovie($id)
     {
         $movie = Movies::find($id);
 
+        $movie->delete();
+
         return redirect()->route('pending.movies')->with('status', 'Movie deleted');
     }
 
+    /**
+     * Search for movies and series based on a query.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\View\View
+     */
     public function search(Request $request)
     {
         $search = $request->input('query');
@@ -195,6 +296,12 @@ class AdminController extends Controller
         return view('admin.components.search', compact('merge'));
     }
 
+    /**
+     * Approve a specific series by its ID.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function approve_series($id)
     {
         Series::where('status', 'pending')->where('id', $id)->update(['status' => 'approved']);
@@ -202,6 +309,12 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('status', 'Series approved');
     }
 
+    /**
+     * Approve a specific movie by its ID.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function approve_movies($id)
     {
         Movies::where('status', 'pending')->where('id', $id)->update(['status' => 'approved']);
@@ -209,6 +322,12 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('status', 'Movie approved');
     }
 
+    /**
+     * Display the edit movie page for a specific movie by its ID.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
     public function edit_movie($id)
     {
         $movie = Movies::find($id);
@@ -216,6 +335,12 @@ class AdminController extends Controller
         return view('admin.components.edit-movies', compact('movie'));
     }
 
+    /**
+     * Display the edit series page for a specific series by its ID.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
     public function edit_series($id)
     {
         $series = Series::find($id);
@@ -223,6 +348,13 @@ class AdminController extends Controller
         return view('admin.components.edit-series', compact('series'));
     }
 
+    /**
+     * Update the details of a specific movie.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update_movie(Request $request, $id)
     {
         $movie = Movies::find($id);
@@ -242,19 +374,26 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('status', 'Movie updated');
     }
 
+    /**
+     * Update the details of a specific series.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update_series(Request $request, $id)
     {
-        $movie = Series::find($id);
+        $series = Series::find($id);
 
-        $movie->full_name = $request->input('edit_name');
-        $movie->imageUrl = $request->input('edit_image');
-        $movie->country = $request->input('edit_country');
-        $movie->plotText = $request->input('edit_plotText');
-        $movie->releaseDate = $request->input('edit_releaseDate');
-        $movie->genres = $request->input('edit_genres');
-        $movie->trailer = $request->input('edit_trailer');
+        $series->full_name = $request->input('edit_name');
+        $series->imageUrl = $request->input('edit_image');
+        $series->country = $request->input('edit_country');
+        $series->plotText = $request->input('edit_plotText');
+        $series->releaseDate = $request->input('edit_releaseDate');
+        $series->genres = $request->input('edit_genres');
+        $series->trailer = $request->input('edit_trailer');
 
-        $movie->save();
+        $series->save();
 
         return redirect()->route('admin.dashboard')->with('status', 'Series updated');
     }
