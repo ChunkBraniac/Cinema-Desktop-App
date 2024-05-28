@@ -19,8 +19,8 @@ class MoviesController extends Controller
     //
     public function getAll()
     {
-        $series_all = Series::where('status', '!=', 'pending')->orderBy('releaseDate', 'Desc')->latest()->paginate(24);
-        $movies_all = Movies::where('status', '!=', 'pending')->orderBy('releaseDate', 'Desc')->latest()->paginate(24);
+        $series_all = Series::where('status', '!=', 'pending')->latest()->paginate(24);
+        $movies_all = Movies::where('status', '!=', 'pending')->latest()->paginate(24);
 
         return view('home', compact('series_all', 'movies_all'));
     }
