@@ -62,6 +62,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/series/trailer', [ApiController::class, 'updateSeriesTrailer'])->name('series.trailer');
     Route::get('admin/movies/trailer', [ApiController::class, 'updateMoviesTrailer'])->name('movies.trailer');
     Route::get('admin/series/trailer/v2', [ApiController::class, 'updateSeriesTrailerV2'])->name('series.trailer.v2');
+    Route::get('admin/movies/trailer/v2', [ApiController::class, 'updateMoviesTrailerV2'])->name('movies.trailer.v2');
 
     Route::post('admin/reset', [AdminController::class, 'reset'])->name('admin.reset');
 
@@ -89,6 +90,9 @@ Route::group(['middleware' => 'admin'], function () {
     // edting the series and movies
     Route::get('admin/edit/movie/{id}', [AdminController::class, 'edit_movie'])->name('edit.movie');
     Route::post('admin/edit/movie/{id}', [AdminController::class, 'update_movie'])->name('update.movie');
+
+    Route::get('admin/edit/series/{id}', [AdminController::class, 'edit_series'])->name('edit.series');
+    Route::post('admin/edit/series/{id}', [AdminController::class, 'update_series'])->name('update.series');
 });
 
 // Download page

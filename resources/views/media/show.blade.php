@@ -15,7 +15,8 @@
                         @endsection
                         <!-- Iterate over each item in the collection -->
                         <h3 class="d-xl-block d-none d-md-block d-sm-block d-lg-block">
-                            {{ str_replace(['-', $item->movieId], ' ', $item->originalTitleText) }}</h3>
+                            {{ $item->full_name }}
+                        </h3>
                         <div class="row">
                             <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
                                 <img data-src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
@@ -26,7 +27,7 @@
                                 <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
                                     <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3"
                                         style="font-family: 'Ubuntu sans', sans-serif;">
-                                        {{ str_replace('-', ' ', $item->originalTitleText) }}
+                                        {{ $item->full_name }}
                                     </h4>
                                     <h6
                                         style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">

@@ -216,6 +216,13 @@ class AdminController extends Controller
         return view('admin.components.edit-movies', compact('movie'));
     }
 
+    public function edit_series($id)
+    {
+        $series = Series::find($id);
+
+        return view('admin.components.edit-series', compact('series'));
+    }
+
     public function update_movie(Request $request, $id)
     {
         $movie = Movies::find($id);
@@ -233,5 +240,22 @@ class AdminController extends Controller
         $movie->save();
 
         return redirect()->route('admin.dashboard')->with('status', 'Movie updated');
+    }
+
+    public function update_series(Request $request, $id)
+    {
+        $movie = Series::find($id);
+
+        $movie->full_name = $request->input('edit_name');
+        $movie->imageUrl = $request->input('edit_image');
+        $movie->country = $request->input('edit_country');
+        $movie->plotText = $request->input('edit_plotText');
+        $movie->releaseDate = $request->input('edit_releaseDate');
+        $movie->genres = $request->input('edit_genres');
+        $movie->trailer = $request->input('edit_trailer');
+
+        $movie->save();
+
+        return redirect()->route('admin.dashboard')->with('status', 'Series updated');
     }
 }

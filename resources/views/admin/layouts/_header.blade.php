@@ -295,6 +295,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('movies.trailer.v2') }}">
+                            <i class="bi bi-circle"></i><span>Get Movies Trailer V2</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('admin.seasons') }}">
                             <i class="bi bi-circle"></i><span>Get Seasons</span>
                         </a>

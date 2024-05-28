@@ -113,7 +113,7 @@
                                                 <td>{{ $movies->runtime ? $movies->runtime : 'N/A' }}</td>
                                                 <td>{{ $movies->genres ? $movies->genres : 'N/A'}}</td>
                                                 <td>
-                                                    <a href="" class="btn btn-outline-success">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>
+                                                    <a href="{{ route('edit.series', ['id'=>$movies->id]) }}" class="btn btn-outline-success">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
