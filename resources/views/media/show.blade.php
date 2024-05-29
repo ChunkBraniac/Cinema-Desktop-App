@@ -148,13 +148,13 @@
                             {{ $item->full_name }}
                         </h3>
                         <div class="row">
-                            <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
+                            <div class="col-xl-2 col-sm-4 col-md-3 col-lg-4">
                                 <img data-src="{{ asset($item->imageUrl) }}" alt=""
                                     class="img-fluid blurry-image lazy"
                                     style="width: 100%; background: rgba(0, 0, 0, 0.493)" loading="lazy">
                             </div>
 
-                            <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-1" style="font-size: 15px;">
+                            <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-3" style="font-size: 15px;">
                                 <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
                                     <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3"
                                         style="font-family: 'Roboto', sans-serif; font-size: 19px;">
@@ -283,7 +283,10 @@
             @if ($item->titleType == 'movie')
                 <div class="m-auto text-center">
                     <button data-url="{{ $item->download_url }}" data-filename="{{ $item->full_name }} {{ ($item->releaseYear) }}" class="btn btn-success btn-md mr-3"
-                        style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 12px; padding-bottom: 12px" id="downloadButton">Download <i class="fa fa-download" aria-hidden="true"></i></button>
+                        style="font-size: 16px; padding-right: 25px; padding-left: 25px; padding-top: 12px; padding-bottom: 12px" id="downloadButton">Download 
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
+                    </button>
                 </div>
             @endif
         @else
@@ -298,13 +301,13 @@
 
                             @foreach ($merged as $more)
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
-                                    <a href="{{ url('media/' . $more->originalTitleText) }} "><img
+                                    <a href="{{ route('media.show', ['name'=>$more->originalTitleText]) }}"><img
                                             data-src="{{ asset($more->imageUrl) }}" alt=""
                                             class="img-fluid blurry-image lazy"
                                             style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)"
                                             loading="lazy"></a>
 
-                                    <a href="{{ url('media/' . $more->originalTitleText) }}"
+                                    <a href="{{ route('media.show', ['name'=>$more->originalTitleText]) }}"
                                         class="text-decoration-none text-reset">
                                         <h6 class="mt-1 text-truncate"
                                             style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;"
@@ -424,7 +427,7 @@
                                     <div class="collapse mt-3" id="{{ $comment->id }}">
                                         <div class="card card-body" style="background: #f9f9f9; border-radius: 0px">
                                             <form
-                                                action="{{ route('reply', ['name' => $item->originalTitleText, 'type' => $item->titleType]) }}"
+                                                action="{{ route('reply', ['name' => $item->originalTitleText]) }}"
                                                 method="post">
                                                 {{ csrf_field() }}
 
@@ -461,7 +464,7 @@
 
                 <div class="mt-4">
                     <form
-                        action="{{ route('comment', ['name' => $item->originalTitleText, 'type' => $item->titleType]) }}"
+                        action="{{ route('comment', ['name'=>$item->originalTitleText]) }}"
                         method="post">
                         {{ csrf_field() }}
                         <label for="">Name</label>
@@ -493,16 +496,16 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#{{ $recommended->id }}" aria-expanded="false"
+                                        data-bs-target="#recommend-{{ $recommended->movieId }}" aria-expanded="false"
                                         aria-controls="flush-collapseOne">
                                         {{ $recommended->full_name }}
                                     </button>
                                 </h2>
 
-                                <div id="{{ $recommended->id }}" class="accordion-collapse collapse"
+                                <div id="recommend-{{ $recommended->movieId }}" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body" style="font-size: 15px">{{ $recommended->plotText }} <a
-                                            href="{{ url('media/' . $recommended->originalTitleText) }} ">More
+                                            href="{{ route('media.show', ['name'=>$recommended->originalTitleText]) }} ">More
                                             Details</a>
                                     </div>
                                 </div>

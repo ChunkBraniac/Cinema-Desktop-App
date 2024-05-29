@@ -7,7 +7,7 @@
 @section('content')
     <br><br>
     <div class="container">
-        <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif;">Animation & Anime @if ($page == 1)
+        <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">Animation & Anime @if ($page == 1)
             @else
                 <span>
                     <h6 style="font-family: 'Roboto', sans-serif; font-weight: normal; font-size: 14px;">Page
@@ -24,14 +24,14 @@
 
     <br><br>
     <hr>
-    <div class="container mt-5">
+    <div class="container mt-4">
         <div class="row">
             @unless (count($paginatedResults) == 0)
                 @foreach ($paginatedResults as $animation)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                        <a href="{{ url('media/' . $animation->originalTitleText) }}"><img data-src="{{ asset($animation->imageUrl) }}"
-                                alt="{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}" class="img-fluid " style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
-                        <a href="{{ url('media/' . $animation->originalTitleText) }}" class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}">
+                        <a href="{{ route('media.show', ['name'=>$animation->originalTitleText]) }}"><img data-src="{{ asset($animation->imageUrl) }}"
+                                alt="{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}" class="img-fluid" loading="lazy"></a>
+                        <a href="{{ route('media.show', ['name'=>$animation->originalTitleText]) }}" class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}">
                             <h6 class="mt-1 text-truncate" style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}</h6>
                         </a>
                         <h6 class="text-truncate" style="font-size: 13px; font-family: 'Roboto', sans-serif; font-weight: 400; margin-top: -4px;">{{ $animation->genres }}</h6>

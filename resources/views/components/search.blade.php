@@ -8,7 +8,7 @@
     <br>
     <br>
     <div class="container-sm">
-        <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif;">Search @if ($page == 1)
+        <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">Search @if ($page == 1)
             @else
                 <span>
                     <h6 style="font-family: 'Roboto', sans-serif; font-weight: normal; font-size: 14px;">Page
@@ -26,16 +26,18 @@
 
     <br><br>
     <hr>
-    <div class="container-sm mt-5">
+    <div class="container-sm mt-4">
         <div class="row">
             @if ($paginatedResults->isNotEmpty())
                 @unless (count($paginatedResults) == 0)
                     @foreach ($paginatedResults as $search)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                            <a href="{{ url('media/' . $search->originalTitleText) }}" class="text-decoration-none text-reset"><img
+                            <a href="{{ route('media.show', ['name'=>$search->originalTitleText]) }}" class="text-decoration-none text-reset"><img
                                     data-src="{{ $search->imageUrl ? asset($search->imageUrl) : asset('images/No-Image-Placeholder.svg.webp') }}" alt="{{ $search->full_name . ' ' . '(' . $search->releaseYear . ')' }}" class="img-fluid blurry-image lazy"
                                     style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493);" loading="lazy"></a>
-                            <a href="{{ url('media/' . $search->originalTitleText) }}"
+
+
+                            <a href="{{ route('media.show', ['name'=>$search->originalTitleText]) }}"
                                 class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                 data-bs-title="{{ $search->full_name . ' ' . '(' . $search->releaseYear . ')' }}">
 

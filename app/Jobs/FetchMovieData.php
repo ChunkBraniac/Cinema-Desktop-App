@@ -81,7 +81,7 @@ class FetchMovieData implements ShouldQueue
                             $backdrop_path = isset($result['backdrop_path']) ? $result['backdrop_path'] : 0;
                             $language = strtoupper($result['original_language']);
                             $full_name = $result['title'];
-                            $name = $result['title'] . ' ' . $id;
+                            $name = $result['title'] . ' ' . $year . ' download';
                             $overview = $result['overview'];
                             $poster_path = $result['poster_path'];
                             $vote_average = $result['vote_average'];

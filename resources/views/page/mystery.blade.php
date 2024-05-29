@@ -7,7 +7,7 @@
 @section('content')
     <br><br>
     <div class="container">
-        <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif;">Mystery @if ($page == 1)
+        <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">Mystery @if ($page == 1)
             @else
                 <span>
                     <h6 style="font-family: 'Roboto', sans-serif; font-weight: normal; font-size: 14px;">Page
@@ -29,10 +29,11 @@
             @unless (count($paginatedResults) == 0)
                 @foreach ($paginatedResults as $mystery)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                        <a href="{{ url('media/' . $mystery->originalTitleText) }}"><img
-                                data-src="{{ asset($mystery->imageUrl) }}" alt="{{ $mystery->full_name . ' ' . '(' . $mystery->releaseYear . ')' }}" class="img-fluid"
-                                style="width: 100%; aspect-ratio: 3/5;" loading="lazy"></a>
-                        <a href="{{ url('media/' . $mystery->originalTitleText) }}"
+                        <a href="{{ route('media.show', ['name'=>$mystery->originalTitleText]) }}"><img
+                                data-src="{{ asset($mystery->imageUrl) }}" alt="{{ $mystery->full_name . ' ' . '(' . $mystery->releaseYear . ')' }}" class="img-fluid" loading="lazy"></a>
+
+
+                        <a href="{{ route('media.show', ['name'=>$mystery->originalTitleText]) }}"
                             class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $mystery->full_name . ' ' . '(' . $mystery->releaseYear . ')' }}">
 
                             <h6 class="mt-1 text-truncate" style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">

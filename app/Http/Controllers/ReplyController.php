@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ReplyController extends Controller
 {
     //
-    public function reply(Request $request, $name, $type)
+    public function reply(Request $request, $name)
     {
 
         $request->validate([
@@ -29,6 +29,6 @@ class ReplyController extends Controller
 
         $reply->save();
 
-        return redirect()->route('media.show', ['name' => $name, 'type' => $type])->with('success', 'Reply added successfully');
+        return redirect()->route('media.show', ['name' => $name])->with('success', 'Reply added successfully');
     }
 }

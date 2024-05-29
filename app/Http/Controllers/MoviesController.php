@@ -20,7 +20,7 @@ class MoviesController extends Controller
     public function getAll()
     {
         $series_all = Series::where('status', '!=', 'pending')->orderBy('updated_at', 'Desc')->paginate(24);
-        $movies_all = Movies::where('status', '!=', 'pending')->orderBy('updated_at', 'Desc')->paginate(24);
+        $movies_all = Movies::where('status', '!=', 'pending')->orderBy('updated_at', 'Desc')->paginate(18);
         
         
         $seasons = DB::table('seasons as s1')
@@ -388,5 +388,23 @@ class MoviesController extends Controller
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
         return view('components.show-more', compact('more_Movies', 'more_Series', 'page'));
+    }
+
+    public function showMoreSeries()
+    {
+        $more_Series = Series::where('status', '!=', 'pending')->orderByDesc('releaseYear')->paginate(36);
+
+        $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
+
+        return view('components.show-more-series', compact('more_Series', 'page'));
+    }
+
+    public function showMoreMovies()
+    {
+        $more_Series = Movies::where('status', '!=', 'pending')->orderByDesc('releaseYear')->paginate(36);
+
+        $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
+
+        return view('components.show-more-movies', compact('more_Series', 'page'));
     }
 }

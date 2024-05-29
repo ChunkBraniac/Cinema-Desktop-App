@@ -52,10 +52,6 @@
                             <a class="nav-link text-light" href="{{ url('#') }}" style="font-size: 15px; margin-right: 20px;">About
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ route('request.movie') }}" style="font-size: 15px;"> Request Movie
-                            </a>
-                        </li>
                     </ul>
                     <form class="d-flex" role="search" action="{{ route('movie.search') }}" method="get">
                         <input class="form-control" type="search" placeholder="Search" aria-label="Search"

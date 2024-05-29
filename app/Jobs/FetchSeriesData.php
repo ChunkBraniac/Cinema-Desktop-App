@@ -81,7 +81,7 @@ class FetchSeriesData implements ShouldQueue
 
                             $base_url = $poster_path ? "https://image.tmdb.org/t/p/w500" . $poster_path : "";
 
-                            $formatted_name = str_replace(' ', '-', $result['name'] . ' ' . $id);
+                            $formatted_name = str_replace(' ', '-', $result['name'] . ' ' . $year . ' download');
                             $rating = floor($vote_average * 10) / 10;
 
                             Series::create([

@@ -27,14 +27,16 @@ Route::get('scifi', [MoviesController::class, 'getScifi'])->name('movies.scifi')
 // 404 page
 Route::get('404', [PageController::class, 'error'])->name('error.404');
 
-Route::group(['middleware' => 'xframe'], function () {
-    Route::get('/media/{name}', [MoviesController::class, 'show'])->name('media.show');
-});
+// Route to show more movies and series
+Route::get('/show-more-series', [MoviesController::class, 'showMoreSeries'])->name('moreseries');
+Route::get('/show-more-movies', [MoviesController::class, 'showMoreMovies'])->name('moremovies');
 
+// Route for searching for a movie or series
 Route::get('search', [MoviesController::class, 'search'])->name('movie.search');
 
-Route::post('media/{name}/{type}/comment', [CommentController::class, 'store'])->name('comment');
-Route::post('media/{name}/{type}/reply', [ReplyController::class, 'reply'])->name('reply');
+// Route for commenting and replying on a movie or series
+Route::post('/{name}/comment', [CommentController::class, 'store'])->name('comment');
+Route::post('/{name}/reply', [ReplyController::class, 'reply'])->name('reply');
 
 // Admin Routes
 Route::get('admin/register', [AdminController::class, 'registerPage'])->name('admin.home.register');
@@ -96,10 +98,14 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/edit/series/{id}', [AdminController::class, 'update_series'])->name('update.series');
 });
 
+// Route for showing the movie and series details
+Route::group(['middleware' => 'xframe'], function () {
+    Route::get('/{name}', [MoviesController::class, 'show'])->name('media.show');
+});
+
+
 // Download page
 Route::get('download/{name}/season/{season}/episode/{episode}', [SeasonsController::class, 'download'])->name('download');
-
-Route::get('show-more', [MoviesController::class, 'showMore'])->name('moremovies');
 
 // Route for requesting movie
 Route::get('/movie-request', [MovieRequestController::class, 'create'])->name('request.movie');
