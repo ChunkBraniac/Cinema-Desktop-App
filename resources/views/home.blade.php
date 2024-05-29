@@ -27,7 +27,7 @@
                                 data-src="{{ $series->imageUrl ? asset($series->imageUrl) : asset('images/No-Image-Placeholder.svg.webp') }}"
                                 alt="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode '. $series->episode_number  }}"
                                 class="img-fluid blurry-image lazy"
-                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.315);" loading="lazy"></a>
+                                style="background: rgba(0, 0, 0, 0.315);" loading="lazy"></a>
                         <a href="{{ url('media/' . $series->movieName) }}" class="text-decoration-none text-reset"
                             data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode '. $series->episode_number  }}">
@@ -57,7 +57,7 @@
                                 data-src="{{ $series->imageUrl ? asset($series->imageUrl) : asset('images/No-Image-Placeholder.svg.webp') }}"
                                 alt="{{ str_replace(['-', $series->movieId], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy"
-                                style="aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.315);" loading="lazy"></a>
+                                style="background: rgba(0, 0, 0, 0.315);" loading="lazy"></a>
                         <a href="{{ url('media/' . $series->originalTitleText) }}" class="text-decoration-none text-reset"
                             data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ str_replace(['-', $series->movieId], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}">
@@ -103,7 +103,7 @@
                                 data-src="{{ $movies->imageUrl ? asset($movies->imageUrl) : asset('images/no-image.png') }}"
                                 alt="{{ str_replace(['-', $movies->releaseYear], ' ', $movies->originalTitleText) . ' ' . '(' . $movies->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy"
-                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.315);" loading="lazy"></a>
+                                style="background: rgba(0, 0, 0, 0.315);" loading="lazy"></a>
                         <a href="{{ url('media/' . $movies->originalTitleText) }}" class="text-decoration-none text-reset"
                             data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ $movies->full_name . ' ' . '(' . $movies->releaseYear . ')' }}">

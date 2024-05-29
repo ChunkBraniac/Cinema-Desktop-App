@@ -25,14 +25,14 @@ class FetchSeriesData implements ShouldQueue
         ini_set('max_execution_time', 900); // Set the max execution time to 5 minutes
         ini_set('memory_limit', '500M');
 
-        $pages = range(1, 10);
+        $pages = 1;
         $date = date('Y-m-d');
 
-        foreach ($pages as $page) {
+        do {
             $curl = curl_init();
 
             curl_setopt_array($curl, [
-                CURLOPT_URL => "https://api.themoviedb.org/3/account/20553054/watchlist/tv?language=en-US&page={$page}&sort_by=created_at.asc",
+                CURLOPT_URL => "https://api.themoviedb.org/3/account/20553054/watchlist/tv?language=en-US&page={$pages}&sort_by=created_at.asc",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
@@ -58,7 +58,7 @@ class FetchSeriesData implements ShouldQueue
 
             $data = json_decode($response, true);
 
-            if (isset($data['results']) && is_array($data['results'])) {
+            if (isset($data['results']) && is_array($data['results']) && count($data['results']) > 0) {
                 foreach ($data['results'] as $result) {
                     $first_air_date = $result['first_air_date'];
                     $year = substr($first_air_date, 0, 4); // Extract the first four characters
@@ -112,12 +112,14 @@ class FetchSeriesData implements ShouldQueue
                     }
                 }
             } else {
-                echo "No results found";
+                // No more results, stop the loop
+                break;
             }
-        }
-        
 
-        
+            // Check if there are more pages to fetch
+            if (!isset($data['total_pages']) || $pages >= $data['total_pages']) {
+                break;
+            }
+        } while (true);
     }
 }
-

@@ -9,15 +9,18 @@ $(document).ready(function () {
         responsive: {
             0: {
                 items: 2,
-                dots: false
+                dots: false,
+                loop: false,
             },
             600: {
                 items: 3,
                 dots: false,
+                loop: false,
             },
             1000: {
                 items: 5,
                 dots: false,
+                loop: false,
             },
             1200: {
                 items: 6,

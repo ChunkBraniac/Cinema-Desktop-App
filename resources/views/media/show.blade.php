@@ -20,7 +20,7 @@
                         <div class="row">
                             <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
                                 <img data-src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
-                                    style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy">
+                                    style="background: rgba(0, 0, 0, 0.493)" loading="lazy">
                             </div>
 
                             <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
@@ -151,7 +151,7 @@
                             <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
                                 <img data-src="{{ asset($item->imageUrl) }}" alt=""
                                     class="img-fluid blurry-image lazy"
-                                    style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)" loading="lazy">
+                                    style="background: rgba(0, 0, 0, 0.493)" loading="lazy">
                             </div>
 
                             <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
@@ -307,7 +307,7 @@
                                     <a href="{{ url('media/' . $more->originalTitleText) }}"
                                         class="text-decoration-none text-reset">
                                         <h6 class="mt-1 text-truncate"
-                                            style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500"
+                                            style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;"
                                             data-bs-toggle="tooltip" data-bs-placement="bottom"
                                             data-bs-title="{{ $more->full_name . ' ' . '(' . $more->releaseYear . ')' }}">
                                             {{ $more->full_name }}</h6>
@@ -328,7 +328,7 @@
                                     <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
                                         class="text-decoration-none text-reset">
                                         <h6 class="mt-1"
-                                            style="font-family: 'Ubuntu sans', sans-serif; font-weight: 500">
+                                            style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
                                             Season
                                             {{ $more->season_number }} Episode {{ $more->episode_number }}
                                         </h6>

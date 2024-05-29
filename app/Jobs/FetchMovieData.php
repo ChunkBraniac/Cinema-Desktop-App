@@ -31,13 +31,14 @@ class FetchMovieData implements ShouldQueue
         ini_set('max_execution_time', 900); // Set the max execution time to 5 minutes
         ini_set('memory_limit', '500M');
 
-        $page = range(1, 100);
+        $page = 1;
         $date = date('Y-m-d');
-        foreach ($page as $pages) {
+
+        do {
             $curl = curl_init();
 
             curl_setopt_array($curl, [
-                CURLOPT_URL => "https://api.themoviedb.org/3/account/20553054/watchlist/movies?language=en-US&page={$pages}&sort_by=created_at.asc",
+                CURLOPT_URL => "https://api.themoviedb.org/3/account/20553054/watchlist/movies?language=en-US&page={$page}&sort_by=created_at.asc",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
@@ -58,12 +59,12 @@ class FetchMovieData implements ShouldQueue
             if ($err) {
                 // Handle error
                 echo $err;
-                continue;
+                break;
             }
 
             $data = json_decode($response, true);
 
-            if (isset($data['results']) && is_array($data['results'])) {
+            if (isset($data['results']) && is_array($data['results']) && count($data['results']) > 0) {
                 foreach ($data['results'] as $result) {
                     $release_date = isset($result['release_date']) ? $result['release_date'] : 0;
                     $year = substr($release_date, 0, 4); // Extract the first four characters
@@ -72,8 +73,7 @@ class FetchMovieData implements ShouldQueue
                     if ($year >= '2018' && $release_date <= $date && $year <= '2024') {
                         $id = $result['id'];
 
-                        // check if the series is already in the db
-
+                        // Check if the movie is already in the database
                         $fetch = Movies::where('movieId', $id)->first();
 
                         if (!$fetch) {
@@ -120,7 +120,17 @@ class FetchMovieData implements ShouldQueue
                         echo $full_name . " - not in range \n";
                     }
                 }
+            } else {
+                // No more results, stop the loop
+                break;
             }
-        }
+
+            // Check if there are more pages to fetch
+            if (!isset($data['total_pages']) || $page >= $data['total_pages']) {
+                break;
+            }
+
+            $page++;
+        } while (true);
     }
 }
