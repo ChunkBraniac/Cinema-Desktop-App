@@ -36,7 +36,7 @@ class getSeasons implements ShouldQueue
 
         $fetch = Series::where('titleType', 'series')->get();
 
-        $seasons = range(1, 20);
+        $seasons = 1;
 
         foreach ($fetch as $data_info) {
             $movie_id = $data_info->movieId;
@@ -45,11 +45,15 @@ class getSeasons implements ShouldQueue
             $movie_image = $data_info->imageUrl;
             $full_name = $data_info->full_name;
 
-            foreach ($seasons as $season) {
+            // foreach ($seasons as $season) {
+                
+            // }
+
+            do {
                 $curl = curl_init();
 
                 curl_setopt_array($curl, [
-                    CURLOPT_URL => "https://api.themoviedb.org/3/tv/{$movie_id}/season/{$season}?language=en-US",
+                    CURLOPT_URL => "https://api.themoviedb.org/3/tv/{$movie_id}/season/{$seasons}?language=en-US",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_ENCODING => "",
                     CURLOPT_MAXREDIRS => 10,
@@ -74,7 +78,7 @@ class getSeasons implements ShouldQueue
 
                 $data = json_decode($response, true);
 
-                if (isset($data['episodes']) && is_array($data['episodes'])) {
+                if (isset($data['episodes']) && is_array($data['episodes']) && count($data['episodes']) > 0) {
 
                     if ($data['air_date'] == null) {
                         echo "Air date not available for " . $full_name . "\n";
@@ -108,8 +112,17 @@ class getSeasons implements ShouldQueue
                             }
                         }
                     }
+                } else {
+                    // No more results, stop the loop
+                    break;
                 }
-            }
-        }
+
+                if (!isset($data['season_number']) || $seasons >= $data['season_number']) {
+                    break;
+                }
+    
+                $seasons++;
+            } while(true);
+        } 
     }
 }

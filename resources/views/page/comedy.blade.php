@@ -30,7 +30,7 @@
                 @foreach ($paginatedResults as $comedy)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ route('media.show', ['name'=>$comedy->originalTitleText]) }}"><img data-src="{{ asset($comedy->imageUrl) }}"
-                                alt="{{ $comedy->full_name . ' ' . '(' . $comedy->releaseYear . ')' }}" loading="lazy"></a>
+                                alt="{{ $comedy->full_name . ' ' . '(' . $comedy->releaseYear . ')' }}" class="img-fluid" loading="lazy"></a>
 
 
                         <a href="{{ route('media.show', ['name'=>$comedy->originalTitleText]) }}" class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $comedy->full_name . ' ' . '(' . $comedy->releaseYear . ')' }}">

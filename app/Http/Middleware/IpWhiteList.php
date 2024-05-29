@@ -4,10 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class IpWhiteList
 {
     /**
      * Handle an incoming request.
@@ -16,11 +15,12 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $allowed_ips = ['127.0.0.1']; // Add your allowed IPs here
 
-        if (!Auth::guard('admin')->check()) {
-            return redirect('admin')->with('error', 'Login required'); // Redirect to login page if not admin
+        if (!in_array($request->ip(), $allowed_ips)) {
+            abort(404); // Return 404 if IP is not allowed
         }
-
+        
         return $next($request);
     }
 }

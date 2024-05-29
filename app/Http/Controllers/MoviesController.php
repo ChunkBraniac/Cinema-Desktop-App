@@ -257,9 +257,11 @@ class MoviesController extends Controller
 
         $actionMoviesSeries = Series::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Science Fiction%')->get();
         $actionMovies = Movies::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Science Fiction%')->get();
+        $actionMovies2 = Series::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Sci-Fi%')->get();
+        $actionMovies3 = Movies::where('status', '!=', 'pending')->latest()->where('genres', 'like', '%Sci-Fi%')->get();
 
         // Merge the collections
-        $allActionMovies = $actionMoviesSeries->concat($actionMovies);
+        $allActionMovies = $actionMoviesSeries->concat($actionMovies)->concat($actionMovies2)->concat($actionMovies3);
 
         // Sort the merged collection
         $allActionMovies = $allActionMovies->sortByDesc('releaseYear');

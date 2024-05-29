@@ -20,7 +20,7 @@
                         <div class="row">
                             <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
                                 <img data-src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
-                                    style="background: rgba(0, 0, 0, 0.493)" loading="lazy">
+                                    style="width: 100%; background: rgba(0, 0, 0, 0.493)" loading="lazy">
                             </div>
 
                             <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
@@ -322,11 +322,11 @@
                         <div class="row mb-3">
 
                             @foreach ($seasons as $more)
-                                <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
+                                <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-2">
                                     <a
                                         href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"><img
                                             data-src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
-                                            style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)"
+                                            style="background: rgba(0, 0, 0, 0.493)"
                                             loading="lazy"></a>
                                     <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
                                         class="text-decoration-none text-reset">
@@ -340,7 +340,7 @@
                             @endforeach
                         </div>
 
-                        {{ $seasons->onEachSide(1)->links() }}
+                        {{ $seasons->onEachSide(2)->links('vendor.pagination.bootstrap-5') }}
 
                         @if (count($seasons) == 0)
                             <p>No data for this title</p>
@@ -458,7 +458,7 @@
 
                         </div>
                     @else
-                        <p class="alert alert-danger" style="font-size: 14px">No comments yet for this movie.</p>
+                        <p class="text-muted" style="font-size: 14px">*No comments yet for this movie. Be the first to comment*</p>
                     @endif
                 </div>
 

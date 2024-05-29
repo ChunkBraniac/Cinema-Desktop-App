@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Middleware\IpWhiteList;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\AuthMiddleware;
-use App\Http\Middleware\AddXFrameOptionsMiddleware;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\AddXFrameOptionsMiddleware;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -18,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => AdminMiddleware::class,
             'xframe' => AddXFrameOptionsMiddleware::class,
+            'ipWhitelist' => IpWhiteList::class,
             
         ]);
     })
