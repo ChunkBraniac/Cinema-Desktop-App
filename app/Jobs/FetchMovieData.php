@@ -37,7 +37,7 @@ class FetchMovieData implements ShouldQueue
             $curl = curl_init();
 
             curl_setopt_array($curl, [
-                CURLOPT_URL => "https://api.themoviedb.org/3/account/20553054/favorite/movies?page={$pages}",
+                CURLOPT_URL => "https://api.themoviedb.org/3/account/20553054/watchlist/movies?language=en-US&page={$pages}&sort_by=created_at.asc",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,

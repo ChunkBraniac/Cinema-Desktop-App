@@ -25,18 +25,18 @@ class FetchSeriesData implements ShouldQueue
         ini_set('max_execution_time', 900); // Set the max execution time to 5 minutes
         ini_set('memory_limit', '500M');
 
-        $pages = range(1, 100);
+        $pages = range(1, 10);
         $date = date('Y-m-d');
 
         foreach ($pages as $page) {
             $curl = curl_init();
 
             curl_setopt_array($curl, [
-                CURLOPT_URL => "https://api.themoviedb.org/3/account/20553054/favorite/tv?&page={$page}",
+                CURLOPT_URL => "https://api.themoviedb.org/3/account/20553054/watchlist/tv?language=en-US&page={$page}&sort_by=created_at.asc",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 300,
+                CURLOPT_TIMEOUT => 30,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => "GET",
                 CURLOPT_HTTPHEADER => [

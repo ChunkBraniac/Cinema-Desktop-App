@@ -21,14 +21,17 @@ class MoviesController extends Controller
     {
         $series_all = Series::where('status', '!=', 'pending')->orderBy('updated_at', 'Desc')->paginate(24);
         $movies_all = Movies::where('status', '!=', 'pending')->orderBy('updated_at', 'Desc')->paginate(24);
+        
+        
         $seasons = DB::table('seasons as s1')
         ->select('s1.*')
-        ->join(DB::raw('(SELECT MAX(episode_number) as episode_number, movieId FROM seasons GROUP BY movieId) as s2'), function($join) {
-            $join->on('s1.episode_number', '=', 's2.episode_number');
+        ->join(DB::raw('(SELECT MAX(id) as id, movieId FROM seasons GROUP BY movieId ORDER BY episode_number DESC) as s2'), function($join) {
+            $join->on('s1.id', '=', 's2.id');
             $join->on('s1.movieId', '=', 's2.movieId');
         })
-        ->latest()
+        ->latest('s1.id')
         ->paginate(9);
+
 
         return view('home', compact('series_all', 'movies_all', 'seasons'));
     }

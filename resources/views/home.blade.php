@@ -7,7 +7,7 @@
 @section('content')
     {{-- <hr class="mt-5"> --}}
 
-    <!--- <div class="container-sm mt-5">
+     <div class="container-sm mt-5">
 
         {{-- OWLCAROUSEL PANE --}}
         <h4 style="font-family: 'Roboto', sans-serif; font-weight: bold">New Seasons & Episodes
@@ -23,12 +23,12 @@
             @unless (count($seasons) == 0)
                 @foreach ($seasons as $series)
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1 item">
-                        <a href="{{ url('download/' . $series->movieName . '/season/' . $series->season_number . '/episode/' . $series->episode_number) }}"><img
+                        <a href="{{ url('media/' . $series->movieName) }}"><img
                                 data-src="{{ $series->imageUrl ? asset($series->imageUrl) : asset('images/No-Image-Placeholder.svg.webp') }}"
                                 alt="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode '. $series->episode_number  }}"
                                 class="img-fluid blurry-image lazy"
                                 style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.315);" loading="lazy"></a>
-                        <a href="{{ url('download/' . $series->movieName . '/season/' . $series->season_number . '/episode/' . $series->episode_number) }}" class="text-decoration-none text-reset"
+                        <a href="{{ url('media/' . $series->movieName) }}" class="text-decoration-none text-reset"
                             data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode '. $series->episode_number  }}">
 
@@ -41,7 +41,9 @@
                 @endforeach
             @endunless
         </div>
-    </div><hr class="mt-5">---->
+    </div>
+
+    <hr class="mt-5">
 
     <div class="container-sm mt-5">
 

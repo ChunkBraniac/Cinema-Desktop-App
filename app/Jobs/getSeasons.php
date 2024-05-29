@@ -27,13 +27,12 @@ class getSeasons implements ShouldQueue
      * Execute the job.
      */
 
-    public $tries = 3;
-    public $retryAfter = 3; // Retry after 90 seconds
+     
     public function handle(): void
     {
         //
-        ini_set('max_execution_time', 900); // Set the max execution time to 5 minutes
-        ini_set('memory_limit', '500M');
+        ini_set('max_execution_time', 90000); // Set the max execution time to 5 minutes
+        ini_set('memory_limit', '50000M');
 
         $fetch = Series::where('titleType', 'series')->get();
 
