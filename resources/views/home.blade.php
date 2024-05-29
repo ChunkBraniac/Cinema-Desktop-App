@@ -7,7 +7,7 @@
 @section('content')
     {{-- <hr class="mt-5"> --}}
 
-    <div class="container-sm mt-5">
+    <!--- <div class="container-sm mt-5">
 
         {{-- OWLCAROUSEL PANE --}}
         <h4 style="font-family: 'Roboto', sans-serif; font-weight: bold">New Seasons & Episodes
@@ -41,9 +41,7 @@
                 @endforeach
             @endunless
         </div>
-    </div>
-
-    <hr class="mt-5">
+    </div><hr class="mt-5">---->
 
     <div class="container-sm mt-5">
 
