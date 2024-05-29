@@ -151,10 +151,10 @@
                             <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
                                 <img data-src="{{ asset($item->imageUrl) }}" alt=""
                                     class="img-fluid blurry-image lazy"
-                                    style="background: rgba(0, 0, 0, 0.493)" loading="lazy">
+                                    style="width: 100%; background: rgba(0, 0, 0, 0.493)" loading="lazy">
                             </div>
 
-                            <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
+                            <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-1" style="font-size: 15px;">
                                 <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
                                     <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3"
                                         style="font-family: 'Roboto', sans-serif; font-size: 19px;">
