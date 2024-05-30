@@ -1,14 +1,17 @@
 <?php
 
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\Tags\Url;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\MovieRequestController;
-use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\SeasonsController;
+use App\Http\Controllers\MovieRequestController;
+use App\Http\Controllers\SitemapController;
 
 Route::get('/', [PageController::class, 'home'])->name('home.page');
 
@@ -101,6 +104,10 @@ Route::middleware(['ipWhitelist'])->group(function () {
         Route::post('admin/edit/series/{id}', [AdminController::class, 'update_series'])->name('update.series');
     });
 });
+
+// Displaying sitemap
+Route::get('/sitemap.xml', [SitemapController::class, 'showXml'])->name('sitemap.xml');
+Route::get('/sitemap', [SitemapController::class, 'showHtml'])->name('sitemap');
 
 // Route for showing the movie and series details
 Route::group(['middleware' => 'xframe'], function () {
