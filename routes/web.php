@@ -38,12 +38,14 @@ Route::get('/show-more-movies', [MoviesController::class, 'showMoreMovies'])->na
 // Route for searching for a movie or series
 Route::get('search', [MoviesController::class, 'search'])->name('movie.search');
 
+// Download page
+Route::get('/{name}/season/{season}/episode/{episode}', [SeasonsController::class, 'download'])->name('download');
+
 // Route for commenting and replying on a movie or series
 Route::post('/{name}/comment', [CommentController::class, 'store'])->name('comment');
 Route::post('/{name}/reply', [ReplyController::class, 'reply'])->name('reply');
 
 // Admin Routes
-
 Route::middleware(['ipWhitelist'])->group(function () {
     Route::get('admin/register', [AdminController::class, 'registerPage'])->name('admin.home.register');
     Route::post('admin/register', [AdminController::class, 'register'])->name('register.admin');
@@ -105,18 +107,16 @@ Route::middleware(['ipWhitelist'])->group(function () {
     });
 });
 
+Route::get('tv-shows', [MoviesController::class, 'tv_series'])->name('tv.shows');
+Route::get('movies', [MoviesController::class, 'movies'])->name('movies');
+
 // Displaying sitemap
-Route::get('/sitemap.xml', [SitemapController::class, 'showXml'])->name('sitemap.xml');
-Route::get('/sitemap', [SitemapController::class, 'showHtml'])->name('sitemap');
+Route::get('/sitemap', [SitemapController::class, 'show'])->name('sitemap');
 
 // Route for showing the movie and series details
 Route::group(['middleware' => 'xframe'], function () {
     Route::get('/{name}', [MoviesController::class, 'show'])->name('media.show');
 });
-
-
-// Download page
-Route::get('download/{name}/season/{season}/episode/{episode}', [SeasonsController::class, 'download'])->name('download');
 
 // Route for requesting movie
 Route::get('/movie-request', [MovieRequestController::class, 'create'])->name('request.movie');

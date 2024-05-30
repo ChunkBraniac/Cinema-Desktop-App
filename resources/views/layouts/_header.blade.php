@@ -45,11 +45,11 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ url('#') }}"
-                                style="font-size: 15px; margin-right: 20px;">TV Series</a>
+                            <a class="nav-link text-light" href="{{ route('tv.shows') }}"
+                                style="font-size: 15px; margin-right: 20px;">TV Shows</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ route('about-us') }}" style="font-size: 15px; margin-right: 20px;">Movies
+                            <a class="nav-link text-light" href="{{ route('movies') }}" style="font-size: 15px; margin-right: 20px;">Movies
                             </a>
                         </li>
                         <li class="nav-item">

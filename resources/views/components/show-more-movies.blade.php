@@ -37,7 +37,7 @@
                                 data-src="{{ $action->imageUrl ? asset($action->imageUrl) : asset('images/no-image.jpg') }}"
                                 alt="{{ $action->full_name . ' ' . '(' . $action->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy"
-                                style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493);" loading="lazy"></a>
+                                style="background: rgba(0, 0, 0, 0.493);" loading="lazy"></a>
 
 
                         <a href="{{ route('media.show', ['name' => $action->originalTitleText]) }}"

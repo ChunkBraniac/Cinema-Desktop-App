@@ -2,9 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Spatie\Sitemap\Sitemap;
-use Spatie\Sitemap\Tags\Url;
 use Illuminate\Console\Command;
+use Spatie\Sitemap\SitemapGenerator;
 
 class GenerateSitemap extends Command
 {
@@ -13,26 +12,27 @@ class GenerateSitemap extends Command
      *
      * @var string
      */
-    protected $signature = 'app:generate-sitemap';
+    protected $signature = 'sitemap:generate';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Generate the sitemap';
 
     /**
      * Execute the console command.
+     *
+     * @return int
      */
     public function handle()
     {
-        //
-        Sitemap::create()
-            ->add(Url::create('/'))
-            ->add(Url::create('/about'))
-            ->add(Url::create('/contact'))
+        SitemapGenerator::create('http://127.0.0.1:8000')
             ->writeToFile(public_path('sitemap.xml'));
-        $this->info('Sitemap has been generated');
+
+        $this->info('Sitemap generated successfully.');
+
+        return 0;
     }
 }

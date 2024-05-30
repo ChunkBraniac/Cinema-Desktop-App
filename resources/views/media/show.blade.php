@@ -324,11 +324,11 @@
                             @foreach ($seasons as $more)
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-2">
                                     <a
-                                        href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"><img
+                                        href="{{ url($more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"><img
                                             data-src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
                                             style="background: rgba(0, 0, 0, 0.493)"
                                             loading="lazy"></a>
-                                    <a href="{{ url('download/' . $more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
+                                    <a href="{{ url($more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
                                         class="text-decoration-none text-reset">
                                         <h6 class="mt-1"
                                             style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">

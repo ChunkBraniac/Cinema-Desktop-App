@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    TV Series
+    TV Shows
 @endsection
 
 @section('content')
@@ -9,8 +9,8 @@
     <div class="container mt-5">
         {{-- Series Pane --}}
         <div class="row mb-4">
-            @unless (count($more_Series) == 0)
-                @foreach ($more_Series as $action)
+            @unless (count($tv_series) == 0)
+                @foreach ($tv_series as $action)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ route('media.show', ['name' => $action->originalTitleText]) }}"><img
                                 data-src="{{ $action->imageUrl ? asset($action->imageUrl) : asset('images/no-image.jpg') }}"
@@ -47,9 +47,9 @@
             @endunless
         </div>
 
-        {{ $more_Series->appends(request()->query())->onEachSide(2)->links('vendor.pagination.bootstrap-5') }}
+        {{ $tv_series->appends(request()->query())->onEachSide(2)->links('vendor.pagination.bootstrap-5') }}
 
-        @if (count($more_Series) == 0)
+        @if (count($tv_series) == 0)
             {{ abort(404) }}
         @endif
 
