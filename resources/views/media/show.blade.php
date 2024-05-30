@@ -296,7 +296,7 @@
             <div class="col-xl-9 col-lg-8 mt-3">
                 @if (isset($item))
                     @if ($item->titleType == 'movie')
-                        <h4 style="font-size: 19px;">{{ Str::upper('You may also like: ')}}</h4>
+                        <h5 style="font-weight: 700;">You    may also like:</h5>
                         <div class="row">
 
                             @foreach ($merged as $more)
@@ -353,7 +353,7 @@
                 <hr class="mt-4 mb-4">
 
                 <div class="mt-4">
-                    <h5 class="mb-3">Comment</h5>
+                    <h5 class="mb-3" style="font-weight: 700;">Comment</h5>
                     @if (session('success'))
                         <script>
                             const Toast = Swal.mixin({
@@ -487,8 +487,8 @@
                 </div>
             </div>
 
-            <div class="col-xl-3 col-lg-4 mt-4">
-                <h5>Recommended Shows </h5>
+            <div class="col-xl-3 col-lg-4 mt-4" style="border-left: 1px solid rgba(0, 0, 0, 0.349)">
+                <h5 style="font-weight: 700;">Recommended Shows </h5>
                 @unless (count($recom) == 0)
                     @foreach ($recom as $recommended)
                         <div class="accordion accordion-flush border"

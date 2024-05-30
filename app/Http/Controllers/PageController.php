@@ -61,4 +61,9 @@ class PageController extends Controller
     {
         return view('page.404');
     }
+
+    public static function about_us()
+    {
+        return view('page.about-us');
+    }
 }

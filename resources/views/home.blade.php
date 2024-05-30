@@ -10,7 +10,7 @@
     <div class="container-sm mt-5">
 
         {{-- OWLCAROUSEL PANE --}}
-        <h4 style="font-family: 'Roboto', sans-serif; font-weight: bold">New Seasons & Episodes
+        <h4 style="font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">New Seasons & Episodes
             <span style="float: right;">
                 <button class="customPrevBtn">‹</button>
                 <button class="customNextBtn">›</button>
@@ -51,7 +51,7 @@
     <div class="container-sm mt-5">
 
         {{-- SERIES PANE --}}
-        <h4 style="font-family: 'Roboto', sans-serif; font-weight: bold;">New Series</h4>
+        <h4 style="font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">New Series</h4>
         <div class="row">
             @unless (count($series_all) == 0)
                 @foreach ($series_all as $series)
@@ -103,7 +103,7 @@
     <div class="container-sm mt-5">
 
         {{-- MOVIES PANE --}}
-        <h4 style="font-family: 'Roboto', sans-serif; font-weight: bold;">New Movies</h4>
+        <h4 style="font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">New Movies</h4>
         <div class="row">
             @unless (count($movies_all) == 0)
                 @foreach ($movies_all as $movies)

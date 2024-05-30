@@ -23,6 +23,7 @@ Route::get('horror', [MoviesController::class, 'getHorror'])->name('movies.horro
 Route::get('thriller', [MoviesController::class, 'getThriller'])->name('movies.thriller');
 Route::get('mystery', [MoviesController::class, 'getMystery'])->name('movies.mystery');
 Route::get('scifi', [MoviesController::class, 'getScifi'])->name('movies.scifi');
+Route::get('about-us', [PageController::class, 'about_us'])->name('about-us');
 
 // 404 page
 Route::get('404', [PageController::class, 'error'])->name('error.404');

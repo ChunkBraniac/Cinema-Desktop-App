@@ -363,8 +363,8 @@ class MoviesController extends Controller
             return redirect()->back()->with('error', 'Please enter a search word');
         }
 
-        $SeriesResults = Series::where('status', '!=', 'pending')->where('originalTitleText', 'like', "%$searchWord%")->orderBy('releaseYear', 'Desc')->get();
-        $MoviesResults = Movies::where('status', '!=', 'pending')->where('originalTitleText', 'like', "%$searchWord%")->orderBy('releaseYear', 'Desc')->get();
+        $SeriesResults = Series::where('status', '!=', 'pending')->where('full_name', 'LIKE', "%$searchWord%")->orderBy('releaseYear', 'Desc')->get();
+        $MoviesResults = Movies::where('status', '!=', 'pending')->where('full_name', 'LIKE', "%$searchWord%")->orderBy('releaseYear', 'Desc')->get();
 
         $allResults = $SeriesResults->concat($MoviesResults);
 

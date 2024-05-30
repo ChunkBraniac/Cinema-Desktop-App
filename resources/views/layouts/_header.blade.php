@@ -46,10 +46,14 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" href="{{ url('#') }}"
-                                style="font-size: 15px; margin-right: 20px;">Help</a>
+                                style="font-size: 15px; margin-right: 20px;">TV Series</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ url('#') }}" style="font-size: 15px; margin-right: 20px;">About
+                            <a class="nav-link text-light" href="{{ route('about-us') }}" style="font-size: 15px; margin-right: 20px;">Movies
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ route('about-us') }}" style="font-size: 15px; margin-right: 20px;">About Us
                             </a>
                         </li>
                     </ul>
