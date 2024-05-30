@@ -24,13 +24,13 @@
                             </div>
 
                             <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
-                                <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
+                                <div>
                                     <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3"
                                         style="font-family: 'Roboto', sans-serif; font-size: 20px;">
                                         {{ $item->full_name }}
                                     </h4>
                                     <h6
-                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;" class="mt-3 mt-xl-0">
                                         <i class="fa fa-star" aria-hidden="true" style="font-size: 11px"></i>
 
                                         {{ isset($item->aggregateRating) ? $item->aggregateRating : 'N/A' }}
@@ -155,13 +155,13 @@
                             </div>
 
                             <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-3" style="font-size: 15px;">
-                                <div style="border-left: 3px solid rgba(0, 0, 0, 0.459); padding-left: 10px">
+                                <div>
                                     <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3"
                                         style="font-family: 'Roboto', sans-serif; font-size: 19px;">
                                         {{ $item->full_name }}
                                     </h4>
                                     <h6
-                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;">
+                                        style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;" class="mt-3 mt-xl-0">
                                         <i class="fa fa-star" aria-hidden="true" style="font-size: 11px"></i>
 
                                         {{ isset($item->aggregateRating) ? $item->aggregateRating : 'N/A' }}

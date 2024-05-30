@@ -37,7 +37,7 @@
                                     data-src="{{ $search->imageUrl ? asset($search->imageUrl) : asset('images/No-Image-Placeholder.svg.webp') }}"
                                     alt="{{ $search->full_name . ' ' . '(' . $search->releaseYear . ')' }}"
                                     class="img-fluid blurry-image lazy"
-                                    style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493);"
+                                    style="background: rgba(0, 0, 0, 0.493);"
                                     loading="lazy"></a>
 
 

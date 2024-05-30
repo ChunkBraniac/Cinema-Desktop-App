@@ -108,13 +108,13 @@
             @unless (count($movies_all) == 0)
                 @foreach ($movies_all as $movies)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-2">
-                        <a href="{{ route('media.show', ['name'=>$movies->originalTitleText]) }}" class="text-decoration-none text-reset"><img
+                        <a href="{{ url($movies->originalTitleText) }}" class="text-decoration-none text-reset"><img
                                 data-src="{{ $movies->imageUrl ? asset($movies->imageUrl) : asset('images/no-image.png') }}"
                                 alt="{{ str_replace(['-', $movies->releaseYear], ' ', $movies->originalTitleText) . ' ' . '(' . $movies->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy" style="background: rgba(0, 0, 0, 0.315);"
                                 loading="lazy"></a>
 
-                        <a href="{{ route('media.show', ['name'=>$movies->originalTitleText]) }}" class="text-decoration-none text-reset"
+                        <a href="{{ url($movies->originalTitleText) }}" class="text-decoration-none text-reset"
                             data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ $movies->full_name . ' ' . '(' . $movies->releaseYear . ')' }}">
 
