@@ -11,7 +11,8 @@
     <link rel="shortcut icon" href="{{ url('icons/video.png') }}" type="image/x-icon">
 
     {{-- bootstrap cdn --}}
-    <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}"> --}}
+    <link href="{{ url('css/custom.min.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ url('css/style.css') }}">
 

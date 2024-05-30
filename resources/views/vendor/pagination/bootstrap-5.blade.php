@@ -2,7 +2,7 @@
     <nav class="d-flex justify-content-center">
         <!-- Mobile Pagination (Visible on small screens) -->
         <div class="d-flex justify-content-center flex-fill d-sm-none">
-            <ul class="pagination">
+            <ul class="pagination pagination-sm">
                 {{-- Previous Page Link --}}
                 @if ($paginator->onFirstPage())
                     <li class="page-item disabled" aria-disabled="true">
@@ -30,7 +30,7 @@
 
         <!-- Desktop Pagination (Hidden on small screens) -->
         <div class="d-none flex-sm-fill d-sm-flex align-items-center justify-content-center">
-            <ul class="pagination">
+            <ul class="pagination pagination-lg">
                 {{-- Previous Page Link --}}
                 @if ($paginator->onFirstPage())
                     <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">

@@ -112,6 +112,7 @@ Route::get('movies', [MoviesController::class, 'movies'])->name('movies');
 
 // Displaying sitemap
 Route::get('/sitemap', [SitemapController::class, 'show'])->name('sitemap');
+Route::get('/generate-sitemap', [SitemapController::class, 'generate'])->name('generate.sitemap');
 
 // Route for showing the movie and series details
 Route::group(['middleware' => 'xframe'], function () {

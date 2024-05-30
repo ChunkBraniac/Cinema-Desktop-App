@@ -340,7 +340,9 @@
                             @endforeach
                         </div>
 
-                        {{ $seasons->onEachSide(2)->links('vendor.pagination.bootstrap-5') }}
+                        <div class="mt-5">
+                            {{ $seasons->onEachSide(2)->links('vendor.pagination.bootstrap-5') }}
+                        </div>
 
                         @if (count($seasons) == 0)
                             <p>No data for this title</p>
