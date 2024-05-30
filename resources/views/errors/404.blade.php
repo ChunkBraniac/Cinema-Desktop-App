@@ -46,7 +46,7 @@
 						<div class="page-404__content">
 							<h1 class="page-404__title">404</h1>
 							<p class="page-404__text">The page you are looking for is not available!</p>
-							<a href="{{ url('/') }}" class="page-404__btn">go back</a>
+							<a href="{{ url('/') }}" class="page-404__btn">go home</a>
 						</div>
 					</div>
 				</div>

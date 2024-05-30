@@ -5,6 +5,13 @@
 @endsection
 
 @section('content')
+    @if (Auth::guard('admin')->check())
+        @php
+            header('Location: ' . route('admin.dashboard'));
+            exit();
+        @endphp
+    @endif
+    
     <main>
         <div class="container">
 

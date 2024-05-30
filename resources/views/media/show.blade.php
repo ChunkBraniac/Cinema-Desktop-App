@@ -304,7 +304,7 @@
                                     <a href="{{ route('media.show', ['name'=>$more->originalTitleText]) }}"><img
                                             data-src="{{ asset($more->imageUrl) }}" alt=""
                                             class="img-fluid blurry-image lazy"
-                                            style="width: 100%; aspect-ratio: 3/5; background: rgba(0, 0, 0, 0.493)"
+                                            style=" background: rgba(0, 0, 0, 0.493)"
                                             loading="lazy"></a>
 
                                     <a href="{{ route('media.show', ['name'=>$more->originalTitleText]) }}"
