@@ -1,19 +1,19 @@
 // Custom.scss
 // Option A: Include all of Bootstrap
 
-$font-size-base: 1rem;
+$pagination-font-size: 1rem !default;
 
 
 $pagination-padding-y-lg: 0.6rem;
 $pagination-padding-x-lg: 1.2rem;
 $pagination-border-radius-lg: 4px !default;
-
-
-
 $pagination-padding-y-sm: 0.6rem !default;
 $pagination-padding-x-sm: 0.9rem !default;
 
-// Define the border color for the pagination
+$accordion-button-focus-box-shadow: none !default;
+
+$input-focus-box-shadow:  none !default;
+// $input-border-color: #495057 !default;
 
 
 

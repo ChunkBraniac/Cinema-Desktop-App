@@ -1,7 +1,7 @@
 @if ($paginator->hasPages())
     <nav class="d-flex justify-content-center">
         <!-- Mobile Pagination (Visible on small screens) -->
-        <div class="d-flex justify-content-center flex-fill d-sm-none">
+        <div class="d-flex justify-content-between flex-fill d-sm-none">
             <ul class="pagination pagination-sm">
                 {{-- Previous Page Link --}}
                 @if ($paginator->onFirstPage())
@@ -14,7 +14,8 @@
                             rel="prev">@lang('pagination.previous')</a>
                     </li>
                 @endif
-
+            </ul>
+            <ul class="pagination pagination-sm">
                 {{-- Next Page Link --}}
                 @if ($paginator->hasMorePages())
                     <li class="page-item">

@@ -6,6 +6,14 @@
 
 @section('content')
 
+    @if (session('status'))
+        <h6 class="alert alert-success">{{ session('status') }}</h6>
+    @endif
+
+    @if (session('error'))
+        <h6 class="alert alert-danger">{{ session('error') }}</h6>
+    @endif
+
     <main id="main" class="main">
 
         <div class="pagetitle">
@@ -54,21 +62,24 @@
                                     @unless (count($pending_series) == 0)
                                         @foreach ($pending_series as $series)
                                             <tr>
-                                                <td>{{ $loop->iteration + ($pending_series->currentPage() - 1) * $pending_series->perPage() }}</td>
+                                                <td>{{ $loop->iteration + ($pending_series->currentPage() - 1) * $pending_series->perPage() }}
+                                                </td>
                                                 <td>{{ $series->movieId }}</td>
                                                 <td class="text-truncate">{{ $series->full_name }}</td>
                                                 <td>
                                                     <img src="{{ $series->imageUrl }}" alt=""
-                                                    style="width: 70px; height: 70px;">
+                                                        style="width: 70px; height: 70px;">
                                                 </td>
                                                 <td>{{ $series->titleType }}</td>
                                                 <td>{{ $series->country ? $series->country : 'N/A' }}</td>
-                                                <td>{{ $series->genres ? $series->genres : 'N/A'}}</td>
-                                                <td>{{ $series->plotText ? $series->plotText : 'N/A'}}</td>
+                                                <td>{{ $series->genres ? $series->genres : 'N/A' }}</td>
+                                                <td>{{ $series->plotText ? $series->plotText : 'N/A' }}</td>
                                                 <td>
-                                                    <a href="" class="btn btn-outline-success">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>
+                                                    <a href="" class="btn btn-outline-success">Edit <i class="fa fa-edit"
+                                                            aria-hidden="true"></i></a>
 
-                                                    <a href="{{ route('approve.series', ['id'=>$series->id]) }}" class="btn btn-outline-danger mt-2">Approve </a>
+                                                    <a href="{{ route('approve.series', ['id' => $series->id]) }}"
+                                                        class="btn btn-outline-danger mt-2">Approve </a>
                                                 </td>
                                             </tr>
                                         @endforeach

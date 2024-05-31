@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('admin_password');
             $table->rememberToken();
             $table->string('role')->default('admin');
+            $table->string('ip_address')->nullable();
             $table->timestamps();
         });
     }

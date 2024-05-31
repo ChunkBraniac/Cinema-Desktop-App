@@ -306,7 +306,7 @@ class AdminController extends Controller
     {
         Series::where('status', 'pending')->where('id', $id)->update(['status' => 'approved']);
 
-        return redirect()->route('admin.dashboard')->with('status', 'Series approved');
+        return redirect()->route('admin.approve.series')->with('status', 'Series approved');
     }
 
     /**
@@ -319,7 +319,7 @@ class AdminController extends Controller
     {
         Movies::where('status', 'pending')->where('id', $id)->update(['status' => 'approved']);
 
-        return redirect()->route('admin.dashboard')->with('status', 'Movie approved');
+        return redirect()->route('admin.approve')->with('status', 'Movie approved');
     }
 
     /**
