@@ -47,9 +47,7 @@ The Movie Website Project is a web application designed to provide users with in
 ## Features
 - **Browse Movies:** Users can browse a list of movies available in the database.
 - **Search:** Users can search for movies by title or keywords.
-- **Movie Details:** Users can view detailed information about each movie, including title, release date, cast, plot summary, and user ratings.
-- **User Ratings:** Users can rate movies and view average ratings provided by other users.
-- **User Authentication:** Secure user authentication system to manage user accounts and access control.
+- **Movie Details:** Users can view detailed information about each movie, including title, release date, cast, plot summary
 
 ## 🛠️ Installation
 ### Prerequisites
@@ -92,10 +90,9 @@ The Movie Website Project is a web application designed to provide users with in
 7. Access the application in your web browser at `http://127.0.0.1:8000`.
 
 ## Usage
-1. **🏠 Home Page:** The home page displays a list of popular movies.
+1. **🏠 Home Page:** The home page displays a list of all movies.
 2. **🔍 Search:** Use the search bar to find specific movies by title or keywords.
-3. **🎥 Movie Details:** Click on a movie title to view detailed information about the movie, including its cast, plot summary, and user ratings.
-4. **🔐 User Authentication:** Register for a new account or log in with an existing account to access additional features such as rating movies.
+3. **🎥 Movie Details:** Click on a movie title to view detailed information about the movie, including its cast, plot summary.
 
 ## 🤝 Contributing
 We welcome contributions from the community to improve the Movie Website Project. If you would like to contribute, please follow these steps:
@@ -107,9 +104,10 @@ We welcome contributions from the community to improve the Movie Website Project
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
-- The Movie Website Project utilizes Laravel, a PHP framework, for building web applications [https://laravel.com] [https://php.net].
-- Bootstrap is used for the frontend design and layout [https://getbootstrap.com/].
-- JavaScript is used for client-side interactivity.
+<a href=""><img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white"></a>
+<a href=""><img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white"></a>
+<a href=""><img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white"></a>
+<a href=""><img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white"></a>
 
 ## 📧 Contact
 For any inquiries or support, please contact [anthonyobah37@gmail.com](mailto:anthonyobah37@email.com).
