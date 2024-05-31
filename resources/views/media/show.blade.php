@@ -24,7 +24,7 @@
                         </h3>
                         <div class="row">
                             <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
-                                <img data-src="{{ asset($item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                                <img data-src="{{ asset('storage/images/' . $item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
                                     style="width: 100%; background: rgba(0, 0, 0, 0.493)" loading="lazy">
                             </div>
 
@@ -34,6 +34,7 @@
                                         style="font-family: 'Roboto', sans-serif; font-size: 20px;">
                                         {{ $item->full_name }}
                                     </h4>
+                                    
                                     <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;"
                                         class="mt-3 mt-xl-0">
                                         <i class="fa fa-star" aria-hidden="true" style="font-size: 11px"></i>
@@ -155,7 +156,7 @@
                         </h3>
                         <div class="row">
                             <div class="col-xl-2 col-sm-4 col-md-3 col-lg-4">
-                                <img data-src="{{ asset($item->imageUrl) }}" alt=""
+                                <img data-src="{{ asset('storage/images/' . $item->imageUrl) }}" alt=""
                                     class="img-fluid blurry-image lazy"
                                     style="width: 100%; background: rgba(0, 0, 0, 0.493)" loading="lazy">
                             </div>
@@ -315,7 +316,7 @@
                             @foreach ($merged as $more)
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
                                     <a href="{{ route('media.show', ['name' => $more->originalTitleText]) }}"><img
-                                            data-src="{{ asset($more->imageUrl) }}" alt=""
+                                            src="{{ asset('storage/images/' . $more->imageUrl) }}" alt=""
                                             class="img-fluid blurry-image lazy" style=" background: rgba(0, 0, 0, 0.493)"
                                             loading="lazy"></a>
 
@@ -337,7 +338,7 @@
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-2">
                                     <a
                                         href="{{ url($more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"><img
-                                            data-src="{{ asset($more->imageUrl) }}" alt="" class="img-fluid"
+                                            src="{{ asset('storage/images/' . $item->imageUrl) }}" alt="" class="img-fluid"
                                             style="background: rgba(0, 0, 0, 0.493)" loading="lazy"></a>
                                     <a href="{{ url($more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
                                         class="text-decoration-none text-reset">
@@ -479,13 +480,14 @@
                     <form action="{{ route('comment', ['name' => $item->originalTitleText]) }}" method="post">
                         {{ csrf_field() }}
 
-                        <div class="input-group mb-3">
+                        {{-- <div class="input-group mb-3">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="floatingInputGroup1"
                                     placeholder="Name" name="commentor" style="border-radius: 0px;" required>
                                 <label for="floatingInputGroup1">Name</label>
                             </div>
-                        </div>
+                        </div> --}}
+                        <input type="text" class="form-control" placeholder="Name" name="commentor" style="border-radius: 0px;" required>
 
                         <input type="hidden" class="form-control pl-3" name="movie_id" style="border-radius: 0px"
                             required value="{{ $item->movieId }}">
@@ -494,7 +496,7 @@
                             required value="{{ $item->originalTitleText }}">
 
 
-                        <textarea name="comment" id="" cols="30" rows="5" class="form-control"
+                        <textarea name="comment" id="" cols="30" rows="5" class="form-control mt-2"
                             style="border-radius: 0px; box-shadow: none;" required placeholder="Your Comment"></textarea>
 
                         <div class="mt-3">

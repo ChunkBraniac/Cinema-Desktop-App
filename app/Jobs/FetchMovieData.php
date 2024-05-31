@@ -6,6 +6,7 @@ use App\Models\Movies;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Carbon;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -89,16 +90,29 @@ class FetchMovieData implements ShouldQueue
                             $poster_path = $result['poster_path'];
                             $vote_average = $result['vote_average'];
 
-                            $base_url = $poster_path ? "https://image.tmdb.org/t/p/w780" . $poster_path : "";
+                            $base_url = "https://image.tmdb.org/t/p/w780" . $poster_path;
                             $formatted_name = str_replace(' ', '-', $name);
                             $rating = floor($vote_average * 10) / 10;
+
+                            // Downloading the image and saving it to the storage folder
+                            $url = $base_url;
+                            $contents = file_get_contents($url);
+
+                            $image_name = basename($url);
+                            $path = "public/images/" . $image_name;
+
+                            if (Storage::exists($path)) {
+                                // do nothing
+                            } else {
+                                Storage::put($path, $contents);
+                            }
 
                             Movies::create([
                                 'movieId' => $id,
                                 'isAdult' => $adult,
                                 'full_name' => $full_name,
                                 'originalTitleText' => $formatted_name,
-                                'imageUrl' => $base_url,
+                                'imageUrl' => $image_name,
                                 'backdrop_path' => $backdrop_path,
                                 'country' => '',
                                 'language' => $language,

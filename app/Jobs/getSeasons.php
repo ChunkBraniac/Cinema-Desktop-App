@@ -36,7 +36,7 @@ class getSeasons implements ShouldQueue
 
         $fetch = Series::where('titleType', 'series')->where('status', 'approved')->get();
 
-        $seasons = 1;
+        $seasons = range(1, 10);
 
         if (count($fetch) > 0) {
             foreach ($fetch as $data_info) {
@@ -50,11 +50,11 @@ class getSeasons implements ShouldQueue
 
                 // }
 
-                do {
+                foreach ($seasons as $season) {
                     $curl = curl_init();
 
                     curl_setopt_array($curl, [
-                        CURLOPT_URL => "https://api.themoviedb.org/3/tv/{$movie_id}/season/{$seasons}?language=en-US",
+                        CURLOPT_URL => "https://api.themoviedb.org/3/tv/{$movie_id}/season/{$season}?language=en-US",
                         CURLOPT_RETURNTRANSFER => true,
                         CURLOPT_ENCODING => "",
                         CURLOPT_MAXREDIRS => 10,
@@ -117,14 +117,7 @@ class getSeasons implements ShouldQueue
                         // No more results, stop the loop
                         break;
                     }
-
-                    if (!isset($data['episodes']) || $seasons >= $data['episodes']) {
-                        break;
-                    }
-
-                    $seasons++;
-                    
-                } while (true);
+                }
             }
         } else {
             echo "No approved series found in the database \n";

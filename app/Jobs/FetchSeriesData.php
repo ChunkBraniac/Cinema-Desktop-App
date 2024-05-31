@@ -7,6 +7,7 @@ use App\Models\Movies;
 use App\Models\Series;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -84,12 +85,25 @@ class FetchSeriesData implements ShouldQueue
                             $formatted_name = str_replace(' ', '-', $result['name'] . ' ' . $year . ' download');
                             $rating = floor($vote_average * 10) / 10;
 
+                            // Downloading the image and saving it to the storage folder
+                            $url = $base_url;
+                            $contents = file_get_contents($url);
+
+                            $image_name = basename($url);
+                            $path = "public/images/" . $image_name;
+
+                            if (Storage::exists($path)) {
+                                // do nothing
+                            } else {
+                                Storage::put($path, $contents);
+                            }
+
                             Series::create([
                                 'movieId' => $id,
                                 'isAdult' => $adult,
                                 'full_name' => $full_name,
                                 'originalTitleText' => $formatted_name,
-                                'imageUrl' => $base_url,
+                                'imageUrl' => $image_name,
                                 'backdrop_path' => $backdrop_path,
                                 'country' => $country,
                                 'language' => $language,

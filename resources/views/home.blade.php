@@ -23,14 +23,14 @@
             @unless (count($seasons) == 0)
                 @foreach ($seasons as $series)
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1 item">
-                        <a href="{{ route('media.show', ['name'=>$series->movieName]) }}"><img
-                                data-src="{{ $series->imageUrl ? asset($series->imageUrl) : asset('images/No-Image-Placeholder.svg.webp') }}"
+                        <a href="{{ route('media.show', ['name' => $series->movieName]) }}"><img
+                                src="{{ asset('storage/images/' . $series->imageUrl) }}" decoding="sync"
                                 alt="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode ' . $series->episode_number }}"
                                 class="img-fluid blurry-image lazy" style="background: rgba(0, 0, 0, 0.315);"
                                 loading="lazy"></a>
 
-                        <a href="{{ route('media.show', ['name'=>$series->movieName]) }}" class="text-decoration-none text-reset"
-                            data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        <a href="{{ route('media.show', ['name' => $series->movieName]) }}"
+                            class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode ' . $series->episode_number }}">
 
                             <h6 class="mt-1"
@@ -56,14 +56,15 @@
             @unless (count($series_all) == 0)
                 @foreach ($series_all as $series)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                        <a href="{{ route('media.show', ['name'=>$series->originalTitleText]) }}" class="text-decoration-none text-reset"><img
-                                data-src="{{ $series->imageUrl ? asset($series->imageUrl) : asset('images/No-Image-Placeholder.svg.webp') }}"
+                        <a href="{{ route('media.show', ['name' => $series->originalTitleText]) }}"
+                            class="text-decoration-none text-reset"><img
+                                src="{{ asset('storage/images/' . $series->imageUrl) }}"
                                 alt="{{ str_replace(['-', $series->movieId], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy" style="background: rgba(0, 0, 0, 0.315);"
                                 loading="lazy"></a>
 
-                        <a href="{{ route('media.show', ['name'=>$series->originalTitleText]) }}" class="text-decoration-none text-reset"
-                            data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        <a href="{{ route('media.show', ['name' => $series->originalTitleText]) }}"
+                            class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ str_replace(['-', $series->movieId], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}">
 
                             <h6 class="mt-1 text-truncate"
@@ -109,7 +110,7 @@
                 @foreach ($movies_all as $movies)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-2">
                         <a href="{{ url($movies->originalTitleText) }}" class="text-decoration-none text-reset"><img
-                                data-src="{{ $movies->imageUrl ? asset($movies->imageUrl) : asset('images/no-image.png') }}"
+                                src="{{ asset('storage/images/' . $movies->imageUrl) }}"
                                 alt="{{ str_replace(['-', $movies->releaseYear], ' ', $movies->originalTitleText) . ' ' . '(' . $movies->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy" style="background: rgba(0, 0, 0, 0.315);"
                                 loading="lazy"></a>
