@@ -31,6 +31,8 @@ class FetchMovieData implements ShouldQueue
         ini_set('max_execution_time', 900); // Set the max execution time to 5 minutes
         ini_set('memory_limit', '500M');
 
+        // Give a custom page number
+        // Also give a custom date
         $page = 1;
         $date = date('Y-m-d');
 
@@ -64,6 +66,7 @@ class FetchMovieData implements ShouldQueue
 
             $data = json_decode($response, true);
 
+            // Check if the results key exists and has more than one item
             if (isset($data['results']) && is_array($data['results']) && count($data['results']) > 0) {
                 foreach ($data['results'] as $result) {
                     $release_date = isset($result['release_date']) ? $result['release_date'] : 0;
@@ -73,7 +76,7 @@ class FetchMovieData implements ShouldQueue
                     if ($year >= '2018' && $release_date <= $date && $year <= '2024') {
                         $id = $result['id'];
 
-                        // Check if the movie is already in the database
+                        // Check if the movie is already in the database. If not, add it
                         $fetch = Movies::where('movieId', $id)->first();
 
                         if (!$fetch) {
@@ -113,6 +116,8 @@ class FetchMovieData implements ShouldQueue
                             ]);
 
                             echo $full_name . " - has been added successfully \n";
+
+                            // Dispatch the UpdateMoviesTrailer job
                         } else {
                             echo $full_name . " - already in database \n";
                         }
