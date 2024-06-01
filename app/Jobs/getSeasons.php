@@ -7,6 +7,7 @@ use App\Models\Seasons;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Carbon;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -84,6 +85,25 @@ class getSeasons implements ShouldQueue
                         if ($data['air_date'] == null) {
                             echo "Air date not available for " . $full_name . "\n";
                         } else {
+
+                            // season image
+                            $poster_path = isset($data['poster_path']) ? $data['poster_path'] : null;
+                            $base_url = "https://image.tmdb.org/t/p/w780" . $poster_path;
+
+                            // Downloading the image
+                            $url = $base_url;
+                            $contents = file_get_contents($url);
+
+                            // Saving the image to the storage folder
+                            $image_name = basename($url);
+                            $path = "public/uploads/" . $image_name;
+
+                            if (Storage::exists($path)) {
+                                // do nothing
+                            } else {
+                                Storage::put($path, $contents);
+                            }
+
                             foreach ($data['episodes'] as $episode) {
                                 $air_date = isset($episode['air_date']) ? $episode['air_date'] : 0;
                                 $episode_number = $episode['episode_number'];
@@ -103,7 +123,7 @@ class getSeasons implements ShouldQueue
                                         'season_number' => $season_number,
                                         'episode_number' => $episode_number,
                                         'air_date' => $air_date,
-                                        'imageUrl' => $movie_image,
+                                        'imageUrl' => $image_name,
                                         'created_at' => Carbon::now(),
                                     ]);
 

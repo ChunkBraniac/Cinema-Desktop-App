@@ -338,7 +338,7 @@
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-2">
                                     <a
                                         href="{{ url($more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"><img
-                                            src="{{ asset('storage/images/' . $item->imageUrl) }}" alt="" class="img-fluid"
+                                            src="{{ asset('storage/uploads/' . $more->imageUrl) }}" alt="" class="img-fluid"
                                             style="background: rgba(0, 0, 0, 0.493)" loading="lazy"></a>
                                     <a href="{{ url($more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
                                         class="text-decoration-none text-reset">

@@ -24,7 +24,7 @@
                 @foreach ($seasons as $series)
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1 item">
                         <a href="{{ route('media.show', ['name' => $series->movieName]) }}"><img
-                                data-src="{{ asset('storage/images/' . $series->imageUrl) }}"
+                                data-src="{{ asset('storage/uploads/' . $series->imageUrl) }}"
                                 alt="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode ' . $series->episode_number }}"
                                 class="img-fluid blurry-image lazy" style="background: rgba(0, 0, 0, 0.315);"
                                 loading="lazy"></a>
@@ -36,7 +36,7 @@
                             <h6 class="mt-1"
                                 style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
                                 {{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode ' . $series->episode_number }}
-                                Added
+                                (Added)
                             </h6>
                         </a>
 
