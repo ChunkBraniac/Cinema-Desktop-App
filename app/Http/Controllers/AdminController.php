@@ -303,7 +303,7 @@ class AdminController extends Controller
     {
         Series::where('status', 'pending')->where('id', $id)->update(['status' => 'approved']);
 
-        return redirect()->route('approve.series')->with('status', 'Series approved');
+        return redirect()->route('pending.series')->with('status', 'Series approved');
     }
 
     /**
@@ -316,7 +316,7 @@ class AdminController extends Controller
     {
         Movies::where('status', 'pending')->where('id', $id)->update(['status' => 'approved']);
 
-        return redirect()->route('approve.movie')->with('status', 'Movie approved');
+        return redirect()->route('pending.movies')->with('status', 'Movie approved');
     }
 
     /**
