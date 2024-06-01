@@ -24,7 +24,7 @@
                 @foreach ($seasons as $series)
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1 item">
                         <a href="{{ route('media.show', ['name' => $series->movieName]) }}"><img
-                                src="{{ asset('storage/images/' . $series->imageUrl) }}" decoding="sync"
+                                data-src="{{ asset('storage/images/' . $series->imageUrl) }}"
                                 alt="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode ' . $series->episode_number }}"
                                 class="img-fluid blurry-image lazy" style="background: rgba(0, 0, 0, 0.315);"
                                 loading="lazy"></a>
@@ -58,7 +58,7 @@
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ route('media.show', ['name' => $series->originalTitleText]) }}"
                             class="text-decoration-none text-reset"><img
-                                src="{{ asset('storage/images/' . $series->imageUrl) }}"
+                                data-src="{{ asset('storage/images/' . $series->imageUrl) }}"
                                 alt="{{ str_replace(['-', $series->movieId], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy" style="background: rgba(0, 0, 0, 0.315);"
                                 loading="lazy"></a>
@@ -110,7 +110,7 @@
                 @foreach ($movies_all as $movies)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-2">
                         <a href="{{ url($movies->originalTitleText) }}" class="text-decoration-none text-reset"><img
-                                src="{{ asset('storage/images/' . $movies->imageUrl) }}"
+                                data-src="{{ asset('storage/images/' . $movies->imageUrl) }}"
                                 alt="{{ str_replace(['-', $movies->releaseYear], ' ', $movies->originalTitleText) . ' ' . '(' . $movies->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy" style="background: rgba(0, 0, 0, 0.315);"
                                 loading="lazy"></a>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Fantasy (Page {{ $page }})
+    Fantasy
 @endsection
 
 @section('content')
@@ -30,7 +30,7 @@
                 @foreach ($paginatedResults as $fantasy)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ route('media.show', ['name'=>$fantasy->originalTitleText]) }}"><img
-                                data-src="{{ asset($fantasy->imageUrl) }}" alt="{{ $fantasy->full_name . ' ' . '(' . $fantasy->releaseYear . ')' }}" class="img-fluid" loading="lazy"></a>
+                                data-src="{{ asset('storage/images/' . $fantasy->imageUrl) }}" alt="{{ $fantasy->full_name . ' ' . '(' . $fantasy->releaseYear . ')' }}" class="img-fluid" loading="lazy"></a>
 
 
                         <a href="{{ route('media.show', ['name'=>$fantasy->originalTitleText]) }}"

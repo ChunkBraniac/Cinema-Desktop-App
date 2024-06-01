@@ -34,7 +34,7 @@
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                             <a href="{{ route('media.show', ['name' => $search->originalTitleText]) }}"
                                 class="text-decoration-none text-reset"><img
-                                    data-src="{{ $search->imageUrl ? asset($search->imageUrl) : asset('images/No-Image-Placeholder.svg.webp') }}"
+                                    src="{{ asset('storage/images/' . $search->imageUrl) }}"
                                     alt="{{ $search->full_name . ' ' . '(' . $search->releaseYear . ')' }}"
                                     class="img-fluid blurry-image lazy"
                                     style="background: rgba(0, 0, 0, 0.493);"

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Horror (Page {{ $page }})
+    Horror
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
             @unless (count($paginatedResults) == 0)
                 @foreach ($paginatedResults as $horror)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                        <a href="{{ route('media.show', ['name'=>$horror->originalTitleText]) }}"><img data-src="{{ asset($horror->imageUrl) }}"
+                        <a href="{{ route('media.show', ['name'=>$horror->originalTitleText]) }}"><img data-src="{{ asset('storage/images/' . $horror->imageUrl) }}"
                                 alt="{{ $horror->full_name . ' ' . '(' . $horror->releaseYear . ')' }}" class="img-fluid" loading="lazy"></a>
 
 

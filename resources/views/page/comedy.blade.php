@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Comedy (Page {{ $page }})
+    Comedy
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
             @unless (count($paginatedResults) == 0)
                 @foreach ($paginatedResults as $comedy)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                        <a href="{{ route('media.show', ['name'=>$comedy->originalTitleText]) }}"><img data-src="{{ asset($comedy->imageUrl) }}"
+                        <a href="{{ route('media.show', ['name'=>$comedy->originalTitleText]) }}"><img data-src="{{ asset('storage/images/' . $comedy->imageUrl) }}"
                                 alt="{{ $comedy->full_name . ' ' . '(' . $comedy->releaseYear . ')' }}" class="img-fluid" loading="lazy"></a>
 
 

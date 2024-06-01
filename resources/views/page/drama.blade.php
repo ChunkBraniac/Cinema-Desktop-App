@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Drama (Page {{ $page }})
+    Drama
 @endsection
 
 @section('content')
@@ -30,7 +30,7 @@
                 @foreach ($paginatedResults as $drama)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ route('media.show', ['name'=>$drama->originalTitleText]) }}"><img
-                                data-src="{{ asset($drama->imageUrl) }}" alt="{{ $drama->full_name . ' ' . '(' . $drama->releaseYear . ')' }}" class="img-fluid" loading="lazy"></a>
+                                data-src="{{ asset('storage/images/' . $drama->imageUrl) }}" alt="{{ $drama->full_name . ' ' . '(' . $drama->releaseYear . ')' }}" class="img-fluid" loading="lazy"></a>
 
                         <a href="{{ route('media.show', ['name'=>$drama->originalTitleText]) }}"
                             class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $drama->full_name . ' ' . '(' . $drama->releaseYear . ')' }}">

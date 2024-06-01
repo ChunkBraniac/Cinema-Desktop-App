@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Animation & Anime (Page {{ $page }})
+    Animation & Anime
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
             @unless (count($paginatedResults) == 0)
                 @foreach ($paginatedResults as $animation)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                        <a href="{{ route('media.show', ['name'=>$animation->originalTitleText]) }}"><img data-src="{{ asset($animation->imageUrl) }}"
+                        <a href="{{ route('media.show', ['name'=>$animation->originalTitleText]) }}"><img data-src="{{ asset('storage/images/' . $animation->imageUrl) }}"
                                 alt="{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}" class="img-fluid" loading="lazy"></a>
 
                                 

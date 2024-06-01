@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Mystery (Page {{ $page }})
+    Mystery
 @endsection
 
 @section('content')
@@ -30,7 +30,7 @@
                 @foreach ($paginatedResults as $mystery)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ route('media.show', ['name'=>$mystery->originalTitleText]) }}"><img
-                                data-src="{{ asset($mystery->imageUrl) }}" alt="{{ $mystery->full_name . ' ' . '(' . $mystery->releaseYear . ')' }}" class="img-fluid" loading="lazy"></a>
+                                data-src="{{ asset('storage/images/' . $mystery->imageUrl) }}" alt="{{ $mystery->full_name . ' ' . '(' . $mystery->releaseYear . ')' }}" class="img-fluid" loading="lazy"></a>
 
 
                         <a href="{{ route('media.show', ['name'=>$mystery->originalTitleText]) }}"

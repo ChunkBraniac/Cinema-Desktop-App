@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Sci-Fi (Page {{ $page }})
+    Sci-Fi
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
             @unless (count($paginatedResults) == 0)
                 @foreach ($paginatedResults as $scifi)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                        <a href="{{ route('media.show', ['name'=>$scifi->originalTitleText]) }}"><img data-src="{{ asset($scifi->imageUrl) }}"
+                        <a href="{{ route('media.show', ['name'=>$scifi->originalTitleText]) }}"><img data-src="{{ asset('storage/images/' . $scifi->imageUrl) }}"
                                 alt="{{ $scifi->full_name . ' ' . '(' . $scifi->releaseYear . ')' }}" class="img-fluid" loading="lazy"></a>
 
                                 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Action (Page {{ $page }})
+    Action
 @endsection
 
 @section('content')
@@ -31,7 +31,7 @@
                 @foreach ($paginatedResults as $action)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ route('media.show', ['name'=>$action->originalTitleText]) }}"><img
-                                data-src="{{ asset($action->imageUrl) }}" alt="{{ $action->full_name . ' ' . '(' . $action->releaseYear . ')' }}" class="img-fluid blurry-image lazy" loading="lazy"></a>
+                                data-src="{{ asset('storage/images/' . $action->imageUrl) }}" alt="{{ $action->full_name . ' ' . '(' . $action->releaseYear . ')' }}" class="img-fluid blurry-image lazy" loading="lazy"></a>
                         <a href="{{ route('media.show', ['name'=>$action->originalTitleText]) }}"
                             class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $action->full_name . ' ' . '(' . $action->releaseYear . ')' }}">
                             
