@@ -14,6 +14,6 @@ class Reply extends Model
         'reply_name',
         'reply_text',
         'movie_id',
-        'movie_name'
+        'movie_name',
     ];
 }

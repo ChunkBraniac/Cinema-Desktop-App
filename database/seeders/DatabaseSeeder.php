@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Admin;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Request;
-use Google\Service\DomainsRDAP\Resource\Ip;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,7 +22,7 @@ class DatabaseSeeder extends Seeder
             'admin_email' => 'anthonyobah37@gmail.com',
             'admin_password' => bcrypt('123456'),
             'role' => 'admin',
-            'ip_address' => Request::ip()
+            'ip_address' => Request::ip(),
         ]);
     }
 }

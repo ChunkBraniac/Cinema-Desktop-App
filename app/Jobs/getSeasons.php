@@ -2,15 +2,15 @@
 
 namespace App\Jobs;
 
-use App\Models\Series;
 use App\Models\Seasons;
+use App\Models\Series;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Carbon;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class getSeasons implements ShouldQueue
 {
@@ -27,8 +27,6 @@ class getSeasons implements ShouldQueue
     /**
      * Execute the job.
      */
-
-
     public function handle(): void
     {
         //
@@ -57,14 +55,14 @@ class getSeasons implements ShouldQueue
                     curl_setopt_array($curl, [
                         CURLOPT_URL => "https://api.themoviedb.org/3/tv/{$movie_id}/season/{$season}?language=en-US",
                         CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_ENCODING => "",
+                        CURLOPT_ENCODING => '',
                         CURLOPT_MAXREDIRS => 10,
                         CURLOPT_TIMEOUT => 300,
                         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                        CURLOPT_CUSTOMREQUEST => "GET",
+                        CURLOPT_CUSTOMREQUEST => 'GET',
                         CURLOPT_HTTPHEADER => [
-                            "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTg4ZDY3NDI1ZmJiN2VhYjIzNWViMDM4NTQyYjY0ZiIsInN1YiI6IjY1MjU3Y2FhMDcyMTY2NDViNDAwMTVhOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GaTStrEdn0AWqdlwpzn75h8vo_-X5qoOxVxZEEBYJXc",
-                            "accept: application/json"
+                            'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTg4ZDY3NDI1ZmJiN2VhYjIzNWViMDM4NTQyYjY0ZiIsInN1YiI6IjY1MjU3Y2FhMDcyMTY2NDViNDAwMTVhOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GaTStrEdn0AWqdlwpzn75h8vo_-X5qoOxVxZEEBYJXc',
+                            'accept: application/json',
                         ],
                     ]);
 
@@ -74,7 +72,8 @@ class getSeasons implements ShouldQueue
                     curl_close($curl);
 
                     if ($err) {
-                        echo "cURL Error #:" . $err;
+                        echo 'cURL Error #:'.$err;
+
                         continue;
                     }
 
@@ -83,12 +82,12 @@ class getSeasons implements ShouldQueue
                     if (isset($data['episodes']) && is_array($data['episodes']) && count($data['episodes']) > 0) {
 
                         if ($data['air_date'] == null) {
-                            echo "Air date not available for " . $full_name . "\n";
+                            echo 'Air date not available for '.$full_name."\n";
                         } else {
 
                             // season image
                             $poster_path = isset($data['poster_path']) ? $data['poster_path'] : null;
-                            $base_url = "https://image.tmdb.org/t/p/w780" . $poster_path;
+                            $base_url = 'https://image.tmdb.org/t/p/w780'.$poster_path;
 
                             // Downloading the image
                             $url = $base_url;
@@ -96,7 +95,7 @@ class getSeasons implements ShouldQueue
 
                             // Saving the image to the storage folder
                             $image_name = basename($url);
-                            $path = "public/uploads/" . $image_name;
+                            $path = 'public/uploads/'.$image_name;
 
                             if (Storage::exists($path)) {
                                 // do nothing
@@ -114,7 +113,7 @@ class getSeasons implements ShouldQueue
                                     ->where('season_number', $season_number)
                                     ->first();
 
-                                if (!$fetch_old) {
+                                if (! $fetch_old) {
                                     Seasons::create([
                                         'movieId' => $movie_id,
                                         'full_name' => $full_name,
@@ -127,9 +126,9 @@ class getSeasons implements ShouldQueue
                                         'created_at' => Carbon::now(),
                                     ]);
 
-                                    echo $full_name . " Season " . $season_number . " Episode \n" . $episode_number . " added successfully" . "\n";
+                                    echo $full_name.' Season '.$season_number." Episode \n".$episode_number.' added successfully'."\n";
                                 } else {
-                                    echo "Season for " . $full_name . " already in database" . "\n";
+                                    echo 'Season for '.$full_name.' already in database'."\n";
                                 }
                             }
                         }

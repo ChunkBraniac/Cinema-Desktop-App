@@ -17,7 +17,7 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-        if (!Auth::guard('admin')->check()) {
+        if (! Auth::guard('admin')->check()) {
             return redirect('admin')->with('error', 'Login required'); // Redirect to login page if not admin
         }
 

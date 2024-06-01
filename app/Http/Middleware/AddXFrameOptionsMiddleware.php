@@ -10,7 +10,7 @@ class AddXFrameOptionsMiddleware
     {
         $response = $next($request);
         $response->header('X-Frame-Options', 'ALLOWALL');
+
         return $response;
     }
 }
-

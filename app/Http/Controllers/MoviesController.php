@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reply;
-use App\Models\Latest;
-use App\Models\Movies;
-use App\Models\Series;
 use App\Models\Comment;
+use App\Models\Movies;
+use App\Models\Reply;
 use App\Models\Seasons;
-use Illuminate\Support\Str;
+use App\Models\Series;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class MoviesController extends Controller
 {
@@ -21,16 +19,15 @@ class MoviesController extends Controller
     {
         $series_all = Series::where('status', '!=', 'pending')->orderByDesc('updated_at')->paginate(24);
         $movies_all = Movies::where('status', '!=', 'pending')->orderByDesc('updated_at')->paginate(18);
-        
-        $seasons = DB::table('seasons as s1')
-        ->select('s1.*')
-        ->join(DB::raw('(SELECT MAX(id) as id, movieId FROM seasons GROUP BY movieId ORDER BY episode_number DESC) as s2'), function($join) {
-            $join->on('s1.id', '=', 's2.id');
-            $join->on('s1.movieId', '=', 's2.movieId');
-        })
-        ->latest('s1.id')
-        ->paginate(9);
 
+        $seasons = DB::table('seasons as s1')
+            ->select('s1.*')
+            ->join(DB::raw('(SELECT MAX(id) as id, movieId FROM seasons GROUP BY movieId ORDER BY episode_number DESC) as s2'), function ($join) {
+                $join->on('s1.id', '=', 's2.id');
+                $join->on('s1.movieId', '=', 's2.movieId');
+            })
+            ->latest('s1.id')
+            ->paginate(9);
 
         return view('home', compact('series_all', 'movies_all', 'seasons'));
     }
@@ -282,12 +279,12 @@ class MoviesController extends Controller
 
     public static function show($name)
     {
-        
-        $cache = "recommend_" . $name;
+
+        $cache = 'recommend_'.$name;
 
         $recom = Cache::get($cache);
 
-        if (!$recom) {
+        if (! $recom) {
 
             $recommend = DB::table('series')->where('aggregateRating', '>', '7')->where('originalTitleText', '<>', $name)->inRandomOrder()->limit(9)->get();
             $recommend2 = DB::table('movies')->where('aggregateRating', '>', '7')->where('originalTitleText', '<>', $name)->inRandomOrder()->limit(9)->get();
@@ -310,15 +307,15 @@ class MoviesController extends Controller
 
         $all = $media->union($media2);
 
-        /* 
+        /*
         the below code uses the same structure as above
         read it and understand it's workings
         */
-        $cacheKey = "moreSeries_" . $name;
+        $cacheKey = 'moreSeries_'.$name;
 
         $merged = Cache::get($cacheKey);
 
-        if (!$merged) {
+        if (! $merged) {
             $merged = DB::table('series')
                 ->where('originalTitleText', '<>', $name)
                 ->inRandomOrder()
@@ -358,7 +355,7 @@ class MoviesController extends Controller
 
         $searchWord = $request->input('search');
 
-        if (!$searchWord) {
+        if (! $searchWord) {
             return redirect()->back()->with('error', 'Please enter a search word');
         }
 

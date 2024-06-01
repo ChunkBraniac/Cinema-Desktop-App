@@ -2,12 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\UpdateSitemap;
-use Spatie\Sitemap\Sitemap;
-use Illuminate\Http\Request;
-use Spatie\Sitemap\Tags\Url;
 use App\Jobs\GenerateSitemapJob;
-use Spatie\Sitemap\SitemapGenerator;
 
 class SitemapController extends Controller
 {
@@ -33,6 +28,7 @@ class SitemapController extends Controller
     public function generate()
     {
         GenerateSitemapJob::dispatch();
+
         return response()->json(['message' => 'Sitemap generation job dispatched successfully.']);
     }
 }

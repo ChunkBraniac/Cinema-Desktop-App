@@ -14,7 +14,6 @@ class Seasons extends Model
      *
      * @var array
      */
-
     protected $fillable = [
         'movieId',
         'full_name',

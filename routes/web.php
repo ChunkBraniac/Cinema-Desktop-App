@@ -1,17 +1,16 @@
 <?php
 
-use Spatie\Sitemap\Sitemap;
-use Spatie\Sitemap\Tags\Url;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ApiController;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ReplyController;
-use App\Http\Controllers\MoviesController;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\MovieRequestController;
+use App\Http\Controllers\MoviesController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\SitemapController;
+use Illuminate\Support\Facades\Route;
+use Spatie\Sitemap\Sitemap;
 
 Route::get('/', [PageController::class, 'home'])->name('home.page');
 
@@ -58,50 +57,50 @@ Route::middleware(['ipWhitelist'])->group(function () {
         Route::get('logout', [AdminController::class, 'logout'])->name('admin.logout');
         Route::get('admin/movies', [AdminController::class, 'movies'])->name('admin.all');
         Route::get('admin/comments', [AdminController::class, 'displayComments'])->name('admin.comments');
-    
+
         // route to fetch the movies and series and other settings
         Route::get('admin/series/v1', [ApiController::class, 'seriesV1'])->name('seriesV1.api');
-    
+
         // route to fetch the movies
         Route::get('admin/movies/v2', [ApiController::class, 'moviesV2'])->name('moviesV2.api');
-    
+
         // update the movies and series
         Route::get('admin/update/movies', [ApiController::class, 'updateMoviesInfo'])->name('moviesUpdate.api');
         Route::get('admin/update/series', [ApiController::class, 'updateSeriesInfo'])->name('seriesUpdate.api');
-    
+
         // update the trailer
         Route::get('admin/series/trailer', [ApiController::class, 'updateSeriesTrailer'])->name('series.trailer');
         Route::get('admin/movies/trailer', [ApiController::class, 'updateMoviesTrailer'])->name('movies.trailer');
         Route::get('admin/series/trailer/v2', [ApiController::class, 'updateSeriesTrailerV2'])->name('series.trailer.v2');
         Route::get('admin/movies/trailer/v2', [ApiController::class, 'updateMoviesTrailerV2'])->name('movies.trailer.v2');
-    
+
         Route::post('admin/reset', [AdminController::class, 'reset'])->name('admin.reset');
-    
+
         // get seasons
         Route::get('admin/seasons', [ApiController::class, 'getSeasons'])->name('admin.seasons');
-    
+
         // show pending series and movies
         Route::get('admin/series/pending', [AdminController::class, 'showPendingSeries'])->name('pending.series');
         Route::get('admin/movies/pending', [AdminController::class, 'showPendingMovies'])->name('pending.movies');
-    
+
         Route::get('admin/approve/movies', [AdminController::class, 'approveMovies'])->name('admin.approve');
         Route::get('admin/approve/series', [AdminController::class, 'approveSeries'])->name('admin.approve.series');
-    
+
         // deleting a series
         Route::get('admin/delete/series/{id}', [AdminController::class, 'deleteSeries'])->name('delete.series');
         Route::get('admin/delete/movie/{id}', [AdminController::class, 'deleteMovie'])->name('delete.movie');
-    
+
         // search for a movie
         Route::get('admin/search', [AdminController::class, 'search'])->name('search');
-    
-        // Route to approve series and movies per each 
+
+        // Route to approve series and movies per each
         Route::get('admin/approve/series/{id}', [AdminController::class, 'approve_series'])->name('approve.series');
         Route::get('admin/approve/movie/{id}', [AdminController::class, 'approve_movies'])->name('approve.movie');
-    
+
         // edting the series and movies
         Route::get('admin/edit/movie/{id}', [AdminController::class, 'edit_movie'])->name('edit.movie');
         Route::post('admin/edit/movie/{id}', [AdminController::class, 'update_movie'])->name('update.movie');
-    
+
         Route::get('admin/edit/series/{id}', [AdminController::class, 'edit_series'])->name('edit.series');
         Route::post('admin/edit/series/{id}', [AdminController::class, 'update_series'])->name('update.series');
     });
@@ -122,4 +121,3 @@ Route::group(['middleware' => 'xframe'], function () {
 // Route for requesting movie
 Route::get('/movie-request', [MovieRequestController::class, 'create'])->name('request.movie');
 Route::post('/movie-request', [MovieRequestController::class, 'store'])->name('send.request');
-

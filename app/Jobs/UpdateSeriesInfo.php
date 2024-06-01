@@ -4,11 +4,11 @@ namespace App\Jobs;
 
 use App\Models\Series;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Http;
 
 class UpdateSeriesInfo implements ShouldQueue
 {
@@ -43,7 +43,8 @@ class UpdateSeriesInfo implements ShouldQueue
                     ->get("https://api.themoviedb.org/3/tv/{$id}?language=en-US");
 
                 if ($response->failed()) {
-                    echo "HTTP Error: " . $response->body();
+                    echo 'HTTP Error: '.$response->body();
+
                     continue;
                 }
 
@@ -56,18 +57,18 @@ class UpdateSeriesInfo implements ShouldQueue
                 }
 
                 if (isset($data['genres'][1]['name'])) {
-                    $genres .= ', ' . $data['genres'][1]['name'];
+                    $genres .= ', '.$data['genres'][1]['name'];
                 }
 
                 if (isset($data['genres'][2]['name'])) {
-                    $genres .= ', ' . $data['genres'][2]['name'];
+                    $genres .= ', '.$data['genres'][2]['name'];
                 }
 
                 // update the movie in the database
                 $movie->genres = $genres;
                 $movie->save();
 
-                echo $movie->full_name . " updated successfully \n";
+                echo $movie->full_name." updated successfully \n";
             }
         } else {
             echo 'No series to update';

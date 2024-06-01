@@ -1,26 +1,21 @@
 <?php
 
 // Define the namespace for this file
+
 namespace App\Http\Controllers;
 
 // Import the necessary classes
-use Google\Client;
-use App\Models\Movies;
-use App\Models\Series;
-use App\Models\Seasons;
-use App\Jobs\getSeasons;
-use Google\Service\YouTube;
 use App\Jobs\FetchMovieData;
-use Illuminate\Http\Request;
 use App\Jobs\FetchSeriesData;
+use App\Jobs\getSeasons;
 use App\Jobs\UpdateMoviesInfo;
-use App\Jobs\UpdateSeriesInfo;
-use Illuminate\Support\Carbon;
 use App\Jobs\UpdateMoviesTrailer;
-use App\Jobs\UpdateSeriesTrailer;
 use App\Jobs\UpdateMoviesTrailerV2;
+use App\Jobs\UpdateSeriesInfo;
+use App\Jobs\UpdateSeriesTrailer;
 use App\Jobs\UpdateSeriesTrailerV2;
-use Illuminate\Support\Facades\Http;
+use App\Models\Seasons;
+use App\Models\Series;
 
 // Define the ApiController class which extends the base Controller class
 class ApiController extends Controller
@@ -30,6 +25,7 @@ class ApiController extends Controller
     {
         // Dispatch the FetchSeriesData job
         FetchSeriesData::dispatch();
+
         // Redirect to the admin dashboard with a status message
         return redirect()->route('admin.dashboard')->with('status', 'Job Dispatched');
     }
@@ -39,6 +35,7 @@ class ApiController extends Controller
     {
         // Dispatch the FetchMovieData job
         FetchMovieData::dispatch();
+
         // Redirect to the admin dashboard with a status message
         return redirect()->route('admin.dashboard')->with('status', 'Job Dispatched');
     }
@@ -48,6 +45,7 @@ class ApiController extends Controller
     {
         // Dispatch the UpdateMoviesInfo job
         UpdateMoviesInfo::dispatch();
+
         // Redirect to the admin dashboard with a status message
         return redirect()->route('admin.dashboard')->with('status', 'Job Dispatched');
     }
@@ -57,6 +55,7 @@ class ApiController extends Controller
     {
         // Dispatch the UpdateSeriesInfo job
         UpdateSeriesInfo::dispatch();
+
         // Redirect to the admin dashboard with a status message
         return redirect()->route('admin.dashboard')->with('status', 'Job Dispatched');
     }
@@ -66,6 +65,7 @@ class ApiController extends Controller
     {
         // Dispatch the UpdateSeriesTrailer job
         UpdateSeriesTrailer::dispatch();
+
         // Redirect to the admin dashboard with a status message
         return redirect()->route('admin.dashboard')->with('status', 'Job Dispatched');
     }
@@ -75,6 +75,7 @@ class ApiController extends Controller
     {
         // Dispatch the UpdateSeriesTrailerV2 job
         UpdateSeriesTrailerV2::dispatch();
+
         // Redirect to the admin dashboard with a status message
         return redirect()->route('admin.dashboard')->with('status', 'Job Dispatched');
     }
@@ -84,6 +85,7 @@ class ApiController extends Controller
     {
         // Dispatch the UpdateMoviesTrailer job
         UpdateMoviesTrailer::dispatch();
+
         // Redirect to the admin dashboard with a status message
         return redirect()->route('admin.dashboard')->with('status', 'Job Dispatched');
     }
@@ -93,6 +95,7 @@ class ApiController extends Controller
     {
         // Dispatch the UpdateMoviesTrailerV2 job
         UpdateMoviesTrailerV2::dispatch();
+
         // Redirect to the admin dashboard with a status message
         return redirect()->route('admin.dashboard')->with('status', 'Job Dispatched');
     }
@@ -102,6 +105,7 @@ class ApiController extends Controller
     {
         // Dispatch the getSeasons job
         getSeasons::dispatch();
+
         // Redirect to the admin dashboard with a status message
         return redirect()->route('admin.dashboard')->with('status', 'Job Dispatched');
     }

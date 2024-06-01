@@ -13,6 +13,6 @@ class Comment extends Model
         'commentor',
         'comment',
         'movie_id',
-        'movie_name'
+        'movie_name',
     ];
 }

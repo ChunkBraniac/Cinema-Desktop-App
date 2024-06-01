@@ -14,7 +14,6 @@ class Movies extends Model
      *
      * @var array
      */
-
     protected $fillable = [
         'movieId',
         'isAdult',

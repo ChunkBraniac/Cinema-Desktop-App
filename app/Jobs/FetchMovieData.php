@@ -4,12 +4,12 @@ namespace App\Jobs;
 
 use App\Models\Movies;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Carbon;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class FetchMovieData implements ShouldQueue
 {
@@ -43,14 +43,14 @@ class FetchMovieData implements ShouldQueue
             curl_setopt_array($curl, [
                 CURLOPT_URL => "https://api.themoviedb.org/3/account/20553054/favorite/movies?language=en-US&page={$page}&sort_by=created_at.desc",
                 CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
+                CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 300,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_CUSTOMREQUEST => 'GET',
                 CURLOPT_HTTPHEADER => [
-                    "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTg4ZDY3NDI1ZmJiN2VhYjIzNWViMDM4NTQyYjY0ZiIsInN1YiI6IjY1MjU3Y2FhMDcyMTY2NDViNDAwMTVhOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GaTStrEdn0AWqdlwpzn75h8vo_-X5qoOxVxZEEBYJXc",
-                    "accept: application/json"
+                    'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTg4ZDY3NDI1ZmJiN2VhYjIzNWViMDM4NTQyYjY0ZiIsInN1YiI6IjY1MjU3Y2FhMDcyMTY2NDViNDAwMTVhOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GaTStrEdn0AWqdlwpzn75h8vo_-X5qoOxVxZEEBYJXc',
+                    'accept: application/json',
                 ],
             ]);
 
@@ -80,17 +80,17 @@ class FetchMovieData implements ShouldQueue
                         // Check if the movie is already in the database. If not, add it
                         $fetch = Movies::where('movieId', $id)->first();
 
-                        if (!$fetch) {
+                        if (! $fetch) {
                             $adult = $result['adult'];
                             $backdrop_path = isset($result['backdrop_path']) ? $result['backdrop_path'] : 0;
                             $language = strtoupper($result['original_language']);
                             $full_name = $result['title'];
-                            $name = $result['title'] . ' ' . $year . ' download';
+                            $name = $result['title'].' '.$year.' download';
                             $overview = $result['overview'];
                             $poster_path = $result['poster_path'];
                             $vote_average = $result['vote_average'];
 
-                            $base_url = "https://image.tmdb.org/t/p/w780" . $poster_path;
+                            $base_url = 'https://image.tmdb.org/t/p/w780'.$poster_path;
                             $formatted_name = str_replace(' ', '-', $name);
                             $rating = floor($vote_average * 10) / 10;
 
@@ -99,7 +99,7 @@ class FetchMovieData implements ShouldQueue
                             $contents = file_get_contents($url);
 
                             $image_name = basename($url);
-                            $path = "public/images/" . $image_name;
+                            $path = 'public/images/'.$image_name;
 
                             if (Storage::exists($path)) {
                                 // do nothing
@@ -129,14 +129,14 @@ class FetchMovieData implements ShouldQueue
                                 'created_at' => Carbon::now(),
                             ]);
 
-                            echo $full_name . " - has been added successfully \n";
+                            echo $full_name." - has been added successfully \n";
 
                             // Dispatch the UpdateMoviesTrailer job
                         } else {
-                            echo $full_name . " - already in database \n";
+                            echo $full_name." - already in database \n";
                         }
                     } else {
-                        echo $full_name . " - not in range \n";
+                        echo $full_name." - not in range \n";
                     }
                 }
             } else {
@@ -145,7 +145,7 @@ class FetchMovieData implements ShouldQueue
             }
 
             // Check if there are more pages to fetch
-            if (!isset($data['total_pages']) || $page >= $data['total_pages']) {
+            if (! isset($data['total_pages']) || $page >= $data['total_pages']) {
                 break;
             }
 

@@ -19,7 +19,7 @@ class MovieRequestController extends Controller
             'name' => 'required|string',
             'email' => 'required|string',
             'movie_title' => 'required|string',
-            'comment' => 'required|string'
+            'comment' => 'required|string',
         ]);
 
         if (MovieRequest::create($request->all())) {

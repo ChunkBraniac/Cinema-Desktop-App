@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Jobs\GenerateSitemapJob;
+use Illuminate\Console\Command;
 
 class DispatchSitemapJob extends Command
 {
@@ -29,6 +29,6 @@ class DispatchSitemapJob extends Command
         //
         GenerateSitemapJob::dispatch();
         $this->info('Sitemap job dispatched successfully.');
-        
+
     }
 }

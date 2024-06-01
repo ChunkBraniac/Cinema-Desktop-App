@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
-use App\Models\Reply;
-use App\Models\Movies;
-use App\Models\Series;
 use App\Models\Comment;
+use App\Models\Movies;
+use App\Models\Reply;
+use App\Models\Series;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 /**
  * Class AdminController
- * 
+ *
  * This controller handles administrative tasks for the admin panel including
- * displaying the dashboard, login, registration, profile management, movie and 
+ * displaying the dashboard, login, registration, profile management, movie and
  * series management, and more.
  */
 class AdminController extends Controller
@@ -37,7 +37,7 @@ class AdminController extends Controller
      */
     public static function loginPage()
     {
-        if (!empty(Auth::check())) {
+        if (! empty(Auth::check())) {
             return redirect()->route('admin.dashboard')->with('error', 'You are already logged in');
         } else {
             return view('admin.auth.login');
@@ -77,7 +77,6 @@ class AdminController extends Controller
     /**
      * Handle admin registration.
      *
-     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function register(Request $request)
@@ -85,13 +84,13 @@ class AdminController extends Controller
         $request->validate([
             'admin_name' => 'required|string|max:255',
             'admin_email' => 'required|string|email|unique:admins',
-            'admin_password' => 'required|string|min:6|confirmed'
+            'admin_password' => 'required|string|min:6|confirmed',
         ]);
 
         $register_admin = new Admin([
             'admin_name' => $request->admin_name,
             'admin_email' => $request->admin_email,
-            'admin_password' => Hash::make($request->admin_password)
+            'admin_password' => Hash::make($request->admin_password),
         ]);
 
         $register_admin->save();
@@ -106,7 +105,6 @@ class AdminController extends Controller
     /**
      * Handle admin login.
      *
-     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function login(Request $request)
@@ -115,7 +113,7 @@ class AdminController extends Controller
 
         $credentials = $request->validate([
             'admin_email' => 'required|string|email',
-            'admin_password' => 'required|string'
+            'admin_password' => 'required|string',
         ]);
 
         if (Auth::guard('admin')->attempt(['admin_email' => $credentials['admin_email'], 'password' => $credentials['admin_password']], $remember)) {
@@ -126,6 +124,7 @@ class AdminController extends Controller
             } else {
                 // Logout the user if not an admin
                 Auth::guard('admin')->logout();
+
                 return redirect()->route('admin.home.login')->with('error', 'You are not an admin!!!');
             }
         } else {
@@ -174,7 +173,6 @@ class AdminController extends Controller
     /**
      * Handle password reset for the admin.
      *
-     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function reset(Request $request)
@@ -251,7 +249,7 @@ class AdminController extends Controller
     /**
      * Delete a series by its ID.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function deleteSeries($id)
@@ -266,7 +264,7 @@ class AdminController extends Controller
     /**
      * Delete a movie by its ID.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function deleteMovie($id)
@@ -281,15 +279,14 @@ class AdminController extends Controller
     /**
      * Search for movies and series based on a query.
      *
-     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
      */
     public function search(Request $request)
     {
         $search = $request->input('query');
 
-        $movies = Movies::where('full_name', 'like', '%' . $search . '%')->paginate(10);
-        $series = Series::where('full_name', 'like', '%' . $search . '%')->paginate(10);
+        $movies = Movies::where('full_name', 'like', '%'.$search.'%')->paginate(10);
+        $series = Series::where('full_name', 'like', '%'.$search.'%')->paginate(10);
 
         $merge = $movies->concat($series);
 
@@ -299,7 +296,7 @@ class AdminController extends Controller
     /**
      * Approve a specific series by its ID.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function approve_series($id)
@@ -312,7 +309,7 @@ class AdminController extends Controller
     /**
      * Approve a specific movie by its ID.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function approve_movies($id)
@@ -325,7 +322,7 @@ class AdminController extends Controller
     /**
      * Display the edit movie page for a specific movie by its ID.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function edit_movie($id)
@@ -338,7 +335,7 @@ class AdminController extends Controller
     /**
      * Display the edit series page for a specific series by its ID.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function edit_series($id)
@@ -351,8 +348,7 @@ class AdminController extends Controller
     /**
      * Update the details of a specific movie.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update_movie(Request $request, $id)
@@ -377,8 +373,7 @@ class AdminController extends Controller
     /**
      * Update the details of a specific series.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update_series(Request $request, $id)

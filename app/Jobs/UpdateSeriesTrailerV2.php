@@ -4,10 +4,10 @@ namespace App\Jobs;
 
 use App\Models\Series;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class UpdateSeriesTrailerV2 implements ShouldQueue
 {
@@ -41,26 +41,26 @@ class UpdateSeriesTrailerV2 implements ShouldQueue
 
                 // Set parameters for the API request
                 $params = [
-                    'q' => $movieName . ' trailer',
+                    'q' => $movieName.' trailer',
                     'type' => 'video',
                     'maxResults' => 1, // Ensures only one result is fetched
-                    'key' => $apiKey
+                    'key' => $apiKey,
                 ];
 
                 // Make the API request
-                $apiUrl = "https://www.googleapis.com/youtube/v3/search?" . http_build_query($params);
+                $apiUrl = 'https://www.googleapis.com/youtube/v3/search?'.http_build_query($params);
                 $response = file_get_contents($apiUrl);
                 $data = json_decode($response, true);
 
                 // Display the results
-                if (!empty($data['items'])) {
-                    $videoTrailer = "https://www.youtube.com/embed/" . $data['items'][0]['id']['videoId'];
+                if (! empty($data['items'])) {
+                    $videoTrailer = 'https://www.youtube.com/embed/'.$data['items'][0]['id']['videoId'];
 
                     // Update the database with the trailer
                     $nonTrailer->trailer = $videoTrailer;
                     $nonTrailer->save();
 
-                    echo "Trailer updated for " . $nonTrailer->full_name . "\n";
+                    echo 'Trailer updated for '.$nonTrailer->full_name."\n";
                 }
             }
         } else {

@@ -3,11 +3,11 @@
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Spatie\Sitemap\SitemapGenerator;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Spatie\Sitemap\SitemapGenerator;
 
 class GenerateSitemapJob implements ShouldQueue
 {
@@ -28,7 +28,7 @@ class GenerateSitemapJob implements ShouldQueue
     {
         //
         $path = 'sitemap.xml';
-        
+
         SitemapGenerator::create('http://127.0.0.1:8000')
             ->writeToFile(public_path($path));
 

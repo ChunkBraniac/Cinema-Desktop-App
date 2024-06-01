@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class Admin extends Authenticatable
 {
@@ -14,12 +14,11 @@ class Admin extends Authenticatable
         'admin_name',
         'admin_email',
         'admin_password',
-        'role'
+        'role',
     ];
 
     public function getAuthPassword()
     {
         return $this->admin_password; // Change to your custom password column name
     }
-
 }

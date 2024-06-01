@@ -13,6 +13,6 @@ class MovieRequest extends Model
         'name',
         'email',
         'movie_title',
-        'comment'
+        'comment',
     ];
 }

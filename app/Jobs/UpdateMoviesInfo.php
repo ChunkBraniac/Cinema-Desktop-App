@@ -4,10 +4,10 @@ namespace App\Jobs;
 
 use App\Models\Movies;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class UpdateMoviesInfo implements ShouldQueue
 {
@@ -41,14 +41,14 @@ class UpdateMoviesInfo implements ShouldQueue
                 curl_setopt_array($curl, [
                     CURLOPT_URL => "https://api.themoviedb.org/3/movie/{$id}?language=en-US",
                     CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => "",
+                    CURLOPT_ENCODING => '',
                     CURLOPT_MAXREDIRS => 10,
                     CURLOPT_TIMEOUT => 300,
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_CUSTOMREQUEST => 'GET',
                     CURLOPT_HTTPHEADER => [
-                        "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTg4ZDY3NDI1ZmJiN2VhYjIzNWViMDM4NTQyYjY0ZiIsInN1YiI6IjY1MjU3Y2FhMDcyMTY2NDViNDAwMTVhOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GaTStrEdn0AWqdlwpzn75h8vo_-X5qoOxVxZEEBYJXc",
-                        "accept: application/json"
+                        'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTg4ZDY3NDI1ZmJiN2VhYjIzNWViMDM4NTQyYjY0ZiIsInN1YiI6IjY1MjU3Y2FhMDcyMTY2NDViNDAwMTVhOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GaTStrEdn0AWqdlwpzn75h8vo_-X5qoOxVxZEEBYJXc',
+                        'accept: application/json',
                     ],
                 ]);
 
@@ -58,7 +58,7 @@ class UpdateMoviesInfo implements ShouldQueue
                 curl_close($curl);
 
                 if ($err) {
-                    echo "cURL Error #:" . $err;
+                    echo 'cURL Error #:'.$err;
                 }
 
                 $data = json_decode($response, true);
@@ -70,11 +70,11 @@ class UpdateMoviesInfo implements ShouldQueue
                 }
 
                 if (isset($data['genres'][1]['name'])) {
-                    $genres .= ', ' . $data['genres'][1]['name'];
+                    $genres .= ', '.$data['genres'][1]['name'];
                 }
 
                 if (isset($data['genres'][2]['name'])) {
-                    $genres .= ', ' . $data['genres'][2]['name'];
+                    $genres .= ', '.$data['genres'][2]['name'];
                 }
 
                 $origin_country = isset($data['origin_country'][0]) ? $data['origin_country'][0] : 0;
@@ -84,9 +84,9 @@ class UpdateMoviesInfo implements ShouldQueue
                 $minutes = $runtime % 60; // Modulus to get the remaining minutes
 
                 if ($hours > 1) {
-                    $hour = "hours";
+                    $hour = 'hours';
                 } else {
-                    $hour = "hour";
+                    $hour = 'hour';
                 }
 
                 $runtime = '';
@@ -94,7 +94,7 @@ class UpdateMoviesInfo implements ShouldQueue
                 if ($hour == '0' && $minutes == '0') {
                     $runtime = '';
                 } else {
-                    $runtime = $hours . ' ' . $hour . ' ' . $minutes . ' minutes';
+                    $runtime = $hours.' '.$hour.' '.$minutes.' minutes';
                 }
 
                 // update the movie in the database
@@ -103,7 +103,7 @@ class UpdateMoviesInfo implements ShouldQueue
                 $movie->genres = $genres;
                 $movie->save();
 
-                echo $movie->full_name . " - updated successfully \n";
+                echo $movie->full_name." - updated successfully \n";
             }
         } else {
             echo 'No movie to update';

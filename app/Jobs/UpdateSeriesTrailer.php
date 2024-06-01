@@ -4,10 +4,10 @@ namespace App\Jobs;
 
 use App\Models\Series;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class UpdateSeriesTrailer implements ShouldQueue
 {
@@ -41,14 +41,14 @@ class UpdateSeriesTrailer implements ShouldQueue
                 curl_setopt_array($curl, [
                     CURLOPT_URL => "https://api.themoviedb.org/3/tv/{$movie_id}/videos",
                     CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => "",
+                    CURLOPT_ENCODING => '',
                     CURLOPT_MAXREDIRS => 10,
                     CURLOPT_TIMEOUT => 300,
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_CUSTOMREQUEST => 'GET',
                     CURLOPT_HTTPHEADER => [
-                        "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTg4ZDY3NDI1ZmJiN2VhYjIzNWViMDM4NTQyYjY0ZiIsInN1YiI6IjY1MjU3Y2FhMDcyMTY2NDViNDAwMTVhOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GaTStrEdn0AWqdlwpzn75h8vo_-X5qoOxVxZEEBYJXc",
-                        "accept: application/json"
+                        'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTg4ZDY3NDI1ZmJiN2VhYjIzNWViMDM4NTQyYjY0ZiIsInN1YiI6IjY1MjU3Y2FhMDcyMTY2NDViNDAwMTVhOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GaTStrEdn0AWqdlwpzn75h8vo_-X5qoOxVxZEEBYJXc',
+                        'accept: application/json',
                     ],
                 ]);
 
@@ -58,7 +58,8 @@ class UpdateSeriesTrailer implements ShouldQueue
                 curl_close($curl);
 
                 if ($err) {
-                    echo "cURL Error #:" . $err;
+                    echo 'cURL Error #:'.$err;
+
                     continue;
                 }
 
@@ -67,12 +68,12 @@ class UpdateSeriesTrailer implements ShouldQueue
                 if (isset($data['results']) && is_array($data['results'])) {
                     foreach ($data['results'] as $video) {
                         if ($video['type'] === 'Trailer' && $video['site'] === 'YouTube') {
-                            $trailer = "https://www.youtube.com/embed/" . $video['key'];
+                            $trailer = 'https://www.youtube.com/embed/'.$video['key'];
 
                             $movie->trailer = $trailer;
                             $movie->save();
 
-                            echo "Trailer updated successfully for " . $movie->full_name . "\n";
+                            echo 'Trailer updated successfully for '.$movie->full_name."\n";
                         }
                     }
                 }

@@ -16,7 +16,7 @@ class ReplyController extends Controller
             'reply_text' => 'required|string',
             'comment_id',
             'movie_name',
-            'movie_id'
+            'movie_id',
         ]);
 
         $reply = new Reply([
@@ -24,7 +24,7 @@ class ReplyController extends Controller
             'reply_name' => $request->reply_name,
             'reply_text' => $request->reply_text,
             'movie_id' => $request->movie_id,
-            'movie_name' => $request->movie_name
+            'movie_name' => $request->movie_name,
         ]);
 
         $reply->save();
