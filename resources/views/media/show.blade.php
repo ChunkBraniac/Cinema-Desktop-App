@@ -157,8 +157,8 @@
                         <div class="row">
                             <div class="col-xl-2 col-sm-4 col-md-3 col-lg-4">
                                 <img data-src="{{ asset('storage/images/' . $item->imageUrl) }}" alt=""
-                                    class="img-fluid blurry-image lazy"
-                                    style="width: 100%; background: rgba(0, 0, 0, 0.493)" loading="lazy">
+                                    class="img-fluid blurry-image lazy "
+                                    style="background: rgba(0, 0, 0, 0.493);" loading="lazy">
                             </div>
 
                             <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-3" style="font-size: 15px;">
