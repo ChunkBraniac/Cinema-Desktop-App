@@ -5,9 +5,29 @@
 @endsection
 
 @section('content')
+
+    <style>
+        .image-container {
+            display: inline-block;
+            overflow: hidden;
+            transition: width 0.3s, height 0.3s;
+            border-radius: 0px;
+        }
+
+        .image-container #img-scale {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s;
+        }
+
+        #img-scale:hover {
+            transform: scale(1.1);
+        }
+    </style>
     {{-- <hr class="mt-5"> --}}
 
-    <div class="container-sm mt-5">
+    <div class="container-md mt-5">
 
         {{-- OWLCAROUSEL PANE --}}
         <h4 style="font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">New Seasons & Episodes
@@ -23,17 +43,17 @@
             @unless (count($seasons) == 0)
                 @foreach ($seasons as $series)
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1 item">
-                        <a href="{{ route('media.show', ['name' => $series->movieName]) }}"><img
-                                data-src="{{ asset('storage/uploads/' . $series->imageUrl) }}"
+                        <a href="{{ route('media.show', ['name' => $series->movieName]) }}" class="image-container"><img
+                                src="{{ asset('storage/uploads/' . $series->imageUrl) }}"
                                 alt="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode ' . $series->episode_number }}"
-                                class="img-fluid blurry-image lazy" style="background: rgba(0, 0, 0, 0.315);"
-                                loading="lazy"></a>
+                                class="img-fluid blurry-image lazy" id="img-scale" style="background: rgba(0, 0, 0, 0.315);" loading="lazy">
+                        </a>
 
                         <a href="{{ route('media.show', ['name' => $series->movieName]) }}"
                             class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode ' . $series->episode_number }}">
 
-                            <h6 class="mt-1"
+                            <h6 class="mt-3"
                                 style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
                                 {{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode ' . $series->episode_number }}
                                 (Added)
@@ -48,7 +68,7 @@
 
     <hr class="mt-5">
 
-    <div class="container-sm mt-5">
+    <div class="container-md mt-5">
 
         {{-- SERIES PANE --}}
         <h4 style="font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">New Series</h4>
@@ -58,7 +78,7 @@
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ route('media.show', ['name' => $series->originalTitleText]) }}"
                             class="text-decoration-none text-reset"><img
-                                data-src="{{ asset('storage/images/' . $series->imageUrl) }}"
+                                src="{{ asset('storage/images/' . $series->imageUrl) }}"
                                 alt="{{ str_replace(['-', $series->movieId], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy" style="background: rgba(0, 0, 0, 0.315);"
                                 loading="lazy"></a>
@@ -67,7 +87,7 @@
                             class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ str_replace(['-', $series->movieId], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}">
 
-                            <h6 class="mt-1 text-truncate"
+                            <h6 class="mt-3 text-truncate"
                                 style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
                                 {{ $series->full_name . ' ' . '(' . $series->releaseYear . ')' }}
                             </h6>
@@ -101,7 +121,7 @@
 
     <hr class="mt-5">
 
-    <div class="container-sm mt-5">
+    <div class="container-md mt-5">
 
         {{-- MOVIES PANE --}}
         <h4 style="font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">New Movies</h4>
@@ -110,7 +130,7 @@
                 @foreach ($movies_all as $movies)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-2">
                         <a href="{{ url($movies->originalTitleText) }}" class="text-decoration-none text-reset"><img
-                                data-src="{{ asset('storage/images/' . $movies->imageUrl) }}"
+                                src="{{ asset('storage/images/' . $movies->imageUrl) }}"
                                 alt="{{ str_replace(['-', $movies->releaseYear], ' ', $movies->originalTitleText) . ' ' . '(' . $movies->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy" style="background: rgba(0, 0, 0, 0.315);"
                                 loading="lazy"></a>
@@ -119,7 +139,7 @@
                             data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ $movies->full_name . ' ' . '(' . $movies->releaseYear . ')' }}">
 
-                            <h6 class="mt-1 text-truncate"
+                            <h6 class="mt-3 text-truncate"
                                 style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
                                 {{ $movies->full_name . ' ' . '(' . $movies->releaseYear . ')' }}
                             </h6>

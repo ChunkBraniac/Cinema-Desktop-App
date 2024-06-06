@@ -65,18 +65,12 @@ footer {
     bottom: 20px;
     right: 20px;
     display: none; /* Hidden by default */
-    background-color: #333;
-    color: #fff;
     padding: 10px;
     border-radius: 5px;
     text-align: center;
     cursor: pointer;
     z-index: 1000; /* Ensure it's above other elements */
     font-size: 18px;
-}
-
-.back-to-top:hover {
-    background-color: #555;
 }
 
 .customPrevBtn, .customNextBtn {
@@ -93,3 +87,7 @@ footer {
     background-color: #555;
 }
 
+
+img {
+    border-radius: 5px
+}
