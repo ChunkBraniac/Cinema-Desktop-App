@@ -23,7 +23,5 @@
                 </div>
             @endforeach
         @endunless
-
-
     </div>
 @endsection

@@ -400,7 +400,7 @@ class MoviesController extends Controller
 
     public function showMoreMovies()
     {
-        $more_Series = Movies::where('status', '!=', 'pending')->orderByDesc('releaseYear')->paginate(36);
+        $more_Series = Movies::where('status', '!=', 'pending')->orderByDesc('updated_at')->paginate(36);
 
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
@@ -409,7 +409,7 @@ class MoviesController extends Controller
 
     public function tv_series()
     {
-        $tv_series = Series::where('status', '!=', 'pending')->orderByDesc('releaseYear')->paginate(36);
+        $tv_series = Series::where('status', '!=', 'pending')->orderByDesc('updated_at')->paginate(36);
 
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
@@ -418,7 +418,7 @@ class MoviesController extends Controller
 
     public function movies()
     {
-        $movies = Movies::where('status', '!=', 'pending')->orderByDesc('releaseYear')->paginate(36);
+        $movies = Movies::where('status', '!=', 'pending')->orderByDesc('updated_at')->paginate(36);
 
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
