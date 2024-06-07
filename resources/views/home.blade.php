@@ -11,18 +11,19 @@
             display: inline-block;
             overflow: hidden;
             transition: width 0.3s, height 0.3s;
-            border-radius: 0px;
+            border-radius: 5px;
         }
 
         .image-container #img-scale {
             display: block;
             width: 100%;
             height: auto;
-            transition: transform 0.5s;
+            transition: transform 0.8s;
         }
 
         #img-scale:hover {
             transform: scale(1.1);
+            border-radius: 5px;
         }
     </style>
     {{-- <hr class="mt-5"> --}}
@@ -76,8 +77,7 @@
             @unless (count($series_all) == 0)
                 @foreach ($series_all as $series)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                        <a href="{{ route('media.show', ['name' => $series->originalTitleText]) }}"
-                            class="text-decoration-none text-reset"><img
+                        <a href="{{ route('media.show', ['name' => $series->originalTitleText]) }}"><img
                                 src="{{ asset('storage/images/' . $series->imageUrl) }}"
                                 alt="{{ str_replace(['-', $series->movieId], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy" style="background: rgba(0, 0, 0, 0.315);"

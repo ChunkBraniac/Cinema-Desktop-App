@@ -122,7 +122,7 @@ class getSeasons implements ShouldQueue
 
                                     echo $full_name . ' Season ' . $season_number . " Episode \n" . $episode_number . ' added successfully' . "\n";
                                 } else {
-                                    echo 'Air date not available for ' . $full_name . ' Season \n';
+                                    echo 'Air date not available for ' . $full_name . ' Season ' . "\n";
                                 }
                             }
                         }

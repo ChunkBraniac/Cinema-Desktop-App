@@ -65,64 +65,62 @@ class FetchSeriesData implements ShouldQueue
                     $year = substr($first_air_date, 0, 4); // Extract the first four characters
                     $full_name = $result['name'];
 
-                    if ($year >= '2017' && $first_air_date <= $date && $year <= '2024') {
-                        $id = $result['id'];
+                    $id = $result['id'];
 
-                        // Check if the series is already in the db
-                        $fetch = Series::where('movieId', $id)->first();
+                    // Check if the series is already in the db
+                    $fetch = Series::where('movieId', $id)->first();
 
-                        if (! $fetch) {
-                            $adult = isset($result['adult']) ? $result['adult'] : false;
-                            $backdrop_path = isset($result['backdrop_path']) ? $result['backdrop_path'] : 'false';
-                            $country = isset($result['origin_country'][0]) ? $result['origin_country'][0] : null;
-                            $language = strtoupper($result['original_language']);
-                            $overview = $result['overview'];
-                            $poster_path = $result['poster_path'];
-                            $vote_average = $result['vote_average'];
+                    if (!$fetch) {
+                        $adult = isset($result['adult']) ? $result['adult'] : false;
+                        $backdrop_path = isset($result['backdrop_path']) ? $result['backdrop_path'] : 'false';
+                        $country = isset($result['origin_country'][0]) ? $result['origin_country'][0] : null;
+                        $language = strtoupper($result['original_language']);
+                        $overview = $result['overview'];
+                        $poster_path = $result['poster_path'];
+                        $vote_average = $result['vote_average'];
 
-                            $base_url = 'https://image.tmdb.org/t/p/w780'.$poster_path;
+                        $base_url = 'https://image.tmdb.org/t/p/w780' . $poster_path;
 
-                            $formatted_name = str_replace(' ', '-', $result['name'].' '.$year.' download');
-                            $rating = floor($vote_average * 10) / 10;
+                        $formatted_name = str_replace(' ', '-', $result['name'] . ' ' . $year . ' download');
+                        $rating = floor($vote_average * 10) / 10;
 
-                            // Downloading the image and saving it to the storage folder
-                            $url = $base_url;
-                            $contents = file_get_contents($url);
+                        // Downloading the image and saving it to the storage folder
+                        $url = $base_url;
+                        $contents = file_get_contents($url);
 
-                            $image_name = basename($url);
-                            $path = 'public/images/'.$image_name;
+                        $image_name = basename($url);
+                        $path = 'public/images/' . $image_name;
 
-                            if (Storage::exists($path)) {
-                                // do nothing
-                            } else {
-                                Storage::put($path, $contents);
-                            }
-
-                            Series::create([
-                                'movieId' => $id,
-                                'isAdult' => $adult,
-                                'full_name' => $full_name,
-                                'originalTitleText' => $formatted_name,
-                                'imageUrl' => $image_name,
-                                'backdrop_path' => $backdrop_path,
-                                'country' => $country,
-                                'language' => $language,
-                                'plotText' => $overview,
-                                'releaseDate' => $first_air_date,
-                                'releaseYear' => $year,
-                                'aggregateRating' => $rating,
-                                'titleType' => 'series',
-                                'runtime' => '',
-                                'genres' => '',
-                                'trailer' => '',
-                                'status' => 'pending',
-                                'created_at' => Carbon::now(),
-                            ]);
-
-                            echo $full_name." - has been added to database \n";
+                        if (Storage::exists($path)) {
+                            // do nothing
                         } else {
-                            echo $full_name." - already in database \n";
+                            Storage::put($path, $contents);
                         }
+
+                        Series::create([
+                            'movieId' => $id,
+                            'isAdult' => $adult,
+                            'full_name' => $full_name,
+                            'originalTitleText' => $formatted_name,
+                            'imageUrl' => $image_name,
+                            'backdrop_path' => $backdrop_path,
+                            'country' => $country,
+                            'language' => $language,
+                            'plotText' => $overview,
+                            'releaseDate' => $first_air_date,
+                            'releaseYear' => $year,
+                            'aggregateRating' => $rating,
+                            'titleType' => 'series',
+                            'runtime' => '',
+                            'genres' => '',
+                            'trailer' => '',
+                            'status' => 'pending',
+                            'created_at' => Carbon::now(),
+                        ]);
+
+                        echo $full_name . " - has been added to database \n";
+                    } else {
+                        echo $full_name . " - already in database \n";
                     }
                 }
             } else {
@@ -131,7 +129,7 @@ class FetchSeriesData implements ShouldQueue
             }
 
             // Check if there are more pages to fetch
-            if (! isset($data['total_pages']) || $pages >= $data['total_pages']) {
+            if (!isset($data['total_pages']) || $pages >= $data['total_pages']) {
                 break;
             }
         } while (true);
