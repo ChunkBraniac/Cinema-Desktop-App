@@ -19,7 +19,7 @@ class MoviesController extends Controller
     public function getAll()
     {
         $series_all = Series::where('status', '!=', 'pending')->orderByDesc('updated_at')->latest()->paginate(24);
-        $movies_all = Movies::where('status', '!=', 'pending')->orderByDesc('updated_at')->where('releaseDate', '<=', Carbon::now()->format('Y-m-d'))->latest()->paginate(18);
+        $movies_all = Movies::where('status', '!=', 'pending')->orderByDesc('updated_at')->latest()->paginate(18);
 
         $seasons = DB::table('seasons as s1')
             ->select('s1.*')
@@ -424,5 +424,26 @@ class MoviesController extends Controller
         $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
 
         return view('others.movies', compact('movies', 'page'));
+    }
+
+    public function korean()
+    {
+        $korean_movies = Movies::where('country', 'KR')->paginate(36);
+        $korean_series = Series::where('country', 'KR')->paginate(36);
+
+        $merge = $korean_movies->concat($korean_series);
+
+        $page = LengthAwarePaginator::resolveCurrentPage() ?: 1;
+
+        // Items per page
+        $perPage = 36;
+
+        // Slice the collection to get the items to display in current page
+        $currentPageResults = $merge->slice(($page * $perPage) - $perPage, $perPage)->values();
+
+        // Create our paginator and add it to the view
+        $paginatedResults = new LengthAwarePaginator($currentPageResults, count($merge), $perPage, $page, ['path' => LengthAwarePaginator::resolveCurrentPath()]);
+
+        return view('others.korean', compact('paginatedResults', 'page'));
     }
 }

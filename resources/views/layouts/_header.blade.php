@@ -53,7 +53,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ route('about-us') }}" style="font-size: 15px; margin-right: 20px;">About Us
+                            <a class="nav-link text-light" href="{{ route('korean') }}" style="font-size: 15px; margin-right: 20px;">Korean
                             </a>
                         </li>
                     </ul>

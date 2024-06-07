@@ -108,15 +108,14 @@ Route::middleware(['ipWhitelist'])->group(function () {
 
 Route::get('tv-shows', [MoviesController::class, 'tv_series'])->name('tv.shows');
 Route::get('movies', [MoviesController::class, 'movies'])->name('movies');
+Route::get('/korean', [MoviesController::class, 'korean'])->name('korean');
 
 // Displaying sitemap
 Route::get('/sitemap', [SitemapController::class, 'show'])->name('sitemap');
 Route::get('/generate-sitemap', [SitemapController::class, 'generate'])->name('generate.sitemap');
 
 // Route for showing the movie and series details
-Route::group(['middleware' => 'xframe'], function () {
-    Route::get('/{name}', [MoviesController::class, 'show'])->name('media.show');
-});
+Route::get('/{name}', [MoviesController::class, 'show'])->name('media.show');
 
 // Route for requesting movie
 Route::get('/movie-request', [MovieRequestController::class, 'create'])->name('request.movie');

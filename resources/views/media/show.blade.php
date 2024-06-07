@@ -23,7 +23,7 @@
                             {{ $item->full_name }}
                         </h3>
                         <div class="row">
-                            <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3 col-10">
+                            <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
                                 <img data-src="{{ asset('storage/images/' . $item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
                                     style="width: 100%; background: rgba(0, 0, 0, 0.493)" loading="lazy">
                             </div>
@@ -155,7 +155,7 @@
                             {{ $item->full_name }}
                         </h3>
                         <div class="row">
-                            <div class="col-xl-2 col-sm-4 col-md-3 col-lg-4 col-10">
+                            <div class="col-xl-2 col-sm-4 col-md-3 col-lg-4">
                                 <img data-src="{{ asset('storage/images/' . $item->imageUrl) }}" alt=""
                                     class="img-fluid blurry-image lazy "
                                     style="background: rgba(0, 0, 0, 0.493);" loading="lazy">
