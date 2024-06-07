@@ -74,69 +74,68 @@ class FetchMovieData implements ShouldQueue
                     $year = substr($release_date, 0, 4); // Extract the first four characters
                     $full_name = $result['title'];
 
-                    if ($year >= '2018' && $release_date <= $date && $year <= '2024') {
-                        $id = $result['id'];
+                    $id = $result['id'];
 
-                        // Check if the movie is already in the database. If not, add it
-                        $fetch = Movies::where('movieId', $id)->first();
+                    // Check if the movie is already in the database. If not, add it
+                    $fetch = Movies::where('movieId', $id)->first();
 
-                        if (! $fetch) {
-                            $adult = $result['adult'];
-                            $backdrop_path = isset($result['backdrop_path']) ? $result['backdrop_path'] : 0;
-                            $language = strtoupper($result['original_language']);
-                            $full_name = $result['title'];
-                            $name = $result['title'].' '.$year.' download';
-                            $overview = $result['overview'];
-                            $poster_path = $result['poster_path'];
-                            $vote_average = $result['vote_average'];
+                    if (!$fetch) {
+                        $adult = $result['adult'];
+                        $backdrop_path = isset($result['backdrop_path']) ? $result['backdrop_path'] : 0;
+                        $language = strtoupper($result['original_language']);
+                        $full_name = $result['title'];
+                        $name = $result['title'] . ' ' . $year . ' download';
+                        $overview = $result['overview'];
+                        $poster_path = $result['poster_path'];
+                        $vote_average = $result['vote_average'];
 
-                            $base_url = 'https://image.tmdb.org/t/p/w780'.$poster_path;
-                            $formatted_name = str_replace(' ', '-', $name);
-                            $rating = floor($vote_average * 10) / 10;
+                        $base_url = 'https://image.tmdb.org/t/p/w780' . $poster_path;
+                        $formatted_name = preg_replace('/[^a-zA-Z0-9 ]/', '', $name);
+                        $formatted_name2 = preg_replace('/\s+/', '-', $formatted_name);
+                        $formatted_name3 = trim($formatted_name2, '-');
+                        
+                        $rating = floor($vote_average * 10) / 10;
 
-                            // Downloading the image and saving it to the storage folder
-                            $url = $base_url;
-                            $contents = file_get_contents($url);
+                        // Downloading the image and saving it to the storage folder
+                        $url = $base_url;
+                        $contents = file_get_contents($url);
 
-                            $image_name = basename($url);
-                            $path = 'public/images/'.$image_name;
+                        $image_name = basename($url);
+                        $path = 'public/images/' . $image_name;
 
-                            if (Storage::exists($path)) {
-                                // do nothing
-                            } else {
-                                Storage::put($path, $contents);
-                            }
-
-                            Movies::create([
-                                'movieId' => $id,
-                                'isAdult' => $adult,
-                                'full_name' => $full_name,
-                                'originalTitleText' => $formatted_name,
-                                'imageUrl' => $image_name,
-                                'backdrop_path' => $backdrop_path,
-                                'country' => '',
-                                'language' => $language,
-                                'plotText' => $overview,
-                                'releaseDate' => $release_date,
-                                'releaseYear' => $year,
-                                'aggregateRating' => $rating,
-                                'titleType' => 'movie',
-                                'runtime' => '',
-                                'genres' => '',
-                                'trailer' => '',
-                                'download_url' => '',
-                                'status' => 'pending',
-                                'created_at' => Carbon::now(),
-                            ]);
-
-                            echo $full_name." - has been added successfully \n";
-
-                            // Dispatch the UpdateMoviesTrailer job
+                        if (Storage::exists($path)) {
+                            // do nothing
                         } else {
-                            echo $full_name." - already in database \n";
+                            Storage::put($path, $contents);
                         }
+
+                        Movies::create([
+                            'movieId' => $id,
+                            'isAdult' => $adult,
+                            'full_name' => $full_name,
+                            'originalTitleText' => $formatted_name3,
+                            'imageUrl' => $image_name,
+                            'backdrop_path' => $backdrop_path,
+                            'country' => '',
+                            'language' => $language,
+                            'plotText' => $overview,
+                            'releaseDate' => $release_date,
+                            'releaseYear' => $year,
+                            'aggregateRating' => $rating,
+                            'titleType' => 'movie',
+                            'runtime' => '',
+                            'genres' => '',
+                            'trailer' => '',
+                            'download_url' => '',
+                            'status' => 'pending',
+                            'created_at' => Carbon::now(),
+                        ]);
+
+                        echo $full_name . " - has been added successfully \n";
+
+                        // Dispatch the UpdateMoviesTrailer job
                     } else {
-                        echo $full_name." - not in range \n";
+                        echo $full_name . " - already in database \n";
                     }
                 }
             } else {
@@ -145,7 +144,7 @@ class FetchMovieData implements ShouldQueue
             }
 
             // Check if there are more pages to fetch
-            if (! isset($data['total_pages']) || $page >= $data['total_pages']) {
+            if (!isset($data['total_pages']) || $page >= $data['total_pages']) {
                 break;
             }
 
