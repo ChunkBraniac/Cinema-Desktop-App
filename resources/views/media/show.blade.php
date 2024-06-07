@@ -335,7 +335,7 @@
                         <div class="row mb-3">
 
                             @foreach ($seasons as $more)
-                                <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-2">
+                                <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
                                     <a
                                         href="{{ url($more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"><img
                                             src="{{ asset('storage/uploads/' . $more->imageUrl) }}" alt="" class="img-fluid"

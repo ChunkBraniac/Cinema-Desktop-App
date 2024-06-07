@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
-use App\Models\Movies;
 use App\Models\Reply;
-use App\Models\Seasons;
+use App\Models\Movies;
 use App\Models\Series;
+use App\Models\Comment;
+use App\Models\Seasons;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class MoviesController extends Controller
 {
@@ -18,7 +19,7 @@ class MoviesController extends Controller
     public function getAll()
     {
         $series_all = Series::where('status', '!=', 'pending')->orderByDesc('updated_at')->latest()->paginate(24);
-        $movies_all = Movies::where('status', '!=', 'pending')->orderByDesc('updated_at')->latest()->paginate(18);
+        $movies_all = Movies::where('status', '!=', 'pending')->orderByDesc('updated_at')->where('releaseDate', '<=', Carbon::now()->format('Y-m-d'))->latest()->paginate(18);
 
         $seasons = DB::table('seasons as s1')
             ->select('s1.*')
