@@ -132,6 +132,8 @@ class FetchSeriesData implements ShouldQueue
             if (!isset($data['total_pages']) || $pages >= $data['total_pages']) {
                 break;
             }
+
+            $pages++;
         } while (true);
     }
 }

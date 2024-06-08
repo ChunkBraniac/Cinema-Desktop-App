@@ -1,7 +1,7 @@
 @if ($paginator->hasPages())
     <nav class="d-flex justify-content-center">
         <!-- Mobile Pagination (Visible on small screens) -->
-        <div class="d-flex justify-content-between flex-fill d-sm-none">
+        <div class="d-flex justify-content-between flex-fill d-sm-flex d-xl-none d-md-none d-lg-flex">
             <ul class="pagination pagination-sm">
                 {{-- Previous Page Link --}}
                 @if ($paginator->onFirstPage())
@@ -30,7 +30,7 @@
         </div>
 
         <!-- Desktop Pagination (Hidden on small screens) -->
-        <div class="d-none flex-sm-fill d-sm-flex align-items-center justify-content-center">
+        <div class="d-none flex-sm-fill d-sm-none d-xl-flex d-md-flex d-lg-none align-items-center justify-content-center">
             <ul class="pagination pagination-lg">
                 {{-- Previous Page Link --}}
                 @if ($paginator->onFirstPage())
