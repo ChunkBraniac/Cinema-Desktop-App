@@ -110,7 +110,7 @@
             @endunless
         </div>
 
-        @if (count($series_all) >= 36)
+        @if (count($series_all) >= 18)
             <div class="mt-4 text-center">
                 <a href="{{ route('moreseries') }}" class="btn btn-primary" id="show-more">Show More</a>
             </div>
