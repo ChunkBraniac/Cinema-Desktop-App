@@ -6,28 +6,6 @@
 
 @section('content')
 
-    <style>
-        .image-container {
-            display: inline-block;
-            overflow: hidden;
-            transition: width 0.3s, height 0.3s;
-            border-radius: 5px;
-        }
-
-        .image-container #img-scale {
-            display: block;
-            width: 100%;
-            height: auto;
-            transition: transform 0.8s;
-        }
-
-        #img-scale:hover {
-            transform: scale(1.1);
-            border-radius: 5px;
-        }
-    </style>
-    {{-- <hr class="mt-5"> --}}
-
     <div class="container-md mt-5">
 
         {{-- OWLCAROUSEL PANE --}}
