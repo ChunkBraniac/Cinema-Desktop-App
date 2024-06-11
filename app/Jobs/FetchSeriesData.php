@@ -51,10 +51,9 @@ class FetchSeriesData implements ShouldQueue
             curl_close($curl);
 
             if ($err) {
-                // Handle error
-                echo $err;
+                echo $err . "\n";
 
-                continue;
+                break;
             }
 
             $data = json_decode($response, true);

@@ -40,15 +40,15 @@
                                         {{ csrf_field() }}
 
                                         @if (session('success'))
-                                            <h6 class="alert alert-success text-center">{{ session('success') }}</h6>
+                                            <h6 class="alert alert-success text-center" style="font-size: 14px;">{{ session('success') }}</h6>
                                         @endif
 
                                         @if (session('error'))
-                                            <h6 class="alert alert-danger text-center">{{ session('error') }}</h6>
+                                            <h6 class="alert alert-danger text-center" style="font-size: 14px;">{{ session('error') }}</h6>
                                         @endif
 
                                         @if (session('stat'))
-                                            <h6 class="alert alert-danger text-center">{{ session('stat') }}</h6>
+                                            <h6 class="alert alert-danger text-center" style="font-size: 14px;">{{ session('stat') }}</h6>
                                         @endif
                                         <div class="col-12">
                                             <label for="yourUsername" class="form-label">Email</label>

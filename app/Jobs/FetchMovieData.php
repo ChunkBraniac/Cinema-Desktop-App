@@ -61,7 +61,7 @@ class FetchMovieData implements ShouldQueue
 
             if ($err) {
                 // Handle error
-                echo $err;
+                echo $err . "\n";
                 break;
             }
 

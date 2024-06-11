@@ -10,11 +10,11 @@
 
         <div class="pagetitle">
             @if (session('status'))
-                <h6 class="alert alert-success">{{ session('status') }}</h6>
+                <h6 class="alert alert-success" style="font-size: 14px;">{{ session('status') }}</h6>
             @endif
 
             @if (session('error'))
-                <h6 class="alert alert-danger">{{ session('error') }}</h6>
+                <h6 class="alert alert-danger" style="font-size: 14px;">{{ session('error') }}</h6>
             @endif
             <h1>Dashboard</h1>
             <nav>
