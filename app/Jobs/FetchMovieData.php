@@ -128,7 +128,7 @@ class FetchMovieData implements ShouldQueue
                             'trailer' => '',
                             'download_url' => '',
                             'status' => 'pending',
-                            'created_at' => Carbon::now(),
+                            'created_at' => Carbon::now()->format('Y-m-d'),
                         ]);
 
                         echo $full_name . " - has been added successfully \n";
