@@ -9,7 +9,7 @@
     <br><br>
 
     <div class="container">
-        <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">Movies @if ($page == 1)
+        <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">Korean @if ($page == 1)
             @else
                 <span>
                     <h6 style="font-family: 'Roboto', sans-serif; font-weight: normal; font-size: 14px;">Page
@@ -21,7 +21,7 @@
                 style="margin-right: 5px; font-size: 14px"><a href="{{ url('/') }} "
                     class="text-decoration-none text-reset text-muted">Home</a></span> <i class="fa fa-arrow-right text-muted"
                 style="font-size: 13px" aria-hidden="true"></i> <span style="margin-left: 5px; font-size: 14px"
-                class="text-muted">Movies</span></h6>
+                class="text-muted">Korean</span></h6>
     </div>
 
     <br><br>
@@ -70,9 +70,9 @@
 
         {{ $paginatedResults->appends(request()->query())->onEachSide(2)->links('vendor.pagination.bootstrap-5') }}
 
-        @if (count($paginatedResults) == 0)
+        {{-- @if (count($paginatedResults) == 0)
             {{ abort(404) }}
-        @endif
+        @endif --}}
 
     </div>
 

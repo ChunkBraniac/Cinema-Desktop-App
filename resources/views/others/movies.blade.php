@@ -70,9 +70,9 @@
 
         {{ $movies->appends(request()->query())->onEachSide(2)->links('vendor.pagination.bootstrap-5') }}
 
-        @if (count($movies) == 0)
+        {{-- @if (count($movies) == 0)
             {{ abort(404) }}
-        @endif
+        @endif --}}
 
     </div>
 

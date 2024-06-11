@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
-use App\Models\Comment;
-use App\Models\Movies;
 use App\Models\Reply;
+use App\Models\Movies;
 use App\Models\Series;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -27,7 +28,12 @@ class AdminController extends Controller
      */
     public static function dashboard()
     {
-        return view('admin.dashboard');
+        $total_movies = Movies::all()->count();
+        $total_series = Series::all()->count();
+
+        $movies_today = Movies::where('created_at', Carbon::now()->format('Y-m-d'))->paginate(10);
+
+        return view('admin.dashboard', compact('total_movies', 'total_series', 'movies_today'));
     }
 
     /**

@@ -10,10 +10,12 @@
 
         {{-- OWLCAROUSEL PANE --}}
         <h4 style="font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">New Seasons & Episodes
-            <span style="float: right;">
-                <button class="customPrevBtn">‹</button>
-                <button class="customNextBtn">›</button>
-            </span>
+            @unless (count($seasons) == 0)
+                <span style="float: right;">
+                    <button class="customPrevBtn">‹</button>
+                    <button class="customNextBtn">›</button>
+                </span>
+            @endunless
         </h4>
         <div class="owl-carousel owl-theme">
             {{-- <div class="item">
@@ -25,7 +27,8 @@
                         <a href="{{ route('media.show', ['name' => $series->movieName]) }}" class="image-container"><img
                                 src="{{ asset('storage/uploads/' . $series->imageUrl) }}"
                                 alt="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode ' . $series->episode_number }}"
-                                class="img-fluid blurry-image lazy" id="img-scale" style="background: rgba(0, 0, 0, 0.315);" loading="lazy">
+                                class="img-fluid blurry-image lazy" id="img-scale" style="background: rgba(0, 0, 0, 0.315);"
+                                loading="lazy">
                         </a>
 
                         <a href="{{ route('media.show', ['name' => $series->movieName]) }}"
