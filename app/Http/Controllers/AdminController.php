@@ -7,6 +7,7 @@ use App\Models\Reply;
 use App\Models\Movies;
 use App\Models\Series;
 use App\Models\Comment;
+use App\Models\Seasons;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -264,7 +265,10 @@ class AdminController extends Controller
 
         $series->delete();
 
-        return redirect()->route('admin.dashboard')->with('status', 'Series deleted');
+        $season = Seasons::where('movieId', $series->movieId);
+        $season->delete();
+
+        return redirect()->route('admin.all')->with('status', 'Series deleted');
     }
 
     /**
@@ -279,7 +283,7 @@ class AdminController extends Controller
 
         $movie->delete();
 
-        return redirect()->route('pending.movies')->with('status', 'Movie deleted');
+        return redirect()->route('admin.all')->with('status', 'Movie deleted');
     }
 
     /**
