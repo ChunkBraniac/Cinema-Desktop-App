@@ -19,7 +19,7 @@ class MoviesController extends Controller
     public function getAll()
     {
         $series_all = Series::where('status', '!=', 'pending')->orderByDesc('updated_at')->latest()->paginate(24);
-        $movies_all = Movies::where('status', '!=', 'pending')->orderByDesc('updated_at')->latest()->paginate(18);
+        $movies_all = Movies::where('status', '!=', 'pending')->orderByDesc('updated_at')->latest()->paginate(24);
 
         $seasons = DB::table('seasons as s1')
             ->select('s1.*')

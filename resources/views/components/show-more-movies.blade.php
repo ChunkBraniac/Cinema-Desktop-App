@@ -8,7 +8,7 @@
 
     <br><br>
 
-    <div class="container">
+    <div class="container-lg">
         <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">Movies @if ($page == 1)
             @else
                 <span>
@@ -27,14 +27,14 @@
     <br><br>
     <hr>
 
-    <div class="container mt-4">
+    <div class="container-lg mt-4">
         {{-- Series Pane --}}
         <div class="row mb-4">
             @unless (count($more_Series) == 0)
                 @foreach ($more_Series as $action)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ route('media.show', ['name' => $action->originalTitleText]) }}"><img
-                                data-src="{{ asset('storage/images/' . $action->imageUrl) }}"
+                                src="{{ asset('storage/images/' . $action->imageUrl) }}"
                                 alt="{{ $action->full_name . ' ' . '(' . $action->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy"
                                 style="background: rgba(0, 0, 0, 0.493);" loading="lazy"></a>
@@ -69,10 +69,6 @@
         </div>
 
         {{ $more_Series->appends(request()->query())->onEachSide(2)->links('vendor.pagination.bootstrap-5') }}
-
-        @if (count($more_Series) == 0)
-            {{ abort(404) }}
-        @endif
 
     </div>
 

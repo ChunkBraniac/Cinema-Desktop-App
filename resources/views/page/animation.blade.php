@@ -6,7 +6,7 @@
 
 @section('content')
     <br><br>
-    <div class="container">
+    <div class="container-lg">
         <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">Animation & Anime @if ($page == 1)
             @else
                 <span>
@@ -24,7 +24,7 @@
 
     <br><br>
     <hr>
-    <div class="container mt-4">
+    <div class="container-lg mt-4">
         <div class="row">
             @unless (count($paginatedResults) == 0)
                 @foreach ($paginatedResults as $animation)
@@ -34,7 +34,7 @@
 
                                 
                         <a href="{{ route('media.show', ['name'=>$animation->originalTitleText]) }}" class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}">
-                            <h6 class="mt-1 text-truncate" style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}</h6>
+                            <h6 class="mt-3 text-truncate" style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">{{ $animation->full_name . ' ' . '(' . $animation->releaseYear . ')' }}</h6>
                         </a>
                         <h6 class="text-truncate" style="font-size: 13px; font-family: 'Roboto', sans-serif; font-weight: 400; margin-top: -4px;">{{ $animation->genres }}</h6>
                     </div>

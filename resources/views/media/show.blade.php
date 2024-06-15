@@ -6,7 +6,7 @@
             background: transparent;
         }
     </style>
-    <div class="container-xl mt-5">
+    <div class="container-lg mt-5">
 
         @if ($all)
             @if ($all->isNotEmpty())
@@ -23,12 +23,12 @@
                             {{ $item->full_name }}
                         </h3>
                         <div class="row">
-                            <div class="col-xl-2 col-sm-4 col-md-3 col-lg-3">
-                                <img data-src="{{ asset('storage/images/' . $item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
+                            <div class="col-xl-2 col-sm-4 col-md-4 col-lg-3">
+                                <img src="{{ asset('storage/images/' . $item->imageUrl) }}" alt="" class="img-fluid blurry-image lazy"
                                     style="width: 100%; background: rgba(0, 0, 0, 0.493)" loading="lazy">
                             </div>
 
-                            <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-4" style="font-size: 15px;">
+                            <div class="col-xl-8 col-sm-8 col-lg-5 col-md-8 mt-xl-4" style="font-size: 15px;">
                                 <div>
                                     <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3"
                                         style="font-family: 'Roboto', sans-serif; font-size: 20px;">
@@ -109,7 +109,7 @@
                                         {{-- {{ $item->plotText ? $item->plotText : 'N/A' }} --}}
 
 
-                                        @if (strlen($item->plotText) > 352)
+                                        {{-- @if (strlen($item->plotText) > 352)
                                             {{ substr($item->plotText, 0, 352) }}
 
                                             <div class="collapse" id="collapseExample">
@@ -128,13 +128,14 @@
                                             </div>
                                         @else
                                             {{ $item->plotText ? $item->plotText : 'N/A' }}
-                                        @endif
+                                        @endif --}}
 
+                                        <span>{{ $item->plotText ? $item->plotText : 'N/A' }}</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-xl-6 mt-3 mt-xl-0">
+                            <div class="col-xl-12 mt-3 mt-xl-4">
                                 <iframe src="{{ $item->trailer ? $item->trailer : 'N/A' }}" title="YouTube video player"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -155,13 +156,13 @@
                             {{ $item->full_name }}
                         </h3>
                         <div class="row">
-                            <div class="col-xl-2 col-sm-4 col-md-3 col-lg-4">
+                            <div class="col-xl-2 col-sm-4 col-md-4 col-lg-4">
                                 <img data-src="{{ asset('storage/images/' . $item->imageUrl) }}" alt=""
                                     class="img-fluid blurry-image lazy "
                                     style="background: rgba(0, 0, 0, 0.493);" loading="lazy">
                             </div>
 
-                            <div class="col-xl-4 col-sm-8 col-lg-5 mt-xl-3" style="font-size: 15px;">
+                            <div class="col-xl-8 col-sm-8 col-lg-5 col-md-8 mt-xl-3" style="font-size: 15px;">
                                 <div>
                                     <h4 class="d-xl-none d-block d-md-none d-sm-none d-lg-none mt-3"
                                         style="font-family: 'Roboto', sans-serif; font-size: 19px;">
@@ -241,7 +242,7 @@
                                         {{-- {{ $item->plotText ? $item->plotText : 'N/A' }} --}}
 
 
-                                        @if (strlen($item->plotText) > 352)
+                                        {{-- @if (strlen($item->plotText) > 352)
                                             {{ substr($item->plotText, 0, 352) }}
 
                                             <div class="collapse" id="collapseExample">
@@ -260,13 +261,15 @@
                                             </div>
                                         @else
                                             {{ $item->plotText ? $item->plotText : 'N/A' }}
-                                        @endif
+                                        @endif --}}
+
+                                        {{ $item->plotText ? $item->plotText : 'N/A' }}
 
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-xl-6 mt-3 mt-xl-0">
+                            <div class="col-xl-12 mt-3 mt-xl-4">
                                 <iframe src="{{ $item->trailer ? $item->trailer : 'N/A' }}" title="YouTube video player"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -285,7 +288,7 @@
         <hr class="mt-5">
     </div>
 
-    <div class="container-xl">
+    <div class="container-lg">
         @if (isset($item))
             @if ($item->titleType == 'movie')
                 <div class="m-auto text-center">

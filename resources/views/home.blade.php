@@ -6,10 +6,10 @@
 
 @section('content')
 
-    <div class="container-md mt-5">
+    <div class="container-lg mt-5">
 
         {{-- OWLCAROUSEL PANE --}}
-        <h4 style="font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">New Seasons & Episodes
+        <h4 style="font-weight: 600;">New Seasons & Episodes
             @unless (count($seasons) == 0)
                 <span style="float: right;">
                     <button class="customPrevBtn">‹</button>
@@ -50,10 +50,10 @@
 
     <hr class="mt-5">
 
-    <div class="container-md mt-5">
+    <div class="container-lg mt-5">
 
         {{-- SERIES PANE --}}
-        <h4 style="font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">New Series</h4>
+        <h4 style="font-weight: 600;">New Series</h4>
         <div class="row">
             @unless (count($series_all) == 0)
                 @foreach ($series_all as $series)
@@ -102,10 +102,10 @@
 
     <hr class="mt-5">
 
-    <div class="container-md mt-5">
+    <div class="container-lg mt-5">
 
         {{-- MOVIES PANE --}}
-        <h4 style="font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">New Movies</h4>
+        <h4 style="font-weight: 600;">New Movies</h4>
         <div class="row">
             @unless (count($movies_all) == 0)
                 @foreach ($movies_all as $movies)

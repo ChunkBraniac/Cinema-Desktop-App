@@ -14,13 +14,27 @@ $pagination-focus-box-shadow: none !default;
 
 $accordion-button-focus-box-shadow: none !default;
 
-$input-focus-box-shadow:  none !default;
+$input-focus-box-shadow: none !default;
 // $input-border-color: #495057 !default;
+
+$transition-duration: 0.5s;
+$transition-ease: ease;
+
+.dropdown-menu {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity $transition-duration $transition-ease, transform $transition-duration $transition-ease;
+
+    &.show {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 
 
 // Include any default variable overrides here (though functions won't be available)
-
-
 @import "../node_modules/bootstrap/scss/bootstrap";
-

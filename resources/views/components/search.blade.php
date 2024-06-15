@@ -7,7 +7,7 @@
 @section('content')
     <br>
     <br>
-    <div class="container-sm">
+    <div class="container-lg">
         <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">Search @if ($page == 1)
             @else
                 <span>
@@ -26,7 +26,7 @@
 
     <br><br>
     <hr>
-    <div class="container-sm mt-4">
+    <div class="container-lg mt-4">
         <div class="row">
             @if ($paginatedResults->isNotEmpty())
                 @unless (count($paginatedResults) == 0)
@@ -45,7 +45,7 @@
                                 class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                 data-bs-title="{{ $search->full_name . ' ' . '(' . $search->releaseYear . ')' }}">
 
-                                <h6 class="mt-1 text-truncate"
+                                <h6 class="mt-3 text-truncate"
                                     style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
                                     {{ $search->full_name . ' ' . '(' . $search->releaseYear . ')' }}</h6>
                             </a>

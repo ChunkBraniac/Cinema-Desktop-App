@@ -34,7 +34,7 @@
                 @foreach ($movies as $action)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
                         <a href="{{ route('media.show', ['name' => $action->originalTitleText]) }}"><img
-                                data-src="{{ asset('storage/images/' . $action->imageUrl) }}"
+                                src="{{ asset('storage/images/' . $action->imageUrl) }}"
                                 alt="{{ $action->full_name . ' ' . '(' . $action->releaseYear . ')' }}"
                                 class="img-fluid blurry-image lazy"
                                 style="background: rgba(0, 0, 0, 0.493);" loading="lazy"></a>
