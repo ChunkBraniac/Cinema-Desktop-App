@@ -43,7 +43,7 @@
                         <a href="{{ route('media.show', ['name' => $action->originalTitleText]) }}"
                             class="text-decoration-none text-reset">
 
-                            <h6 class="mt-1 text-truncate"
+                            <h6 class="mt-2 text-truncate"
                                 style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;"
                                 data-bs-toggle="tooltip" data-bs-placement="bottom"
                                 data-bs-title="{{ $action->full_name . ' ' . '(' . $action->releaseYear . ')' }}">

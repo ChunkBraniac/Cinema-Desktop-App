@@ -32,7 +32,7 @@
                 @unless (count($paginatedResults) == 0)
                     @foreach ($paginatedResults as $search)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-3">
-                            <a href="{{ route('media.show', ['name' => $search->originalTitleText]) }}"
+                            <a href="{{ route('media.show', ['name' => Str::slug($search->originalTitleText)]) }}"
                                 class="text-decoration-none text-reset"><img
                                     src="{{ asset('storage/images/' . $search->imageUrl) }}"
                                     alt="{{ $search->full_name . ' ' . '(' . $search->releaseYear . ')' }}"
@@ -45,7 +45,7 @@
                                 class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                 data-bs-title="{{ $search->full_name . ' ' . '(' . $search->releaseYear . ')' }}">
 
-                                <h6 class="mt-3 text-truncate"
+                                <h6 class="mt-2 text-truncate"
                                     style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
                                     {{ $search->full_name . ' ' . '(' . $search->releaseYear . ')' }}</h6>
                             </a>

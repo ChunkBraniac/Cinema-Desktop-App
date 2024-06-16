@@ -35,7 +35,7 @@
                             class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode ' . $series->episode_number }}">
 
-                            <h6 class="mt-3"
+                            <h6 class="mt-2"
                                 style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
                                 {{ $series->full_name . ' ' . 'Season ' . $series->season_number . ' Episode ' . $series->episode_number }}
                                 (Added)
@@ -68,7 +68,7 @@
                             class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ str_replace(['-', $series->movieId], ' ', $series->originalTitleText) . ' ' . '(' . $series->releaseYear . ')' }}">
 
-                            <h6 class="mt-3 text-truncate"
+                            <h6 class="mt-2 text-truncate"
                                 style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
                                 {{ $series->full_name . ' ' . '(' . $series->releaseYear . ')' }}
                             </h6>
@@ -120,7 +120,7 @@
                             data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-title="{{ $movies->full_name . ' ' . '(' . $movies->releaseYear . ')' }}">
 
-                            <h6 class="mt-3 text-truncate"
+                            <h6 class="mt-2 text-truncate"
                                 style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
                                 {{ $movies->full_name . ' ' . '(' . $movies->releaseYear . ')' }}
                             </h6>

@@ -13,7 +13,6 @@ body {
     font-weight: 400;
 }
 
-
 h4,
 h6,
 #show-more {
@@ -107,5 +106,5 @@ footer {
 }
 
 img {
-    border-radius: 5px;
+    border-radius: 0px;
 }

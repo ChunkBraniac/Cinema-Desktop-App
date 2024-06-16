@@ -35,7 +35,7 @@
 
                         <a href="{{ route('media.show', ['name'=>$horror->originalTitleText]) }}" class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $horror->full_name . ' ' . '(' . $horror->releaseYear . ')' }}">
 
-                            <h6 class="mt-3 text-truncate" style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">{{ $horror->full_name . ' ' . '(' . $horror->releaseYear . ')' }}</h6>
+                            <h6 class="mt-2 text-truncate" style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">{{ $horror->full_name . ' ' . '(' . $horror->releaseYear . ')' }}</h6>
                         </a>
                         <h6 class="text-truncate" style="font-size: 13px; font-family: 'Roboto', sans-serif; font-weight: 400; margin-top: -4px;">{{ $horror->genres }}</h6>
                     </div>
