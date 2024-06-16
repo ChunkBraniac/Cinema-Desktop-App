@@ -2,14 +2,15 @@
 
 namespace App\Jobs;
 
-use App\Models\Series;
 use Carbon\Carbon;
+use App\Models\Series;
+use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
 
 class FetchSeriesData implements ShouldQueue
 {
@@ -74,13 +75,17 @@ class FetchSeriesData implements ShouldQueue
                         $backdrop_path = isset($result['backdrop_path']) ? $result['backdrop_path'] : 'false';
                         $country = isset($result['origin_country'][0]) ? $result['origin_country'][0] : null;
                         $language = strtoupper($result['original_language']);
+                        $name = $result['name'] . ' ' . $year . ' download';
                         $overview = $result['overview'];
                         $poster_path = $result['poster_path'];
                         $vote_average = $result['vote_average'];
 
                         $base_url = 'https://image.tmdb.org/t/p/w780' . $poster_path;
 
-                        $formatted_name = str_replace(' ', '-', $result['name'] . ' ' . $year . ' download');
+                        
+                        $formatted_name = preg_replace('/[^a-zA-Z0-9 ]/', '', $name);
+                        $formatted_name2 = preg_replace('/\s+/', '-', $formatted_name);
+                        $formatted_name3 = trim(Str::lower($formatted_name2), '-');
                         $rating = floor($vote_average * 10) / 10;
 
                         // Downloading the image and saving it to the storage folder
@@ -100,7 +105,7 @@ class FetchSeriesData implements ShouldQueue
                             'movieId' => $id,
                             'isAdult' => $adult,
                             'full_name' => $full_name,
-                            'originalTitleText' => $formatted_name,
+                            'originalTitleText' => $formatted_name3,
                             'imageUrl' => $image_name,
                             'backdrop_path' => $backdrop_path,
                             'country' => $country,

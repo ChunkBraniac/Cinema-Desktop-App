@@ -3,13 +3,14 @@
 namespace App\Jobs;
 
 use App\Models\Movies;
+use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Carbon;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Storage;
 
 class FetchMovieData implements ShouldQueue
 {
@@ -68,47 +69,60 @@ class FetchMovieData implements ShouldQueue
             $data = json_decode($response, true);
 
             // Check if the results key exists and has more than one item
+            // Check if 'results' exists in $data, is an array, and has at least one element
             if (isset($data['results']) && is_array($data['results']) && count($data['results']) > 0) {
+
+                // Iterate over each result in 'results' array
                 foreach ($data['results'] as $result) {
+
+                    // Get the release date if it exists, otherwise default to 0
                     $release_date = isset($result['release_date']) ? $result['release_date'] : 0;
-                    $year = substr($release_date, 0, 4); // Extract the first four characters
+
+                    // Extract the year from the release date
+                    $year = substr($release_date, 0, 4);
+
+                    // Get the full name of the movie
                     $full_name = $result['title'];
 
+                    // Get the movie ID
                     $id = $result['id'];
 
-                    // Check if the movie is already in the database. If not, add it
+                    // Check if the movie is already in the database
                     $fetch = Movies::where('movieId', $id)->first();
 
+                    // If the movie is not in the database, add it
                     if (!$fetch) {
+
+                        // Extract and prepare movie details
                         $adult = $result['adult'];
                         $backdrop_path = isset($result['backdrop_path']) ? $result['backdrop_path'] : 0;
                         $language = strtoupper($result['original_language']);
-                        $full_name = $result['title'];
-                        $name = $result['title'] . ' ' . $year . ' download';
                         $overview = $result['overview'];
                         $poster_path = $result['poster_path'];
                         $vote_average = $result['vote_average'];
-
                         $base_url = 'https://image.tmdb.org/t/p/w780' . $poster_path;
+
+                        // Format the name for storage
+                        $name = $result['title'] . ' ' . $year . ' download';
                         $formatted_name = preg_replace('/[^a-zA-Z0-9 ]/', '', $name);
                         $formatted_name2 = preg_replace('/\s+/', '-', $formatted_name);
-                        $formatted_name3 = trim($formatted_name2, '-');
-                        
+                        $formatted_name3 = trim(Str::lower($formatted_name2), '-');
+
+                        // Round the vote average to one decimal place
                         $rating = floor($vote_average * 10) / 10;
 
-                        // Downloading the image and saving it to the storage folder
+                        // Download the movie poster image
                         $url = $base_url;
                         $contents = file_get_contents($url);
-
                         $image_name = basename($url);
                         $path = 'public/images/' . $image_name;
 
-                        if (Storage::exists($path)) {
-                            // do nothing
-                        } else {
+                        // Check if the image already exists in storage, if not, save it
+                        if (!Storage::exists($path)) {
                             Storage::put($path, $contents);
                         }
 
+                        // Create a new movie record in the database
                         Movies::create([
                             'movieId' => $id,
                             'isAdult' => $adult,
@@ -131,10 +145,12 @@ class FetchMovieData implements ShouldQueue
                             'created_at' => Carbon::now()->format('Y-m-d'),
                         ]);
 
+                        // Output a success message
                         echo $full_name . " - has been added successfully \n";
 
-                        // Dispatch the UpdateMoviesTrailer job
+                        // Optionally, dispatch the UpdateMoviesTrailer job here
                     } else {
+                        // Output a message indicating the movie is already in the database
                         echo $full_name . " - already in database \n";
                     }
                 }
@@ -142,6 +158,7 @@ class FetchMovieData implements ShouldQueue
                 // No more results, stop the loop
                 break;
             }
+
 
             // Check if there are more pages to fetch
             if (!isset($data['total_pages']) || $page >= $data['total_pages']) {

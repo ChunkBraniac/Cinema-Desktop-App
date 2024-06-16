@@ -26,8 +26,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link text-light" href="{{ url('#') }}" id="dropdownId"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                style="font-size: 15px; margin-right: 20px">Genres <i class="fa fa-plus"
-                                    aria-hidden="true" style="font-size: 12px"></i></a>
+                                style="font-size: 15px; margin-right: 20px">Genres <i class="fa-sharp fa-solid fa-angle-down"></i></a>
                             <div class="dropdown-menu bg-dark mt-0 mt-xl-3 m-lg-auto justify-content-center position-absolute text-left text-xl-left"
                                 aria-labelledby="dropdownId"
                                 style="border-radius: 0px; font-size: 15px; margin-top: 10px;">
