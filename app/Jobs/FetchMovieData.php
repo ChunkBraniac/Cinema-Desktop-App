@@ -104,7 +104,7 @@ class FetchMovieData implements ShouldQueue
 
                         // Format the name for storage
                         $name = $result['title'].' '.$year.' download';
-                        $formatted_name = preg_replace('/[^a-zA-Z0-9 ]/', '', $name);
+                        $formatted_name = preg_replace('/[^a-zA-Z0-9 ]/', ' ', $name);
                         $formatted_name2 = preg_replace('/\s+/', '-', $formatted_name);
                         $formatted_name3 = trim(Str::lower($formatted_name2), '-');
 

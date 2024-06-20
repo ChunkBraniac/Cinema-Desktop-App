@@ -82,7 +82,7 @@ class FetchSeriesData implements ShouldQueue
 
                         $base_url = 'https://image.tmdb.org/t/p/w780'.$poster_path;
 
-                        $formatted_name = preg_replace('/[^a-zA-Z0-9 ]/', '', $name);
+                        $formatted_name = preg_replace('/[^a-zA-Z0-9 ]/', ' ', $name);
                         $formatted_name2 = preg_replace('/\s+/', '-', $formatted_name);
                         $formatted_name3 = trim(Str::lower($formatted_name2), '-');
                         $rating = floor($vote_average * 10) / 10;

@@ -34,7 +34,7 @@ class getSeasons implements ShouldQueue
         ini_set('memory_limit', '50000M');
 
         // Fetch approved series
-        $fetch = Series::where('titleType', 'series')->where('status', 'approved')->orderBy('updated_at', 'Desc')->get();
+        $fetch = Series::where('titleType', 'series')->where('status', 'approved')->orderBy('updated_at', 'Desc')->latest()->get();
 
         if (count($fetch) > 0) {
             foreach ($fetch as $data_info) {

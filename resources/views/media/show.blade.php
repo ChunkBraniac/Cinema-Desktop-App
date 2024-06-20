@@ -34,7 +34,7 @@
                                         style="font-family: 'Roboto', sans-serif; font-size: 20px;">
                                         {{ $item->full_name }}
                                     </h4>
-                                    
+
                                     <h6 style="font-size: 15px; font-family: 'Ubuntu sans', sans-serif; font-weight: normal;"
                                         class="mt-3 mt-xl-0">
                                         <i class="fa fa-star" aria-hidden="true" style="font-size: 11px"></i>
@@ -340,10 +340,11 @@
                             @foreach ($seasons as $more)
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mt-2">
                                     <a
-                                        href="{{ url($more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"><img
+                                        href="{{ route('download', ['name'=>$more->movieName, 'season' => $more->season_number, 'episode' => $more->episode_number]) }}"><img
                                             src="{{ asset('storage/uploads/' . $more->imageUrl) }}" alt="" class="img-fluid"
                                             style="background: rgba(0, 0, 0, 0.493)" loading="lazy"></a>
-                                    <a href="{{ url($more->movieName . '/season/' . $more->season_number . '/episode/' . $more->episode_number) }}"
+
+                                    <a href="{{ route('download', ['name'=>$more->movieName, 'season' => $more->season_number, 'episode' => $more->episode_number]) }}"
                                         class="text-decoration-none text-reset">
                                         <h6 class="mt-1"
                                             style="font-family: 'Roboto', sans-serif; font-weight: 500; font-weight: bold; font-size: 14px;">
