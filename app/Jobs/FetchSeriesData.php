@@ -2,15 +2,15 @@
 
 namespace App\Jobs;
 
-use Carbon\Carbon;
 use App\Models\Series;
-use Illuminate\Support\Str;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class FetchSeriesData implements ShouldQueue
 {
@@ -52,7 +52,7 @@ class FetchSeriesData implements ShouldQueue
             curl_close($curl);
 
             if ($err) {
-                echo $err . "\n";
+                echo $err."\n";
 
                 break;
             }
@@ -70,19 +70,18 @@ class FetchSeriesData implements ShouldQueue
                     // Check if the series is already in the db
                     $fetch = Series::where('movieId', $id)->first();
 
-                    if (!$fetch) {
+                    if (! $fetch) {
                         $adult = isset($result['adult']) ? $result['adult'] : false;
                         $backdrop_path = isset($result['backdrop_path']) ? $result['backdrop_path'] : 'false';
                         $country = isset($result['origin_country'][0]) ? $result['origin_country'][0] : null;
                         $language = strtoupper($result['original_language']);
-                        $name = $result['name'] . ' ' . $year . ' download';
+                        $name = $result['name'].' '.$year.' download';
                         $overview = $result['overview'];
                         $poster_path = $result['poster_path'];
                         $vote_average = $result['vote_average'];
 
-                        $base_url = 'https://image.tmdb.org/t/p/w780' . $poster_path;
+                        $base_url = 'https://image.tmdb.org/t/p/w780'.$poster_path;
 
-                        
                         $formatted_name = preg_replace('/[^a-zA-Z0-9 ]/', '', $name);
                         $formatted_name2 = preg_replace('/\s+/', '-', $formatted_name);
                         $formatted_name3 = trim(Str::lower($formatted_name2), '-');
@@ -93,7 +92,7 @@ class FetchSeriesData implements ShouldQueue
                         $contents = file_get_contents($url);
 
                         $image_name = basename($url);
-                        $path = 'public/images/' . $image_name;
+                        $path = 'public/images/'.$image_name;
 
                         if (Storage::exists($path)) {
                             // do nothing
@@ -122,9 +121,9 @@ class FetchSeriesData implements ShouldQueue
                             'created_at' => Carbon::now(),
                         ]);
 
-                        echo $full_name . " - has been added to database \n";
+                        echo $full_name." - has been added to database \n";
                     } else {
-                        echo $full_name . " - already in database \n";
+                        echo $full_name." - already in database \n";
                     }
                 }
             } else {
@@ -133,7 +132,7 @@ class FetchSeriesData implements ShouldQueue
             }
 
             // Check if there are more pages to fetch
-            if (!isset($data['total_pages']) || $pages >= $data['total_pages']) {
+            if (! isset($data['total_pages']) || $pages >= $data['total_pages']) {
                 break;
             }
 

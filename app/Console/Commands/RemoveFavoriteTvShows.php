@@ -30,15 +30,17 @@ class RemoveFavoriteTvShows extends Command
         $apiKey = env('TMDB_API_KEY');
         $sessionId = env('TMDB_SESSION_ID');
 
-        if (!$apiKey || !$sessionId) {
+        if (! $apiKey || ! $sessionId) {
             $this->error('TMDB_API_KEY or TMDB_SESSION_ID is not set in the .env file.');
+
             return 1;
         }
 
         // Step 1: Get Account Details
         $accountId = $this->getAccountId($apiKey, $sessionId);
-        if (!$accountId) {
+        if (! $accountId) {
             $this->error('Failed to get account ID.');
+
             return 1;
         }
 
@@ -61,6 +63,7 @@ class RemoveFavoriteTvShows extends Command
         $url = "https://api.themoviedb.org/3/account?api_key={$apiKey}&session_id={$sessionId}";
 
         $response = $this->curlGet($url);
+
         return $response->id ?? null;
     }
 
@@ -69,6 +72,7 @@ class RemoveFavoriteTvShows extends Command
         $url = "https://api.themoviedb.org/3/account/{$accountId}/favorite/tv?api_key={$apiKey}&session_id={$sessionId}";
 
         $response = $this->curlGet($url);
+
         return $response->results ?? [];
     }
 
@@ -79,7 +83,7 @@ class RemoveFavoriteTvShows extends Command
         $data = json_encode([
             'media_type' => 'tv',
             'media_id' => $tvShowId,
-            'favorite' => false
+            'favorite' => false,
         ]);
 
         $this->curlPost($url, $data);

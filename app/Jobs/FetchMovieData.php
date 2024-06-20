@@ -3,14 +3,14 @@
 namespace App\Jobs;
 
 use App\Models\Movies;
-use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Carbon;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class FetchMovieData implements ShouldQueue
 {
@@ -62,7 +62,7 @@ class FetchMovieData implements ShouldQueue
 
             if ($err) {
                 // Handle error
-                echo $err . "\n";
+                echo $err."\n";
                 break;
             }
 
@@ -91,7 +91,7 @@ class FetchMovieData implements ShouldQueue
                     $fetch = Movies::where('movieId', $id)->first();
 
                     // If the movie is not in the database, add it
-                    if (!$fetch) {
+                    if (! $fetch) {
 
                         // Extract and prepare movie details
                         $adult = $result['adult'];
@@ -100,10 +100,10 @@ class FetchMovieData implements ShouldQueue
                         $overview = $result['overview'];
                         $poster_path = $result['poster_path'];
                         $vote_average = $result['vote_average'];
-                        $base_url = 'https://image.tmdb.org/t/p/w780' . $poster_path;
+                        $base_url = 'https://image.tmdb.org/t/p/w780'.$poster_path;
 
                         // Format the name for storage
-                        $name = $result['title'] . ' ' . $year . ' download';
+                        $name = $result['title'].' '.$year.' download';
                         $formatted_name = preg_replace('/[^a-zA-Z0-9 ]/', '', $name);
                         $formatted_name2 = preg_replace('/\s+/', '-', $formatted_name);
                         $formatted_name3 = trim(Str::lower($formatted_name2), '-');
@@ -115,10 +115,10 @@ class FetchMovieData implements ShouldQueue
                         $url = $base_url;
                         $contents = file_get_contents($url);
                         $image_name = basename($url);
-                        $path = 'public/images/' . $image_name;
+                        $path = 'public/images/'.$image_name;
 
                         // Check if the image already exists in storage, if not, save it
-                        if (!Storage::exists($path)) {
+                        if (! Storage::exists($path)) {
                             Storage::put($path, $contents);
                         }
 
@@ -146,12 +146,12 @@ class FetchMovieData implements ShouldQueue
                         ]);
 
                         // Output a success message
-                        echo $full_name . " - has been added successfully \n";
+                        echo $full_name." - has been added successfully \n";
 
                         // Optionally, dispatch the UpdateMoviesTrailer job here
                     } else {
                         // Output a message indicating the movie is already in the database
-                        echo $full_name . " - already in database \n";
+                        echo $full_name." - already in database \n";
                     }
                 }
             } else {
@@ -159,9 +159,8 @@ class FetchMovieData implements ShouldQueue
                 break;
             }
 
-
             // Check if there are more pages to fetch
-            if (!isset($data['total_pages']) || $page >= $data['total_pages']) {
+            if (! isset($data['total_pages']) || $page >= $data['total_pages']) {
                 break;
             }
 

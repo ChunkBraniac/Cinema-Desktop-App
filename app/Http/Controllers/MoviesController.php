@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reply;
-use App\Models\Movies;
-use App\Models\Series;
 use App\Models\Comment;
+use App\Models\Movies;
+use App\Models\Reply;
 use App\Models\Seasons;
+use App\Models\Series;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class MoviesController extends Controller
 {

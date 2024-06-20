@@ -69,7 +69,8 @@ class getSeasons implements ShouldQueue
                     curl_close($curl);
 
                     if ($err) {
-                        echo 'cURL Error #:' . $err;
+                        echo 'cURL Error #:'.$err;
+
                         continue;
                     }
 
@@ -77,18 +78,18 @@ class getSeasons implements ShouldQueue
 
                     if (isset($data['episodes']) && is_array($data['episodes']) && count($data['episodes']) > 0) {
                         if ($data['air_date'] == null || $data['air_date'] > Carbon::now()->format('Y-m-d')) {
-                            echo 'Air date not available for ' . $full_name . "\n";
+                            echo 'Air date not available for '.$full_name."\n";
                         } else {
                             // Season image
                             $poster_path = isset($data['poster_path']) ? $data['poster_path'] : null;
-                            $base_url = 'https://image.tmdb.org/t/p/w780' . $poster_path;
+                            $base_url = 'https://image.tmdb.org/t/p/w780'.$poster_path;
 
                             // Download and save the image
                             $contents = file_get_contents($base_url);
                             $image_name = basename($base_url);
-                            $path = 'public/uploads/' . $image_name;
+                            $path = 'public/uploads/'.$image_name;
 
-                            if (!Storage::exists($path)) {
+                            if (! Storage::exists($path)) {
                                 Storage::put($path, $contents);
                             }
 
@@ -103,7 +104,8 @@ class getSeasons implements ShouldQueue
                                         isset($existingSeasonsEpisodes[$season_number]) &&
                                         in_array($episode_number, $existingSeasonsEpisodes[$season_number])
                                     ) {
-                                        echo 'Season for ' . $full_name . ' already in database' . "\n";
+                                        echo 'Season for '.$full_name.' already in database'."\n";
+
                                         continue;
                                     }
 
@@ -120,9 +122,9 @@ class getSeasons implements ShouldQueue
                                         'created_at' => Carbon::now(),
                                     ]);
 
-                                    echo $full_name . ' Season ' . $season_number . " Episode \n" . $episode_number . ' added successfully' . "\n";
+                                    echo $full_name.' Season '.$season_number." Episode \n".$episode_number.' added successfully'."\n";
                                 } else {
-                                    echo 'Air date not available for ' . $full_name . ' Season ' . "\n";
+                                    echo 'Air date not available for '.$full_name.' Season '."\n";
                                 }
                             }
                         }
