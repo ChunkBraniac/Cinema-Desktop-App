@@ -25,7 +25,6 @@ class NativeAppServiceProvider implements ProvidesPhpIni
             ->title('CinemaHub - Admin')
             ->width(600)
             ->height(600);
-        MenuBar::show();
     }
 
     /**

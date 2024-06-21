@@ -6,7 +6,7 @@
 
 @section('content')
     <br><br>
-    <div class="container-lg">
+    <div class="container-fluid">
         <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">Sci-Fi @if ($page == 1)
             @else
                 <span>
@@ -24,7 +24,7 @@
 
     <br><br>
     <hr>
-    <div class="container-lg mt-4">
+    <div class="container-fluid mt-4">
         <div class="row">
             @unless (count($paginatedResults) == 0)
                 @foreach ($paginatedResults as $scifi)
