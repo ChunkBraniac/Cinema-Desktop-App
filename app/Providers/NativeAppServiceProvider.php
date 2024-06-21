@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Native\Laravel\Facades\Window;
+use Native\Laravel\Facades\MenuBar;
 use Native\Laravel\Contracts\ProvidesPhpIni;
 
 class NativeAppServiceProvider implements ProvidesPhpIni
@@ -15,11 +16,16 @@ class NativeAppServiceProvider implements ProvidesPhpIni
     {
         Window::open('movies.all')
             ->route('movies.all')
-            ->title('CinemaHub - Home');
+            ->title('CinemaHub - Home')
+            ->width(800)
+            ->height(800);
 
         Window::open('admin.dashboard')
-            ->route('admin.home.login')
-            ->title('CinemaHub - Admin');
+            ->route('admin.dashboard')
+            ->title('CinemaHub - Admin')
+            ->width(600)
+            ->height(600);
+        MenuBar::show();
     }
 
     /**

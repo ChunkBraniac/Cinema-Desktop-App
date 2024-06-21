@@ -4,7 +4,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark pt-3 pb-3"
             style="width: 100%; top: 0; z-index: 10; position: fixed;">
             <!---- box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.623); -->
-            <div class="container-lg">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ url('icons/video.png') }}"
                         style="height: 35px; width: 30px" alt=""> Cinema<span class="text-info">Hub</span></a>
 

@@ -8,7 +8,7 @@
 
     <br><br>
 
-    <div class="container">
+    <div class="container-fluid">
         <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">Movies @if ($page == 1)
             @else
                 <span>
@@ -27,7 +27,7 @@
     <br><br>
     <hr>
 
-    <div class="container mt-4">
+    <div class="container-fluid mt-4">
         {{-- Series Pane --}}
         <div class="row mb-4">
             @unless (count($movies) == 0)

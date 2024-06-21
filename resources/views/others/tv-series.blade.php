@@ -7,7 +7,7 @@
 @section('content')
 
     <br><br>
-    <div class="container-lg">
+    <div class="container-fluid">
         <h4 style="float: left; font-family: 'Ubuntu sans', sans-serif; font-weight: 600;">TV Shows @if ($page == 1)
             @else
                 <span>
@@ -26,7 +26,7 @@
     <br><br>
     <hr>
 
-    <div class="container-lg mt-4">
+    <div class="container-fluid mt-4">
         {{-- Series Pane --}}
         <div class="row mb-4">
             @unless (count($tv_series) == 0)

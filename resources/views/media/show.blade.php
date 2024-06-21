@@ -6,7 +6,7 @@
             background: transparent;
         }
     </style>
-    <div class="container-lg mt-5">
+    <div class="container-fluid mt-5">
 
         @if ($all)
             @if ($all->isNotEmpty())
@@ -288,7 +288,7 @@
         <hr class="mt-5">
     </div>
 
-    <div class="container-lg">
+    <div class="container-fluid">
         @if (isset($item))
             @if ($item->titleType == 'movie')
                 <div class="m-auto text-center">
