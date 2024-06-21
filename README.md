@@ -32,7 +32,7 @@
 </p>
 
 
-# 🎬 Movie Website Project
+# 🎬 Movie Website Project (DESKTOP-APP VERSION )
 
 ## Overview
 The Movie Website Project is a web application designed to provide users with information about movies, including details such as title, release date, cast, plot summary, and user ratings It allows users to browse movies, search for specific titles, and view detailed information about each movie.
